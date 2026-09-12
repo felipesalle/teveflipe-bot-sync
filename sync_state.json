@@ -595,6 +595,21 @@
     "aves de corral",
     "hasta el fin del mundo"
   ],
-  "current_series_title": "Chuck",
-  "current_topic_id": 5990
+  "current_series_title": null,
+  "current_topic_id": null,
+  "series_whitelist": [
+    "seinfeld",
+    "24",
+    "24 legacy",
+    "ad vitam",
+    "ad vitan",
+    "daredevil",
+    "daredevill",
+    "friends",
+    "la fuga de logan",
+    "roma",
+    "the white lotus"
+  ],
+  "backlog_cutoff_id": 161650,
+  "auto_sync_new_series": true
 }

@@ -174,11 +174,16 @@ def clean_movie_title(raw_title: str, caption: str = "") -> str:
     return title_part
 
 
+KNOWN_VALID_NUMERIC_SERIES = {"24", "1883", "1923", "9-1-1", "300"}
+
+
 def is_junk_series_title(title: str) -> bool:
     """Comprueba si un texto es solo un código de episodio/temporada o basura decorativa."""
     if not title or len(title.strip()) < 2:
         return True
     t = title.strip()
+    if t.lower() in KNOWN_VALID_NUMERIC_SERIES:
+        return False
     # Si es solo código de episodio, temporada o números (ej. 1X01, S01E01, T1, 1x02, 1, 01)
     if re.match(r"(?i)^(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|\d+[xX]\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|\d+|temporada\s*\d+)$", t):
         return True
@@ -190,6 +195,32 @@ def is_junk_series_title(title: str) -> bool:
     if len(letters) < 2:
         return True
     return False
+
+
+def is_series_allowed(series_title: Optional[str], msg_id: int, state: dict) -> bool:
+    """Verifica si una serie está en la lista de permitidas (whitelist) o si es una serie nueva."""
+    if not series_title:
+        return False
+        
+    whitelist = state.get("series_whitelist", [])
+    if not whitelist:
+        return True  # Sin filtro activo, se permite todo
+        
+    backlog_cutoff = state.get("backlog_cutoff_id", 161650)
+    auto_sync_new = state.get("auto_sync_new_series", True)
+    
+    # Si es contenido nuevo posterior al catálogo histórico y está activo el auto-sync, se acepta
+    if auto_sync_new and msg_id > backlog_cutoff:
+        return True
+        
+    s_low = series_title.lower().strip()
+    for allowed in whitelist:
+        a_low = allowed.lower().strip()
+        if a_low in s_low or s_low in a_low:
+            return True
+            
+    return False
+
 
 
 def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
@@ -621,10 +652,16 @@ async def sync_series(client: TelegramClient, state: dict):
             cand = clean_series_title(text_content, is_filename=False)
             if cand and not is_junk_series_title(cand):
                 current_series_title = cand
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
-                state["current_series_title"] = current_series_title
-                state["current_topic_id"] = current_topic_id
-                logger.info(f"📝 Título de serie detectado en mensaje de texto: '{current_series_title}'")
+                if is_series_allowed(current_series_title, msg.id, state):
+                    current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = current_topic_id
+                    logger.info(f"📝 Título de serie detectado en mensaje de texto: '{current_series_title}'")
+                else:
+                    current_topic_id = None
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = None
+                    logger.info(f"⏭️ Omitiendo serie no seleccionada: '{current_series_title}'")
 
         # 2. Detectar si es una imagen de carátula o presentación
         elif msg.media and isinstance(msg.media, MessageMediaPhoto):
@@ -632,17 +669,24 @@ async def sync_series(client: TelegramClient, state: dict):
             # Si la foto tiene un título de serie válido, usarlo
             if extracted and not is_junk_series_title(extracted):
                 current_series_title = extracted
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
-                state["current_series_title"] = current_series_title
-                state["current_topic_id"] = current_topic_id
-                pending_poster = msg
-                logger.info(f"🖼️ Póster detectado para serie: '{current_series_title}'")
-            elif current_series_title:
-                # Si la foto es un banner técnico (ej. 1080p.Castellano.T1) pero la serie ya fue declarada
+                if is_series_allowed(current_series_title, msg.id, state):
+                    current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = current_topic_id
+                    pending_poster = msg
+                    logger.info(f"🖼️ Póster detectado para serie: '{current_series_title}'")
+                else:
+                    current_topic_id = None
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = None
+                    pending_poster = None
+                    logger.info(f"⏭️ Omitiendo carátula de serie no seleccionada: '{current_series_title}'")
+            elif current_series_title and is_series_allowed(current_series_title, msg.id, state):
+                # Si la foto es un banner técnico (ej. 1080p.Castellano.T1) pero la serie ya fue declarada y permitida
                 pending_poster = msg
                 logger.info(f"🖼️ Póster técnico asociado a la serie activa: '{current_series_title}'")
             else:
-                logger.info(f"Omitiendo foto decorativa o sin título válido: {repr(text_content[:40]) if text_content else msg.id}")
+                logger.debug(f"Omitiendo foto decorativa o no seleccionada: {repr(text_content[:40]) if text_content else msg.id}")
 
         # 3. Detectar si es un video de episodio
         elif is_video_message(msg):
@@ -654,15 +698,29 @@ async def sync_series(client: TelegramClient, state: dict):
             # Si el video tiene un nombre explícito de serie diferente de la activa
             if video_series_title and video_series_title.lower() != (current_series_title or "").lower():
                 current_series_title = video_series_title
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
-                state["current_series_title"] = current_series_title
-                state["current_topic_id"] = current_topic_id
+                if is_series_allowed(current_series_title, msg.id, state):
+                    current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = current_topic_id
+                else:
+                    current_topic_id = None
+                    state["current_series_title"] = current_series_title
+                    state["current_topic_id"] = None
 
             target_series = current_series_title
             target_topic_id = current_topic_id
 
+            if not is_series_allowed(target_series, msg.id, state):
+                if msg.id > state.get("series_last_id", 0):
+                    state["series_last_id"] = msg.id
+                save_state(state)
+                continue
+
             if not target_topic_id:
                 logger.warning(f"Omitiendo video huérfano sin serie identificada: {file_name or msg.id}")
+                if msg.id > state.get("series_last_id", 0):
+                    state["series_last_id"] = msg.id
+                save_state(state)
                 continue
 
             # Si había una carátula pendiente para este tema, enviarla primero
