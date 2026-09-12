@@ -1,13 +1,15 @@
 {
-  "last_message_id": 13364,
+  "last_message_id": 13793,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
-    "aída": 2350
+    "aída": 2350,
+    "cuéntame cómo pasó": 2662
   },
-  "forwarded_count": 2300,
+  "forwarded_count": 2450,
   "series_stats": {
-    "El Secreto de Puente Viejo": 2300
+    "El Secreto de Puente Viejo": 2357,
+    "Cuéntame Cómo Pasó": 93
   },
-  "current_series": "El Secreto de Puente Viejo"
+  "current_series": "Cuéntame Cómo Pasó"
 }
