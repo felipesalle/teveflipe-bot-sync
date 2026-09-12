@@ -1,0 +1,1165 @@
+[
+  {
+    "titulo": "1 Temp",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 12,
+    "rango_ids": [
+      158606,
+      158985
+    ]
+  },
+  {
+    "titulo": "1 Temporada",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 8,
+    "rango_ids": [
+      157607,
+      157615
+    ]
+  },
+  {
+    "titulo": "12 Monkeys",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "temporadas_texto": "T1-T4 (4 temp.)",
+    "episodios": 45,
+    "rango_ids": [
+      159354,
+      159399
+    ]
+  },
+  {
+    "titulo": "13 Temporada",
+    "temporadas": [
+      13
+    ],
+    "temporadas_texto": "T13",
+    "episodios": 7,
+    "rango_ids": [
+      158848,
+      158855
+    ]
+  },
+  {
+    "titulo": "2 Temporada",
+    "temporadas": [
+      2
+    ],
+    "temporadas_texto": "T2",
+    "episodios": 40,
+    "rango_ids": [
+      157616,
+      158998
+    ]
+  },
+  {
+    "titulo": "24 Legacy - 1 Temporada  Microhd    /",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 12,
+    "rango_ids": [
+      158406,
+      158418
+    ]
+  },
+  {
+    "titulo": "3 Temporada",
+    "temporadas": [
+      3
+    ],
+    "temporadas_texto": "T3",
+    "episodios": 19,
+    "rango_ids": [
+      157625,
+      159010
+    ]
+  },
+  {
+    "titulo": "4 Temporada",
+    "temporadas": [
+      4
+    ],
+    "temporadas_texto": "T4",
+    "episodios": 8,
+    "rango_ids": [
+      157634,
+      157642
+    ]
+  },
+  {
+    "titulo": "Ad Vitan",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 6,
+    "rango_ids": [
+      159783,
+      159789
+    ]
+  },
+  {
+    "titulo": "Agente Carter",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 18,
+    "rango_ids": [
+      161390,
+      161408
+    ]
+  },
+  {
+    "titulo": "Agents Of S H I E L D",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 55,
+    "rango_ids": [
+      161586,
+      161641
+    ]
+  },
+  {
+    "titulo": "American Horror Story",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "temporadas_texto": "T1-T10 (10 temp.)",
+    "episodios": 108,
+    "rango_ids": [
+      159790,
+      159908
+    ]
+  },
+  {
+    "titulo": "Battlestar Galactica Razor Flashbacks",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      157802,
+      157802
+    ]
+  },
+  {
+    "titulo": "Battlestar Galactica The Face Of The Enemy",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "temporadas_texto": "T1-T5 (5 temp.)",
+    "episodios": 55,
+    "rango_ids": [
+      157804,
+      157864
+    ]
+  },
+  {
+    "titulo": "Battlestar Galactica The Resistance",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      157800,
+      157800
+    ]
+  },
+  {
+    "titulo": "Beef",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 10,
+    "rango_ids": [
+      159426,
+      159436
+    ]
+  },
+  {
+    "titulo": "Britannia",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 27,
+    "rango_ids": [
+      160554,
+      160581
+    ]
+  },
+  {
+    "titulo": "Bronca",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 10,
+    "rango_ids": [
+      159416,
+      159425
+    ]
+  },
+  {
+    "titulo": "Castle",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "temporadas_texto": "T1-T8 (8 temp.)",
+    "episodios": 173,
+    "rango_ids": [
+      159684,
+      159982
+    ]
+  },
+  {
+    "titulo": "Chino Americano, La Serie",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 8,
+    "rango_ids": [
+      158871,
+      158878
+    ]
+  },
+  {
+    "titulo": "Chuck",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "temporadas_texto": "T1-T9 (9 temp.)",
+    "episodios": 311,
+    "rango_ids": [
+      158073,
+      158405
+    ]
+  },
+  {
+    "titulo": "Community",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "temporadas_texto": "T1-T6 (6 temp.)",
+    "episodios": 108,
+    "rango_ids": [
+      160060,
+      160168
+    ]
+  },
+  {
+    "titulo": "Célula De Crisis",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 6,
+    "rango_ids": [
+      161364,
+      161370
+    ]
+  },
+  {
+    "titulo": "Daredevill",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 39,
+    "rango_ids": [
+      161472,
+      161511
+    ]
+  },
+  {
+    "titulo": "Doctor Hwo - 10 Temporas Completas",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "temporadas_texto": "T1-T12 (12 temp.)",
+    "episodios": 165,
+    "rango_ids": [
+      158675,
+      158847
+    ]
+  },
+  {
+    "titulo": "El Caso Hartung",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 6,
+    "rango_ids": [
+      161340,
+      161346
+    ]
+  },
+  {
+    "titulo": "El Limpiador",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 12,
+    "rango_ids": [
+      158856,
+      158869
+    ]
+  },
+  {
+    "titulo": "El Mentalista",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "temporadas_texto": "T1-T7 (7 temp.)",
+    "episodios": 142,
+    "rango_ids": [
+      160169,
+      160327
+    ]
+  },
+  {
+    "titulo": "Elite",
+    "temporadas": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "temporadas_texto": "T0-T4 (5 temp.)",
+    "episodios": 44,
+    "rango_ids": [
+      160864,
+      160908
+    ]
+  },
+  {
+    "titulo": "En Hd",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 8,
+    "rango_ids": [
+      161308,
+      161316
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 36,
+    "rango_ids": [
+      159292,
+      159353
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 01 - El Despertar",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159293,
+      159293
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 02 - Contacto",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159294,
+      159294
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 03 - Ciudad Laberinto",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159295,
+      159295
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 04 - Futu-Riesgo",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159296,
+      159296
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 05 - Crepúsculo",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159297,
+      159297
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 06 - Regreso",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159298,
+      159298
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 07 - Re-L124C41",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159299,
+      159299
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 08 - Un Rayo De Luz",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159300,
+      159300
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 09 - La Parte Del Ángel",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159301,
+      159301
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 10 - Existencia",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159302,
+      159302
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 11 - Anamnesia",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159303,
+      159303
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 12 - La Guarida",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159304,
+      159304
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 13 - Camino A Casa Equivocado",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159305,
+      159305
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 14 - Ophelia",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159306,
+      159306
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 15 - Quién Quiere Estar En Peligro",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159307,
+      159307
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 16 - Ocupado Sin Hacer Nada",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159308,
+      159308
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 17 - Terra Incognita",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159309,
+      159309
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 18 - La Vida Después De Dios",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159310,
+      159310
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 19 - Sonrisa Eterna",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159311,
+      159311
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 20 - Adiós Vincent",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159312,
+      159312
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 21 - En El Lmite Del Tiempo",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159313,
+      159313
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 22 - Bilbul",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159314,
+      159314
+    ]
+  },
+  {
+    "titulo": "Ergo Proxy 23 - Deus Ex Machina",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159315,
+      159315
+    ]
+  },
+  {
+    "titulo": "Fin De Temporada",
+    "temporadas": [
+      1,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (2 temp.)",
+    "episodios": 11,
+    "rango_ids": [
+      157643,
+      159012
+    ]
+  },
+  {
+    "titulo": "Friends",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "temporadas_texto": "T1-T10 (10 temp.)",
+    "episodios": 248,
+    "rango_ids": [
+      160582,
+      161362
+    ]
+  },
+  {
+    "titulo": "Friends 10X17X18",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      161363,
+      161363
+    ]
+  },
+  {
+    "titulo": "Friends 9X23X24",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      161339,
+      161339
+    ]
+  },
+  {
+    "titulo": "Gravity Falls",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 20,
+    "rango_ids": [
+      160712,
+      160731
+    ]
+  },
+  {
+    "titulo": "High Maintenance",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 34,
+    "rango_ids": [
+      161125,
+      161235
+    ]
+  },
+  {
+    "titulo": "Historias De La Cripta",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "temporadas_texto": "T1-T7 (7 temp.)",
+    "episodios": 92,
+    "rango_ids": [
+      160748,
+      160839
+    ]
+  },
+  {
+    "titulo": "Iron Fist",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 23,
+    "rango_ids": [
+      160452,
+      160475
+    ]
+  },
+  {
+    "titulo": "Jessica Jones",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 39,
+    "rango_ids": [
+      161512,
+      161551
+    ]
+  },
+  {
+    "titulo": "La Fuga De Colditz",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 28,
+    "rango_ids": [
+      158647,
+      158674
+    ]
+  },
+  {
+    "titulo": "La Fuga De Logan",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 14,
+    "rango_ids": [
+      160733,
+      160746
+    ]
+  },
+  {
+    "titulo": "Legends Of Tomorrow",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "temporadas_texto": "T1-T6 (6 temp.)",
+    "episodios": 97,
+    "rango_ids": [
+      160328,
+      160425
+    ]
+  },
+  {
+    "titulo": "Luke Cage - 2 Temporadas Ciompletas  /",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 26,
+    "rango_ids": [
+      161418,
+      161444
+    ]
+  },
+  {
+    "titulo": "Normas",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 5,
+    "rango_ids": [
+      157597,
+      157603
+    ]
+  },
+  {
+    "titulo": "Paris Police",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 15,
+    "rango_ids": [
+      158892,
+      158908
+    ]
+  },
+  {
+    "titulo": "Penny Dreadful",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 27,
+    "rango_ids": [
+      157866,
+      157892
+    ]
+  },
+  {
+    "titulo": "Rabo De Peixe",
+    "temporadas": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "temporadas_texto": "T5-T11 (7 temp.)",
+    "episodios": 124,
+    "rango_ids": [
+      159013,
+      159153
+    ]
+  },
+  {
+    "titulo": "Roma",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 22,
+    "rango_ids": [
+      161102,
+      161123
+    ]
+  },
+  {
+    "titulo": "Runaways",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 33,
+    "rango_ids": [
+      161552,
+      161585
+    ]
+  },
+  {
+    "titulo": "Seal Team",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 92,
+    "rango_ids": [
+      160935,
+      161035
+    ]
+  },
+  {
+    "titulo": "Seaquest Dsv",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 57,
+    "rango_ids": [
+      159984,
+      160040
+    ]
+  },
+  {
+    "titulo": "Seinfeld",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "temporadas_texto": "T1-T9 (9 temp.)",
+    "episodios": 171,
+    "rango_ids": [
+      157893,
+      158072
+    ]
+  },
+  {
+    "titulo": "Spartacus",
+    "temporadas": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T0-T3 (4 temp.)",
+    "episodios": 39,
+    "rango_ids": [
+      160514,
+      160553
+    ]
+  },
+  {
+    "titulo": "Succession",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "temporadas_texto": "T1-T4 (4 temp.)",
+    "episodios": 37,
+    "rango_ids": [
+      159645,
+      159682
+    ]
+  },
+  {
+    "titulo": "T4X02-03 Vacaciones En El Mar - Complot Familiar",
+    "temporadas": [],
+    "temporadas_texto": "1 temp.",
+    "episodios": 1,
+    "rango_ids": [
+      159277,
+      159277
+    ]
+  },
+  {
+    "titulo": "The Alienist",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 18,
+    "rango_ids": [
+      160041,
+      160059
+    ]
+  },
+  {
+    "titulo": "The Blacklist Redemption",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 8,
+    "rango_ids": [
+      158420,
+      158427
+    ]
+  },
+  {
+    "titulo": "The Crown",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "temporadas_texto": "T1-T5 (5 temp.)",
+    "episodios": 129,
+    "rango_ids": [
+      157661,
+      158952
+    ]
+  },
+  {
+    "titulo": "The Defenders",
+    "temporadas": [
+      1
+    ],
+    "temporadas_texto": "T1",
+    "episodios": 8,
+    "rango_ids": [
+      161409,
+      161417
+    ]
+  },
+  {
+    "titulo": "The Love Boat",
+    "temporadas": [
+      4
+    ],
+    "temporadas_texto": "T4",
+    "episodios": 3,
+    "rango_ids": [
+      159282,
+      159289
+    ]
+  },
+  {
+    "titulo": "The Punisher",
+    "temporadas": [
+      1,
+      2
+    ],
+    "temporadas_texto": "T1-T2 (2 temp.)",
+    "episodios": 26,
+    "rango_ids": [
+      161445,
+      161471
+    ]
+  },
+  {
+    "titulo": "The Walking Dead",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "temporadas_texto": "T1-T11 (11 temp.)",
+    "episodios": 177,
+    "rango_ids": [
+      158428,
+      158605
+    ]
+  },
+  {
+    "titulo": "The White Lotus",
+    "temporadas": [
+      2
+    ],
+    "temporadas_texto": "T2",
+    "episodios": 13,
+    "rango_ids": [
+      160909,
+      160922
+    ]
+  },
+  {
+    "titulo": "The Wire - 5 Temporadas",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "temporadas_texto": "T1-T5 (5 temp.)",
+    "episodios": 59,
+    "rango_ids": [
+      160639,
+      160698
+    ]
+  },
+  {
+    "titulo": "Titans",
+    "temporadas": [
+      1,
+      2,
+      3
+    ],
+    "temporadas_texto": "T1-T3 (3 temp.)",
+    "episodios": 37,
+    "rango_ids": [
+      160476,
+      160513
+    ]
+  },
+  {
+    "titulo": "Vacaciones En El Mar",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "temporadas_texto": "T1-T4 (4 temp.)",
+    "episodios": 81,
+    "rango_ids": [
+      159206,
+      159291
+    ]
+  },
+  {
+    "titulo": "Westworld",
+    "temporadas": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "temporadas_texto": "T1-T4 (4 temp.)",
+    "episodios": 33,
+    "rango_ids": [
+      159154,
+      159193
+    ]
+  }
+]
