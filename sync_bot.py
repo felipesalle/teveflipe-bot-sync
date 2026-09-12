@@ -17,7 +17,8 @@ from telethon.tl.types import (
 import random
 from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
-    CreateForumTopicRequest
+    CreateForumTopicRequest,
+    DeleteTopicHistoryRequest
 )
 
 # Configuración de Logging
@@ -161,22 +162,28 @@ def clean_series_title(raw_title: str) -> str:
         
     text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
     text = re.sub(r"https?://\S+", "", text)
-    text = re.sub(r"@\w+", "", text)
-    text = re.sub(r"#\w+", "", text)
+    text = re.sub(r"[@#]\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
     
     # Quitar emojis comunes o símbolos residuales
     text = re.sub(r"[\U00010000-\U0010ffff]", "", text)
     
-    # Quitar créditos como 'By Luar12', 'FINAL', etc.
-    text = re.sub(r"(?i)\b(?:by\s+\w+|final|completa|dual|latino|castellano|español|subtitulado|miniserie|precuela)\b", "", text)
+    # Reemplazar guiones bajos y puntos por espacios para respetar límites de palabras (\b)
+    text = text.replace("_", " ").replace(".", " ")
+    
+    # Quitar créditos de ripeo, códecs, resoluciones, idiomas y etiquetas residuales
+    text = re.sub(
+        r"(?i)\b(?:1080p?|720p?|2160p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|hdtv|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada|final|completa|miniserie|precuela)\b",
+        " ",
+        text
+    )
     
     # Cortar en patrones de temporada/episodio (ej. 1x01, S01E01, Temporada 2, T 2, etc.)
     parts = re.split(
         r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|T\s*\d+)\b",
         text
     )
-    candidates = [p.replace(".", " ").replace("_", " ").strip() for p in parts if p.strip()]
+    candidates = [p.strip() for p in parts if p.strip()]
     
     title = ""
     if candidates:
@@ -279,18 +286,53 @@ async def sync_movies(client: TelegramClient, state: dict):
             logger.error(f"Error reenviando película ID {best_msg.id}: {e}")
 
 
+async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict):
+    """Elimina temas vacíos, basura o duplicados de ejecuciones previas."""
+    junk_topic_ids = [5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097]
+    dest_input = await client.get_input_entity(dest_chat)
+    
+    # 1. Limpiar del caché local
+    cached_topics = state.setdefault("series_topics_cache", {})
+    to_delete = [k for k, v in cached_topics.items() if v in junk_topic_ids or clean_series_title(k) == ""]
+    for k in to_delete:
+        del cached_topics[k]
+        logger.info(f"Limpiando tema del caché: '{k}'")
+    state["series_topics_cache"] = cached_topics
+    
+    # 2. Eliminar temas no deseados en Telegram si aún existen
+    for tid in junk_topic_ids:
+        try:
+            await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=tid))
+            logger.info(f"🗑️ Tema no deseado ID {tid} eliminado de Telegram.")
+            await asyncio.sleep(1)
+        except Exception as e:
+            logger.debug(f"Tema {tid} ya no existe o no se pudo eliminar: {e}")
+
+
 async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_name: str, state: dict) -> Optional[int]:
     """Busca si ya existe un Tema en el supergrupo con el nombre de la serie; si no, lo crea."""
-    normalized_name = series_name.strip().lower()
+    clean_name = clean_series_title(series_name)
+    if not clean_name or len(clean_name) < 2 or re.match(r"^[-–—:\s*=#~]+$", clean_name):
+        logger.warning(f"Título de serie inválido o decorativo descartado: '{series_name}'")
+        return None
+
+    normalized_name = clean_name.strip().lower()
     
     # 1. Comprobar caché local
     cached_topics = state.setdefault("series_topics_cache", {})
     if normalized_name in cached_topics:
         return cached_topics[normalized_name]
 
+    # Comprobar variaciones en la caché local
+    for k, v in cached_topics.items():
+        if clean_series_title(k).strip().lower() == normalized_name:
+            cached_topics[normalized_name] = v
+            return v
+
     dest_input = await client.get_input_entity(dest_chat)
 
     # 2. Consultar temas existentes en el supergrupo de Telegram paginando de 100 en 100
+    matched_id = None
     try:
         offset_date = None
         offset_id = 0
@@ -310,13 +352,24 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
                 break
                 
             for topic in topics_list:
-                t_title = getattr(topic, "title", "").strip().lower()
+                t_raw = getattr(topic, "title", "").strip()
                 t_id = getattr(topic, "id", None)
-                if t_title and t_id:
-                    cached_topics[t_title] = t_id
-                    if t_title == normalized_name:
-                        state["series_topics_cache"] = cached_topics
-                        return t_id
+                if t_raw and t_id:
+                    t_lower = t_raw.lower()
+                    cached_topics[t_lower] = t_id
+                    t_clean = clean_series_title(t_raw).lower()
+                    if t_clean:
+                        cached_topics[t_clean] = t_id
+                        
+                    if t_lower == normalized_name or t_clean == normalized_name:
+                        matched_id = t_id
+                        break
+                    elif len(normalized_name) >= 4 and (normalized_name in t_lower or t_lower in normalized_name):
+                        if matched_id is None:
+                            matched_id = t_id
+
+            if matched_id:
+                break
 
             # Parámetros para la siguiente página
             last_topic = topics_list[-1]
@@ -330,18 +383,18 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
     except Exception as e:
         logger.warning(f"No se pudieron listar los temas existentes: {e}")
 
-    # Si ya se encontró durante la búsqueda
-    if normalized_name in cached_topics:
+    if matched_id:
+        cached_topics[normalized_name] = matched_id
         state["series_topics_cache"] = cached_topics
-        return cached_topics[normalized_name]
+        return matched_id
 
     # 3. Si no existe, crear un nuevo tema para la serie
     try:
-        logger.info(f"🆕 Creando nuevo Tema en el foro de Series: '{series_name}'...")
+        logger.info(f"🆕 Creando nuevo Tema en el foro de Series: '{clean_name}'...")
         rand_id = random.randint(1, 2**63 - 1)
         created = await client(CreateForumTopicRequest(
             peer=dest_input,
-            title=series_name[:128],  # Límite de caracteres de Telegram
+            title=clean_name[:128],  # Límite de caracteres de Telegram
             random_id=rand_id
         ))
         
@@ -360,15 +413,15 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
                 topic_id = update.id
 
         if topic_id:
-            logger.info(f"✅ Tema creado exitosamente para '{series_name}' (Topic ID: {topic_id})")
+            logger.info(f"✅ Tema creado exitosamente para '{clean_name}' (Topic ID: {topic_id})")
             cached_topics[normalized_name] = topic_id
             state["series_topics_cache"] = cached_topics
             save_state(state)
             return topic_id
         else:
-            logger.error(f"No se pudo determinar el ID del tema creado para '{series_name}'")
+            logger.error(f"No se pudo determinar el ID del tema creado para '{clean_name}'")
     except Exception as e:
-        logger.error(f"Error creando tema para '{series_name}': {e}")
+        logger.error(f"Error creando tema para '{clean_name}': {e}")
         
     return None
 
@@ -379,6 +432,35 @@ async def sync_series(client: TelegramClient, state: dict):
     dest_chat = await client.get_input_entity(SERIES_DEST_CHAT)
     source_chat = await client.get_input_entity(SERIES_SOURCE_CHAT)
     
+    # 0. Limpiar temas basura o duplicados de ejecuciones previas
+    await cleanup_spurious_topics(client, dest_chat, state)
+
+    # 1. Re-sincronizar episodios de The Crown que hayan quedado huérfanos al tema unificado
+    the_crown_msg_ids = [mid for mid in range(157655, 157705)]
+    crown_to_resync = [mid for mid in the_crown_msg_ids if mid not in state.get("forwarded_message_ids", [])]
+    if crown_to_resync:
+        logger.info(f"Re-sincronizando {len(crown_to_resync)} episodios de The Crown directamente a su tema único...")
+        crown_topic_id = await get_or_create_forum_topic(client, dest_chat, "The Crown", state)
+        if crown_topic_id:
+            crown_messages = await client.get_messages(source_chat, ids=crown_to_resync)
+            for cmsg in crown_messages:
+                if cmsg and is_video_message(cmsg):
+                    cfname = extract_file_name(cmsg)
+                    try:
+                        await client.send_message(
+                            dest_chat,
+                            message=cmsg.text or cfname or "The Crown",
+                            file=cmsg.media,
+                            reply_to=crown_topic_id
+                        )
+                        logger.info(f"🎬 Episodio de The Crown enviado a tema {crown_topic_id}: {cfname}")
+                        state["forwarded_message_ids"].append(cmsg.id)
+                        save_state(state)
+                        await asyncio.sleep(2.5)
+                    except Exception as e:
+                        logger.error(f"Error reenviando episodio Crown ID {cmsg.id}: {e}")
+
+    # 2. Escanear nuevos mensajes de series posteriores a series_last_id
     last_id = state.get("series_last_id", 0)
     logger.info(f"Escaneando series nuevas posteriores al ID {last_id}...")
     
@@ -411,17 +493,20 @@ async def sync_series(client: TelegramClient, state: dict):
         # 1. Detectar si es una imagen de carátula o presentación
         if msg.media and isinstance(msg.media, MessageMediaPhoto):
             extracted = clean_series_title(text_content) if text_content else None
-            if extracted and len(extracted) >= 2:
+            # Descartar carátulas con textos decorativos o sin título válido
+            if extracted and len(extracted) >= 3 and not re.match(r"^[-–—:\s*=#~]+$", text_content):
                 current_series_title = extracted
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
                 pending_poster = msg
+                logger.info(f"🖼️ Póster detectado para serie: '{current_series_title}'")
+            else:
+                logger.info(f"Omitiendo foto decorativa o sin título válido: {text_content[:30] if text_content else msg.id}")
 
         # 2. Detectar si es un video de episodio
         elif is_video_message(msg):
-            raw = text_content or file_name
+            raw = file_name or text_content
             video_title = clean_series_title(raw) if raw else None
 
-            # Siempre resolver el tema adecuado según el título del video o el actual
+            # Priorizar el título extraído directamente del archivo de video
             target_series = video_title or current_series_title
             target_topic_id = None
 
