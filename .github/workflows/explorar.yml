@@ -1,4 +1,4 @@
-﻿name: Explorar Nuevo Grupo de Telegram
+name: Explorar Nuevo Grupo de Telegram
 
 on:
   workflow_dispatch:
@@ -44,5 +44,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
-          git add EXPLORACION_GRUPO.md exploracion_grupo.json
+          git add EXPLORACION_GRUPO.md exploracion_grupo.json EXPLORACION_DETALLADA.md exploracion_detallada.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar exploracion de nuevo grupo [skip ci]" && git push)
