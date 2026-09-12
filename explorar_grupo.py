@@ -5,7 +5,7 @@ import os
 import sys
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-from telethon.tl.functions.channels import GetForumTopicsRequest
+from telethon.tl.functions.messages import GetForumTopicsRequest
 from telethon.tl.types import Channel, MessageMediaPhoto, MessageMediaDocument
 
 logging.basicConfig(
@@ -59,6 +59,7 @@ async def explore_group():
             "series": []
         }
 
+        # Caso 1: Es un grupo con Temas / Foro
         if is_forum:
             logger.info("El grupo es un FORO. Obteniendo lista de temas...")
             all_topics = []
@@ -66,9 +67,11 @@ async def explore_group():
             offset_id = 0
             offset_topic = 0
 
+            input_peer = await client.get_input_entity(entity)
+
             while True:
                 res = await client(GetForumTopicsRequest(
-                    channel=entity,
+                    peer=input_peer,
                     offset_date=offset_date,
                     offset_id=offset_id,
                     offset_topic=offset_topic,
@@ -94,13 +97,14 @@ async def explore_group():
 
             logger.info(f"Total de temas encontrados: {len(all_topics)}")
 
+            # Para cada tema, contar cuántos archivos de video o mensajes hay
             for idx, top in enumerate(all_topics, 1):
                 t_id = top["id"]
                 t_title = top["titulo"]
                 video_count = 0
                 sample_files = []
                 try:
-                    async for m in client.iter_messages(entity, reply_to=t_id, limit=100):
+                    async for m in client.iter_messages(entity, reply_to=t_id, limit=80):
                         fname = None
                         if m.media and hasattr(m.media, "document") and m.media.document:
                             for attr in m.media.document.attributes:
@@ -120,6 +124,7 @@ async def explore_group():
 
             report["temas"] = all_topics
 
+            # Generar Markdown
             with open("EXPLORACION_GRUPO.md", "w", encoding="utf-8") as f:
                 f.write(f"# 📂 Catálogo del Grupo: **{chat_title}**\n\n")
                 f.write(f"- **ID del Chat:** `{TARGET_CHAT_ID}`\n")
@@ -131,8 +136,9 @@ async def explore_group():
                     samples = "<br>".join(f"`{s}`" for s in t.get("sample_files", []))
                     f.write(f"| {i} | **{t['titulo']}** | `{t['id']}` | {t.get('video_count', 0)} | {samples} |\n")
 
+        # Caso 2: Es un canal o grupo normal (sin foros)
         else:
-            logger.info("El chat NO es un foro. Escaneando mensajes recientes...")
+            logger.info("El chat NO es un foro. Escaneando mensajes recientes para ver contenido...")
             recent_msgs = []
             async for m in client.iter_messages(entity, limit=200):
                 fname = None
