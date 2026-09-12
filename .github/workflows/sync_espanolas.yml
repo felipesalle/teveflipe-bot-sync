@@ -10,6 +10,10 @@ permissions:
   contents: write
   actions: write
 
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
