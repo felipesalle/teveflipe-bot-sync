@@ -9,7 +9,7 @@ import unicodedata
 from collections import defaultdict
 from typing import Optional, Dict, List
 
-from telethon import TelegramClient
+from telethon import TelegramClient, errors
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
@@ -46,7 +46,7 @@ SERIES_SOURCE_TOPIC = int(os.getenv("SERIES_SOURCE_TOPIC", "21"))
 SERIES_DEST_CHAT = int(os.getenv("SERIES_DEST_CHAT", "-1004419790119"))
 
 STATE_FILE = "sync_state_espanolas.json"
-BATCH_FORWARD_LIMIT = int(os.getenv("BATCH_FORWARD_LIMIT", "250"))
+BATCH_FORWARD_LIMIT = int(os.getenv("BATCH_FORWARD_LIMIT", "150"))
 
 SERIES_BLOCKS = [
     (11026, 13693, "El Secreto de Puente Viejo"),
@@ -69,11 +69,19 @@ SERIES_BLOCKS = [
     (80861, 90316, "Compañeros"),
     (90317, 91652, "Valle Salvaje"),
     (91653, 102985, "SMS (Sin Miedo a Soñar)"),
-    (102986, 9999999, "La Verdad de Laura")
+    (102986, 999999, "La Verdad de Laura")
 ]
 
 CANONICAL_ALIASES = {
+    "puente viejo": "El Secreto de Puente Viejo",
+    "el secreto de puente viejo": "El Secreto de Puente Viejo",
+    "cuentame": "Cuéntame Cómo Pasó",
+    "cuéntame": "Cuéntame Cómo Pasó",
+    "al salir de clase": "Al Salir de Clase",
+    "medico de familia": "Médico de Familia",
+    "médico de familia": "Médico de Familia",
     "aqui no hay quien viva": "Aquí No Hay Quien Viva",
+    "aquí no hay quien viva": "Aquí No Hay Quien Viva",
     "anhqv": "Aquí No Hay Quien Viva",
     "la que se avecina": "La Que Se Avecina",
     "lqsa": "La Que Se Avecina",
@@ -82,27 +90,20 @@ CANONICAL_ALIASES = {
     "aida": "Aída",
     "aída": "Aída",
     "los serrano": "Los Serrano",
-    "farmacia de guardia": "Farmacia de Guardia",
-    "medico de familia": "Médico de Familia",
-    "médico de familia": "Médico de Familia",
-    "cuentame como paso": "Cuéntame Cómo Pasó",
-    "cuéntame cómo pasó": "Cuéntame Cómo Pasó",
-    "cuentame": "Cuéntame Cómo Pasó",
-    "el secreto de puente viejo": "El Secreto de Puente Viejo",
-    "puente viejo": "El Secreto de Puente Viejo",
     "aguila roja": "Águila Roja",
     "águila roja": "Águila Roja",
-    "hospital central": "Hospital Central",
+    "hombres de paco": "Los Hombres de Paco",
     "los hombres de paco": "Los Hombres de Paco",
+    "farmacia de guardia": "Farmacia de Guardia",
     "bandolera": "Bandolera",
-    "al salir de clase": "Al Salir de Clase",
+    "nada es para siempre": "Nada Es Para Siempre",
+    "hospital central": "Hospital Central",
+    "companeros": "Compañeros",
     "compañeros": "Compañeros",
     "sms": "SMS (Sin Miedo a Soñar)",
-    "sms, sin miedo a soñar": "SMS (Sin Miedo a Soñar)",
-    "nada es para siempre": "Nada Es Para Siempre",
+    "la moderna": "Salón de Té La Moderna",
     "salon de te la moderna": "Salón de Té La Moderna",
     "salón de té la moderna": "Salón de Té La Moderna",
-    "la moderna": "Salón de Té La Moderna",
     "valle salvaje": "Valle Salvaje",
     "regreso a las sabinas": "Regreso a las Sabinas",
     "la verdad de laura": "La Verdad de Laura"
@@ -111,10 +112,11 @@ CANONICAL_ALIASES = {
 def load_state() -> dict:
     if os.path.exists(STATE_FILE):
         try:
-            with open(STATE_FILE, "r", encoding="utf-8") as f:
+            with open(STATE_FILE, "r", encoding="utf-8-sig") as f:
                 return json.load(f)
         except Exception as e:
-            logger.warning(f"No se pudo leer {STATE_FILE}: {e}")
+            logger.error(f"Error crítico leyendo {STATE_FILE}: {e}")
+            raise e
     return {
         "last_message_id": 11025,
         "topics_cache": {},
@@ -142,11 +144,42 @@ def resolve_series_for_message(msg_id: int, file_name: str, text: str) -> Option
 
     return None
 
+async def safe_send_message(client: TelegramClient, dest_chat, message: str, file, reply_to: int, max_retries: int = 4):
+    for attempt in range(max_retries):
+        try:
+            if not client.is_connected():
+                logger.warning("Cliente desconectado de Telegram. Reconectando...")
+                await client.connect()
+            return await client.send_message(
+                dest_chat,
+                message=message,
+                file=file,
+                reply_to=reply_to
+            )
+        except errors.FloodWaitError as e:
+            if e.seconds > 180:
+                logger.warning(f"FloodWait excesivo ({e.seconds}s).")
+                raise e
+            logger.warning(f"FloodWait: esperando {e.seconds + 1}s...")
+            await asyncio.sleep(e.seconds + 1)
+        except (ConnectionError, asyncio.TimeoutError, errors.RPCError) as e:
+            logger.warning(f"Error de red/RPC (intento {attempt + 1}/{max_retries}): {e}")
+            await asyncio.sleep(4)
+            try:
+                if not client.is_connected():
+                    await client.connect()
+            except Exception:
+                pass
+    raise ConnectionError("No se pudo enviar el mensaje tras múltiples reintentos.")
+
 async def get_or_create_topic(client: TelegramClient, dest_chat, series_title: str, state: dict) -> Optional[int]:
     cached = state.setdefault("topics_cache", {})
     norm_key = series_title.strip().lower()
     if norm_key in cached:
         return cached[norm_key]
+
+    if not client.is_connected():
+        await client.connect()
 
     dest_input = await client.get_input_entity(dest_chat)
 
@@ -232,7 +265,17 @@ async def sync_espanolas():
     logger.info(f"Límite de episodios por ejecución: {BATCH_FORWARD_LIMIT}")
     logger.info("=" * 60)
 
-    async with TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH) as client:
+    client = TelegramClient(
+        StringSession(STRING_SESSION),
+        API_ID,
+        API_HASH,
+        connection_retries=10,
+        retry_delay=3,
+        auto_reconnect=True,
+        timeout=60
+    )
+
+    async with client:
         # Precargar entidades de forma robusta
         source_chat = await client.get_entity(SERIES_SOURCE_CHAT)
         
@@ -247,8 +290,6 @@ async def sync_espanolas():
                     break
         if not dest_chat:
             dest_chat = await client.get_entity(SERIES_DEST_CHAT)
-            
-        dest_input = await client.get_input_entity(dest_chat)
 
         forward_count = 0
         pending_poster = None
@@ -256,13 +297,34 @@ async def sync_espanolas():
         active_topic_id = state.get("topics_cache", {}).get((active_series or "").lower())
         more_remaining = False
 
-        async for msg in client.iter_messages(
-            source_chat,
-            reply_to=SERIES_SOURCE_TOPIC,
-            min_id=last_id,
-            reverse=True,
-            limit=2500
-        ):
+        # Descargar lote de mensajes
+        logger.info(f"Descargando lote de mensajes desde ID {last_id}...")
+        messages = []
+        for attempt in range(3):
+            try:
+                if not client.is_connected():
+                    await client.connect()
+                messages = await client.get_messages(
+                    source_chat,
+                    reply_to=SERIES_SOURCE_TOPIC,
+                    min_id=last_id,
+                    reverse=True,
+                    limit=BATCH_FORWARD_LIMIT + 50
+                )
+                break
+            except Exception as e:
+                logger.warning(f"Error obteniendo mensajes (intento {attempt+1}): {e}")
+                await asyncio.sleep(4)
+
+        if not messages:
+            logger.info("No se encontraron más mensajes para procesar.")
+            if os.path.exists(".more_episodes"):
+                os.remove(".more_episodes")
+            return
+
+        logger.info(f"Mensajes recuperados para analizar: {len(messages)}")
+
+        for msg in messages:
             if forward_count >= BATCH_FORWARD_LIMIT:
                 logger.info(f"Alcanzado el límite de {BATCH_FORWARD_LIMIT} episodios para esta tanda.")
                 more_remaining = True
@@ -280,6 +342,8 @@ async def sync_espanolas():
                     state["current_series"] = active_series
                     pending_poster = msg
                     logger.info(f"🖼️ Póster detectado para serie: '{active_series}'")
+                state["last_message_id"] = msg.id
+                save_state(state)
 
             # 2. Archivo de video
             elif is_video_message(msg):
@@ -298,7 +362,8 @@ async def sync_espanolas():
                 if pending_poster:
                     try:
                         p_caption = pending_poster.text or f"Póster Oficial - {active_series}"
-                        await client.send_message(
+                        await safe_send_message(
+                            client,
                             dest_chat,
                             message=p_caption,
                             file=pending_poster.media,
@@ -313,7 +378,8 @@ async def sync_espanolas():
                 # Enviar episodio
                 try:
                     caption = text or fname or "Episodio"
-                    await client.send_message(
+                    await safe_send_message(
+                        client,
                         dest_chat,
                         message=caption,
                         file=msg.media,
@@ -323,19 +389,27 @@ async def sync_espanolas():
                     state["forwarded_count"] = state.get("forwarded_count", 0) + 1
                     state["series_stats"].setdefault(active_series, 0)
                     state["series_stats"][active_series] += 1
-
-                    logger.info(f"[{forward_count}/{BATCH_FORWARD_LIMIT}] 🎬 Enviado a '{active_series}': {fname or msg.id}")
                     state["last_message_id"] = msg.id
                     save_state(state)
+
+                    logger.info(f"[{forward_count}/{BATCH_FORWARD_LIMIT}] 🎬 Enviado a '{active_series}': {fname or msg.id}")
                     await asyncio.sleep(2.0)
+                except errors.FloodWaitError as fe:
+                    logger.warning(f"FloodWait detectado ({fe.seconds}s). Guardando progreso y cediendo turno...")
+                    more_remaining = True
+                    break
                 except Exception as ex:
                     logger.error(f"Error enviando episodio Msg {msg.id}: {ex}")
-                    await asyncio.sleep(3.0)
+                    more_remaining = True
+                    break
 
-            # Actualizar último ID procesado
-            if msg.id > state.get("last_message_id", 0):
-                state["last_message_id"] = msg.id
-                save_state(state)
+            else:
+                if msg.id > state.get("last_message_id", 0):
+                    state["last_message_id"] = msg.id
+                    save_state(state)
+
+        if len(messages) >= BATCH_FORWARD_LIMIT or forward_count >= BATCH_FORWARD_LIMIT:
+            more_remaining = True
 
         logger.info("=" * 60)
         logger.info(f"Tanda finalizada. Episodios reenviados en esta ejecución: {forward_count}")
@@ -347,6 +421,7 @@ async def sync_espanolas():
         if more_remaining or forward_count >= BATCH_FORWARD_LIMIT:
             with open(".more_episodes", "w") as f:
                 f.write("true")
+            logger.info("Marcador .more_episodes creado para continuar en la siguiente ejecución.")
         elif os.path.exists(".more_episodes"):
             os.remove(".more_episodes")
 
