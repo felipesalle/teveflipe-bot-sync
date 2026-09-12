@@ -13,7 +13,8 @@ from telethon.tl.types import (
     DocumentAttributeFilename,
     Channel
 )
-from telethon.tl.functions.channels import (
+import random
+from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
     CreateForumTopicRequest
 )
@@ -176,10 +177,12 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
     if normalized_name in cached_topics:
         return cached_topics[normalized_name]
 
+    dest_input = await client.get_input_entity(dest_chat)
+
     # 2. Consultar temas existentes en el supergrupo de Telegram
     try:
         topics_res = await client(GetForumTopicsRequest(
-            channel=dest_chat,
+            peer=dest_input,
             offset_date=None,
             offset_id=0,
             offset_topic=0,
@@ -199,21 +202,26 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
     # 3. Si no existe, crear un nuevo tema para la serie
     try:
         logger.info(f"🆕 Creando nuevo Tema en el foro de Series: '{series_name}'...")
+        rand_id = random.randint(1, 2**63 - 1)
         created = await client(CreateForumTopicRequest(
-            channel=dest_chat,
+            peer=dest_input,
             title=series_name[:128],  # Límite de caracteres de Telegram
-            icon_color=0x6FB9F0       # Color azul/celeste
+            random_id=rand_id
         ))
         
         # Obtener el ID del tema creado
         topic_id = None
         for update in getattr(created, "updates", []):
-            if hasattr(update, "message") and hasattr(update.message, "id"):
-                topic_id = update.message.id
-                break
-            if hasattr(update, "id"):
+            msg = getattr(update, "message", None)
+            if msg and hasattr(msg, "id"):
+                action = getattr(msg, "action", None)
+                if action and "TopicCreate" in type(action).__name__:
+                    topic_id = msg.id
+                    break
+                elif topic_id is None:
+                    topic_id = msg.id
+            elif hasattr(update, "id"):
                 topic_id = update.id
-                break
 
         if topic_id:
             logger.info(f"✅ Tema creado exitosamente para '{series_name}' (Topic ID: {topic_id})")
