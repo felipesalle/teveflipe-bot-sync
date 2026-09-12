@@ -1,4 +1,4 @@
-﻿import asyncio
+import asyncio
 import json
 import logging
 import os
@@ -40,7 +40,21 @@ async def explore_group():
 
     logger.info(f"Conectando a Telegram para explorar el chat: {TARGET_CHAT_ID}...")
     async with TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH) as client:
-        entity = await client.get_entity(TARGET_CHAT_ID)
+        logger.info("Cargando lista de diálogos para resolver entidades recientes...")
+        entity = None
+        async for dialog in client.iter_dialogs(limit=100):
+            d_id = dialog.id
+            if d_id == TARGET_CHAT_ID or str(TARGET_CHAT_ID) in str(d_id) or "4455579909" in str(d_id):
+                entity = dialog.entity
+                logger.info(f"¡Grupo encontrado en diálogos!: {dialog.title} (ID {d_id})")
+                break
+        
+        if not entity:
+            try:
+                entity = await client.get_entity(TARGET_CHAT_ID)
+            except Exception as e:
+                logger.error(f"No se pudo resolver la entidad {TARGET_CHAT_ID}: {e}")
+                return
         input_peer = await client.get_input_entity(entity)
         chat_title = getattr(entity, "title", "Desconocido")
 
