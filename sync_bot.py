@@ -383,23 +383,26 @@ async def sync_movies(client: TelegramClient, state: dict):
 
 async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict):
     """Elimina temas vacíos, basura o duplicados de ejecuciones previas."""
-    junk_topic_ids = [5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313]
     dest_input = await client.get_input_entity(dest_chat)
     
-    # 1. Limpiar del caché local
+    # 1. Identificar y limpiar temas no deseados del caché local
     cached_topics = state.setdefault("series_topics_cache", {})
-    to_delete = [k for k, v in cached_topics.items() if v in junk_topic_ids or is_junk_series_title(k)]
-    for k in to_delete:
-        del cached_topics[k]
-        logger.info(f"Limpiando tema del caché: '{k}'")
+    junk_topic_ids = [5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313]
+    for k, v in list(cached_topics.items()):
+        if v >= 5330 or v in junk_topic_ids or is_junk_series_title(k):
+            junk_topic_ids.append(v)
+            del cached_topics[k]
+            logger.info(f"Limpiando tema no deseado del caché: '{k}' (ID {v})")
+            
     state["series_topics_cache"] = cached_topics
+    junk_topic_ids = list(set(junk_topic_ids))
     
-    # 2. Eliminar temas no deseados conocidos en Telegram
+    # 2. Eliminar temas no deseados en Telegram si aún existen
     for tid in junk_topic_ids:
         try:
             await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=tid))
             logger.info(f"🗑️ Tema no deseado ID {tid} eliminado de Telegram.")
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.8)
         except Exception as e:
             logger.debug(f"Tema {tid} ya no existe o no se pudo eliminar: {e}")
 
@@ -611,13 +614,28 @@ async def sync_series(client: TelegramClient, state: dict):
             if video_title and is_junk_series_title(video_title):
                 video_title = None
 
-            # Priorizar el nombre de la serie oficial sobre el título de un episodio
-            target_series = resolve_series_name(video_title, current_series_title)
-            target_topic_id = None
+            # Lógica estricta de asignación: Si hay una serie activa (ej. 'Seinfeld'), los capítulos pertenecen a ella
+            target_series = None
+            if current_series_title:
+                if video_title and video_title.lower() != current_series_title.lower():
+                    # Solo cambiar de serie si el video coincide con otra serie ya conocida en el foro
+                    known_topics = state.get("series_topics_cache", {})
+                    if video_title.lower() in known_topics:
+                        target_series = video_title
+                        current_series_title = target_series
+                    else:
+                        # Es el título de un capítulo (ej. 'The Library', 'The Cafe') -> se queda en la serie activa ('Seinfeld')
+                        target_series = current_series_title
+                else:
+                    target_series = current_series_title
+            else:
+                target_series = video_title
+                if target_series:
+                    current_series_title = target_series
 
+            target_topic_id = None
             if target_series and not is_junk_series_title(target_series):
                 target_topic_id = await get_or_create_forum_topic(client, dest_chat, target_series, state)
-                current_series_title = target_series
                 current_topic_id = target_topic_id
             elif current_topic_id:
                 target_topic_id = current_topic_id
