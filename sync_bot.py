@@ -192,7 +192,7 @@ def is_junk_series_title(title: str) -> bool:
     return False
 
 
-def clean_series_title(raw_title: str) -> str:
+def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     """Limpia el título para extraer únicamente el nombre base de la serie."""
     if not raw_title:
         return ""
@@ -220,27 +220,39 @@ def clean_series_title(raw_title: str) -> str:
         r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX]\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|T\s*\d+)\b",
         text
     )
-    candidates = [p.strip() for p in parts if p.strip()]
     
     title = ""
-    if candidates:
-        # Tomar el primer bloque que contenga letras y longitud válida
-        for c in candidates:
-            c_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", c).strip()
-            c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
-            if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
-                title = c_clean
-                break
+    if is_filename:
+        # En archivos de video, el nombre de serie precede al episodio (ej. 'Penny Dreadful 1x01').
+        # Si el archivo empieza por el número (ej. '3x05 The Library.mp4'), el texto siguiente es el título del capítulo, NUNCA la serie.
+        before_ep = parts[0].strip() if parts else ""
+        c_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", before_ep).strip()
+        c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
+        if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
+            title = c_clean
+        else:
+            return ""
     else:
-        t_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", text).strip()
-        if not is_junk_series_title(t_clean):
-            title = t_clean
+        # En mensajes de texto y pósters, buscar el primer candidato con texto válido
+        candidates = [p.strip() for p in parts if p.strip()]
+        if candidates:
+            for c in candidates:
+                c_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", c).strip()
+                c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
+                if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
+                    title = c_clean
+                    break
+        else:
+            t_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", text).strip()
+            if not is_junk_series_title(t_clean):
+                title = t_clean
         
     title = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", title).strip()
     title = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", title).strip()
     if is_junk_series_title(title):
         return ""
     return title.title()
+
 
 
 def resolve_series_name(video_title: Optional[str], current_series_title: Optional[str]) -> Optional[str]:
@@ -381,30 +393,37 @@ async def sync_movies(client: TelegramClient, state: dict):
             logger.error(f"Error reenviando película ID {best_msg.id}: {e}")
 
 
+KNOWN_JUNK_TOPIC_IDS = {
+    5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 
+    5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313
+} | set(range(5327, 5430))
+
+
 async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict):
     """Elimina temas vacíos, basura o duplicados de ejecuciones previas."""
     dest_input = await client.get_input_entity(dest_chat)
     
     # 1. Identificar y limpiar temas no deseados del caché local
     cached_topics = state.setdefault("series_topics_cache", {})
-    junk_topic_ids = [5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313]
+    junk_topic_ids = set(KNOWN_JUNK_TOPIC_IDS)
     for k, v in list(cached_topics.items()):
-        if v >= 5330 or v in junk_topic_ids or is_junk_series_title(k):
-            junk_topic_ids.append(v)
+        if v in junk_topic_ids or v >= 5327 or is_junk_series_title(k):
+            junk_topic_ids.add(v)
             del cached_topics[k]
             logger.info(f"Limpiando tema no deseado del caché: '{k}' (ID {v})")
             
     state["series_topics_cache"] = cached_topics
-    junk_topic_ids = list(set(junk_topic_ids))
+    state["current_series_title"] = None
+    state["current_topic_id"] = None
     
     # 2. Eliminar temas no deseados en Telegram si aún existen
-    for tid in junk_topic_ids:
+    for tid in sorted(junk_topic_ids):
         try:
             await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=tid))
             logger.info(f"🗑️ Tema no deseado ID {tid} eliminado de Telegram.")
-            await asyncio.sleep(0.8)
-        except Exception as e:
-            logger.debug(f"Tema {tid} ya no existe o no se pudo eliminar: {e}")
+            await asyncio.sleep(0.4)
+        except Exception:
+            pass
 
     # 3. Escanear temas existentes en el supergrupo y borrar los que sean códigos de episodio o basura
     try:
@@ -412,17 +431,20 @@ async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict
         for top in getattr(topics_res, "topics", []):
             top_title = getattr(top, "title", "").strip()
             top_id = getattr(top, "id", None)
-            if top_id and top_id != 1 and is_junk_series_title(top_title):
+            if top_id and top_id != 1 and (is_junk_series_title(top_title) or top_id in junk_topic_ids or top_id >= 5327):
                 logger.info(f"🗑️ Eliminando tema basura detectado en Telegram: '{top_title}' (ID {top_id})...")
-                await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=top_id))
-                await asyncio.sleep(1)
+                try:
+                    await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=top_id))
+                    await asyncio.sleep(0.5)
+                except Exception:
+                    pass
     except Exception as e:
         logger.warning(f"Error escaneando temas en destino: {e}")
 
 
 async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_name: str, state: dict) -> Optional[int]:
     """Busca si ya existe un Tema en el supergrupo con el nombre de la serie; si no, lo crea."""
-    clean_name = clean_series_title(series_name)
+    clean_name = clean_series_title(series_name, is_filename=False)
     if not clean_name or is_junk_series_title(clean_name):
         logger.warning(f"Título de serie inválido o decorativo descartado: '{series_name}'")
         return None
@@ -436,7 +458,7 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
 
     # Comprobar variaciones en la caché local
     for k, v in cached_topics.items():
-        if clean_series_title(k).strip().lower() == normalized_name:
+        if clean_series_title(k, is_filename=False).strip().lower() == normalized_name:
             cached_topics[normalized_name] = v
             return v
 
@@ -466,9 +488,11 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
                 t_raw = getattr(topic, "title", "").strip()
                 t_id = getattr(topic, "id", None)
                 if t_raw and t_id:
+                    if t_id in KNOWN_JUNK_TOPIC_IDS or is_junk_series_title(t_raw):
+                        continue
                     t_lower = t_raw.lower()
                     cached_topics[t_lower] = t_id
-                    t_clean = clean_series_title(t_raw).lower()
+                    t_clean = clean_series_title(t_raw, is_filename=False).lower()
                     if t_clean:
                         cached_topics[t_clean] = t_id
                         
@@ -559,13 +583,13 @@ async def sync_series(client: TelegramClient, state: dict):
     last_id = state.get("series_last_id", 0)
     logger.info(f"Escaneando series nuevas posteriores al ID {last_id}...")
     
-    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 100 para no cortar series a la mitad
+    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 150 para avanzar más rápido
     messages = []
     async for message in client.iter_messages(
         source_chat,
         reply_to=SERIES_SOURCE_TOPIC if SERIES_SOURCE_TOPIC else None,
         min_id=last_id,
-        limit=100,
+        limit=150,
         reverse=True
     ):
         messages.append(message)
@@ -574,8 +598,8 @@ async def sync_series(client: TelegramClient, state: dict):
         logger.info("No hay nuevos mensajes de series para procesar.")
         return
 
-    current_series_title: Optional[str] = None
-    current_topic_id: Optional[int] = None
+    current_series_title: Optional[str] = state.get("current_series_title")
+    current_topic_id: Optional[int] = state.get("current_topic_id")
     pending_poster = None
 
     for msg in messages:
@@ -587,17 +611,23 @@ async def sync_series(client: TelegramClient, state: dict):
         
         # 1. Detectar si es un mensaje de texto puro (anuncio o título de serie)
         if not msg.media and text_content:
-            cand = clean_series_title(text_content)
+            cand = clean_series_title(text_content, is_filename=False)
             if cand and not is_junk_series_title(cand):
                 current_series_title = cand
+                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                state["current_series_title"] = current_series_title
+                state["current_topic_id"] = current_topic_id
                 logger.info(f"📝 Título de serie detectado en mensaje de texto: '{current_series_title}'")
 
         # 2. Detectar si es una imagen de carátula o presentación
         elif msg.media and isinstance(msg.media, MessageMediaPhoto):
-            extracted = clean_series_title(text_content) if text_content else None
+            extracted = clean_series_title(text_content, is_filename=False) if text_content else None
             # Si la foto tiene un título de serie válido, usarlo
             if extracted and not is_junk_series_title(extracted):
                 current_series_title = extracted
+                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                state["current_series_title"] = current_series_title
+                state["current_topic_id"] = current_topic_id
                 pending_poster = msg
                 logger.info(f"🖼️ Póster detectado para serie: '{current_series_title}'")
             elif current_series_title:
@@ -609,72 +639,57 @@ async def sync_series(client: TelegramClient, state: dict):
 
         # 3. Detectar si es un video de episodio
         elif is_video_message(msg):
-            raw = file_name or text_content
-            video_title = clean_series_title(raw) if raw else None
-            if video_title and is_junk_series_title(video_title):
-                video_title = None
+            # Obtener el nombre de serie del archivo únicamente si está explícito antes del número de episodio
+            video_series_title = clean_series_title(file_name, is_filename=True) if file_name else None
+            if video_series_title and is_junk_series_title(video_series_title):
+                video_series_title = None
 
-            # Lógica estricta de asignación: Si hay una serie activa (ej. 'Seinfeld'), los capítulos pertenecen a ella
-            target_series = None
-            if current_series_title:
-                if video_title and video_title.lower() != current_series_title.lower():
-                    # Solo cambiar de serie si el video coincide con otra serie ya conocida en el foro
-                    known_topics = state.get("series_topics_cache", {})
-                    if video_title.lower() in known_topics:
-                        target_series = video_title
-                        current_series_title = target_series
-                    else:
-                        # Es el título de un capítulo (ej. 'The Library', 'The Cafe') -> se queda en la serie activa ('Seinfeld')
-                        target_series = current_series_title
-                else:
-                    target_series = current_series_title
-            else:
-                target_series = video_title
-                if target_series:
-                    current_series_title = target_series
+            # Si el video tiene un nombre explícito de serie diferente de la activa
+            if video_series_title and video_series_title.lower() != (current_series_title or "").lower():
+                current_series_title = video_series_title
+                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+                state["current_series_title"] = current_series_title
+                state["current_topic_id"] = current_topic_id
 
-            target_topic_id = None
-            if target_series and not is_junk_series_title(target_series):
-                target_topic_id = await get_or_create_forum_topic(client, dest_chat, target_series, state)
-                current_topic_id = target_topic_id
-            elif current_topic_id:
-                target_topic_id = current_topic_id
+            target_series = current_series_title
+            target_topic_id = current_topic_id
 
-            if target_topic_id:
-                # Si había una carátula pendiente para este tema, enviarla primero
-                if pending_poster and current_series_title:
-                    try:
-                        await client.send_message(
-                            dest_chat,
-                            message=pending_poster.text or f"Póster oficial - {current_series_title}",
-                            file=pending_poster.media,
-                            reply_to=target_topic_id
-                        )
-                        logger.info(f"🖼️ Póster enviado al tema '{current_series_title}'")
-                        state["forwarded_message_ids"].append(pending_poster.id)
-                        pending_poster = None
-                        await asyncio.sleep(2)
-                    except Exception as e:
-                        logger.error(f"Error enviando póster: {e}")
+            if not target_topic_id:
+                logger.warning(f"Omitiendo video huérfano sin serie identificada: {file_name or msg.id}")
+                continue
 
-                # Enviar el episodio al Tema correspondiente
+            # Si había una carátula pendiente para este tema, enviarla primero
+            if pending_poster and current_series_title:
                 try:
-                    caption = text_content or file_name or "Episodio"
                     await client.send_message(
                         dest_chat,
-                        message=caption,
-                        file=msg.media,
+                        message=pending_poster.text or f"Póster oficial - {current_series_title}",
+                        file=pending_poster.media,
                         reply_to=target_topic_id
                     )
-                    logger.info(f"🎬 Episodio enviado a '{current_series_title}': {file_name or msg.id}")
-                    state["forwarded_message_ids"].append(msg.id)
-                    await asyncio.sleep(2.5)
+                    logger.info(f"🖼️ Póster enviado al tema '{current_series_title}'")
+                    state.setdefault("forwarded_message_ids", []).append(pending_poster.id)
+                    pending_poster = None
+                    await asyncio.sleep(2)
                 except Exception as e:
-                    logger.error(f"Error reenviando episodio ID {msg.id}: {e}")
-            else:
-                logger.warning(f"No se pudo determinar el tema destino para el video: {file_name or msg.id}")
+                    logger.error(f"Error enviando póster: {e}")
 
-        if msg.id > state["series_last_id"]:
+            # Enviar el episodio al Tema correspondiente
+            try:
+                caption = text_content or file_name or "Episodio"
+                await client.send_message(
+                    dest_chat,
+                    message=caption,
+                    file=msg.media,
+                    reply_to=target_topic_id
+                )
+                logger.info(f"🎬 Episodio enviado a '{current_series_title}': {file_name or msg.id}")
+                state.setdefault("forwarded_message_ids", []).append(msg.id)
+                await asyncio.sleep(2.5)
+            except Exception as e:
+                logger.error(f"Error reenviando episodio ID {msg.id}: {e}")
+
+        if msg.id > state.get("series_last_id", 0):
             state["series_last_id"] = msg.id
         save_state(state)
 
