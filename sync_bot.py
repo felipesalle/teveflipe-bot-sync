@@ -629,13 +629,13 @@ async def sync_series(client: TelegramClient, state: dict):
     last_id = state.get("series_last_id", 0)
     logger.info(f"Escaneando series nuevas posteriores al ID {last_id}...")
     
-    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 220 para procesar series completas
+    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 600 para avanzar rápido en descartes
     messages = []
     async for message in client.iter_messages(
         source_chat,
         reply_to=SERIES_SOURCE_TOPIC if SERIES_SOURCE_TOPIC else None,
         min_id=last_id,
-        limit=220,
+        limit=600,
         reverse=True
     ):
         messages.append(message)
