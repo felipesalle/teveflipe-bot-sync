@@ -1,6 +1,6 @@
 {
   "movies_last_id": 1611648,
-  "series_last_id": 157894,
+  "series_last_id": 157843,
   "series_topics_cache": {
     "stranger things": 4937,
     "terror en tokio": 4807,
@@ -102,16 +102,7 @@
     "battlestar galactica the resistance": 5098,
     "battlestar galactica razor flashbacks": 5098,
     "battlestar galactica the face of the enemy": 5098,
-    "1x01": 5268,
-    "1x02": 5270,
-    "1x03": 5272,
-    "1x04": 5274,
-    "1x05": 5276,
-    "1x06": 5278,
-    "1x07": 5280,
-    "1x08": 5282,
-    "penny dreadful": 5284,
-    "the seinfeld chronicles": 5313
+    "penny dreadful": 5284
   },
   "forwarded_message_ids": [
     1606327,
@@ -379,16 +370,6 @@
     157841,
     157842,
     157843,
-    157844,
-    157845,
-    157846,
-    157847,
-    157848,
-    157850,
-    157851,
-    157852,
-    157853,
-    157854,
     157855,
     157857,
     157858,
@@ -425,9 +406,7 @@
     157889,
     157890,
     157891,
-    157892,
-    157893,
-    157894
+    157892
   ],
   "synced_movie_titles": [
     "un muerto a la hora del te",
