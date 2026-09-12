@@ -1,6 +1,6 @@
 {
   "movies_last_id": 1611648,
-  "series_last_id": 158192,
+  "series_last_id": 158328,
   "series_topics_cache": {
     "stranger things": 4937,
     "terror en tokio": 4807,
@@ -100,11 +100,7 @@
     "battlestar galactica the resistance": 5098,
     "battlestar galactica razor flashbacks": 5098,
     "battlestar galactica the face of the enemy": 5098,
-    "penny dreadful": 5284,
-    "seinfeld": 5676,
-    "chuck - 5 temporadas completas  / finalizada\n | microhd   \n |  + \n | \n | 1 gb\n⚙️ |": 5700,
-    "chuck - 5 temporadas completas / finalizada | microhd | + | | 1 gb ⚙️ |": 5700,
-    "24 - 9 temporadas completas  + pelicula / finalizada\n\n | microhd   \n |  + \n |  + \n | 700 mb\n⚙️ |  \n\n⚠️ sin     del": 5793
+    "penny dreadful": 5284
   },
   "forwarded_message_ids": [
     157599,
@@ -653,6 +649,6 @@
     "aves de corral",
     "hasta el fin del mundo"
   ],
-  "current_series_title": "24 - 9 Temporadas Completas  + Pelicula / Finalizada\n\n | Microhd   \n |  + \n |  + \n | 700 Mb\n⚙️ |  \n\n⚠️ Sin     Del",
-  "current_topic_id": 5793
+  "current_series_title": null,
+  "current_topic_id": null
 }
