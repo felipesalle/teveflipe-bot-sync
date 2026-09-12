@@ -105,19 +105,18 @@ def extract_file_name(message) -> str:
 
 def clean_series_title(raw_title: str) -> str:
     """Limpia el título para extraer únicamente el nombre base de la serie."""
+    # Quitar extensión (.mkv, .mp4, etc.)
+    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
     # Eliminar enlaces, menciones (@canal) y corchetes de calidad [1080p], [Dual], etc.
-    text = re.sub(r"https?://\S+", "", raw_title)
+    text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"@\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
     
-    # Cortar en patrones de temporada/episodio comunes (S01, 1x01, Temporada 1, Cap, etc.)
-    match = re.split(r"(?i)\b(?:S\d+|T\d+|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+)\b", text)
-    title = match[0].strip()
-    
-    # Reemplazar puntos, guiones bajos por espacios
-    title = title.replace(".", " ").replace("_", " ").strip()
-    # Quitar guiones al final
-    title = re.sub(r"[-–—:]\s*$", "", title).strip()
+    # Cortar en patrones de temporada/episodio comunes
+    parts = re.split(r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+)\b", text)
+    candidates = [p.replace(".", " ").replace("_", " ").strip() for p in parts if p.strip()]
+    title = candidates[0] if candidates else text
+    title = re.sub(r"^[-–—:\s]+|[-–—:\s]+$", "", title).strip()
     return title.title()
 
 
