@@ -116,27 +116,40 @@ def get_media_size(message) -> int:
     return 0
 
 
-def clean_movie_title(raw_title: str) -> str:
+def clean_movie_title(raw_title: str, caption: str = "") -> str:
     """Extrae una clave normalizada de película para agrupar versiones duplicadas."""
-    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
+    # Si hay un caption con título legible (ej. VAIANA (Moana-2026)), preferir su título principal
+    raw = caption if (caption and len(caption.strip()) >= 3) else raw_title
+    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw)
     text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"@\w+", "", text)
-    text = text.replace("_", " ").replace("-", " ")
     
-    # Extraer año si existe (ej. 1999, 2024, etc.)
-    match = re.search(r"\b((?:19|20)\d\d)\b", text)
-    if match:
-        title_part = text[:match.start()].strip() or text[match.end():].strip()
+    # 1. Separar año pegado a letras (ej: Vaiana2026 -> Vaiana 2026)
+    text = re.sub(r"([a-zA-Z])((?:19|20)\d\d)", r"\1 \2", text)
+    
+    # 2. Si el texto tiene formato 'TITULO (Subtitulo o Alternativo)', tomar la parte principal antes del '('
+    main_match = re.split(r"[\(\[]", text, maxsplit=1)
+    if main_match and len(main_match[0].strip()) >= 3 and any(c.isalpha() for c in main_match[0]):
+        title_cand = main_match[0]
     else:
-        title_part = text
+        title_cand = text
+        
+    title_cand = title_cand.replace("_", " ").replace("-", " ")
+    
+    # 3. Extraer año si está en el título
+    match = re.search(r"\b((?:19|20)\d\d)\b", title_cand)
+    if match:
+        title_part = title_cand[:match.start()].strip() or title_cand[match.end():].strip()
+    else:
+        title_part = title_cand
 
-    # Limpiar etiquetas típicas de ripeos, códecs y audios
+    # 4. Limpiar etiquetas típicas de ripeos, códecs, resoluciones y grupos
     title_part = re.sub(
-        r"(?i)\b(?:1080p|720p|2160p|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|x264|h264|x265|h265|hevc|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip)\b",
-        "",
+        r"(?i)\b(?:1080p?|720p?|2160p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada)\b",
+        " ",
         title_part
     )
-    title_part = re.sub(r"[\[\]\(\)\{\},.+:!¡?¿]", " ", title_part)
+    title_part = re.sub(r"[\[\]\(\)\{\},.+:!¡?¿*=#~]", " ", title_part)
     title_part = re.sub(r"\s+", " ", title_part).strip().lower()
     return title_part
 
@@ -149,14 +162,18 @@ def clean_series_title(raw_title: str) -> str:
     text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
     text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"@\w+", "", text)
+    text = re.sub(r"#\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
     
-    # Quitar créditos como 'By Luar12', 'FINAL', etc.
-    text = re.sub(r"(?i)\b(?:by\s+\w+|final|completa|dual|latino|castellano|español|subtitulado)\b", "", text)
+    # Quitar emojis comunes o símbolos residuales
+    text = re.sub(r"[\U00010000-\U0010ffff]", "", text)
     
-    # Cortar en patrones de temporada/episodio (ej. 1x01, S01E01, Temporada 2, etc.)
+    # Quitar créditos como 'By Luar12', 'FINAL', etc.
+    text = re.sub(r"(?i)\b(?:by\s+\w+|final|completa|dual|latino|castellano|español|subtitulado|miniserie|precuela)\b", "", text)
+    
+    # Cortar en patrones de temporada/episodio (ej. 1x01, S01E01, Temporada 2, T 2, etc.)
     parts = re.split(
-        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+)\b",
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|T\s*\d+)\b",
         text
     )
     candidates = [p.replace(".", " ").replace("_", " ").strip() for p in parts if p.strip()]
@@ -212,8 +229,8 @@ async def sync_movies(client: TelegramClient, state: dict):
     groups = defaultdict(list)
     for msg in new_movies:
         fname = extract_file_name(msg)
-        raw_text = msg.text or fname
-        title_key = clean_movie_title(raw_text)
+        caption_text = msg.text or ""
+        title_key = clean_movie_title(fname, caption_text)
         # Si no se pudo limpiar bien, usar el nombre directo como clave
         key = title_key if len(title_key) >= 3 else (fname.lower() or str(msg.id))
         groups[key].append(msg)
