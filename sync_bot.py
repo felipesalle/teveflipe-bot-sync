@@ -281,13 +281,16 @@ async def sync_series(client: TelegramClient, state: dict):
 
         # 2. Detectar si es un video de episodio
         elif is_video_message(msg):
-            # Si aún no tenemos título activo, deducirlo del nombre del archivo o del texto
             raw = text_content or file_name
-            if not current_series_title and raw:
-                extracted = clean_series_title(raw)
-                if extracted and len(extracted) >= 3:
-                    current_series_title = extracted
-                    current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+            video_title = clean_series_title(raw) if raw else None
+
+            # Si el video tiene un título identificado y es distinto del actual, cambiar al tema correspondiente
+            if video_title and len(video_title) >= 3 and video_title != current_series_title:
+                current_series_title = video_title
+                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+            elif not current_topic_id and video_title and len(video_title) >= 3:
+                current_series_title = video_title
+                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
 
             if current_topic_id:
                 # Si había una carátula pendiente para este tema, enviarla primero
