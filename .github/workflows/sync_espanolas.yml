@@ -1,4 +1,4 @@
-﻿name: Sincronizar Series Espanolas
+name: Sincronizar Series Espanolas
 
 on:
   schedule:
@@ -45,9 +45,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add sync_state_espanolas.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update sync state series espanolas [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update sync state series espanolas [skip ci]"
+          git pull --rebase origin main
+          git push origin main
 
       - name: Encadenar siguiente tanda si quedan episodios
         if: always()
