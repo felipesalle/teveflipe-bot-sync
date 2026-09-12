@@ -197,7 +197,11 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     if not raw_title:
         return ""
         
-    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
+    text = raw_title
+    if not is_filename and "\n" in text:
+        text = text.strip().split("\n")[0].strip()
+
+    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", text)
     text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"[@#]\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
@@ -208,9 +212,13 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     # Reemplazar guiones bajos y puntos por espacios para respetar límites de palabras (\b)
     text = text.replace("_", " ").replace(".", " ")
     
+    # Quitar frases descriptivas comunes en títulos de anuncios
+    text = re.sub(r"(?i)\b\d+\s+temporadas?\s+completas?\b.*$", "", text)
+    text = re.sub(r"(?i)\b(?:finalizada|completa|miniserie|precuela)\b.*$", "", text)
+
     # Quitar créditos de ripeo, códecs, resoluciones, idiomas y etiquetas residuales
     text = re.sub(
-        r"(?i)\b(?:1080p?|720p?|2160p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|hdtv|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada|final|completa|miniserie|precuela)\b",
+        r"(?i)\b(?:1080p?|720p?|2160p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|hdtv|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada)\b",
         " ",
         text
     )
@@ -395,7 +403,8 @@ async def sync_movies(client: TelegramClient, state: dict):
 
 KNOWN_JUNK_TOPIC_IDS = {
     5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 
-    5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313
+    5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313,
+    5525, 5676, 5700, 5707, 5764, 5793
 } | set(range(5327, 5430))
 
 
@@ -407,14 +416,12 @@ async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict
     cached_topics = state.setdefault("series_topics_cache", {})
     junk_topic_ids = set(KNOWN_JUNK_TOPIC_IDS)
     for k, v in list(cached_topics.items()):
-        if v in junk_topic_ids or v >= 5327 or is_junk_series_title(k):
+        if v in junk_topic_ids or is_junk_series_title(k):
             junk_topic_ids.add(v)
             del cached_topics[k]
             logger.info(f"Limpiando tema no deseado del caché: '{k}' (ID {v})")
             
     state["series_topics_cache"] = cached_topics
-    state["current_series_title"] = None
-    state["current_topic_id"] = None
     
     # 2. Eliminar temas no deseados en Telegram si aún existen
     for tid in sorted(junk_topic_ids):
@@ -431,7 +438,7 @@ async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict
         for top in getattr(topics_res, "topics", []):
             top_title = getattr(top, "title", "").strip()
             top_id = getattr(top, "id", None)
-            if top_id and top_id != 1 and (is_junk_series_title(top_title) or top_id in junk_topic_ids or top_id >= 5327):
+            if top_id and top_id != 1 and (is_junk_series_title(top_title) or top_id in junk_topic_ids):
                 logger.info(f"🗑️ Eliminando tema basura detectado en Telegram: '{top_title}' (ID {top_id})...")
                 try:
                     await client(DeleteTopicHistoryRequest(peer=dest_input, top_msg_id=top_id))
@@ -583,13 +590,13 @@ async def sync_series(client: TelegramClient, state: dict):
     last_id = state.get("series_last_id", 0)
     logger.info(f"Escaneando series nuevas posteriores al ID {last_id}...")
     
-    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 150 para avanzar más rápido
+    # Leemos mensajes en orden cronológico (reverse=True), aumentamos lote a 220 para procesar series completas
     messages = []
     async for message in client.iter_messages(
         source_chat,
         reply_to=SERIES_SOURCE_TOPIC if SERIES_SOURCE_TOPIC else None,
         min_id=last_id,
-        limit=150,
+        limit=220,
         reverse=True
     ):
         messages.append(message)
