@@ -1,6 +1,6 @@
 {
   "movies_last_id": 1611648,
-  "series_last_id": 158552,
+  "series_last_id": 158772,
   "series_topics_cache": {
     "stranger things": 4937,
     "terror en tokio": 4807,
@@ -609,7 +609,7 @@
     "aves de corral",
     "hasta el fin del mundo"
   ],
-  "current_series_title": "The Walking Dead",
+  "current_series_title": "Doctor Hwo",
   "current_topic_id": null,
   "series_whitelist": [
     "seinfeld",
