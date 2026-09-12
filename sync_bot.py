@@ -1,5 +1,6 @@
 import os
 import re
+import unicodedata
 import json
 import asyncio
 import logging
@@ -119,38 +120,56 @@ def get_media_size(message) -> int:
 
 def clean_movie_title(raw_title: str, caption: str = "") -> str:
     """Extrae una clave normalizada de película para agrupar versiones duplicadas."""
-    # Si hay un caption con título legible (ej. VAIANA (Moana-2026)), preferir su título principal
-    raw = caption if (caption and len(caption.strip()) >= 3) else raw_title
-    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw)
+    cand = ""
+    if caption and len(caption.strip()) >= 3:
+        first_line = caption.strip().split("\n")[0].strip()
+        if 3 <= len(first_line) <= 150:
+            cand = first_line
+    if not cand:
+        cand = raw_title
+
+    # 1. Quitar extensiones, URLs y menciones
+    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", cand)
     text = re.sub(r"https?://\S+", "", text)
-    text = re.sub(r"@\w+", "", text)
-    
-    # 1. Separar año pegado a letras (ej: Vaiana2026 -> Vaiana 2026)
+    text = re.sub(r"[@#]\w+", "", text)
+
+    # 2. Descomponer y eliminar acentos/diacríticos (ej: mí -> mi, único -> unico)
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(c for c in text if not unicodedata.combining(c))
+
+    # 3. Quitar emojis y caracteres gráficos especiales
+    text = re.sub(r"[\U00010000-\U0010ffff]", "", text)
+    text = re.sub(r"[\u2600-\u27bf\u2300-\u23ff\u2b50\u2b55\ufe0f]", "", text)
+
+    # 4. Separar año pegado a letras (ej: Vaiana2026 -> Vaiana 2026)
     text = re.sub(r"([a-zA-Z])((?:19|20)\d\d)", r"\1 \2", text)
-    
-    # 2. Si el texto tiene formato 'TITULO (Subtitulo o Alternativo)', tomar la parte principal antes del '('
+
+    # 5. Si tiene formato 'TITULO (Subtitulo o Alternativo)', aislar el título principal
     main_match = re.split(r"[\(\[]", text, maxsplit=1)
     if main_match and len(main_match[0].strip()) >= 3 and any(c.isalpha() for c in main_match[0]):
         title_cand = main_match[0]
     else:
         title_cand = text
-        
-    title_cand = title_cand.replace("_", " ").replace("-", " ")
-    
-    # 3. Extraer año si está en el título
+
+    title_cand = title_cand.replace("_", " ").replace("-", " ").replace(".", " ")
+
+    # 6. Extraer año si está en el título
     match = re.search(r"\b((?:19|20)\d\d)\b", title_cand)
     if match:
         title_part = title_cand[:match.start()].strip() or title_cand[match.end():].strip()
     else:
         title_part = title_cand
 
-    # 4. Limpiar etiquetas típicas de ripeos, códecs, resoluciones y grupos
+    # 7. Quitar prefijos comunes de subida ('Ver', 'Descargar', 'Estreno', 'Pelicula')
+    title_part = re.sub(r"(?i)^(?:ver|descargar|estreno|pelicula)\s+", "", title_part.strip())
+
+    # 8. Limpiar etiquetas típicas de ripeos, códecs, resoluciones, idiomas y grupos
     title_part = re.sub(
-        r"(?i)\b(?:1080p?|720p?|2160p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada)\b",
+        r"(?i)\b(?:1080p?|720p?|2160p?|1038p?|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|hdtv|x264|h264|x265|h265|hevc|10bits|eac3|ac3|aac|dual|multi|forzados|completos|subs?|subtitulad[oa]s?|subtitulos|latino|castellano|espanol|cast|spa|ita|eng|es-?en|xusman|hdrip|by\s+\w+|hipolismata|para|rotulada|online|hdfull|hd|mp4|mkv|avi|25fps|5\.1|7\.1)\b",
         " ",
         title_part
     )
-    title_part = re.sub(r"[\[\]\(\)\{\},.+:!¡?¿*=#~]", " ", title_part)
+    title_part = re.sub(r"[\[\]\(\)\{\},.+:!¡?¿*=#~_]", " ", title_part)
     title_part = re.sub(r"\s+", " ", title_part).strip().lower()
     return title_part
 
@@ -204,12 +223,49 @@ def clean_series_title(raw_title: str) -> str:
     return title.title()
 
 
+async def cleanup_destination_duplicates(client: TelegramClient, dest_chat):
+    """Escanea los mensajes recientes en el canal destino de películas y elimina versiones duplicadas de menor tamaño/calidad."""
+    try:
+        logger.info("Comprobando posibles películas duplicadas en el canal destino...")
+        dest_input = await client.get_input_entity(dest_chat)
+        
+        recent_videos = []
+        async for msg in client.iter_messages(dest_input, limit=60):
+            if is_video_message(msg):
+                recent_videos.append(msg)
+                
+        groups = defaultdict(list)
+        for msg in recent_videos:
+            fname = extract_file_name(msg)
+            caption = msg.text or ""
+            key = clean_movie_title(fname, caption)
+            if len(key) >= 3:
+                groups[key].append(msg)
+                
+        for key, msgs in groups.items():
+            if len(msgs) > 1:
+                # Ordenar por tamaño descendente (el más grande primero)
+                sorted_msgs = sorted(msgs, key=lambda m: get_media_size(m), reverse=True)
+                best_msg = sorted_msgs[0]
+                to_delete = sorted_msgs[1:]
+                del_ids = [m.id for m in to_delete]
+                
+                logger.info(f"🗑️ Eliminando {len(del_ids)} versión(es) repetida(s) de '{key}' en canal destino (conservando {get_media_size(best_msg)/(1024*1024):.1f} MB)...")
+                await client.delete_messages(dest_input, del_ids)
+                await asyncio.sleep(1)
+    except Exception as e:
+        logger.warning(f"No se pudo completar la limpieza de duplicados en destino: {e}")
+
+
 async def sync_movies(client: TelegramClient, state: dict):
     """Sincroniza películas desde el grupo/tema origen hacia el canal destino."""
     logger.info("--- INICIANDO SINCRONIZACIÓN DE PELÍCULAS ---")
     dest_chat = await client.get_input_entity(MOVIES_DEST_CHAT)
     source_chat = await client.get_input_entity(MOVIES_SOURCE_CHAT)
     
+    # 0. Limpiar posibles duplicados que ya se hayan enviado al canal destino
+    await cleanup_destination_duplicates(client, dest_chat)
+
     last_id = state.get("movies_last_id", 0)
     logger.info(f"Escaneando películas nuevas posteriores al ID {last_id}...")
     
@@ -243,7 +299,8 @@ async def sync_movies(client: TelegramClient, state: dict):
         groups[key].append(msg)
 
     # 2. Seleccionar la mejor versión por cada grupo (mayor tamaño)
-    synced_movie_titles = set(state.setdefault("synced_movie_titles", []))
+    raw_synced = state.setdefault("synced_movie_titles", [])
+    synced_movie_titles = set(clean_movie_title(t) for t in raw_synced)
     movies_to_forward = []
     for key, msgs in groups.items():
         if key in synced_movie_titles:
