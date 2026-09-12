@@ -1,0 +1,73 @@
+{
+  "chat_id": -1002160549536,
+  "titulo": "Telenovelas/Series TURC-AS-LAT-ESP(+100) Com.Castellana",
+  "username": null,
+  "es_foro": true,
+  "es_megagrupo": true,
+  "es_canal": false,
+  "temas": [
+    {
+      "id": 1,
+      "titulo": "General - NORMAS",
+      "top_message": 86981,
+      "video_count": 0,
+      "sample_files": []
+    },
+    {
+      "id": 7,
+      "titulo": "Series latinas (y/o audio latino)",
+      "top_message": 114920,
+      "video_count": 79,
+      "sample_files": [
+        "El Juicio_S01E08_Miguel vs Huerta.mp4",
+        "El Juicio_S01E07_Carlos vs Andrea.mp4",
+        "El Juicio_S01E06_Andrea & Verónica.mp4"
+      ]
+    },
+    {
+      "id": 62748,
+      "titulo": "APORTES MENTZU",
+      "top_message": 114911,
+      "video_count": 68,
+      "sample_files": [
+        "El compromiso - Temporada 1 - Capítulo 11.mp4",
+        "El compromiso - Temporada 1 - Capítulo 10.mp4",
+        "El compromiso - Temporada 1 - Capítulo 9.mp4"
+      ]
+    },
+    {
+      "id": 10,
+      "titulo": "Series asiáticas",
+      "top_message": 114877,
+      "video_count": 72,
+      "sample_files": [
+        "Una tienda para asesinos 2x08 Escucha, Jinman FIN DE SERIE.mp4",
+        "Una tienda para asesinos 2x07 El Enemigo de mi Enemigo.mp4",
+        "Una tienda para asesinos 2x06 El Caballo de Troya.mp4"
+      ]
+    },
+    {
+      "id": 5,
+      "titulo": "Series turcas",
+      "top_message": 114018,
+      "video_count": 80,
+      "sample_files": [
+        "Destinos cruzados 121 Planes del Futuro.mp4",
+        "Destinos cruzados 120 Honestidad.mp4",
+        "Destinos cruzados 119 Selma, sin Rumbo.mp4"
+      ]
+    },
+    {
+      "id": 21,
+      "titulo": "Series españolas +100 cap.",
+      "top_message": 103115,
+      "video_count": 80,
+      "sample_files": [
+        "Episodio 129.mp4",
+        "Episodio 128.mp4",
+        "Episodio 127.mp4"
+      ]
+    }
+  ],
+  "series": []
+}
