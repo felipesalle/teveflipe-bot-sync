@@ -1,17 +1,19 @@
 {
-  "last_message_id": 21350,
+  "last_message_id": 22688,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
     "aída": 2350,
     "cuéntame cómo pasó": 2662,
-    "al salir de clase": 3079
+    "al salir de clase": 3079,
+    "médico de familia": 4281
   },
-  "forwarded_count": 3950,
+  "forwarded_count": 4100,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 415,
-    "Al Salir de Clase": 1178
+    "Al Salir de Clase": 1200,
+    "Médico de Familia": 128
   },
-  "current_series": "Al Salir de Clase"
+  "current_series": "Médico de Familia"
 }
