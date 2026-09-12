@@ -1,15 +1,17 @@
 {
-  "last_message_id": 14109,
+  "last_message_id": 20297,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
     "aída": 2350,
-    "cuéntame cómo pasó": 2662
+    "cuéntame cómo pasó": 2662,
+    "al salir de clase": 3079
   },
-  "forwarded_count": 2750,
+  "forwarded_count": 2900,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
-    "Cuéntame Cómo Pasó": 393
+    "Cuéntame Cómo Pasó": 415,
+    "Al Salir de Clase": 128
   },
-  "current_series": "Cuéntame Cómo Pasó"
+  "current_series": "Al Salir de Clase"
 }
