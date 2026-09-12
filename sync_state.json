@@ -1,6 +1,6 @@
 {
   "movies_last_id": 1611648,
-  "series_last_id": 159372,
+  "series_last_id": 159972,
   "series_topics_cache": {
     "stranger things": 4937,
     "terror en tokio": 4807,
@@ -104,7 +104,8 @@
     "seinfeld": 5809,
     "chuck": 5990,
     "24 legacy": 6031,
-    "ergo proxy 07 - re-l124c41": 6046
+    "ergo proxy 07 - re-l124c41": 6046,
+    "ad vitan": 6048
   },
   "forwarded_message_ids": [
     157599,
@@ -587,7 +588,14 @@
     158416,
     158417,
     158418,
-    159299
+    159299,
+    159783,
+    159784,
+    159785,
+    159786,
+    159787,
+    159788,
+    159789
   ],
   "synced_movie_titles": [
     "un muerto a la hora del te",
@@ -611,7 +619,7 @@
     "aves de corral",
     "hasta el fin del mundo"
   ],
-  "current_series_title": "12 Monkeys",
+  "current_series_title": "Castle",
   "current_topic_id": null,
   "series_whitelist": [
     "seinfeld",
