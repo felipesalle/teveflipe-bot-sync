@@ -1,6 +1,6 @@
 {
   "movies_last_id": 1611648,
-  "series_last_id": 158332,
+  "series_last_id": 158552,
   "series_topics_cache": {
     "stranger things": 4937,
     "terror en tokio": 4807,
@@ -102,7 +102,8 @@
     "battlestar galactica the face of the enemy": 5098,
     "penny dreadful": 5284,
     "seinfeld": 5809,
-    "chuck": 5990
+    "chuck": 5990,
+    "24 legacy - 1 temporada  microhd    /": 6031
   },
   "forwarded_message_ids": [
     157599,
@@ -571,7 +572,20 @@
     158109,
     158110,
     158111,
-    158112
+    158112,
+    158406,
+    158407,
+    158408,
+    158409,
+    158410,
+    158411,
+    158412,
+    158413,
+    158414,
+    158415,
+    158416,
+    158417,
+    158418
   ],
   "synced_movie_titles": [
     "un muerto a la hora del te",
@@ -595,7 +609,7 @@
     "aves de corral",
     "hasta el fin del mundo"
   ],
-  "current_series_title": null,
+  "current_series_title": "The Walking Dead",
   "current_topic_id": null,
   "series_whitelist": [
     "seinfeld",
