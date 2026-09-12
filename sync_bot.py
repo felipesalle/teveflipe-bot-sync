@@ -4,6 +4,7 @@ import json
 import asyncio
 import logging
 from typing import Optional, Dict, List
+from collections import defaultdict
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.types import (
@@ -57,15 +58,18 @@ def load_state() -> dict:
         "movies_last_id": 0,
         "series_last_id": 0,
         "series_topics_cache": {},  # { "nombre_serie": topic_id }
+        "synced_movie_titles": [],   # Lista de títulos de películas ya sincronizadas
         "forwarded_message_ids": []
     }
 
 
 def save_state(state: dict):
     try:
-        # Mantener solo los últimos 5000 IDs para evitar crecimiento desmedido
+        # Mantener listas acotadas para no saturar el archivo de estado
         if len(state.get("forwarded_message_ids", [])) > 5000:
             state["forwarded_message_ids"] = state["forwarded_message_ids"][-5000:]
+        if len(state.get("synced_movie_titles", [])) > 5000:
+            state["synced_movie_titles"] = state["synced_movie_titles"][-5000:]
             
         with open(STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(state, f, indent=2, ensure_ascii=False)
@@ -103,19 +107,67 @@ def extract_file_name(message) -> str:
     return ""
 
 
+def get_media_size(message) -> int:
+    """Obtiene el tamaño en bytes del archivo del mensaje."""
+    if getattr(message, "file", None) and hasattr(message.file, "size"):
+        return message.file.size or 0
+    if message.media and isinstance(message.media, MessageMediaDocument) and message.media.document:
+        return getattr(message.media.document, "size", 0) or 0
+    return 0
+
+
+def clean_movie_title(raw_title: str) -> str:
+    """Extrae una clave normalizada de película para agrupar versiones duplicadas."""
+    text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
+    text = re.sub(r"https?://\S+", "", text)
+    text = re.sub(r"@\w+", "", text)
+    text = text.replace("_", " ").replace("-", " ")
+    
+    # Extraer año si existe (ej. 1999, 2024, etc.)
+    match = re.search(r"\b((?:19|20)\d\d)\b", text)
+    if match:
+        title_part = text[:match.start()].strip() or text[match.end():].strip()
+    else:
+        title_part = text
+
+    # Limpiar etiquetas típicas de ripeos, códecs y audios
+    title_part = re.sub(
+        r"(?i)\b(?:1080p|720p|2160p|4k|bdrip|brrip|dvdrip|web-?dl|webrip|bluray|x264|h264|x265|h265|hevc|eac3|ac3|aac|dual|multi|forzados|completos|subs?|latino|castellano|español|cast|spa|ita|eng|subtitulado|xusman|hdrip)\b",
+        "",
+        title_part
+    )
+    title_part = re.sub(r"[\[\]\(\)\{\},.+:!¡?¿]", " ", title_part)
+    title_part = re.sub(r"\s+", " ", title_part).strip().lower()
+    return title_part
+
+
 def clean_series_title(raw_title: str) -> str:
     """Limpia el título para extraer únicamente el nombre base de la serie."""
-    # Quitar extensión (.mkv, .mp4, etc.)
     text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
-    # Eliminar enlaces, menciones (@canal) y corchetes de calidad [1080p], [Dual], etc.
     text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"@\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
     
-    # Cortar en patrones de temporada/episodio comunes
-    parts = re.split(r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+)\b", text)
+    # Cortar en patrones de temporada/episodio (ej. 1x01, S01E01, Temporada 2, etc.)
+    parts = re.split(
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+)\b",
+        text
+    )
     candidates = [p.replace(".", " ").replace("_", " ").strip() for p in parts if p.strip()]
-    title = candidates[0] if candidates else text
+    
+    title = ""
+    if candidates:
+        # Tomar el primer bloque que contenga letras y longitud válida
+        for c in candidates:
+            c_clean = re.sub(r"^[-–—:\s]+|[-–—:\s]+$", "", c).strip()
+            if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean):
+                title = c_clean
+                break
+        if not title:
+            title = candidates[0]
+    else:
+        title = text
+        
     title = re.sub(r"^[-–—:\s]+|[-–—:\s]+$", "", title).strip()
     return title.title()
 
@@ -146,25 +198,60 @@ async def sync_movies(client: TelegramClient, state: dict):
         logger.info("No se encontraron nuevas películas para sincronizar.")
         return
 
-    logger.info(f"Encontradas {len(new_movies)} películas para reenviar.")
+    logger.info(f"Se encontraron {len(new_movies)} archivos de video de películas.")
+
+    # 1. Agrupar mensajes por título normalizado de la película
+    groups = defaultdict(list)
     for msg in new_movies:
-        file_name = extract_file_name(msg)
-        caption = msg.text or file_name or "Película"
+        fname = extract_file_name(msg)
+        raw_text = msg.text or fname
+        title_key = clean_movie_title(raw_text)
+        # Si no se pudo limpiar bien, usar el nombre directo como clave
+        key = title_key if len(title_key) >= 3 else (fname.lower() or str(msg.id))
+        groups[key].append(msg)
+
+    # 2. Seleccionar la mejor versión por cada grupo (mayor tamaño)
+    synced_movie_titles = set(state.setdefault("synced_movie_titles", []))
+    movies_to_forward = []
+    for key, msgs in groups.items():
+        if key in synced_movie_titles:
+            logger.info(f"⏭️ Película '{key}' ya fue reenviada anteriormente. Omitiendo versiones duplicadas.")
+            for m in msgs:
+                state["forwarded_message_ids"].append(m.id)
+                if m.id > state["movies_last_id"]:
+                    state["movies_last_id"] = m.id
+            continue
+
+        best_msg = max(msgs, key=lambda m: get_media_size(m))
+        movies_to_forward.append((key, best_msg, msgs))
+
+    logger.info(f"Películas únicas a reenviar tras desduplicación: {len(movies_to_forward)}")
+
+    for key, best_msg, all_msgs in movies_to_forward:
+        file_name = extract_file_name(best_msg)
+        file_size_mb = get_media_size(best_msg) / (1024 * 1024)
+        caption = best_msg.text or file_name or "Película"
+        
         try:
             # Enviamos como copia limpia en la nube de Telegram usando el file media
             await client.send_message(
                 dest_chat,
                 message=caption,
-                file=msg.media
+                file=best_msg.media
             )
-            logger.info(f"✅ Película reenviada: {file_name or msg.id}")
-            state["forwarded_message_ids"].append(msg.id)
-            if msg.id > state["movies_last_id"]:
-                state["movies_last_id"] = msg.id
+            logger.info(f"✅ Película reenviada: {file_name or best_msg.id} ({file_size_mb:.1f} MB)")
+            
+            # Registrar todos los mensajes del grupo como procesados para no reenviar versiones alternas
+            for m in all_msgs:
+                state["forwarded_message_ids"].append(m.id)
+                if m.id > state["movies_last_id"]:
+                    state["movies_last_id"] = m.id
+                    
+            state["synced_movie_titles"].append(key)
             save_state(state)
             await asyncio.sleep(2.5)  # Pausa de cortesía para evitar FloodWait
         except Exception as e:
-            logger.error(f"Error reenviando película ID {msg.id}: {e}")
+            logger.error(f"Error reenviando película ID {best_msg.id}: {e}")
 
 
 async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_name: str, state: dict) -> Optional[int]:
@@ -178,25 +265,50 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
 
     dest_input = await client.get_input_entity(dest_chat)
 
-    # 2. Consultar temas existentes en el supergrupo de Telegram
+    # 2. Consultar temas existentes en el supergrupo de Telegram paginando de 100 en 100
     try:
-        topics_res = await client(GetForumTopicsRequest(
-            peer=dest_input,
-            offset_date=None,
-            offset_id=0,
-            offset_topic=0,
-            limit=100
-        ))
-        for topic in getattr(topics_res, "topics", []):
-            t_title = getattr(topic, "title", "").strip().lower()
-            t_id = getattr(topic, "id", None)
-            if t_title and t_id:
-                cached_topics[t_title] = t_id
-                if t_title == normalized_name:
-                    state["series_topics_cache"] = cached_topics
-                    return t_id
+        offset_date = None
+        offset_id = 0
+        offset_topic = 0
+        
+        while True:
+            topics_res = await client(GetForumTopicsRequest(
+                peer=dest_input,
+                offset_date=offset_date,
+                offset_id=offset_id,
+                offset_topic=offset_topic,
+                limit=100
+            ))
+            
+            topics_list = getattr(topics_res, "topics", [])
+            if not topics_list:
+                break
+                
+            for topic in topics_list:
+                t_title = getattr(topic, "title", "").strip().lower()
+                t_id = getattr(topic, "id", None)
+                if t_title and t_id:
+                    cached_topics[t_title] = t_id
+                    if t_title == normalized_name:
+                        state["series_topics_cache"] = cached_topics
+                        return t_id
+
+            # Parámetros para la siguiente página
+            last_topic = topics_list[-1]
+            offset_topic = getattr(last_topic, "id", 0)
+            offset_id = getattr(last_topic, "top_message", 0)
+            offset_date = getattr(last_topic, "date", None)
+
+            if len(topics_list) < 100:
+                break
+
     except Exception as e:
         logger.warning(f"No se pudieron listar los temas existentes: {e}")
+
+    # Si ya se encontró durante la búsqueda
+    if normalized_name in cached_topics:
+        state["series_topics_cache"] = cached_topics
+        return cached_topics[normalized_name]
 
     # 3. Si no existe, crear un nuevo tema para la serie
     try:
@@ -274,7 +386,7 @@ async def sync_series(client: TelegramClient, state: dict):
         # 1. Detectar si es una imagen de carátula o presentación
         if msg.media and isinstance(msg.media, MessageMediaPhoto):
             extracted = clean_series_title(text_content) if text_content else None
-            if extracted and len(extracted) >= 3:
+            if extracted and len(extracted) >= 2:
                 current_series_title = extracted
                 current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
                 pending_poster = msg
@@ -284,23 +396,26 @@ async def sync_series(client: TelegramClient, state: dict):
             raw = text_content or file_name
             video_title = clean_series_title(raw) if raw else None
 
-            # Si el video tiene un título identificado y es distinto del actual, cambiar al tema correspondiente
-            if video_title and len(video_title) >= 3 and video_title != current_series_title:
-                current_series_title = video_title
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
-            elif not current_topic_id and video_title and len(video_title) >= 3:
-                current_series_title = video_title
-                current_topic_id = await get_or_create_forum_topic(client, dest_chat, current_series_title, state)
+            # Siempre resolver el tema adecuado según el título del video o el actual
+            target_series = video_title or current_series_title
+            target_topic_id = None
 
-            if current_topic_id:
+            if target_series and len(target_series) >= 2:
+                target_topic_id = await get_or_create_forum_topic(client, dest_chat, target_series, state)
+                current_series_title = target_series
+                current_topic_id = target_topic_id
+            elif current_topic_id:
+                target_topic_id = current_topic_id
+
+            if target_topic_id:
                 # Si había una carátula pendiente para este tema, enviarla primero
-                if pending_poster:
+                if pending_poster and current_series_title:
                     try:
                         await client.send_message(
                             dest_chat,
                             message=pending_poster.text or f"Póster oficial - {current_series_title}",
                             file=pending_poster.media,
-                            reply_to=current_topic_id
+                            reply_to=target_topic_id
                         )
                         logger.info(f"🖼️ Póster enviado al tema '{current_series_title}'")
                         state["forwarded_message_ids"].append(pending_poster.id)
@@ -316,7 +431,7 @@ async def sync_series(client: TelegramClient, state: dict):
                         dest_chat,
                         message=caption,
                         file=msg.media,
-                        reply_to=current_topic_id
+                        reply_to=target_topic_id
                     )
                     logger.info(f"🎬 Episodio enviado a '{current_series_title}': {file_name or msg.id}")
                     state["forwarded_message_ids"].append(msg.id)
