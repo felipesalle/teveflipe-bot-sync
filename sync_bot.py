@@ -143,10 +143,16 @@ def clean_movie_title(raw_title: str) -> str:
 
 def clean_series_title(raw_title: str) -> str:
     """Limpia el título para extraer únicamente el nombre base de la serie."""
+    if not raw_title:
+        return ""
+        
     text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", raw_title)
     text = re.sub(r"https?://\S+", "", text)
     text = re.sub(r"@\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
+    
+    # Quitar créditos como 'By Luar12', 'FINAL', etc.
+    text = re.sub(r"(?i)\b(?:by\s+\w+|final|completa|dual|latino|castellano|español|subtitulado)\b", "", text)
     
     # Cortar en patrones de temporada/episodio (ej. 1x01, S01E01, Temporada 2, etc.)
     parts = re.split(
@@ -159,7 +165,8 @@ def clean_series_title(raw_title: str) -> str:
     if candidates:
         # Tomar el primer bloque que contenga letras y longitud válida
         for c in candidates:
-            c_clean = re.sub(r"^[-–—:\s]+|[-–—:\s]+$", "", c).strip()
+            c_clean = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", c).strip()
+            c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
             if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean):
                 title = c_clean
                 break
@@ -168,7 +175,8 @@ def clean_series_title(raw_title: str) -> str:
     else:
         title = text
         
-    title = re.sub(r"^[-–—:\s]+|[-–—:\s]+$", "", title).strip()
+    title = re.sub(r"^[-–—:\s*=#~]+|[-–—:\s*=#~]+$", "", title).strip()
+    title = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", title).strip()
     return title.title()
 
 
