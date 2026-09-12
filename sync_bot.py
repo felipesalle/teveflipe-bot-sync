@@ -19,7 +19,8 @@ import random
 from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
     CreateForumTopicRequest,
-    DeleteTopicHistoryRequest
+    DeleteTopicHistoryRequest,
+    EditForumTopicRequest
 )
 
 # Configuración de Logging
@@ -243,8 +244,9 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     # Reemplazar guiones bajos y puntos por espacios para respetar límites de palabras (\b)
     text = text.replace("_", " ").replace(".", " ")
     
-    # Quitar frases descriptivas comunes en títulos de anuncios
-    text = re.sub(r"(?i)\b\d+\s+temporadas?\s+completas?\b.*$", "", text)
+    # Quitar frases descriptivas comunes en títulos de anuncios (ej. "- 1 Temporada Microhd", "- 5 Temporadas", etc.)
+    text = re.sub(r"(?i)\s*[-–—:/|]+\s*\d+\s+tempora.*$", "", text)
+    text = re.sub(r"(?i)\b\d+\s+tempora.*$", "", text)
     text = re.sub(r"(?i)\b(?:finalizada|completa|miniserie|precuela)\b.*$", "", text)
 
     # Quitar créditos de ripeo, códecs, resoluciones, idiomas y etiquetas residuales
@@ -462,6 +464,12 @@ async def cleanup_spurious_topics(client: TelegramClient, dest_chat, state: dict
             await asyncio.sleep(0.4)
         except Exception:
             pass
+
+    # Renombrar tema 6031 si tenía título largo con coletillas
+    try:
+        await client(EditForumTopicRequest(peer=dest_input, topic_id=6031, title="24 Legacy"))
+    except Exception:
+        pass
 
     # 3. Escanear temas existentes en el supergrupo y borrar los que sean códigos de episodio o basura
     try:
