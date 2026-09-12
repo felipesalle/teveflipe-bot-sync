@@ -1,4 +1,4 @@
-﻿name: Analizar Tema 21 Series Espanolas
+name: Analizar Tema 21 Series Espanolas
 
 on:
   workflow_dispatch:
@@ -31,12 +31,12 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
         run: |
-          python analizar_tema_21.py
+          python analizar_tema_21_completo.py
 
       - name: Guardar Analisis
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
-          git add ANALISIS_TEMA_21.md analisis_tema_21.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar analisis tema 21 [skip ci]" && git push)
+          git add todas_series_tema_21.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar todas las series tema 21 [skip ci]" && git push)
