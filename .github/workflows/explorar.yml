@@ -37,7 +37,7 @@ jobs:
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
           TARGET_CHAT_ID: ${{ github.event.inputs.target_chat || '-1002160549536' }}
         run: |
-          python explorar_grupo.py
+          python ver_mis_grupos.py
 
       - name: Guardar Informe de Exploracion
         run: |
