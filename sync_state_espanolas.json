@@ -1,5 +1,5 @@
 {
-  "last_message_id": 33542,
+  "last_message_id": 33937,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -12,7 +12,7 @@
     "7 vidas": 5187,
     "los serrano": 6194
   },
-  "forwarded_count": 5900,
+  "forwarded_count": 6050,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -22,7 +22,7 @@
     "La Que Se Avecina": 543,
     "7 Vidas": 483,
     "Aída": 472,
-    "Los Serrano": 87
+    "Los Serrano": 237
   },
   "current_series": "Los Serrano"
 }
