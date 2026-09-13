@@ -1,5 +1,5 @@
 {
-  "last_message_id": 91776,
+  "last_message_id": 97824,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -23,7 +23,7 @@
     "valle salvaje": 10317,
     "sms (sin miedo a soñar)": 10356
   },
-  "forwarded_count": 9950,
+  "forwarded_count": 10100,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -44,7 +44,7 @@
     "Hospital Central": 299,
     "Compañeros": 122,
     "Valle Salvaje": 33,
-    "SMS (Sin Miedo a Soñar)": 121
+    "SMS (Sin Miedo a Soñar)": 271
   },
   "current_series": "SMS (Sin Miedo a Soñar)"
 }
