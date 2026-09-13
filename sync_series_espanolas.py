@@ -268,6 +268,57 @@ async def get_or_create_topic(client: TelegramClient, dest_chat, series_title: s
 
     return None
 
+async def limpiar_episodios_desviados(client: TelegramClient, dest_chat, topics_cache: dict):
+    logger.info("Verificando y corrigiendo posibles desvíos en temas de series...")
+    topic_cuentame = topics_cache.get("cuéntame cómo pasó", 2662)
+    topic_7vidas = topics_cache.get("7 vidas", 5187)
+    topic_anhqv = topics_cache.get("aquí no hay quien viva", 4518)
+    topic_aida = topics_cache.get("aída", 2350)
+
+    # 1. En Cuéntame: sacar cualquier episodio de 7 Vidas
+    try:
+        async for msg in client.iter_messages(dest_chat, reply_to=topic_cuentame, limit=40):
+            combined = f"{msg.text or ''} {msg.file.name if msg.file else ''}".lower()
+            if "7 vidas" in combined or "siete vidas" in combined:
+                logger.info(f"🔄 Reubicando capítulo de 7 Vidas desde Cuéntame: {msg.id}")
+                await safe_send_message(
+                    client, dest_chat,
+                    message=msg.text or (msg.file.name if msg.file else ""),
+                    file=msg.media, reply_to=topic_7vidas
+                )
+                await client.delete_messages(dest_chat, [msg.id])
+                await asyncio.sleep(1.5)
+    except Exception as e:
+        logger.warning(f"Aviso en limpieza Cuéntame: {e}")
+
+    # 2. En 7 Vidas: sacar episodios de ANHQV o Aída
+    try:
+        async for msg in client.iter_messages(dest_chat, reply_to=topic_7vidas, limit=80):
+            combined = f"{msg.text or ''} {msg.file.name if msg.file else ''}".lower()
+            is_anhqv = any(k in combined for k in ["érase", "erase", "anhqv", "paripé", "adiós"]) or bool(re.search(r'\b0[345]x\d+', combined))
+            is_aida = ("aida" in combined or "aída" in combined) and any(k in combined for k in ["1x", "2x", "3x", "4x", "temporada", "capitulo", "capítulo"])
+
+            if is_anhqv:
+                logger.info(f"🔄 Reubicando capítulo de ANHQV desde 7 Vidas: {msg.id}")
+                await safe_send_message(
+                    client, dest_chat,
+                    message=msg.text or (msg.file.name if msg.file else ""),
+                    file=msg.media, reply_to=topic_anhqv
+                )
+                await client.delete_messages(dest_chat, [msg.id])
+                await asyncio.sleep(1.5)
+            elif is_aida:
+                logger.info(f"🔄 Reubicando capítulo de Aída desde 7 Vidas: {msg.id}")
+                await safe_send_message(
+                    client, dest_chat,
+                    message=msg.text or (msg.file.name if msg.file else ""),
+                    file=msg.media, reply_to=topic_aida
+                )
+                await client.delete_messages(dest_chat, [msg.id])
+                await asyncio.sleep(1.5)
+    except Exception as e:
+        logger.warning(f"Aviso en limpieza 7 Vidas: {e}")
+
 async def sync_espanolas():
     if not STRING_SESSION:
         logger.error("TELEGRAM_STRING_SESSION no configurada.")
@@ -308,6 +359,9 @@ async def sync_espanolas():
                     break
         if not dest_chat:
             dest_chat = await client.get_entity(SERIES_DEST_CHAT)
+
+        # Limpiar y reubicar desvíos conocidos en temas de series
+        await limpiar_episodios_desviados(client, dest_chat, state.get("topics_cache", {}))
 
         forward_count = 0
         pending_poster = None
