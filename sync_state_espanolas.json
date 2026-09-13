@@ -1,5 +1,5 @@
 {
-  "last_message_id": 52843,
+  "last_message_id": 57712,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -14,9 +14,10 @@
     "águila roja": 6456,
     "los hombres de paco": 6701,
     "farmacia de guardia": 6969,
-    "bandolera": 7140
+    "bandolera": 7140,
+    "nada es para siempre": 8520
   },
-  "forwarded_count": 8000,
+  "forwarded_count": 8150,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -30,7 +31,8 @@
     "Águila Roja": 242,
     "Los Hombres de Paco": 186,
     "Farmacia de Guardia": 169,
-    "Bandolera": 1240
+    "Bandolera": 1283,
+    "Nada Es Para Siempre": 107
   },
-  "current_series": "Bandolera"
+  "current_series": "Nada Es Para Siempre"
 }
