@@ -1,5 +1,5 @@
 {
-  "last_message_id": 24645,
+  "last_message_id": 24805,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -11,7 +11,7 @@
     "la que se avecina": 4615,
     "7 vidas": 5187
   },
-  "forwarded_count": 5300,
+  "forwarded_count": 5450,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -19,7 +19,8 @@
     "Médico de Familia": 234,
     "Aquí No Hay Quien Viva": 108,
     "La Que Se Avecina": 543,
-    "7 Vidas": 442
+    "7 Vidas": 482,
+    "Aída": 110
   },
-  "current_series": "7 Vidas"
+  "current_series": "Aída"
 }
