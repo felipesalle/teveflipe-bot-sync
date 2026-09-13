@@ -1,5 +1,5 @@
 {
-  "last_message_id": 52242,
+  "last_message_id": 52392,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -16,7 +16,7 @@
     "farmacia de guardia": 6969,
     "bandolera": 7140
   },
-  "forwarded_count": 7400,
+  "forwarded_count": 7550,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -30,7 +30,7 @@
     "Águila Roja": 242,
     "Los Hombres de Paco": 186,
     "Farmacia de Guardia": 169,
-    "Bandolera": 640
+    "Bandolera": 790
   },
   "current_series": "Bandolera"
 }
