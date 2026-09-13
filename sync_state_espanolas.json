@@ -1,5 +1,5 @@
 {
-  "last_message_id": 34768,
+  "last_message_id": 38724,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -13,9 +13,10 @@
     "los serrano": 6194,
     "águila roja": 6456,
     "los hombres de paco": 6701,
-    "farmacia de guardia": 6969
+    "farmacia de guardia": 6969,
+    "bandolera": 7140
   },
-  "forwarded_count": 6650,
+  "forwarded_count": 6800,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -28,7 +29,8 @@
     "Los Serrano": 259,
     "Águila Roja": 242,
     "Los Hombres de Paco": 186,
-    "Farmacia de Guardia": 150
+    "Farmacia de Guardia": 169,
+    "Bandolera": 131
   },
-  "current_series": "Farmacia de Guardia"
+  "current_series": "Bandolera"
 }
