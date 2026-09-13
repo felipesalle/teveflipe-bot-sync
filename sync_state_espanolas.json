@@ -1,5 +1,5 @@
 {
-  "last_message_id": 74315,
+  "last_message_id": 74972,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -17,9 +17,10 @@
     "bandolera": 7140,
     "nada es para siempre": 8520,
     "regreso a las sabinas": 9310,
-    "salón de té la moderna": 9382
+    "salón de té la moderna": 9382,
+    "hospital central": 9872
   },
-  "forwarded_count": 9350,
+  "forwarded_count": 9500,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -36,7 +37,8 @@
     "Bandolera": 1283,
     "Nada Es Para Siempre": 774,
     "Regreso a las Sabinas": 70,
-    "Salón de Té La Moderna": 463
+    "Salón de Té La Moderna": 487,
+    "Hospital Central": 126
   },
-  "current_series": "Salón de Té La Moderna"
+  "current_series": "Hospital Central"
 }
