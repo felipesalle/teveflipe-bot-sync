@@ -55,7 +55,8 @@ SERIES_BLOCKS = [
     (22350, 22803, "Médico de Familia"),
     (22804, 23220, "Aquí No Hay Quien Viva"),
     (23221, 23993, "La Que Se Avecina"),
-    (23994, 24686, "7 Vidas"),
+    (23994, 24645, "7 Vidas"),
+    (24646, 24686, "Aquí No Hay Quien Viva"),
     (24687, 33283, "Aída"),
     (33284, 33969, "Los Serrano"),
     (33970, 34224, "Águila Roja"),
@@ -133,15 +134,30 @@ def save_state(state: dict):
         logger.error(f"Error guardando {STATE_FILE}: {e}")
 
 def resolve_series_for_message(msg_id: int, file_name: str, text: str) -> Optional[str]:
-    # 1. Prioridad absoluta al rango de IDs exacto de la serie de origen
+    combined = f"{file_name} {text}".lower()
+
+    # 1. Patrones inconfundibles de series
+    if any(k in combined for k in ["érase", "erase", "anhqv"]):
+        return "Aquí No Hay Quien Viva"
+
+    if re.search(r'\b(aida|aída)\s*\d+x\d+', combined) or combined.strip().startswith("aida ") or combined.strip().startswith("aída "):
+        return "Aída"
+
+    # 2. Prioridad al rango exacto de la serie de origen
     for start_id, end_id, canonical in SERIES_BLOCKS:
         if start_id <= msg_id <= end_id:
+            # Si estamos en el bloque de 7 vidas pero el nombre dice Aída, es Aída
+            if canonical == "7 Vidas" and ("aida" in combined or "aída" in combined):
+                return "Aída"
             return canonical
 
-    # 2. Respaldo por coincidencias de texto / nombre de archivo
-    combined = f"{file_name} {text}".lower()
+    # 3. Respaldo por coincidencias de texto / nombre de archivo
     for alias, canonical in CANONICAL_ALIASES.items():
         if alias in combined:
+            if alias in ["7 vidas", "siete vidas"] and ("aida" in combined or "aída" in combined):
+                continue
+            if alias in ["cuentame", "cuéntame"] and ("7 vidas" in combined or "siete vidas" in combined):
+                continue
             return canonical
 
     return None
