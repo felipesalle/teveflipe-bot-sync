@@ -1,5 +1,5 @@
 {
-  "last_message_id": 90321,
+  "last_message_id": 91776,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -20,9 +20,10 @@
     "salón de té la moderna": 9382,
     "hospital central": 9872,
     "compañeros": 10193,
-    "valle salvaje": 10317
+    "valle salvaje": 10317,
+    "sms (sin miedo a soñar)": 10356
   },
-  "forwarded_count": 9800,
+  "forwarded_count": 9950,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -42,7 +43,8 @@
     "Salón de Té La Moderna": 487,
     "Hospital Central": 299,
     "Compañeros": 122,
-    "Valle Salvaje": 4
+    "Valle Salvaje": 33,
+    "SMS (Sin Miedo a Soñar)": 121
   },
-  "current_series": "Valle Salvaje"
+  "current_series": "SMS (Sin Miedo a Soñar)"
 }
