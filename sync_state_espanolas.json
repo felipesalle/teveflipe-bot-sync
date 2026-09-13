@@ -1,5 +1,5 @@
 {
-  "last_message_id": 33937,
+  "last_message_id": 34099,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -10,9 +10,10 @@
     "aquí no hay quien viva": 4518,
     "la que se avecina": 4615,
     "7 vidas": 5187,
-    "los serrano": 6194
+    "los serrano": 6194,
+    "águila roja": 6456
   },
-  "forwarded_count": 6050,
+  "forwarded_count": 6200,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -22,7 +23,8 @@
     "La Que Se Avecina": 543,
     "7 Vidas": 483,
     "Aída": 472,
-    "Los Serrano": 237
+    "Los Serrano": 259,
+    "Águila Roja": 128
   },
-  "current_series": "Los Serrano"
+  "current_series": "Águila Roja"
 }
