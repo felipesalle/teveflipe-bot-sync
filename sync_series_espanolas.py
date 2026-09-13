@@ -133,13 +133,15 @@ def save_state(state: dict):
         logger.error(f"Error guardando {STATE_FILE}: {e}")
 
 def resolve_series_for_message(msg_id: int, file_name: str, text: str) -> Optional[str]:
+    # 1. Prioridad absoluta al rango de IDs exacto de la serie de origen
+    for start_id, end_id, canonical in SERIES_BLOCKS:
+        if start_id <= msg_id <= end_id:
+            return canonical
+
+    # 2. Respaldo por coincidencias de texto / nombre de archivo
     combined = f"{file_name} {text}".lower()
     for alias, canonical in CANONICAL_ALIASES.items():
         if alias in combined:
-            return canonical
-
-    for start_id, end_id, canonical in SERIES_BLOCKS:
-        if start_id <= msg_id <= end_id:
             return canonical
 
     return None
