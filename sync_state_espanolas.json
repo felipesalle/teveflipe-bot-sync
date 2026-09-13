@@ -1,5 +1,5 @@
 {
-  "last_message_id": 71902,
+  "last_message_id": 72052,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -19,7 +19,7 @@
     "regreso a las sabinas": 9310,
     "salón de té la moderna": 9382
   },
-  "forwarded_count": 8900,
+  "forwarded_count": 9050,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -36,7 +36,7 @@
     "Bandolera": 1283,
     "Nada Es Para Siempre": 774,
     "Regreso a las Sabinas": 70,
-    "Salón de Té La Moderna": 13
+    "Salón de Té La Moderna": 163
   },
   "current_series": "Salón de Té La Moderna"
 }
