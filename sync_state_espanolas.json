@@ -1,5 +1,5 @@
 {
-  "last_message_id": 34264,
+  "last_message_id": 34430,
   "topics_cache": {
     "el secreto de puente viejo": 4,
     "general": 1,
@@ -14,7 +14,7 @@
     "águila roja": 6456,
     "los hombres de paco": 6701
   },
-  "forwarded_count": 6350,
+  "forwarded_count": 6500,
   "series_stats": {
     "El Secreto de Puente Viejo": 2357,
     "Cuéntame Cómo Pasó": 416,
@@ -26,7 +26,7 @@
     "Aída": 472,
     "Los Serrano": 259,
     "Águila Roja": 242,
-    "Los Hombres de Paco": 36
+    "Los Hombres de Paco": 186
   },
   "current_series": "Los Hombres de Paco"
 }
