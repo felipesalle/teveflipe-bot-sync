@@ -193,6 +193,8 @@ SERIES_ALIASES = {
     "tierra amarga": "Tierra Amarga",
     "tierra amarga - emitido en tv": "Tierra Amarga",
     "tierra amarga emitido en tv": "Tierra Amarga",
+    "entre fantasmas": "Entre Fantasmas",
+    "ghost whisperer": "Entre Fantasmas",
 }
 
 
@@ -305,15 +307,15 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
         if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
             title = c_clean
         elif len(parts) > 1:
-            # En formatos españoles donde el archivo empieza por el número (ej. '1x12_Luna_El_Misterio_de_Calenda.avi' o '8x16 Bones [Hdtv].avi')
+            # En formatos españoles donde el archivo empieza por el número (ej. '1x12_Luna_El_Misterio_de_Calenda.avi')
             after_ep = parts[1].strip()
             a_clean = re.sub(r"^[-–—:\s*=#~▶►]+|[-–—:\s*=#~▶►]+$", "", after_ep).strip()
             a_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", a_clean).strip()
             if a_clean.lower() in SERIES_ALIASES:
                 title = a_clean
-            elif len(a_clean) >= 3 and any(char.isalpha() for char in a_clean) and not is_junk_series_title(a_clean):
-                title = a_clean
             else:
+                # Si el archivo empieza por el código de episodio (ej. '1x01 - Piloto.mkv'),
+                # lo que sigue al guion es el título del capítulo, NO el nombre de una nueva serie.
                 return ""
         else:
             return ""

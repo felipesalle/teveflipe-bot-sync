@@ -43,7 +43,7 @@ async def main():
     async with TelegramClient(StringSession(SESSION), API_ID, API_HASH) as client:
         chat = await client.get_entity(TARGET_CHAT)
         print("=" * 65)
-        print(f"REPARACIÓN Y CONSOLIDACIÓN DE 'TIERRA AMARGA' EN: {chat.title} ({chat.id})")
+        print(f"CONSOLIDACIÓN DE 'ENTRE FANTASMAS' EN: {chat.title} ({chat.id})")
         print("=" * 65)
 
         # Cargar estado
@@ -80,23 +80,23 @@ async def main():
 
         print(f"Total de temas encontrados en el foro: {len(all_topics)}")
 
-        # Buscar si ya existe un tema oficial "Tierra Amarga" (excluyendo los que tienen sufijos o números de capítulo)
-        tierra_main_id = None
+        # Buscar si ya existe un tema oficial "Entre Fantasmas"
+        ef_main_id = None
         for t in all_topics:
             t_title = t.title.strip().lower()
-            if t_title == "tierra amarga":
-                tierra_main_id = t.id
-                print(f"✅ Encontrado tema oficial existente 'Tierra Amarga' (ID {tierra_main_id})")
+            if t_title == "entre fantasmas":
+                ef_main_id = t.id
+                print(f"✅ Encontrado tema oficial existente 'Entre Fantasmas' (ID {ef_main_id})")
                 break
 
         # Si no existe, crearlo
-        if not tierra_main_id:
-            print("Creando tema oficial 'Tierra Amarga'...")
+        if not ef_main_id:
+            print("Creando tema oficial 'Entre Fantasmas'...")
             try:
                 rand_id = random.randint(1, 2**63 - 1)
                 created = await client(CreateForumTopicRequest(
                     peer=chat,
-                    title="Tierra Amarga",
+                    title="Entre Fantasmas",
                     random_id=rand_id
                 ))
                 for update in getattr(created, "updates", []):
@@ -104,113 +104,91 @@ async def main():
                     if msg and hasattr(msg, "id"):
                         action = getattr(msg, "action", None)
                         if action and "TopicCreate" in type(action).__name__:
-                            tierra_main_id = msg.id
+                            ef_main_id = msg.id
                             break
-                        elif tierra_main_id is None:
-                            tierra_main_id = msg.id
+                        elif ef_main_id is None:
+                            ef_main_id = msg.id
                     elif hasattr(update, "id"):
-                        tierra_main_id = update.id
+                        ef_main_id = update.id
             except Exception as e:
                 print(f"Error creando tema: {e}")
 
-        if not tierra_main_id:
-            # Reintentar obtener temas por si se creó pero la respuesta no vino en updates
+        if not ef_main_id:
+            # Reintentar obtener temas
             res = await client(GetForumTopicsRequest(peer=chat, offset_date=None, offset_id=0, offset_topic=0, limit=20))
             for t in getattr(res, "topics", []):
-                if t.title.strip().lower() == "tierra amarga":
-                    tierra_main_id = t.id
+                if t.title.strip().lower() == "entre fantasmas":
+                    ef_main_id = t.id
                     break
 
-        if not tierra_main_id:
-            raise RuntimeError("No se pudo crear ni encontrar el tema 'Tierra Amarga'")
+        if not ef_main_id:
+            raise RuntimeError("No se pudo crear ni encontrar el tema 'Entre Fantasmas'")
 
-        print(f"🎯 Tema oficial de destino para 'Tierra Amarga': ID {tierra_main_id}")
+        print(f"🎯 Tema oficial de destino para 'Entre Fantasmas': ID {ef_main_id}")
 
-        # Identificar temas dispersos a consolidar
-        KNOWN_STRAY_IDS = {9773, 9782, 9784, 9786, 9792, 9794, 9796, 9801}
+        # Identificar los temas dispersos de Entre Fantasmas
+        # El rango exacto generado por el sync es 11011 <= tid <= 11241
+        ef_topic_ids_from_cache = {v for k, v in cached_topics.items() if 11011 <= v <= 11241}
         stray_topics = []
 
         for t in all_topics:
             tid = t.id
-            if tid == tierra_main_id:
+            if tid == ef_main_id:
                 continue
             title = t.title.strip()
-            title_lower = title.lower()
 
-            is_stray = False
-            if tid in KNOWN_STRAY_IDS:
-                is_stray = True
-            elif "emitido en tv" in title_lower:
-                is_stray = True
-            elif re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+", title):
-                is_stray = True
-            elif "tierra amarga" in title_lower and tid != tierra_main_id:
-                is_stray = True
-
-            if is_stray:
+            if (11011 <= tid <= 11241) or (tid in ef_topic_ids_from_cache):
                 stray_topics.append((tid, title))
 
-        # Ordenar temas por ID ascendente para preservar el orden cronológico de emisión
+        # Ordenar por ID ascendente para respetar el orden cronológico de emisión (1x01 -> 5x22)
         stray_topics = sorted(stray_topics, key=lambda x: x[0])
-        print(f"\nTemas dispersos detectados para consolidar ({len(stray_topics)}):")
-        for tid, title in stray_topics:
-            print(f"  - [{tid}] '{title}'")
+        print(f"\nTemas individuales de 'Entre Fantasmas' detectados para consolidar: {len(stray_topics)}")
 
         # Transferir mensajes de cada tema al tema oficial
         total_transferred = 0
         for idx, (tid, title) in enumerate(stray_topics, 1):
-            print(f"\n[{idx}/{len(stray_topics)}] Extrayendo archivos del tema ID {tid} ('{title}')...")
+            print(f"[{idx}/{len(stray_topics)}] Extrayendo archivos del tema ID {tid} ('{title}')...")
             msgs = []
             async for m in client.iter_messages(chat, reply_to=tid, reverse=True):
                 if is_video_or_file(m):
                     msgs.append(m)
 
-            print(f"  Episodios encontrados: {len(msgs)}")
             for m in msgs:
-                caption = m.text or (m.file.name if m.file else "Tierra Amarga")
+                caption = m.text or (m.file.name if m.file else f"Entre Fantasmas - {title}")
                 fname = m.file.name if (m.file and m.file.name) else m.id
-                print(f"    -> Transfiriendo a 'Tierra Amarga': {fname}")
+                print(f"  -> Transfiriendo a 'Entre Fantasmas': {fname}")
                 await client.send_message(
                     chat,
                     message=caption,
                     file=m.media,
-                    reply_to=tierra_main_id
+                    reply_to=ef_main_id
                 )
                 total_transferred += 1
-                await asyncio.sleep(1.2)
+                await asyncio.sleep(1.1)
 
             # Eliminar tema huérfano
             try:
-                print(f"  🗑️ Eliminando tema huérfano ID {tid} ('{title}')...")
                 await client(DeleteTopicHistoryRequest(peer=chat, top_msg_id=tid))
-                print(f"  ✅ Tema {tid} eliminado con éxito.")
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.4)
             except Exception as e:
-                print(f"  ⚠️ Error o aviso eliminando tema {tid}: {e}")
+                print(f"  ⚠️ Aviso eliminando tema {tid}: {e}")
 
-        print(f"\n✅ Total de {total_transferred} episodios consolidados en 'Tierra Amarga'.")
+        print(f"\n✅ Total de {total_transferred} episodios consolidados en 'Entre Fantasmas'.")
 
-        # Limpiar entradas de la caché
-        keys_to_del = []
-        for k in cached_topics:
-            k_low = k.lower()
-            if "tierra amarga" in k_low or "emitido en tv" in k_low or re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo", k):
-                keys_to_del.append(k)
-
+        # Limpiar entradas de la caché de Entre Fantasmas
+        keys_to_del = [k for k, v in cached_topics.items() if 11011 <= v <= 11241]
         for k in keys_to_del:
             del cached_topics[k]
 
-        cached_topics["tierra amarga"] = tierra_main_id
+        cached_topics["entre fantasmas"] = ef_main_id
+        cached_topics["ghost whisperer"] = ef_main_id
         state["series_topics_cache"] = cached_topics
-        if state.get("current_series_title") and ("tierra" in state["current_series_title"].lower() or "cap" in state["current_series_title"].lower() or "emitido" in state["current_series_title"].lower()):
-            state["current_series_title"] = "Tierra Amarga"
-            state["current_topic_id"] = tierra_main_id
 
         with open(STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(state, f, indent=2, ensure_ascii=False)
         print("✅ sync_state.json actualizado con éxito.")
         print("\n" + "=" * 65)
-        print("REPARACIÓN DE TIERRA AMARGA COMPLETADA CON ÉXITO")
+        print("REPARACIÓN DE ENTRE FANTASMAS COMPLETADA CON ÉXITO")
         print("=" * 65)
 
 
