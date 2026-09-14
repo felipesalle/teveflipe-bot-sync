@@ -43,7 +43,7 @@ async def main():
     async with TelegramClient(StringSession(SESSION), API_ID, API_HASH) as client:
         chat = await client.get_entity(TARGET_CHAT)
         print("=" * 65)
-        print(f"REPARACIÓN Y CONSOLIDACIÓN DE BONES Y LUNA EN: {chat.title} ({chat.id})")
+        print(f"REPARACIÓN Y CONSOLIDACIÓN DE 'TIERRA AMARGA' EN: {chat.title} ({chat.id})")
         print("=" * 65)
 
         # Cargar estado
@@ -53,156 +53,164 @@ async def main():
                 state = json.load(f)
         cached_topics = state.setdefault("series_topics_cache", {})
 
-        # -------------------------------------------------------------
-        # 1. CONSOLIDAR LUNA, EL MISTERIO DE CALENDA
-        # -------------------------------------------------------------
-        print("\n--- 1. CONSOLIDANDO LUNA, EL MISTERIO DE CALENDA ---")
-        TOPIC_LUNA_MAIN = 10002   # Luna: El Misterio De Calenda (Temporada 1)
-        TOPIC_LUNA_S2 = 10016     # Luna El Misterio De Calenda (Temporada 2)
+        # Listar temas existentes en el chat
+        print("Listando temas del foro...")
+        all_topics = []
+        offset_date = None
+        offset_id = 0
+        offset_topic = 0
+        while True:
+            res = await client(GetForumTopicsRequest(
+                peer=chat,
+                offset_date=offset_date,
+                offset_id=offset_id,
+                offset_topic=offset_topic,
+                limit=100
+            ))
+            topics = getattr(res, "topics", [])
+            if not topics:
+                break
+            all_topics.extend(topics)
+            last = topics[-1]
+            offset_topic = getattr(last, "id", 0)
+            offset_id = getattr(last, "top_message", 0)
+            offset_date = getattr(last, "date", None)
+            if len(topics) < 100:
+                break
 
-        # Intentar renombrar el tema principal a nombre limpio
-        try:
-            print(f"Renombrando tema {TOPIC_LUNA_MAIN} a 'Luna, El Misterio De Calenda'...")
-            await client(EditForumTopicRequest(peer=chat, topic_id=TOPIC_LUNA_MAIN, title="Luna, El Misterio De Calenda"))
-            print("✅ Nombre de tema actualizado correctamente.")
-        except Exception as e:
-            print(f"Aviso actualizando título de Luna ({TOPIC_LUNA_MAIN}): {e}")
+        print(f"Total de temas encontrados en el foro: {len(all_topics)}")
 
-        # Transferir episodios de Temporada 2 a Temporada 1 / Tema Principal
-        luna_s2_msgs = []
-        async for m in client.iter_messages(chat, reply_to=TOPIC_LUNA_S2, reverse=True):
-            if is_video_or_file(m):
-                luna_s2_msgs.append(m)
+        # Buscar si ya existe un tema oficial "Tierra Amarga" (excluyendo los que tienen sufijos o números de capítulo)
+        tierra_main_id = None
+        for t in all_topics:
+            t_title = t.title.strip().lower()
+            if t_title == "tierra amarga":
+                tierra_main_id = t.id
+                print(f"✅ Encontrado tema oficial existente 'Tierra Amarga' (ID {tierra_main_id})")
+                break
 
-        print(f"Episodios encontrados en Temporada 2 (Topic {TOPIC_LUNA_S2}): {len(luna_s2_msgs)}")
-        for m in luna_s2_msgs:
-            caption = m.text or (m.file.name if m.file else "Luna T2")
-            print(f"-> Moviendo a tema principal de Luna: {m.file.name if m.file else m.id}")
-            await client.send_message(
-                chat,
-                message=caption,
-                file=m.media,
-                reply_to=TOPIC_LUNA_MAIN
-            )
-            await asyncio.sleep(1.2)
-
-        # Eliminar el tema duplicado de Temporada 2
-        try:
-            print(f"🗑️ Eliminando tema duplicado Temporada 2 (ID {TOPIC_LUNA_S2})...")
-            await client(DeleteTopicHistoryRequest(peer=chat, top_msg_id=TOPIC_LUNA_S2))
-            print("✅ Tema duplicado de Luna eliminado con éxito.")
-        except Exception as e:
-            print(f"Aviso eliminando {TOPIC_LUNA_S2}: {e}")
-
-        # Actualizar caché de Luna
-        cached_topics.pop("luna el misterio de calenda", None)
-        cached_topics["luna, el misterio de calenda"] = TOPIC_LUNA_MAIN
-        cached_topics["luna: el misterio de calenda"] = TOPIC_LUNA_MAIN
-        cached_topics["luna: el misterio de calenda ✓"] = TOPIC_LUNA_MAIN
-        cached_topics["luna"] = TOPIC_LUNA_MAIN
-        print("✅ Luna consolidada en un único tema.")
-
-        # -------------------------------------------------------------
-        # 2. CONSOLIDAR TODOS LOS TEMAS DE BONES
-        # -------------------------------------------------------------
-        print("\n--- 2. CONSOLIDANDO SERIE BONES ---")
-        # Encontrar todos los temas de Bones registrados en caché o con 'bones' en el nombre
-        bones_items = [(k, v) for k, v in cached_topics.items() if "bones" in k.lower()]
-        # Ordenar por ID de tema (mantiene el orden cronológico de emisión T1 a T6)
-        bones_items = sorted(bones_items, key=lambda x: x[1])
-        unique_bones_topic_ids = []
-        for _, tid in bones_items:
-            if tid not in unique_bones_topic_ids:
-                unique_bones_topic_ids.append(tid)
-
-        print(f"Total de temas individuales de Bones encontrados: {len(unique_bones_topic_ids)}")
-
-        if unique_bones_topic_ids:
-            # Crear el tema único oficial "Bones"
-            print("Creando tema oficial 'Bones'...")
-            bones_main_id = None
+        # Si no existe, crearlo
+        if not tierra_main_id:
+            print("Creando tema oficial 'Tierra Amarga'...")
             try:
+                rand_id = random.randint(1, 2**63 - 1)
                 created = await client(CreateForumTopicRequest(
                     peer=chat,
-                    title="Bones",
-                    random_id=random.randint(1, 2**63 - 1)
+                    title="Tierra Amarga",
+                    random_id=rand_id
                 ))
                 for update in getattr(created, "updates", []):
                     msg = getattr(update, "message", None)
                     if msg and hasattr(msg, "id"):
                         action = getattr(msg, "action", None)
                         if action and "TopicCreate" in type(action).__name__:
-                            bones_main_id = msg.id
+                            tierra_main_id = msg.id
                             break
-                        elif bones_main_id is None:
-                            bones_main_id = msg.id
+                        elif tierra_main_id is None:
+                            tierra_main_id = msg.id
                     elif hasattr(update, "id"):
-                        bones_main_id = update.id
+                        tierra_main_id = update.id
             except Exception as e:
-                print(f"Error creando tema Bones: {e}")
+                print(f"Error creando tema: {e}")
 
-            if not bones_main_id:
-                # Buscar tema existente con título Bones
-                res = await client(GetForumTopicsRequest(peer=chat, offset_date=None, offset_id=0, offset_topic=0, limit=20))
-                for t in res.topics:
-                    if t.title.strip().lower() == "bones":
-                        bones_main_id = t.id
-                        break
+        if not tierra_main_id:
+            # Reintentar obtener temas por si se creó pero la respuesta no vino en updates
+            res = await client(GetForumTopicsRequest(peer=chat, offset_date=None, offset_id=0, offset_topic=0, limit=20))
+            for t in getattr(res, "topics", []):
+                if t.title.strip().lower() == "tierra amarga":
+                    tierra_main_id = t.id
+                    break
 
-            print(f"✅ Tema oficial 'Bones' creado/identificado con ID: {bones_main_id}")
+        if not tierra_main_id:
+            raise RuntimeError("No se pudo crear ni encontrar el tema 'Tierra Amarga'")
 
-            # Recorrer cada uno de los 131 temas individuales y transferir sus episodios a Bones
-            episodes_moved = 0
-            for idx, tid in enumerate(unique_bones_topic_ids, 1):
-                if tid == bones_main_id:
-                    continue
-                print(f"[{idx}/{len(unique_bones_topic_ids)}] Extrayendo archivos del tema ID {tid}...")
-                msgs_in_topic = []
-                async for m in client.iter_messages(chat, reply_to=tid, reverse=True):
-                    if is_video_or_file(m):
-                        msgs_in_topic.append(m)
+        print(f"🎯 Tema oficial de destino para 'Tierra Amarga': ID {tierra_main_id}")
 
-                for m in msgs_in_topic:
-                    caption = m.text or (m.file.name if m.file else "Bones")
-                    print(f"  -> Transfiriendo a Bones: {m.file.name if m.file else m.id}")
-                    await client.send_message(
-                        chat,
-                        message=caption,
-                        file=m.media,
-                        reply_to=bones_main_id
-                    )
-                    episodes_moved += 1
-                    await asyncio.sleep(1.0)
+        # Identificar temas dispersos a consolidar
+        KNOWN_STRAY_IDS = {9773, 9782, 9784, 9786, 9792, 9794, 9796, 9801}
+        stray_topics = []
 
-                # Eliminar el tema individual
-                try:
-                    await client(DeleteTopicHistoryRequest(peer=chat, top_msg_id=tid))
-                    await asyncio.sleep(0.3)
-                except Exception as e:
-                    print(f"  Aviso eliminando tema {tid}: {e}")
+        for t in all_topics:
+            tid = t.id
+            if tid == tierra_main_id:
+                continue
+            title = t.title.strip()
+            title_lower = title.lower()
 
-            print(f"✅ Total de {episodes_moved} episodios transferidos al tema único 'Bones'.")
+            is_stray = False
+            if tid in KNOWN_STRAY_IDS:
+                is_stray = True
+            elif "emitido en tv" in title_lower:
+                is_stray = True
+            elif re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+", title):
+                is_stray = True
+            elif "tierra amarga" in title_lower and tid != tierra_main_id:
+                is_stray = True
 
-            # Limpiar entradas de bones del caché
-            keys_to_del = [k for k in cached_topics if "bones" in k.lower()]
-            for k in keys_to_del:
-                del cached_topics[k]
+            if is_stray:
+                stray_topics.append((tid, title))
 
-            cached_topics["bones"] = bones_main_id
-            print("✅ Caché de Bones unificado en 'bones'.")
+        # Ordenar temas por ID ascendente para preservar el orden cronológico de emisión
+        stray_topics = sorted(stray_topics, key=lambda x: x[0])
+        print(f"\nTemas dispersos detectados para consolidar ({len(stray_topics)}):")
+        for tid, title in stray_topics:
+            print(f"  - [{tid}] '{title}'")
 
-        # Guardar sync_state.json
+        # Transferir mensajes de cada tema al tema oficial
+        total_transferred = 0
+        for idx, (tid, title) in enumerate(stray_topics, 1):
+            print(f"\n[{idx}/{len(stray_topics)}] Extrayendo archivos del tema ID {tid} ('{title}')...")
+            msgs = []
+            async for m in client.iter_messages(chat, reply_to=tid, reverse=True):
+                if is_video_or_file(m):
+                    msgs.append(m)
+
+            print(f"  Episodios encontrados: {len(msgs)}")
+            for m in msgs:
+                caption = m.text or (m.file.name if m.file else "Tierra Amarga")
+                fname = m.file.name if (m.file and m.file.name) else m.id
+                print(f"    -> Transfiriendo a 'Tierra Amarga': {fname}")
+                await client.send_message(
+                    chat,
+                    message=caption,
+                    file=m.media,
+                    reply_to=tierra_main_id
+                )
+                total_transferred += 1
+                await asyncio.sleep(1.2)
+
+            # Eliminar tema huérfano
+            try:
+                print(f"  🗑️ Eliminando tema huérfano ID {tid} ('{title}')...")
+                await client(DeleteTopicHistoryRequest(peer=chat, top_msg_id=tid))
+                print(f"  ✅ Tema {tid} eliminado con éxito.")
+                await asyncio.sleep(0.5)
+            except Exception as e:
+                print(f"  ⚠️ Error o aviso eliminando tema {tid}: {e}")
+
+        print(f"\n✅ Total de {total_transferred} episodios consolidados en 'Tierra Amarga'.")
+
+        # Limpiar entradas de la caché
+        keys_to_del = []
+        for k in cached_topics:
+            k_low = k.lower()
+            if "tierra amarga" in k_low or "emitido en tv" in k_low or re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo", k):
+                keys_to_del.append(k)
+
+        for k in keys_to_del:
+            del cached_topics[k]
+
+        cached_topics["tierra amarga"] = tierra_main_id
         state["series_topics_cache"] = cached_topics
-        if state.get("current_series_title") and "bones" in state.get("current_series_title", "").lower():
-            state["current_series_title"] = "Bones"
-            state["current_topic_id"] = cached_topics.get("bones")
+        if state.get("current_series_title") and ("tierra" in state["current_series_title"].lower() or "cap" in state["current_series_title"].lower() or "emitido" in state["current_series_title"].lower()):
+            state["current_series_title"] = "Tierra Amarga"
+            state["current_topic_id"] = tierra_main_id
 
         with open(STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(state, f, indent=2, ensure_ascii=False)
         print("✅ sync_state.json actualizado con éxito.")
-
         print("\n" + "=" * 65)
-        print("REPARACIÓN COMPLETADA CON ÉXITO")
+        print("REPARACIÓN DE TIERRA AMARGA COMPLETADA CON ÉXITO")
         print("=" * 65)
 
 

@@ -103,6 +103,8 @@ def is_video_message(message) -> bool:
 
 def extract_file_name(message) -> str:
     """Extrae el nombre del archivo de un mensaje multimedia."""
+    if getattr(message, "file", None) and getattr(message.file, "name", None):
+        return message.file.name or ""
     if message.media and isinstance(message.media, MessageMediaDocument) and message.media.document:
         for attr in message.media.document.attributes:
             if isinstance(attr, DocumentAttributeFilename):
@@ -188,6 +190,9 @@ SERIES_ALIASES = {
     "luna, el misterio de calenda": "Luna, El Misterio De Calenda",
     "luna: el misterio de calenda ✓": "Luna, El Misterio De Calenda",
     "luna": "Luna, El Misterio De Calenda",
+    "tierra amarga": "Tierra Amarga",
+    "tierra amarga - emitido en tv": "Tierra Amarga",
+    "tierra amarga emitido en tv": "Tierra Amarga",
 }
 
 
@@ -199,7 +204,11 @@ def is_junk_series_title(title: str) -> bool:
     if t.lower() in KNOWN_VALID_NUMERIC_SERIES:
         return False
     # Si es solo código de episodio, temporada o números (ej. 1X01, S01E01, T1, 1x02, 1×01, 1, 01, 111, etc.)
-    if re.match(r"(?i)^(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|\d+[xX×\u00d7]\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|\d+|temporada\s*\d+)$", t):
+    if re.match(r"(?i)^(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|\d+[xX×\u00d7]\d+|Cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+|Episodio\s*\d+|\d+|temporada\s*\d+)$", t):
+        return True
+    if re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+.*$", t):
+        return True
+    if re.match(r"(?i)^emitido\s+en\s+tv.*$", t):
         return True
     # Anuncios o separadores de temporada (ej. "Segunda Temporada", "▶️ Segunda Temporada", "Temporada 2", etc.)
     if re.match(r"(?i)^[▶►\s*]*(?:primera|segunda|tercera|cuarta|quinta|sexta|séptima|septima|octava|novena|décima|decima|última|ultima|\d+ª?)\s+temporada.*$", t):
@@ -277,9 +286,13 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
         text
     )
     
+    # Quitar fechas de emisión (ej. 08-07-22, 08/07/2022, 2022-07-08)
+    text = re.sub(r"\b\d{1,2}[-–/]\d{1,2}[-–/]\d{2,4}\b", " ", text)
+    text = re.sub(r"\b\d{4}[-–/]\d{1,2}[-–/]\d{1,2}\b", " ", text)
+
     # Cortar en patrones de temporada/episodio (ej. 1x01, 1X01, 1×01, S01E01, Temporada 2, T 2, y códigos 101, 111, 120...)
     parts = re.split(
-        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap[ií]tulo\s*\d+|Episodio\s*\d+|T\s*\d+|\b[1-9]\d{2}\b)\b",
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+|Episodio\s*\d+|T\s*\d+|\b[1-9]\d{2}\b)\b",
         text
     )
     
@@ -474,7 +487,8 @@ async def sync_movies(client: TelegramClient, state: dict):
 KNOWN_JUNK_TOPIC_IDS = {
     5047, 5059, 5070, 5082, 5083, 5086, 5096, 5097, 
     5268, 5270, 5272, 5274, 5276, 5278, 5280, 5282, 5313,
-    5525, 5676, 5700, 5707, 5764, 5793
+    5525, 5676, 5700, 5707, 5764, 5793,
+    9773, 9782, 9784, 9786, 9792, 9794, 9796, 9801
 } | set(range(5327, 5430))
 
 
@@ -720,8 +734,10 @@ async def sync_series(client: TelegramClient, state: dict):
 
         # 3. Detectar si es un video de episodio
         elif is_video_message(msg):
-            # Obtener el nombre de serie del archivo únicamente si está explícito antes del número de episodio
+            # Obtener el nombre de serie del archivo o de la descripción del video
             video_series_title = clean_series_title(file_name, is_filename=True) if file_name else None
+            if not video_series_title and text_content:
+                video_series_title = clean_series_title(text_content, is_filename=False)
             if video_series_title and is_junk_series_title(video_series_title):
                 video_series_title = None
 
