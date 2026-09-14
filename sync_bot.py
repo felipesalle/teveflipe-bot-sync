@@ -195,6 +195,13 @@ SERIES_ALIASES = {
     "tierra amarga emitido en tv": "Tierra Amarga",
     "entre fantasmas": "Entre Fantasmas",
     "ghost whisperer": "Entre Fantasmas",
+    "decalogo": "Decálogo",
+    "decálogo": "Decálogo",
+    "el decalogo": "Decálogo",
+    "el decálogo": "Decálogo",
+    "los pilares de la tierra": "Los Pilares De La Tierra",
+    "los pilares de la tierra 8 episodios": "Los Pilares De La Tierra",
+    "dracula 3 episodios": "Dracula",
 }
 
 
@@ -276,6 +283,8 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     # Quitar frases descriptivas comunes en títulos de anuncios (ej. "- 1 Temporada Microhd", "- 5 Temporadas", etc.)
     text = re.sub(r"(?i)\s*[-–—:/|]+\s*\d+\s+tempora.*$", "", text)
     text = re.sub(r"(?i)\b\d+\s+tempora.*$", "", text)
+    text = re.sub(r"(?i)\s*[-–—:/|]+\s*\d+\s+episodio.*$", "", text)
+    text = re.sub(r"(?i)\b\d+\s+episodio.*$", "", text)
     text = re.sub(r"(?i)\b(?:finalizada|completa|miniserie|precuela)\b.*$", "", text)
 
     # Quitar cabeceras de temporada al inicio (ej. "▶️ Segunda Temporada", "Temporada 2", etc.)
@@ -294,7 +303,7 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
 
     # Cortar en patrones de temporada/episodio (ej. 1x01, 1X01, 1×01, S01E01, Temporada 2, T 2, y códigos 101, 111, 120...)
     parts = re.split(
-        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+|Episodio\s*\d+|T\s*\d+|\b[1-9]\d{2}\b)\b",
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|Ep(?:isodio|\.)?\s*\d+|Parte\s*\d+|T\s*\d+|\b\d{1,2}\s*(?:TV|VOSE|HD)\b|\b[1-9]\d{2}\b)\b",
         text
     )
     
@@ -304,13 +313,18 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
         before_ep = parts[0].strip() if parts else ""
         c_clean = re.sub(r"^[-–—:\s*=#~▶►]+|[-–—:\s*=#~▶►]+$", "", before_ep).strip()
         c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
-        if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
+        if c_clean.lower() not in KNOWN_VALID_NUMERIC_SERIES:
+            c_clean = re.sub(r"\s+\d{1,2}$", "", c_clean).strip()
+        is_numeric = c_clean.lower() in KNOWN_VALID_NUMERIC_SERIES
+        if len(c_clean) >= 2 and (any(char.isalpha() for char in c_clean) or is_numeric) and not is_junk_series_title(c_clean):
             title = c_clean
         elif len(parts) > 1:
             # En formatos españoles donde el archivo empieza por el número (ej. '1x12_Luna_El_Misterio_de_Calenda.avi')
             after_ep = parts[1].strip()
             a_clean = re.sub(r"^[-–—:\s*=#~▶►]+|[-–—:\s*=#~▶►]+$", "", after_ep).strip()
             a_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", a_clean).strip()
+            if a_clean.lower() not in KNOWN_VALID_NUMERIC_SERIES:
+                a_clean = re.sub(r"\s+\d{1,2}$", "", a_clean).strip()
             if a_clean.lower() in SERIES_ALIASES:
                 title = a_clean
             else:
@@ -326,11 +340,16 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
             for c in candidates:
                 c_clean = re.sub(r"^[-–—:\s*=#~▶►]+|[-–—:\s*=#~▶►]+$", "", c).strip()
                 c_clean = re.sub(r"(?i)^(?:esp|cast|lat|eng|spa)\s+", "", c_clean).strip()
-                if len(c_clean) >= 2 and any(char.isalpha() for char in c_clean) and not is_junk_series_title(c_clean):
+                if c_clean.lower() not in KNOWN_VALID_NUMERIC_SERIES:
+                    c_clean = re.sub(r"\s+\d{1,2}$", "", c_clean).strip()
+                is_numeric = c_clean.lower() in KNOWN_VALID_NUMERIC_SERIES
+                if len(c_clean) >= 2 and (any(char.isalpha() for char in c_clean) or is_numeric) and not is_junk_series_title(c_clean):
                     title = c_clean
                     break
         else:
             t_clean = re.sub(r"^[-–—:\s*=#~▶►]+|[-–—:\s*=#~▶►]+$", "", text).strip()
+            if t_clean.lower() not in KNOWN_VALID_NUMERIC_SERIES:
+                t_clean = re.sub(r"\s+\d{1,2}$", "", t_clean).strip()
             if not is_junk_series_title(t_clean):
                 title = t_clean
         
@@ -341,8 +360,9 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
         return ""
         
     norm = title.lower().strip()
-    if norm in SERIES_ALIASES:
-        return SERIES_ALIASES[norm]
+    for alias_key, canonical in SERIES_ALIASES.items():
+        if norm == alias_key or norm.startswith(alias_key + " ") or norm.startswith(alias_key + "_"):
+            return canonical
         
     return title.title()
 
