@@ -5,7 +5,7 @@ import random
 import re
 from telethon import TelegramClient
 from telethon.sessions import StringSession
-from telethon.tl.functions.channels import (
+from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
     CreateForumTopicRequest,
     DeleteTopicHistoryRequest,
@@ -63,7 +63,7 @@ async def main():
         # Intentar renombrar el tema principal a nombre limpio
         try:
             print(f"Renombrando tema {TOPIC_LUNA_MAIN} a 'Luna, El Misterio De Calenda'...")
-            await client(EditForumTopicRequest(channel=chat, topic_id=TOPIC_LUNA_MAIN, title="Luna, El Misterio De Calenda"))
+            await client(EditForumTopicRequest(peer=chat, topic_id=TOPIC_LUNA_MAIN, title="Luna, El Misterio De Calenda"))
             print("✅ Nombre de tema actualizado correctamente.")
         except Exception as e:
             print(f"Aviso actualizando título de Luna ({TOPIC_LUNA_MAIN}): {e}")
