@@ -1,0 +1,17 @@
+{
+  "demo_movies": {
+    "title": "TeveFlipe - Películas (Demo)",
+    "chat_id": -1004364372900,
+    "invite_link": "https://t.me/+MEEHKMKA7fg4ZDMz"
+  },
+  "demo_series": {
+    "title": "TeveFlipe - Series (Demo)",
+    "chat_id": -1004496847899,
+    "invite_link": "https://t.me/+8Jpwrf7Tj8QzOTVj"
+  },
+  "demo_spanish": {
+    "title": "TeveFlipe - Series Españolas (Demo)",
+    "chat_id": -1004379770680,
+    "invite_link": "https://t.me/+3hE-OhFEuBwxNmQz"
+  }
+}
