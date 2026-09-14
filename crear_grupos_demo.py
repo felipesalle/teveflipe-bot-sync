@@ -2,6 +2,7 @@ import asyncio
 import os
 import json
 import random
+from collections import defaultdict
 from telethon import TelegramClient, utils
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import CreateChannelRequest, ToggleForumRequest
@@ -10,41 +11,30 @@ from telethon.tl.functions.messages import (
     CreateForumTopicRequest,
     GetForumTopicsRequest
 )
-from telethon.tl.types import (
-    MessageMediaDocument,
-    DocumentAttributeFilename,
-    DocumentAttributeVideo,
-    ChatInviteExported
+from telethon.tl.types import ChatInviteExported
+
+from sync_bot import (
+    clean_series_title,
+    extract_file_name,
+    is_video_message,
+    is_junk_series_title
 )
 
 API_ID = int(os.environ["TELEGRAM_API_ID"])
 API_HASH = os.environ["TELEGRAM_API_HASH"]
 SESSION = os.environ["TELEGRAM_STRING_SESSION"]
 
-MOVIES_SRC_CHAT = int(os.environ.get("MOVIES_SRC_CHAT", "-1002146236969"))
-SERIES_SRC_CHAT = int(os.environ.get("SERIES_SRC_CHAT", "-1002097175258"))
-SPANISH_SRC_CHAT = int(os.environ.get("SPANISH_SRC_CHAT", "-1004419790119"))
+# Canales origen (desprotegidos para reenvío libre)
+MOVIES_SRC_CHAT = int(os.environ.get("MOVIES_SRC_CHAT", "-1001905652210"))
+MOVIES_SRC_TOPIC = int(os.environ.get("MOVIES_SRC_TOPIC", "1605935"))
+
+SERIES_SRC_CHAT = int(os.environ.get("SERIES_SRC_CHAT", "-1002257262928"))
+SERIES_SRC_TOPIC = int(os.environ.get("SERIES_SRC_TOPIC", "157592"))
+
+SPANISH_SRC_CHAT = int(os.environ.get("SPANISH_SRC_CHAT", "-1002160549536"))
+SPANISH_SRC_TOPIC = int(os.environ.get("SPANISH_SRC_TOPIC", "21"))
 
 CONFIG_FILE = "demo_config.json"
-
-
-def is_video_message(m):
-    if not m or not m.media:
-        return False
-    if getattr(m, "video", None):
-        return True
-    if isinstance(m.media, MessageMediaDocument) and m.media.document:
-        doc = m.media.document
-        if doc.mime_type and doc.mime_type.startswith("video/"):
-            return True
-        for attr in doc.attributes:
-            if isinstance(attr, (DocumentAttributeVideo,)):
-                return True
-            if isinstance(attr, DocumentAttributeFilename):
-                fname = (attr.file_name or "").lower()
-                if fname.endswith((".mkv", ".mp4", ".avi", ".mov", ".ts")):
-                    return True
-    return False
 
 
 async def get_or_create_channel(client, title, about, is_megagroup=False, is_forum=False):
@@ -53,10 +43,10 @@ async def get_or_create_channel(client, title, about, is_megagroup=False, is_for
     
     # 1. Comprobar si ya existe en los diálogos del usuario
     existing = None
-    async for dialog in client.iter_dialogs(limit=100):
+    async for dialog in client.iter_dialogs(limit=120):
         if dialog.is_channel and dialog.title.strip().lower() == title.strip().lower():
             existing = dialog.entity
-            print(f"  -> Canal ya existente encontrado: ID {utils.get_peer_id(existing)}")
+            print(f"  -> Canal existente encontrado: ID {utils.get_peer_id(existing)}")
             break
 
     chat = existing
@@ -80,7 +70,7 @@ async def get_or_create_channel(client, title, about, is_megagroup=False, is_for
         except Exception as e:
             print(f"  -> Aviso foros: {e}")
 
-    # 3. Exportar enlace de invitación permanente
+    # 3. Exportar enlace de invitación
     invite_link = ""
     try:
         exported = await client(ExportChatInviteRequest(peer=chat, title="Enlace Demo Clientes"))
@@ -145,7 +135,7 @@ async def main():
         movies_chat, movies_id, movies_link = await get_or_create_channel(
             client,
             title="TeveFlipe - Películas (Demo)",
-            about="Canal de demostración para clientes y testers de TeveFlipe. Incluye una selección de películas de muestra.",
+            about="Canal de demostración para clientes y testers de TeveFlipe. Incluye una selección de 10 películas de muestra.",
             is_megagroup=False,
             is_forum=False
         )
@@ -155,31 +145,38 @@ async def main():
             "invite_link": movies_link
         }
 
-        # Comprobar cuántas películas ya tiene el canal demo
-        existing_movies_count = 0
+        # Contar cuántas películas ya tiene
+        existing_movies = 0
         async for m in client.iter_messages(movies_chat, limit=20):
             if is_video_message(m):
-                existing_movies_count += 1
+                existing_movies += 1
 
-        print(f"Películas existentes en canal Demo: {existing_movies_count}")
-        if existing_movies_count < 10:
-            to_copy = 10 - existing_movies_count
-            print(f"Copiando {to_copy} películas desde el canal oficial ({MOVIES_SRC_CHAT})...")
+        print(f"Películas existentes en canal Demo: {existing_movies}")
+        if existing_movies < 10:
+            to_copy = 10 - existing_movies
+            print(f"Copiando {to_copy} películas desde el canal origen ({MOVIES_SRC_CHAT})...")
             copied = 0
-            async for m in client.iter_messages(MOVIES_SRC_CHAT, limit=50):
+            async for m in client.iter_messages(
+                MOVIES_SRC_CHAT,
+                reply_to=MOVIES_SRC_TOPIC if MOVIES_SRC_TOPIC else None,
+                limit=60
+            ):
                 if is_video_message(m):
-                    fname = m.file.name if m.file else m.id
-                    caption = m.text or fname
+                    fname = extract_file_name(m) or (m.file.name if m.file else m.id)
+                    caption = m.text or str(fname)
                     print(f"  -> Copiando película: {fname}")
-                    await client.send_message(
-                        movies_chat,
-                        message=caption,
-                        file=m.media
-                    )
-                    copied += 1
-                    await asyncio.sleep(2.0)
-                    if copied >= to_copy:
-                        break
+                    try:
+                        await client.send_message(
+                            movies_chat,
+                            message=caption,
+                            file=m.media
+                        )
+                        copied += 1
+                        await asyncio.sleep(2.0)
+                        if copied >= to_copy:
+                            break
+                    except Exception as e:
+                        print(f"    Aviso enviando: {e}")
             print(f"✅ {copied} películas copiadas al canal Demo.")
 
         # -------------------------------------------------------------
@@ -189,7 +186,7 @@ async def main():
         series_chat, series_id, series_link = await get_or_create_channel(
             client,
             title="TeveFlipe - Series (Demo)",
-            about="Grupo de demostración para clientes y testers de TeveFlipe. Incluye selección de series populares de muestra.",
+            about="Grupo de demostración para clientes y testers de TeveFlipe. Incluye series populares de muestra.",
             is_megagroup=True,
             is_forum=True
         )
@@ -199,48 +196,65 @@ async def main():
             "invite_link": series_link
         }
 
-        # Poblaremos con 2 series de éxito: "Entre Fantasmas" y "Bones"
-        series_samples = [
-            {"title": "Entre Fantasmas", "src_topic": 11511, "max_eps": 10},
-            {"title": "Bones", "src_topic": 10406, "max_eps": 10}
-        ]
+        # Recopilar episodios de series del canal origen
+        print(f"Escaneando series del canal origen ({SERIES_SRC_CHAT})...")
+        series_episodes = defaultdict(list)
+        active_series = None
+        
+        async for m in client.iter_messages(
+            SERIES_SRC_CHAT,
+            reply_to=SERIES_SRC_TOPIC if SERIES_SRC_TOPIC else None,
+            limit=400,
+            reverse=True
+        ):
+            if not m.media and m.text:
+                cand = clean_series_title(m.text, is_filename=False)
+                if cand and not is_junk_series_title(cand):
+                    active_series = cand
+            elif is_video_message(m):
+                fname = extract_file_name(m)
+                v_title = clean_series_title(fname, is_filename=True) if fname else None
+                if not v_title and m.text:
+                    v_title = clean_series_title(m.text, is_filename=False)
+                if v_title and not is_junk_series_title(v_title):
+                    active_series = v_title
+                if active_series and not is_junk_series_title(active_series):
+                    if len(series_episodes[active_series]) < 10:
+                        series_episodes[active_series].append(m)
 
-        for s_info in series_samples:
-            s_title = s_info["title"]
-            s_topic_id = s_info["src_topic"]
-            max_eps = s_info["max_eps"]
+        # Seleccionar las 2 series con más episodios encontrados
+        sorted_series = sorted(series_episodes.items(), key=lambda x: len(x[1]), reverse=True)
+        chosen_series = sorted_series[:2]
+        print(f"Series elegidas para demo: {[s[0] for s in chosen_series]}")
 
-            print(f"\nConfigurando serie de muestra: '{s_title}'...")
-            demo_topic_id = await create_demo_topic(client, series_chat, s_title)
-            print(f"  -> Tema en demo: ID {demo_topic_id}")
+        for s_title, msgs in chosen_series:
+            print(f"\nConfigurando tema de serie: '{s_title}' ({len(msgs)} episodios)...")
+            topic_id = await create_demo_topic(client, series_chat, s_title)
+            
+            # Contar episodios ya enviados
+            existing_eps = 0
+            if topic_id:
+                async for em in client.iter_messages(series_chat, reply_to=topic_id, limit=20):
+                    if is_video_message(em):
+                        existing_eps += 1
 
-            # Contar si ya tiene episodios
-            eps_count = 0
-            if demo_topic_id:
-                async for m in client.iter_messages(series_chat, reply_to=demo_topic_id, limit=20):
-                    if is_video_message(m):
-                        eps_count += 1
-
-            if eps_count < max_eps and demo_topic_id:
-                to_copy = max_eps - eps_count
-                print(f"  -> Copiando {to_copy} capítulos desde el tema oficial {s_topic_id}...")
-                copied = 0
-                async for m in client.iter_messages(SERIES_SRC_CHAT, reply_to=s_topic_id, reverse=True, limit=50):
-                    if is_video_message(m):
-                        fname = m.file.name if m.file else m.id
-                        caption = m.text or f"{s_title} - {fname}"
-                        print(f"    -> Enviando episodio: {fname}")
+            if existing_eps < len(msgs) and topic_id:
+                to_send = msgs[existing_eps:]
+                for m in to_send:
+                    fname = extract_file_name(m) or (m.file.name if m.file else m.id)
+                    caption = m.text or f"{s_title} - {fname}"
+                    print(f"  -> Enviando episodio: {fname}")
+                    try:
                         await client.send_message(
                             series_chat,
                             message=caption,
                             file=m.media,
-                            reply_to=demo_topic_id
+                            reply_to=topic_id
                         )
-                        copied += 1
                         await asyncio.sleep(1.5)
-                        if copied >= to_copy:
-                            break
-                print(f"  ✅ {copied} capítulos de '{s_title}' copiados al tema demo.")
+                    except Exception as e:
+                        print(f"    Aviso enviando episodio: {e}")
+                print(f"  ✅ Episodios de '{s_title}' listos en demo.")
 
         # -------------------------------------------------------------
         # 3. GRUPO DEMO DE SERIES ESPAÑOLAS (FORO)
@@ -249,7 +263,7 @@ async def main():
         spanish_chat, spanish_id, spanish_link = await get_or_create_channel(
             client,
             title="TeveFlipe - Series Españolas (Demo)",
-            about="Grupo de demostración para clientes y testers de TeveFlipe. Incluye selección de series españolas de muestra.",
+            about="Grupo de demostración para clientes y testers de TeveFlipe. Incluye series españolas de muestra.",
             is_megagroup=True,
             is_forum=True
         )
@@ -259,51 +273,76 @@ async def main():
             "invite_link": spanish_link
         }
 
-        # Serie española de muestra: "Luna, El Misterio De Calenda"
-        s_title = "Luna, El Misterio De Calenda"
-        s_topic_id = 10002
-        max_eps = 10
+        # Escanear series españolas del canal origen
+        print(f"Escaneando series españolas del canal origen ({SPANISH_SRC_CHAT})...")
+        spanish_episodes = defaultdict(list)
+        active_spanish = None
 
-        print(f"\nConfigurando serie española de muestra: '{s_title}'...")
-        demo_spanish_topic_id = await create_demo_topic(client, spanish_chat, s_title)
-        print(f"  -> Tema en demo: ID {demo_spanish_topic_id}")
+        async for m in client.iter_messages(
+            SPANISH_SRC_CHAT,
+            reply_to=SPANISH_SRC_TOPIC if SPANISH_SRC_TOPIC else None,
+            limit=250,
+            reverse=True
+        ):
+            if not m.media and m.text:
+                cand = clean_series_title(m.text, is_filename=False)
+                if cand and not is_junk_series_title(cand):
+                    active_spanish = cand
+            elif is_video_message(m):
+                fname = extract_file_name(m)
+                v_title = clean_series_title(fname, is_filename=True) if fname else None
+                if not v_title and m.text:
+                    v_title = clean_series_title(m.text, is_filename=False)
+                if v_title and not is_junk_series_title(v_title):
+                    active_spanish = v_title
+                if active_spanish and not is_junk_series_title(active_spanish):
+                    if len(spanish_episodes[active_spanish]) < 10:
+                        spanish_episodes[active_spanish].append(m)
 
-        eps_count = 0
-        if demo_spanish_topic_id:
-            async for m in client.iter_messages(spanish_chat, reply_to=demo_spanish_topic_id, limit=20):
-                if is_video_message(m):
-                    eps_count += 1
+        sorted_spanish = sorted(spanish_episodes.items(), key=lambda x: len(x[1]), reverse=True)
+        chosen_spanish = sorted_spanish[:2]
+        print(f"Series españolas elegidas para demo: {[s[0] for s in chosen_spanish]}")
 
-        if eps_count < max_eps and demo_spanish_topic_id:
-            to_copy = max_eps - eps_count
-            print(f"  -> Copiando {to_copy} capítulos desde el tema oficial {s_topic_id}...")
-            copied = 0
-            async for m in client.iter_messages(SERIES_SRC_CHAT, reply_to=s_topic_id, reverse=True, limit=50):
-                if is_video_message(m):
-                    fname = m.file.name if m.file else m.id
+        for s_title, msgs in chosen_spanish:
+            print(f"\nConfigurando tema de serie española: '{s_title}' ({len(msgs)} episodios)...")
+            topic_id = await create_demo_topic(client, spanish_chat, s_title)
+            
+            existing_eps = 0
+            if topic_id:
+                async for em in client.iter_messages(spanish_chat, reply_to=topic_id, limit=20):
+                    if is_video_message(em):
+                        existing_eps += 1
+
+            if existing_eps < len(msgs) and topic_id:
+                to_send = msgs[existing_eps:]
+                for m in to_send:
+                    fname = extract_file_name(m) or (m.file.name if m.file else m.id)
                     caption = m.text or f"{s_title} - {fname}"
-                    print(f"    -> Enviando episodio: {fname}")
-                    await client.send_message(
-                        spanish_chat,
-                        message=caption,
-                        file=m.media,
-                        reply_to=demo_spanish_topic_id
-                    )
-                    copied += 1
-                    await asyncio.sleep(1.5)
-                    if copied >= to_copy:
-                        break
-            print(f"  ✅ {copied} capítulos de '{s_title}' copiados al tema demo.")
+                    print(f"  -> Enviando episodio: {fname}")
+                    try:
+                        await client.send_message(
+                            spanish_chat,
+                            message=caption,
+                            file=m.media,
+                            reply_to=topic_id
+                        )
+                        await asyncio.sleep(1.5)
+                    except Exception as e:
+                        print(f"    Aviso enviando episodio: {e}")
+                print(f"  ✅ Episodios de '{s_title}' listos en demo.")
 
-        # Guardar configuración demo
+        # Guardar archivo demo_config.json
         with open(CONFIG_FILE, "w", encoding="utf-8") as f:
             json.dump(demo_data, f, indent=2, ensure_ascii=False)
 
         print("\n" + "=" * 65)
         print("GRUPOS DEMO CREADOS Y CONFIGURADOS CON ÉXITO")
-        print(f"1. Películas Demo: {demo_data['demo_movies']['chat_id']} | Enlace: {demo_data['demo_movies']['invite_link']}")
-        print(f"2. Series Demo: {demo_data['demo_series']['chat_id']} | Enlace: {demo_data['demo_series']['invite_link']}")
-        print(f"3. Series Españolas Demo: {demo_data['demo_spanish']['chat_id']} | Enlace: {demo_data['demo_spanish']['invite_link']}")
+        print(f"1. Películas Demo: {demo_data['demo_movies']['chat_id']}")
+        print(f"   Enlace: {demo_data['demo_movies']['invite_link']}")
+        print(f"2. Series Demo: {demo_data['demo_series']['chat_id']}")
+        print(f"   Enlace: {demo_data['demo_series']['invite_link']}")
+        print(f"3. Series Españolas Demo: {demo_data['demo_spanish']['chat_id']}")
+        print(f"   Enlace: {demo_data['demo_spanish']['invite_link']}")
         print("=" * 65)
 
 

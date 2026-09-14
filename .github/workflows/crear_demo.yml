@@ -26,9 +26,12 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
-          MOVIES_SRC_CHAT: "-1002146236969"
-          SERIES_SRC_CHAT: "-1002097175258"
-          SPANISH_SRC_CHAT: "-1004419790119"
+          MOVIES_SRC_CHAT: "-1001905652210"
+          MOVIES_SRC_TOPIC: "1605935"
+          SERIES_SRC_CHAT: "-1002257262928"
+          SERIES_SRC_TOPIC: "157592"
+          SPANISH_SRC_CHAT: "-1002160549536"
+          SPANISH_SRC_TOPIC: "21"
         run: python crear_grupos_demo.py
 
       - name: Guardar configuracion demo
