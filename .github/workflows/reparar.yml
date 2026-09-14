@@ -1,0 +1,44 @@
+name: Reparar y Consolidar Series
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: pip install telethon
+
+      - name: Ejecutar Reparacion y Consolidacion
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+          TARGET_CHAT: "-1002097175258"
+        run: python reparar_series.py
+
+      - name: Guardar estado tras reparacion
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f sync_state.json ]; then
+            git add sync_state.json
+            if ! git diff --staged --quiet; then
+              git commit -m "Auto-update sync state after repair [skip ci]"
+              git pull --rebase --autostash origin main
+              git push origin main
+            fi
+          fi
