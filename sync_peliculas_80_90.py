@@ -31,9 +31,9 @@ API_ID = int(os.getenv("TELEGRAM_API_ID") or 0)
 API_HASH = os.getenv("TELEGRAM_API_HASH") or ""
 STRING_SESSION = os.getenv("TELEGRAM_STRING_SESSION") or ""
 
-# Canal Origen: Grupo fuente oficial (-1001905652210 tema 1605935)
+# Canal Origen: Grupo fuente oficial (-1001905652210 tema 7 catálogo general)
 SOURCE_CHAT_ID = int(os.getenv("MOVIES_80_90_SOURCE_CHAT", "-1001905652210"))
-SOURCE_TOPIC_ID = int(os.getenv("MOVIES_80_90_SOURCE_TOPIC", "1605935"))
+SOURCE_TOPIC_ID = int(os.getenv("MOVIES_80_90_SOURCE_TOPIC", "7"))
 
 TARGET_GROUP_TITLE = os.getenv("MOVIES_80_90_TARGET_TITLE", "Cine de los 80 y 90")
 STATE_FILE = "sync_state_80_90.json"
@@ -408,8 +408,8 @@ async def sync_peliculas_80_90():
         logger.info(f"  • Último Msg ID escaneado: {state['last_message_id_scanned']}")
         logger.info("=" * 65)
 
-        # Si aún quedan mensajes históricos por recorrer hacia atrás (> 1)
-        if current_lowest_id and current_lowest_id > 1:
+        # Si aún quedan mensajes históricos en el tema (por encima del inicio ~500.000)
+        if current_lowest_id and current_lowest_id > 500335:
             logger.info(f"Aún queda catálogo pendiente. Creando marcador '{MORE_MARKER}'...")
             with open(MORE_MARKER, "w") as f:
                 f.write(str(current_lowest_id))
