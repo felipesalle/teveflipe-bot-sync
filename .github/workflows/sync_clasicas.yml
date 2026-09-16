@@ -37,7 +37,8 @@ jobs:
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
           CLASICAS_SOURCE_CHAT: "-1001905652210"
           CLASICAS_SOURCE_TOPIC: "7"
-          BATCH_FORWARD_LIMIT: "100"
+          BATCH_FORWARD_LIMIT: "50"
+          MAX_MESSAGES_TO_SCAN: "20000"
         run: |
           python sync_peliculas_clasicas.py
 
