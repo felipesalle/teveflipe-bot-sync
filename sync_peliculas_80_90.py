@@ -31,9 +31,9 @@ API_ID = int(os.getenv("TELEGRAM_API_ID") or 0)
 API_HASH = os.getenv("TELEGRAM_API_HASH") or ""
 STRING_SESSION = os.getenv("TELEGRAM_STRING_SESSION") or ""
 
-# Canal Origen: Por defecto REPOSITORIO DE PELÍCULAS (-1002146236969)
-SOURCE_CHAT_ID = int(os.getenv("MOVIES_80_90_SOURCE_CHAT", "-1002146236969"))
-SOURCE_TOPIC_ID = int(os.getenv("MOVIES_80_90_SOURCE_TOPIC", "0"))
+# Canal Origen: Grupo fuente oficial (-1001905652210 tema 1605935)
+SOURCE_CHAT_ID = int(os.getenv("MOVIES_80_90_SOURCE_CHAT", "-1001905652210"))
+SOURCE_TOPIC_ID = int(os.getenv("MOVIES_80_90_SOURCE_TOPIC", "1605935"))
 
 TARGET_GROUP_TITLE = os.getenv("MOVIES_80_90_TARGET_TITLE", "Cine de los 80 y 90")
 STATE_FILE = "sync_state_80_90.json"
