@@ -166,8 +166,8 @@ def normalize_movie_title(raw_title: str, caption: str = "") -> str:
 
 def is_target_movie_video(message) -> Tuple[bool, str]:
     """
-    Verifica si el mensaje contiene un video (.mkv, .mp4).
-    Excluye archivos comprimidos (.rar, .zip, etc.).
+    Verifica si el mensaje contiene un archivo multimedia de video.
+    Excluye archivos comprimidos (.rar, .zip) y audios.
     """
     if not message or not message.media:
         return False, ""
@@ -184,10 +184,8 @@ def is_target_movie_video(message) -> Tuple[bool, str]:
 
     fname_lower = fname.lower()
 
-    if fname_lower.endswith((".rar", ".zip", ".7z", ".tar", ".gz")):
+    if fname_lower.endswith((".rar", ".zip", ".7z", ".tar", ".gz", ".mp3", ".flac", ".wav", ".pdf", ".txt")):
         return False, fname
-
-    has_target_ext = fname_lower.endswith((".mkv", ".mp4"))
 
     is_video = False
     if getattr(message, "video", None):
@@ -200,8 +198,12 @@ def is_target_movie_video(message) -> Tuple[bool, str]:
             if isinstance(attr, DocumentAttributeVideo):
                 is_video = True
                 break
+            if isinstance(attr, DocumentAttributeFilename):
+                if attr.file_name and attr.file_name.lower().endswith((".mkv", ".mp4", ".avi", ".mov", ".webm", ".ts", ".m4v")):
+                    is_video = True
+                    break
 
-    if is_video and has_target_ext:
+    if is_video:
         return True, fname
 
     return False, fname
@@ -310,16 +312,16 @@ async def sync_peliculas_80_90():
             if state.get("highest_id_scanned", 0) == 0:
                 state["highest_id_scanned"] = msg.id
 
-            if scanned_count % 500 == 0:
-                logger.info(f"🔍 [Progreso escaneo] {scanned_count} mensajes analizados (Msg ID actual: {msg.id}) | Películas 80s/90s reenviadas en esta tanda: {forwarded_in_run}")
+            if scanned_count % 100 == 0:
+                logger.info(f"🔍 [Progreso escaneo] {scanned_count} mensajes analizados (Msg ID actual: {msg.id}) | Películas 80s/90s reenviadas: {forwarded_in_run}")
 
-            # 1. Verificar formato video .mkv / .mp4
+            # 1. Verificar formato video
             is_valid, fname = is_target_movie_video(msg)
             if not is_valid:
                 continue
 
-            caption = msg.text or ""
-            combined_text = f"{fname} {caption}"
+            caption = msg.text or getattr(msg, 'message', '') or ""
+            combined_text = f"{fname} {caption}".strip()
 
             # 2. Extraer año y validar rango 1980 - 1999
             year = extract_movie_year(combined_text)
