@@ -83,7 +83,7 @@ def clean_series_name(raw_name: str, caption: str = "") -> tuple:
     # Limpiar año entre paréntesis o suelto
     name = re.sub(r"\b(19\d\d|20\d\d)\b", "", name)
     # Limpiar tags técnicas
-    name = CLEAN_TAGS_REGEX.replace("", name)
+    name = CLEAN_TAGS_REGEX.sub("", name)
     # Limpiar signos y corchetes
     name = re.sub(r"[\[\]\(\)\{\}\-–—+!¡?¿]+", " ", name)
     # Normalizar espacios
