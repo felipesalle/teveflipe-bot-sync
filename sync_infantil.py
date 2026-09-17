@@ -20,7 +20,8 @@ from telethon.tl.types import (
     MessageMediaDocument,
     DocumentAttributeVideo,
     DocumentAttributeFilename,
-    Channel
+    Channel,
+    PeerChannel
 )
 
 logging.basicConfig(
@@ -341,6 +342,23 @@ async def rescatar_series_de_pelis(client: TelegramClient, ent_pelis, ent_series
         logger.warning(f"Error durante el rescate de películas: {e}")
 
 
+async def resolve_channel_entity(client: TelegramClient, channel_id, invite_link=None):
+    """Obtiene la entidad de un canal o supergrupo asegurando que Telethon use PeerChannel o el enlace de invitación."""
+    if invite_link:
+        try:
+            return await client.get_entity(invite_link)
+        except Exception as e:
+            logger.warning(f"No se pudo resolver canal por enlace {invite_link}: {e}")
+    try:
+        clean_id = abs(int(channel_id))
+        if str(clean_id).startswith("100") and len(str(clean_id)) > 10:
+            clean_id = int(str(clean_id)[3:])
+        return await client.get_entity(PeerChannel(clean_id))
+    except Exception as e:
+        logger.warning(f"Error resolviendo PeerChannel({channel_id}): {e}")
+        return await client.get_entity(channel_id)
+
+
 async def main():
     if not STRING_SESSION:
         logger.error("❌ ERROR: TELEGRAM_STRING_SESSION no configurada.")
@@ -368,12 +386,13 @@ async def main():
             ))
             ent_pelis = res_p.chats[0]
             inv_p = await client(ExportChatInviteRequest(peer=ent_pelis))
-            progreso["canal_pelis_id"] = ent_pelis.id
+            p_id = int(f"-100{ent_pelis.id}") if str(ent_pelis.id)[0] != '-' else ent_pelis.id
+            progreso["canal_pelis_id"] = p_id
             progreso["canal_pelis_link"] = inv_p.link
-            logger.info(f"✅ Creado Películas Infantiles: ID={ent_pelis.id} | Enlace: {inv_p.link}")
+            logger.info(f"✅ Creado Películas Infantiles: ID={p_id} | Enlace: {inv_p.link}")
             guardar_progreso(progreso)
         else:
-            ent_pelis = await client.get_entity(progreso["canal_pelis_id"])
+            ent_pelis = await resolve_channel_entity(client, progreso["canal_pelis_id"], progreso.get("canal_pelis_link"))
 
         # 2. GESTIÓN CANAL DE SERIES INFANTILES (Supergrupo con FOROS/TEMAS)
         if not progreso.get("canal_series_id"):
@@ -390,12 +409,13 @@ async def main():
                 await client(ToggleForumRequest(channel=ent_series, enabled=True))
 
             inv_s = await client(ExportChatInviteRequest(peer=ent_series))
-            progreso["canal_series_id"] = ent_series.id
+            s_id = int(f"-100{ent_series.id}") if str(ent_series.id)[0] != '-' else ent_series.id
+            progreso["canal_series_id"] = s_id
             progreso["canal_series_link"] = inv_s.link
-            logger.info(f"✅ Creado Series Infantiles con Temas: ID={ent_series.id} | Enlace: {inv_s.link}")
+            logger.info(f"✅ Creado Series Infantiles con Temas: ID={s_id} | Enlace: {inv_s.link}")
             guardar_progreso(progreso)
         else:
-            ent_series = await client.get_entity(progreso["canal_series_id"])
+            ent_series = await resolve_channel_entity(client, progreso["canal_series_id"], progreso.get("canal_series_link"))
 
         print("\n" + "═" * 70)
         print("CANALES DESTINO PARA EL PANEL WEB (admin.html):")
