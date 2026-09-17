@@ -202,6 +202,31 @@ SERIES_ALIASES = {
     "los pilares de la tierra": "Los Pilares De La Tierra",
     "los pilares de la tierra 8 episodios": "Los Pilares De La Tierra",
     "dracula 3 episodios": "Dracula",
+    "robots in disguise": "Transformers: Robots in Disguise",
+    "transformers robots in disguise": "Transformers: Robots in Disguise",
+    "beast wars 2 (jap)": "Transformers: Beast Wars II",
+    "beast wars 2": "Transformers: Beast Wars II",
+    "beast wars ii": "Transformers: Beast Wars II",
+    "beast wars neo (jap)": "Transformers: Beast Wars Neo",
+    "beast wars neo": "Transformers: Beast Wars Neo",
+    "transformers g1": "Transformers (G1)",
+    "transformers: generacion 1": "Transformers (G1)",
+    "transformers generacion 1": "Transformers (G1)",
+    "transformers headmasters": "Transformers: The Headmasters",
+    "transformers the headmasters": "Transformers: The Headmasters",
+    "transformers: the headmasters": "Transformers: The Headmasters",
+    "the headmasters": "Transformers: The Headmasters",
+    "transformers super-god masterforce": "Transformers: Super-God Masterforce",
+    "transformers super god masterforce": "Transformers: Super-God Masterforce",
+    "transformers: super-god masterforce": "Transformers: Super-God Masterforce",
+    "transformers victory": "Transformers: Victory",
+    "transformers: victory": "Transformers: Victory",
+    "beast wars": "Transformers: Beast Wars",
+    "transformers beast wars": "Transformers: Beast Wars",
+    "beast machines": "Transformers: Beast Machines",
+    "transformers beast machines": "Transformers: Beast Machines",
+    "robot masters": "Transformers: Robot Masters",
+    "transformers robot masters": "Transformers: Robot Masters",
 }
 
 
@@ -212,10 +237,16 @@ def is_junk_series_title(title: str) -> bool:
     t = title.strip()
     if t.lower() in KNOWN_VALID_NUMERIC_SERIES:
         return False
+
+    # Si empieza con un número de episodio (ej. "01 - Protocolo De Batalla", "02 - ", "35 - ")
+    m_num = re.match(r"^(\d{1,3})\s*[-–—.:_]\s*", t)
+    if m_num and m_num.group(1) not in KNOWN_VALID_NUMERIC_SERIES:
+        return True
+
     # Si es solo código de episodio, temporada o números (ej. 1X01, S01E01, T1, 1x02, 1×01, 1, 01, 111, etc.)
     if re.match(r"(?i)^(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|\d+[xX×\u00d7]\d+|Cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+|Episodio\s*\d+|\d+|temporada\s*\d+)$", t):
         return True
-    if re.match(r"(?i)^cap[iíãÃ\ufffd\xad\s]*tulo\s*\d+.*$", t):
+    if re.match(r"(?i)^[▶►\s*]*(?:cap[iíãÃ\ufffd\xad\s]*tulo|episodio|temp(?:orada)?|parte|fin\s+de\s+serie)\b.*$", t):
         return True
     if re.match(r"(?i)^emitido\s+en\s+tv.*$", t):
         return True
@@ -280,6 +311,20 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     # Reemplazar guiones bajos, puntos y dos puntos por espacios para respetar límites de palabras (\b)
     text = text.replace("_", " ").replace(".", " ").replace(":", " ")
     
+    # Comprobar alias exacto antes de podar
+    raw_norm = text.lower().strip()
+    for alias_key, canonical in SERIES_ALIASES.items():
+        if raw_norm == alias_key:
+            return canonical
+
+    # En archivos de video, si el archivo empieza con código de episodio o número, NO contiene el nombre de la serie
+    if is_filename:
+        m_num = re.match(r"^\s*(\d{1,3})\s*[-–—.:_]\s*", text)
+        if m_num and m_num.group(1) not in KNOWN_VALID_NUMERIC_SERIES:
+            return ""
+        if re.match(r"^(?:\d+[xX×\u00d7]\d+|[sS]\d+(?:[eE]\d+)?|[tT]\d+(?:[eE]\d+)?|cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|ep(?:isodio|\.)?\s*\d+)", text.strip(), re.I):
+            return ""
+
     # Quitar frases descriptivas comunes en títulos de anuncios (ej. "- 1 Temporada Microhd", "- 5 Temporadas", etc.)
     text = re.sub(r"(?i)\s*[-–—:/|]+\s*\d+\s+tempora.*$", "", text)
     text = re.sub(r"(?i)\b\d+\s+tempora.*$", "", text)
@@ -328,8 +373,6 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
             if a_clean.lower() in SERIES_ALIASES:
                 title = a_clean
             else:
-                # Si el archivo empieza por el código de episodio (ej. '1x01 - Piloto.mkv'),
-                # lo que sigue al guion es el título del capítulo, NO el nombre de una nueva serie.
                 return ""
         else:
             return ""
@@ -759,15 +802,20 @@ async def sync_series(client: TelegramClient, state: dict):
             # Obtener el nombre de serie del archivo o de la descripción del video
             video_series_title = clean_series_title(file_name, is_filename=True) if file_name else None
             if not video_series_title and text_content:
-                video_series_title = clean_series_title(text_content, is_filename=False)
+                # Solo usar caption si no parece código de episodio o nombre de archivo
+                if not re.match(r"^\s*\d{1,3}\s*[-–—.:_]", text_content.strip()):
+                    video_series_title = clean_series_title(text_content, is_filename=False)
             if video_series_title and is_junk_series_title(video_series_title):
                 video_series_title = None
 
             # Si el video tiene un nombre explícito de serie diferente de la activa
-            if video_series_title and video_series_title.lower() != (current_series_title or "").lower():
-                current_series_title = video_series_title
-                state["current_series_title"] = current_series_title
-                current_topic_id = None
+            if video_series_title:
+                resolved = resolve_series_name(video_series_title, current_series_title)
+                if resolved and resolved.lower() != (current_series_title or "").lower():
+                    logger.info(f"🔄 Cambio de serie detectado por video: '{current_series_title}' -> '{resolved}'")
+                    current_series_title = resolved
+                    state["current_series_title"] = current_series_title
+                    current_topic_id = None
 
             target_series = current_series_title
             if not target_series or not is_series_allowed(target_series, msg.id, state):

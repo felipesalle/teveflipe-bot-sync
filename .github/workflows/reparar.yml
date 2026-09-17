@@ -6,6 +6,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
 jobs:
   repair:
     runs-on: ubuntu-latest
@@ -27,7 +31,7 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
           TARGET_CHAT: "-1002097175258"
-        run: python reparar_series.py
+        run: python reparar_transformers.py
 
       - name: Guardar estado tras reparacion
         if: always()
