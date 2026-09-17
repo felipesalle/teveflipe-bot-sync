@@ -8,13 +8,13 @@ from telethon import TelegramClient, errors
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import (
     CreateChannelRequest,
-    ToggleForumRequest,
-    ExportInviteRequest
+    ToggleForumRequest
 )
 from telethon.tl.functions.messages import (
     ForwardMessagesRequest,
     GetForumTopicsRequest,
-    CreateForumTopicRequest
+    CreateForumTopicRequest,
+    ExportChatInviteRequest
 )
 from telethon.tl.types import (
     MessageMediaDocument,
@@ -311,7 +311,7 @@ async def main():
                 megagroup=False
             ))
             ent_pelis = res_p.chats[0]
-            inv_p = await client(ExportInviteRequest(ent_pelis))
+            inv_p = await client(ExportChatInviteRequest(peer=ent_pelis))
             progreso["canal_pelis_id"] = ent_pelis.id
             progreso["canal_pelis_link"] = inv_p.link
             logger.info(f"✅ Creado Películas Infantiles: ID={ent_pelis.id} | Enlace: {inv_p.link}")
@@ -333,7 +333,7 @@ async def main():
             except TypeError:
                 await client(ToggleForumRequest(channel=ent_series, enabled=True))
 
-            inv_s = await client(ExportInviteRequest(ent_series))
+            inv_s = await client(ExportChatInviteRequest(peer=ent_series))
             progreso["canal_series_id"] = ent_series.id
             progreso["canal_series_link"] = inv_s.link
             logger.info(f"✅ Creado Series Infantiles con Temas: ID={ent_series.id} | Enlace: {inv_s.link}")
