@@ -286,6 +286,21 @@ async def main():
         logger.info(f"Iniciando sincronización desde mensaje ID: {ultimo_id}")
         logger.info(f"Estado inicial: {total_pelis} pelis | {total_series} series | {total_descartados} descartados")
 
+        # Recuperar películas pendientes del buffer de la ejecución anterior
+        if ultimo_id >= 351631:
+            logger.info("🔍 Verificando y transfiriendo películas del buffer previo (IDs 339126 a 351631)...")
+            pendientes_pelis = []
+            async for m in client.iter_messages(source_entity, reply_to=SOURCE_TOPIC_ID, min_id=339126, max_id=351631, reverse=True):
+                if es_archivo_video(m) and clasificar_archivo(m) == "PELICULA":
+                    pendientes_pelis.append(m.id)
+                    if len(pendientes_pelis) >= 10:
+                        await forward_batch(client, source_entity, ent_pelis, pendientes_pelis, tipo="Películas pendientes")
+                        pendientes_pelis.clear()
+            if pendientes_pelis:
+                await forward_batch(client, source_entity, ent_pelis, pendientes_pelis, tipo="Películas pendientes")
+                pendientes_pelis.clear()
+            logger.info("✅ Películas pendientes del buffer anterior transferidas.")
+
         lote_pelis = []
         lote_series = []
 
@@ -319,16 +334,16 @@ async def main():
             if tipo == "PELICULA":
                 lote_pelis.append(msg.id)
                 total_pelis += 1
-                if len(lote_pelis) >= BATCH_SIZE:
-                    await forward_batch(client, source_entity, ent_pelis, lote_pelis, tipo="Películas")
-                    lote_pelis.clear()
-                    progreso.update({
-                        "last_msg_id": ultimo_id,
-                        "pelis_count": total_pelis,
-                        "series_count": total_series,
-                        "descartados": total_descartados
-                    })
-                    guardar_progreso(progreso)
+                # Las películas se envían de inmediato (o en lotes de 1) para no esperar a acumular 50
+                await forward_batch(client, source_entity, ent_pelis, lote_pelis, tipo="Películas")
+                lote_pelis.clear()
+                progreso.update({
+                    "last_msg_id": ultimo_id,
+                    "pelis_count": total_pelis,
+                    "series_count": total_series,
+                    "descartados": total_descartados
+                })
+                guardar_progreso(progreso)
             else:
                 lote_series.append(msg.id)
                 total_series += 1
