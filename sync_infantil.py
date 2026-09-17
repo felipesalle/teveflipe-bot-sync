@@ -164,6 +164,27 @@ async def forward_batch(client: TelegramClient, source_entity, dest_entity, msg_
         except errors.FloodWaitError as e:
             logger.warning(f"⚠️ Telegram FloodWait: pausando {e.seconds}s de seguridad...")
             await asyncio.sleep(e.seconds + 2)
+        except errors.ChatForwardsRestrictedError:
+            logger.warning(f"⚠️ Canal origen protegido contra reenvío. Clonando lote de {len(msg_ids)} {tipo} multimedia directamente...")
+            try:
+                msgs = await client.get_messages(source_entity, ids=msg_ids)
+                for m in msgs:
+                    if m and m.media:
+                        caption = m.text or (m.file.name if getattr(m, 'file', None) else "")
+                        for intento_clone in range(3):
+                            try:
+                                await client.send_message(dest_entity, message=caption, file=m.media)
+                                await asyncio.sleep(1.0)
+                                break
+                            except errors.FloodWaitError as fwe:
+                                logger.warning(f"FloodWait clonando archivo: esperando {fwe.seconds}s...")
+                                await asyncio.sleep(fwe.seconds + 2)
+                            except Exception as err_m:
+                                logger.warning(f"Error en clonación de mensaje {m.id}: {err_m}")
+                                await asyncio.sleep(1.0)
+            except Exception as e_get:
+                logger.error(f"Error obteniendo mensajes para clonar: {e_get}")
+            enviado = True
         except Exception as e:
             logger.warning(f"⚠️ Error enviando lote a {tipo} ({e}). Reintentando individualmente...")
             for mid in msg_ids:
@@ -175,6 +196,8 @@ async def forward_batch(client: TelegramClient, source_entity, dest_entity, msg_
                         drop_author=True
                     )
                     await asyncio.sleep(0.6)
+                except errors.FloodWaitError as fwe:
+                    await asyncio.sleep(fwe.seconds + 2)
                 except Exception as ex_single:
                     logger.debug(f"Saltando mensaje {mid}: {ex_single}")
             enviado = True
