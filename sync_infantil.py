@@ -91,8 +91,11 @@ def clean_series_name(text: str) -> str:
     # Si empieza con números de capítulo (ej. "01 - Titulo", "1x01 Titulo")
     t = re.sub(r"^\s*(?:\d{1,3}\s*[-–—.:]\s*|\d+[xX×\u00d7]\d+\s*[-–—.:]?\s*|[sS]\d+(?:[eE]\d+)?\s*[-–—.:]?\s*|cap[ií]tulo\s*\d+\s*[-–—.:]?\s*)", "", t, flags=re.I)
 
-    # Cortar en patrones de temporada/episodio
-    parts = re.split(r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|Ep(?:isodio|\.)?\s*\d+|Parte\s*\d+)\b", t)
+    # Cortar en patrones de temporada/episodio o numeración de capítulo
+    parts = re.split(
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|Ep(?:isodio|\.)?\s*\d+|Parte\s*\d+|\s*[-–—_]\s*\d{1,3}\b)\b",
+        t
+    )
     cand = parts[0].strip() if parts else t
 
     # Quitar resoluciones, códecs e idiomas
@@ -125,8 +128,11 @@ def clasificar_contenido(msg) -> tuple:
 
     minutos = duracion_segundos / 60.0
 
-    # 1. Detección por patrones explícitos de series
-    patron_serie = re.search(r"(?i)(?:s\d+|temporada|temp\b|cap[íi]tulo|cap\b|\d+[xX×\u00d7]\d+|ep\b|episodio)", texto)
+    # 1. Detección por patrones explícitos de series (códigos o guiones con número de capítulo)
+    patron_serie = re.search(
+        r"(?i)(?:s\d+|temporada|temp\b|cap[íi]tulo|cap\b|\d+[xX×\u00d7]\d+|ep\b|episodio|\b[-–—_]\s*\d{1,3}\b|\b\d{1,3}\s*[-–—_]|\bepisodios?\b)",
+        texto
+    )
     if patron_serie:
         return "SERIE", clean_series_name(fname or msg.text or "")
 
@@ -137,14 +143,18 @@ def clasificar_contenido(msg) -> tuple:
         elif minutos >= 50.0:
             return "PELICULA", None
 
-    # 3. Fallback si no tiene duración registrada
-    if re.search(r"(?i)(?:pelicula|película|movie|1080p|720p|bluray|dvdrip)", texto):
+    # 3. Fallback SOLO si dice explícitamente película/movie/film (NUNCA por 1080p o dvdrip)
+    if re.search(r"(?i)\b(?:pelicula|película|movie|film|largometraje)\b", texto):
         return "PELICULA", None
 
-    if minutos < 45.0:
+    # Si tiene números típicos de capítulos (ej. "Fraggle Rock 01", "Doraemon 12")
+    if re.search(r"\b\d{1,3}\b", fname):
         return "SERIE", clean_series_name(fname or msg.text or "")
-    else:
+
+    if duracion_segundos > 0 and minutos >= 50.0:
         return "PELICULA", None
+
+    return "SERIE", clean_series_name(fname or msg.text or "")
 
 
 def cargar_progreso() -> dict:
@@ -285,6 +295,52 @@ async def get_or_create_series_topic(client: TelegramClient, dest_chat, series_n
     return 1  # Fallback a General
 
 
+async def rescatar_series_de_pelis(client: TelegramClient, ent_pelis, ent_series, topics_cache: dict, progreso: dict):
+    """Escanea el canal de Películas Infantiles para mover cualquier serie que se haya colado erróneamente (como Fraggle Rock)."""
+    logger.info("🔍 Comprobando si hay series coladas en Películas Infantiles para rescatarlas...")
+    dest_pelis = await client.get_input_entity(ent_pelis)
+    dest_series = await client.get_input_entity(ent_series)
+
+    rescatados = 0
+    try:
+        async for msg in client.iter_messages(dest_pelis, limit=350):
+            if not es_archivo_video(msg):
+                continue
+            tipo, s_name = clasificar_contenido(msg)
+            # Detección explícita de Fraggle Rock u otras series
+            fname = extract_file_name(msg)
+            is_fraggle = "fraggle" in (fname + (msg.text or "")).lower()
+            if tipo == "SERIE" or is_fraggle:
+                serie_dest = "Fraggle Rock" if is_fraggle else (s_name or "Serie Infantil")
+                topic_id = await get_or_create_series_topic(client, ent_series, serie_dest, topics_cache)
+                caption = msg.text or (msg.file.name if getattr(msg, "file", None) else "")
+                try:
+                    # Enviar al tema correspondiente en Series Infantiles
+                    await client.send_message(
+                        dest_series,
+                        message=caption,
+                        file=msg.media,
+                        reply_to=topic_id
+                    )
+                    # Eliminar de Películas Infantiles
+                    await client.delete_messages(dest_pelis, [msg.id])
+                    rescatados += 1
+                    progreso["series_count"] = progreso.get("series_count", 0) + 1
+                    progreso["pelis_count"] = max(0, progreso.get("pelis_count", 0) - 1)
+                    logger.info(f"🔄 Rescatado '{serie_dest}' ({fname or msg.id}) -> 'Series Infantiles' (Tema ID {topic_id})")
+                    await asyncio.sleep(1.2)
+                except Exception as e:
+                    logger.error(f"Error rescatando mensaje ID {msg.id}: {e}")
+
+        if rescatados > 0:
+            logger.info(f"🎉 Total de {rescatados} episodios rescatados y trasladados a Series Infantiles.")
+            guardar_progreso(progreso)
+        else:
+            logger.info("✅ Canal de Películas Infantiles verificado: no se encontraron series coladas.")
+    except Exception as e:
+        logger.warning(f"Error durante el rescate de películas: {e}")
+
+
 async def main():
     if not STRING_SESSION:
         logger.error("❌ ERROR: TELEGRAM_STRING_SESSION no configurada.")
@@ -346,6 +402,9 @@ async def main():
         print(f"🎬 Películas Infantiles: ID={progreso['canal_pelis_id']} | Link={progreso['canal_pelis_link']}")
         print(f"📺 Series Infantiles:    ID={progreso['canal_series_id']} | Link={progreso['canal_series_link']}")
         print("═" * 70 + "\n")
+
+        # 3. RESCATE AUTOMÁTICO: Mover cualquier serie que haya ido por error a Películas Infantiles (ej. Fraggle Rock)
+        await rescatar_series_de_pelis(client, ent_pelis, ent_series, topics_cache, progreso)
 
         ultimo_id = progreso.get("last_msg_id", 0)
         total_pelis = progreso.get("pelis_count", 0)
