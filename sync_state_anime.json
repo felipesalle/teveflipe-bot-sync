@@ -1,4 +1,8 @@
 {
-  "completed_series": [],
-  "series_topics": {}
+  "completed_series": [
+    "Death Note"
+  ],
+  "series_topics": {
+    "death note": 9146
+  }
 }

@@ -66,6 +66,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git stash
           git pull --rebase origin main
-          git add sync_state_anime.json
+          git stash pop || true
+          git add -A
           git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar estado de sincronización anime [skip ci]" && git push)
