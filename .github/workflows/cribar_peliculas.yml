@@ -1,0 +1,55 @@
+name: Cribar Peliculas Anime
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Modo seguro (true = solo analizar, false = borrar series coladas)'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install telethon
+
+      - name: Ejecutar Criba de Películas Anime
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          python cribar_peliculas_anime.py
+
+      - name: Guardar Reporte de Criba
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add criba_peliculas_reporte.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Reporte de criba películas anime [skip ci]" && git push)
