@@ -1,0 +1,66 @@
+name: Sincronizar Anime por Lotes
+
+on:
+  workflow_dispatch:
+    inputs:
+      sync_mode:
+        description: 'Modo de Sincronización (all, movies, series)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - movies
+          - series
+      batch_size:
+        description: 'Tamaño del lote de reenvíos (10-40)'
+        required: false
+        default: '25'
+      series_limit:
+        description: 'Límite de series a procesar en esta tanda'
+        required: false
+        default: '25'
+
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install telethon
+
+      - name: Ejecutar Sincronización Anime sin Remitente
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+          SYNC_MODE: ${{ inputs.sync_mode }}
+          BATCH_SIZE: ${{ inputs.batch_size }}
+          SERIES_LIMIT: ${{ inputs.series_limit }}
+        run: |
+          python sync_anime.py
+
+      - name: Guardar Progreso en Repositorio
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add sync_state_anime.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar estado de sincronización anime [skip ci]" && git push)
