@@ -67,17 +67,18 @@ async def main():
         logger.info("✨ Limpieza de temas de series finalizada. El grupo está limpio.")
 
     # Resetear el archivo de estado para series
+    st = {}
     if os.path.exists(STATE_FILE):
         try:
             with open(STATE_FILE, "r", encoding="utf-8") as f:
                 st = json.load(f)
-            st["completed_series"] = []
-            st["series_topics"] = {}
-            with open(STATE_FILE, "w", encoding="utf-8") as f:
-                json.dump(st, f, indent=2, ensure_ascii=False)
-            logger.info("Estado de sincronización de series reseteado a limpio.")
-        except Exception as e:
-            logger.error(f"Error reseteando {STATE_FILE}: {e}")
+        except Exception:
+            pass
+    st["completed_series"] = []
+    st["series_topics"] = {}
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(st, f, indent=2, ensure_ascii=False)
+    logger.info("Estado de sincronización de series inicializado/reseteado.")
 
 if __name__ == "__main__":
     asyncio.run(main())
