@@ -1,8 +1,10 @@
 {
   "completed_series": [
-    "Death Note"
+    "Death Note",
+    "One Punch Man"
   ],
   "series_topics": {
-    "death note": 9146
+    "death note": 9146,
+    "one punch man": 9221
   }
 }
