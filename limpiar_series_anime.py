@@ -51,9 +51,11 @@ async def main():
         logger.info(f"Total temas encontrados en el grupo: {len(topics)}")
 
         for t in topics:
+            if t.id == 1:
+                continue
             logger.info(f"🗑️ Eliminando tema: '{t.title}' (ID {t.id})...")
             try:
-                await client(DeleteTopicHistoryRequest(channel=group, top_msg_id=t.id))
+                await client(DeleteTopicHistoryRequest(peer=group, top_msg_id=t.id))
                 logger.info(f"  -> Eliminado con éxito: '{t.title}'")
                 await asyncio.sleep(1.0)
             except errors.FloodWaitError as e:
