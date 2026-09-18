@@ -170,38 +170,48 @@ async def sync_movies(client, source_entity, movies_channel, analysis_data, stat
             break
 
 async def sync_series(client, source_entity, series_group, analysis_data, state):
-    """Sincroniza las series anime al supergrupo de Series Anime, creando 1 tema por serie con todas sus temporadas."""
+    """Sincroniza las series anime al supergrupo de Series Anime usando IDs exactos indexados (1 tema por serie, todas sus temporadas)."""
     logger.info("\n" + "=" * 60)
-    logger.info(" INICIANDO SINCRONIZACIÓN DE SERIES ANIME (1 TEMA POR SERIE CON TODAS SUS TEMPORADAS)")
+    logger.info(" INICIANDO SINCRONIZACIÓN DE SERIES ANIME (EXACTA POR IDS, SIN REMITENTE)")
     logger.info("=" * 60)
 
     completed_series = set(state.setdefault("completed_series", []))
-    master_file = "catalogo_maestro_series_anime.json"
-    if os.path.exists(master_file):
-        master_series = load_json(master_file, default=list)
-    else:
-        master_series = []
+    index_file = "index_series_anime.json"
 
-    if not master_series:
-        logger.warning(f"No se encontró '{master_file}'. Generándolo ahora...")
-        master_series = list(analysis_data.get("series", {}).values())
-
-    pending_series = [s for s in master_series if s["title"] not in completed_series]
-    logger.info(f"Total series en catálogo maestro: {len(master_series)} | Completadas: {len(completed_series)} | Pendientes: {len(pending_series)}")
-
-    if not pending_series:
-        logger.info("✅ Todas las series anime catalogadas ya están sincronizadas.")
+    if not os.path.exists(index_file):
+        logger.error(f"No se encontró '{index_file}'. Debes ejecutar 'indexar_series_anime.py' primero.")
         return
 
-    # En cada ejecución tomamos hasta SERIES_LIMIT para no saturar y evitar timeout
+    indexed_series = load_json(index_file, default=list)
+    name_filter = os.getenv("SERIES_NAME_FILTER", "").strip().lower()
+
+    if name_filter:
+        indexed_series = [s for s in indexed_series if name_filter in s["title"].lower()]
+        logger.info(f"Filtro por nombre aplicado ('{name_filter}'): {len(indexed_series)} series encontradas.")
+
+    pending_series = [s for s in indexed_series if s["title"] not in completed_series]
+    logger.info(f"Total series en índice verificado: {len(indexed_series)} | Ya completadas: {len(completed_series)} | Pendientes: {len(pending_series)}")
+
+    if not pending_series:
+        logger.info("✅ Todas las series anime verificadas ya están sincronizadas.")
+        return
+
     to_process = pending_series[:SERIES_LIMIT]
     logger.info(f"Procesando lote de {len(to_process)} series en esta tanda...")
 
     for idx, s in enumerate(to_process, 1):
         series_title = s["title"]
-        total_caps = s.get("total_episodes", 0)
+        episodes = s.get("episodes", [])
         seasons_info = f"T{', T'.join(map(str, s.get('seasons', [1])))}"
+        total_caps = len(episodes)
         logger.info(f"\n[{idx}/{len(to_process)}] 📺 Serie: '{series_title}' | Temporadas: {seasons_info} | {total_caps} caps ({s.get('total_gb', 0)} GB)")
+
+        if not episodes:
+            logger.info(f"Serie '{series_title}' sin episodios válidos. Marcando como completada.")
+            completed_series.add(series_title)
+            state["completed_series"] = list(completed_series)
+            save_json(STATE_FILE, state)
+            continue
 
         # 1. Crear u obtener el tema único de la serie en el foro
         topic_id = await get_or_create_topic(client, series_group, series_title, state)
@@ -209,38 +219,10 @@ async def sync_series(client, source_entity, series_group, analysis_data, state)
             logger.warning(f"No se pudo crear tema para '{series_title}'. Omitiendo temporalmente.")
             continue
 
-        # 2. Recopilar todos los IDs de episodios de todas las temporadas de la serie
-        series_msg_ids = []
-        ranges = s.get("ranges", [])
-        if not ranges and s.get("msg_range"):
-            ranges = [s["msg_range"]]
+        # 2. Lista de IDs exactos garantizados
+        series_msg_ids = [ep["id"] for ep in episodes]
 
-        for r_str in ranges:
-            if " - " in r_str:
-                parts = r_str.split(" - ")
-                try:
-                    min_id = int(parts[0])
-                    max_id = int(parts[1])
-                    async for m in client.iter_messages(
-                        source_entity,
-                        reply_to=analysis_data.get("topic_id", 316312),
-                        min_id=min_id - 1,
-                        max_id=max_id + 1,
-                        reverse=True
-                    ):
-                        if (m.video or (m.file and m.file.name)) and m.id not in series_msg_ids:
-                            series_msg_ids.append(m.id)
-                except Exception as e:
-                    logger.warning(f"Error procesando rango {r_str} para '{series_title}': {e}")
-
-        if not series_msg_ids:
-            logger.info(f"No se encontraron mensajes en rangos para '{series_title}'. Marcando completada.")
-            completed_series.add(series_title)
-            state["completed_series"] = list(completed_series)
-            save_json(STATE_FILE, state)
-            continue
-
-        # 3. Reenviar episodios en lotes de 25 directamente dentro del tema (SIN REMITENTE)
+        # 3. Reenviar episodios en lotes directamente dentro del tema (SIN REMITENTE)
         logger.info(f"Reenviando {len(series_msg_ids)} episodios (todas las temporadas) al tema ID {topic_id} sin remitente...")
         chunk_size = BATCH_SIZE
         series_success = True

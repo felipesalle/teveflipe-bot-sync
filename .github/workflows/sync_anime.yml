@@ -20,6 +20,10 @@ on:
         description: 'Límite de series a procesar en esta tanda'
         required: false
         default: '25'
+      series_name_filter:
+        description: 'Filtro de nombre específico (ej: Death Note o dejar vacío)'
+        required: false
+        default: ''
 
 concurrency:
   group: telegram-session
@@ -54,6 +58,7 @@ jobs:
           SYNC_MODE: ${{ inputs.sync_mode }}
           BATCH_SIZE: ${{ inputs.batch_size }}
           SERIES_LIMIT: ${{ inputs.series_limit }}
+          SERIES_NAME_FILTER: ${{ inputs.series_name_filter }}
         run: |
           python sync_anime.py
 
