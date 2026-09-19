@@ -1,12 +1,12 @@
 {
-  "total_topics": 320,
+  "total_topics": 460,
   "suspicious_count": 1,
   "fragmented_groups_count": 0,
   "suspicious_topics": [
     {
       "id": 1,
       "title": "General",
-      "top_message": 20953,
+      "top_message": 25063,
       "is_suspicious": true,
       "suspicious_reason": "Palabra genérica o decorativa",
       "normalized": "general"
@@ -14,6 +14,746 @@
   ],
   "fragmented_series_groups": {},
   "all_topics_summary": [
+    {
+      "id": 3560,
+      "title": "Eric"
+    },
+    {
+      "id": 25064,
+      "title": "Monty Python'S Flying Circus"
+    },
+    {
+      "id": 1,
+      "title": "General"
+    },
+    {
+      "id": 25026,
+      "title": "Pendiente La 8 Que Esta En Emision"
+    },
+    {
+      "id": 24995,
+      "title": "Fear The Walking Dead"
+    },
+    {
+      "id": 24884,
+      "title": "Un Lugar Soñar"
+    },
+    {
+      "id": 24882,
+      "title": "Img 3004"
+    },
+    {
+      "id": 24880,
+      "title": "Img 3003"
+    },
+    {
+      "id": 24878,
+      "title": "Img 3002"
+    },
+    {
+      "id": 24876,
+      "title": "Img 3001"
+    },
+    {
+      "id": 24874,
+      "title": "Img 2999"
+    },
+    {
+      "id": 24872,
+      "title": "Img 2998"
+    },
+    {
+      "id": 24870,
+      "title": "Img 2997"
+    },
+    {
+      "id": 24868,
+      "title": "Img 2996"
+    },
+    {
+      "id": 24866,
+      "title": "Img 2992"
+    },
+    {
+      "id": 24864,
+      "title": "Img 2991"
+    },
+    {
+      "id": 24862,
+      "title": "Img 2990"
+    },
+    {
+      "id": 24860,
+      "title": "Img 2989"
+    },
+    {
+      "id": 24858,
+      "title": "Img 2988"
+    },
+    {
+      "id": 24856,
+      "title": "Img 2911"
+    },
+    {
+      "id": 24854,
+      "title": "Img 2910"
+    },
+    {
+      "id": 24852,
+      "title": "Img 2909"
+    },
+    {
+      "id": 24850,
+      "title": "Img 2908"
+    },
+    {
+      "id": 24848,
+      "title": "Img 2907"
+    },
+    {
+      "id": 24846,
+      "title": "Img 2906"
+    },
+    {
+      "id": 24844,
+      "title": "Img 2905"
+    },
+    {
+      "id": 24842,
+      "title": "Img 2901"
+    },
+    {
+      "id": 24840,
+      "title": "Img 2900"
+    },
+    {
+      "id": 24838,
+      "title": "Img 2899"
+    },
+    {
+      "id": 24835,
+      "title": "Img 2898"
+    },
+    {
+      "id": 24784,
+      "title": "Industry"
+    },
+    {
+      "id": 24773,
+      "title": "Nos4A2"
+    },
+    {
+      "id": 24752,
+      "title": "Ciudad En Llamas"
+    },
+    {
+      "id": 24744,
+      "title": "Spy Master"
+    },
+    {
+      "id": 24524,
+      "title": "Chicago Fire"
+    },
+    {
+      "id": 23882,
+      "title": "Atlanta"
+    },
+    {
+      "id": 24311,
+      "title": "Castle"
+    },
+    {
+      "id": 24277,
+      "title": "Toda La Humanidad"
+    },
+    {
+      "id": 24255,
+      "title": "The Twilight Zone 2019"
+    },
+    {
+      "id": 24253,
+      "title": "26º Actúa A Tu Edad - 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24251,
+      "title": "25º Perdidos En Danville El Método Inator"
+    },
+    {
+      "id": 24249,
+      "title": "24º El Regreso Del Conejo Rebelde Vive Y Deja Conducir"
+    },
+    {
+      "id": 24247,
+      "title": "23º Historias Desde La Resistencia"
+    },
+    {
+      "id": 24245,
+      "title": "22º Operación Pastelito De Nata + Mandace"
+    },
+    {
+      "id": 24243,
+      "title": "21º “Doof Nivel Básico” “El Día Del Padre”"
+    },
+    {
+      "id": 24241,
+      "title": "20º El Ultimátum De Klimpaloon"
+    },
+    {
+      "id": 24239,
+      "title": "19º Druselsteinoween + Enfréntate A Tus Miedos"
+    },
+    {
+      "id": 24237,
+      "title": "18º La Terrible Trilogía Del Terror De Los Tres Estados"
+    },
+    {
+      "id": 24235,
+      "title": "17º Steampunx + Pícnic Sin Pan Comido"
+    },
+    {
+      "id": 24233,
+      "title": "16º Política De Devoluciones + Tormenta Imperfecta"
+    },
+    {
+      "id": 24231,
+      "title": "15º Viva El Miedo + Dichosa Suerte"
+    },
+    {
+      "id": 24229,
+      "title": "14º Amor Al Primer Byte + Un Buen Giro"
+    },
+    {
+      "id": 24227,
+      "title": "13º Gracias, Pero No, Gracias + Historia De Troya"
+    },
+    {
+      "id": 24225,
+      "title": "10º Grandes Bolas De Agua + Y Pinky"
+    },
+    {
+      "id": 1128,
+      "title": "Isabel"
+    },
+    {
+      "id": 24222,
+      "title": "08º Perry"
+    },
+    {
+      "id": 24220,
+      "title": "07º Nudo De Problemas + Transferencia Mental"
+    },
+    {
+      "id": 14125,
+      "title": "Desviados"
+    },
+    {
+      "id": 24217,
+      "title": "05º El Día De La Abeja + Una Historia De Abejas"
+    },
+    {
+      "id": 24215,
+      "title": "04º Der Kinderlümper + Sólo Postres"
+    },
+    {
+      "id": 24213,
+      "title": "03º Matón De Ayudante + Revoltijo En El Jardín"
+    },
+    {
+      "id": 24211,
+      "title": "02º Solo Tus Hielos + ¡Feliz Año Nuevo!"
+    },
+    {
+      "id": 24209,
+      "title": "01º Una Mosca En La Pared + Mi Precioso Coche"
+    },
+    {
+      "id": 24207,
+      "title": "35º Esta Es Tu Historia"
+    },
+    {
+      "id": 24205,
+      "title": "34º ¡Apagón! + He Perdido"
+    },
+    {
+      "id": 24203,
+      "title": "33º Dónde Está Perry 2ª Parte"
+    },
+    {
+      "id": 24201,
+      "title": "32º Dónde Está Perry 1ª Parte"
+    },
+    {
+      "id": 24199,
+      "title": "31º Cuando Los Mundos Chocan + Camino A Danville"
+    },
+    {
+      "id": 24197,
+      "title": "30º Doofrrinco Norm Desatado"
+    },
+    {
+      "id": 24195,
+      "title": "29º Sorbiendo Con El Enemigo + El Tesoro De Los Tres Estados La"
+    },
+    {
+      "id": 24193,
+      "title": "28º El Atractor De Mamás + Cranius Maximus"
+    },
+    {
+      "id": 24191,
+      "title": "27º Sin Meap En Seattle"
+    },
+    {
+      "id": 24189,
+      "title": "26º Sorpresa Sonambulista + Vuelos De Ciencia Ficción"
+    },
+    {
+      "id": 24187,
+      "title": "25º El Imperativo De Las Doonkelberrys + Buford Confidencial"
+    },
+    {
+      "id": 24185,
+      "title": "24º El Día Más Tranquilo + Ruptura De Relación Abusiva"
+    },
+    {
+      "id": 24183,
+      "title": "23º Entrega Del Destino + Vamos A Botar"
+    },
+    {
+      "id": 24181,
+      "title": "22º Agente Doof Phineas Y Ferb Y El Templo De Juatchadoon"
+    },
+    {
+      "id": 24179,
+      "title": "21º Monstruos Del Ello Hormi-Gantes"
+    },
+    {
+      "id": 24177,
+      "title": "20º Excaliferb"
+    },
+    {
+      "id": 24175,
+      "title": "19º Mamá Está En Casa Menor + Monogram"
+    },
+    {
+      "id": 24173,
+      "title": "18º ¡Vaya Cocodrilo! + Teleferb"
+    },
+    {
+      "id": 24171,
+      "title": "17º Una Navidad Familiar Con Phineas Y Ferb + Invierano"
+    },
+    {
+      "id": 24169,
+      "title": "16º Idioma De Ferb + Montones De Latkes"
+    },
+    {
+      "id": 24167,
+      "title": "15º Huida De La Torre De Phineas + Restos Del Ornitorrinco"
+    },
+    {
+      "id": 24165,
+      "title": "14º ¡Ese Es El Espíritu! + La Maldición De Candace"
+    },
+    {
+      "id": 24163,
+      "title": "13º Perry El Actorrinco + El Blanco De La Diana"
+    },
+    {
+      "id": 24161,
+      "title": "12º Mi Bella Portera"
+    },
+    {
+      "id": 24159,
+      "title": "11º Skiddley Whiffers Tour De Ferb"
+    },
+    {
+      "id": 24157,
+      "title": "10º Mamá, Me Oyes + Viaje Por Carretera"
+    },
+    {
+      "id": 24155,
+      "title": "09º Phineas Y Ferb, Interrumpidos + Un Chico De Verdad"
+    },
+    {
+      "id": 24153,
+      "title": "08º Área De Piedra De Los Tres Estados + Dinastía Doof"
+    },
+    {
+      "id": 24151,
+      "title": "07º Un Mal Día De Pelo + Pastel De Carne Sorpresa"
+    },
+    {
+      "id": 24149,
+      "title": "06º Candace Desconectada + Paseo En Alfombra Mágica"
+    },
+    {
+      "id": 24147,
+      "title": "05º Haz Una Pregunta Tonta Monotremado Incomprendido"
+    },
+    {
+      "id": 24145,
+      "title": "04º Vídeo El Cumpleaños De Phineas 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24143,
+      "title": "03º La Panza De La Bestia + Granja Lunar"
+    },
+    {
+      "id": 24141,
+      "title": "02º La Naturaleza Interna + Canderemy"
+    },
+    {
+      "id": 24139,
+      "title": "01º Corre, Candace, Corre + El Último Tren A Villa Pilla"
+    },
+    {
+      "id": 24137,
+      "title": "39º La Montaña Rusa ¡El Musical!, 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24135,
+      "title": "36º Jugar A Imaginar + Candace Se La Carga"
+    },
+    {
+      "id": 24133,
+      "title": "35º Personalidad Dividida + Agota Cerebros"
+    },
+    {
+      "id": 24131,
+      "title": "34º Vacaciones Hawaianas De Phineas Y Ferb, 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24129,
+      "title": "33º Igual De Intelectuales, 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24127,
+      "title": "32º Nosotros Lo Llamamos Laberinto + Señoras Y Señores, Les Presentamos"
+    },
+    {
+      "id": 24125,
+      "title": "31º Ella Es La Alcaldesa + El Puesto De Limonada"
+    },
+    {
+      "id": 24123,
+      "title": "30º El Secreto Del Éxito + El Lado Doof De La Luna"
+    },
+    {
+      "id": 24121,
+      "title": "29º El Susurrador De Lagartos + Rodeo De Robots"
+    },
+    {
+      "id": 24119,
+      "title": "28º No Son Phineas Y Ferb + Las Pilladoras De Phineas Y Ferb"
+    },
+    {
+      "id": 24117,
+      "title": "27º El Pico,"
+    },
+    {
+      "id": 24115,
+      "title": "26º El Mago De Uf, 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24113,
+      "title": "25º La Invasión De Los Ladrones De Ferb + No Es Ningún Juego De"
+    },
+    {
+      "id": 24111,
+      "title": "24º Pasaba Por Aquí… + El Gran Día De Candace"
+    },
+    {
+      "id": 24109,
+      "title": "23º Carl, Agente Secreto + Hip Hip Desfile"
+    },
+    {
+      "id": 24107,
+      "title": "21º Era Un Robot De Mediana Edad + Suzy, La Brusca"
+    },
+    {
+      "id": 24105,
+      "title": "20º Retrátalo + Baile De Pazguatos"
+    },
+    {
+      "id": 24103,
+      "title": "19º Qué Sabe Hacer Atlántida"
+    },
+    {
+      "id": 24101,
+      "title": "18º El Código De Los Matones + Buscando A Mary Mcguffin"
+    },
+    {
+      "id": 24099,
+      "title": "17º Alegra Esa Cara, Candace Congreso De Chicas Scout"
+    },
+    {
+      "id": 24096,
+      "title": "15º Se Acabaron Los Conejos + Un Día En El"
+    },
+    {
+      "id": 24094,
+      "title": "14º Los Baljeatles + Brusquedad Vanessasaria"
+    },
+    {
+      "id": 24092,
+      "title": "13º El Escondite + Esa Sensación De Hundimiento"
+    },
+    {
+      "id": 24090,
+      "title": "12º El Boogaloo Del Quantum De Phineas Y Ferb I, Ii"
+    },
+    {
+      "id": 24088,
+      "title": "11º Los Diez Mejores Videoclips Musicales De Phineas Y Ferb"
+    },
+    {
+      "id": 24086,
+      "title": "10º Oh, Ahí Estás, Perry + La Familia Robinson-Flynn"
+    },
+    {
+      "id": 24084,
+      "title": "09º Pruébalo Aquí En El Lavadero De Coches"
+    },
+    {
+      "id": 24082,
+      "title": "08º Tadeus Y Tor + ¡El Avión! ¡El Avión!"
+    },
+    {
+      "id": 24080,
+      "title": "07º Las Crónicas De Meap,"
+    },
+    {
+      "id": 24078,
+      "title": "06º Perry Pone Un Huevo + Jugando Con El Sistema"
+    },
+    {
+      "id": 24076,
+      "title": "05º Ni Pestañeéis + Chez Ornitorrinco"
+    },
+    {
+      "id": 24074,
+      "title": "04º El Día De La Gelatina Viviente + Elemental, Querida Stacy"
+    },
+    {
+      "id": 24072,
+      "title": "03º El Ataque De La Hermana De 50 Pies + El Del Jardín"
+    },
+    {
+      "id": 24070,
+      "title": "02º Entrevista Con Un Ornitorrinco + El Tema Del Día"
+    },
+    {
+      "id": 24068,
+      "title": "01º El Monstruo Del Lago + Narices"
+    },
+    {
+      "id": 24066,
+      "title": "26º De Dibujos + ¡Ave Doofania!"
+    },
+    {
+      "id": 24064,
+      "title": "25º Sabes Jugar Bien + Cometa Kermillian"
+    },
+    {
+      "id": 24062,
+      "title": "24º Cerrado Por Almuerzo"
+    },
+    {
+      "id": 24060,
+      "title": "23º Feria Científica Injusta + Feria Científica Injusta Revisado"
+    },
+    {
+      "id": 24058,
+      "title": "22º El Monstruo De Phineas Y Ferbenstein + Óleo Sobre Candace"
+    },
+    {
+      "id": 24056,
+      "title": "21º El Lío De La Cámara De Tráfico + El Drama De La Bolera Bolarama"
+    },
+    {
+      "id": 24054,
+      "title": "20º Pon Ese Putt En Su + Me Hace Gorda Este Ornitorrinco"
+    },
+    {
+      "id": 24052,
+      "title": "19º Un Del 27 000 A C + Viaje Al Fondo De Buford"
+    },
+    {
+      "id": 24050,
+      "title": "18º Chasquea El Látigo + El Mejor Día Hacer El Vago"
+    },
+    {
+      "id": 24048,
+      "title": "17º Relámpago De Grecia + Déjanos Pillarlos A Nosotras"
+    },
+    {
+      "id": 24046,
+      "title": "16º Phineas Y Ferb Pillados"
+    },
+    {
+      "id": 24044,
+      "title": "15º Prepárate Las Bettys + El Pescadero Volador"
+    },
+    {
+      "id": 24042,
+      "title": "14º Tío, Reunamos De Nuevo La Banda, 1ª Y 2ª Parte"
+    },
+    {
+      "id": 24040,
+      "title": "13º Un Mundo De Barro, Barro, Barro, Barro + La Balada De Barbamala"
+    },
+    {
+      "id": 24038,
+      "title": "12º Pasarela De Éxito + Yo Grito, Tú Gritas"
+    },
+    {
+      "id": 24036,
+      "title": "11º El Cumpleaños De Mamá + Viaje Al Centro De Candace"
+    },
+    {
+      "id": 24034,
+      "title": "10º Qué Noche El Caballero + Yo Hermanorrobot"
+    },
+    {
+      "id": 24032,
+      "title": "9º Un Buen Susto Puede Bastar"
+    },
+    {
+      "id": 24030,
+      "title": "8º Tonto De Soleil + Juguete El Mundo"
+    },
+    {
+      "id": 24028,
+      "title": "7º Usando El Tiempo"
+    },
+    {
+      "id": 24026,
+      "title": "6º Ese Pie Grande De La Cara Árbol Preparar"
+    },
+    {
+      "id": 24024,
+      "title": "5º Camorrista Furioso + ¡Luces, Candace, Acción!"
+    },
+    {
+      "id": 24022,
+      "title": "4º Eres Tú Mi Momia Estrellas Del Fracaso"
+    },
+    {
+      "id": 24020,
+      "title": "3º Los Pocos Magníficos Invierano"
+    },
+    {
+      "id": 24018,
+      "title": "2º El Rápido Y El Phineas + La Fiesta Playera Del Terror De Los"
+    },
+    {
+      "id": 24015,
+      "title": "1º Montaña Rusa Candace Pierde La Cabeza"
+    },
+    {
+      "id": 23935,
+      "title": "Airwolf"
+    },
+    {
+      "id": 23870,
+      "title": "Project Blue Book"
+    },
+    {
+      "id": 16689,
+      "title": "Billions (2016)"
+    },
+    {
+      "id": 10928,
+      "title": "Preacher"
+    },
+    {
+      "id": 23755,
+      "title": "Servant"
+    },
+    {
+      "id": 23705,
+      "title": "Mayor Of Kingstown"
+    },
+    {
+      "id": 23733,
+      "title": "Mayor De Kingstown"
+    },
+    {
+      "id": 23686,
+      "title": "Keeping Up With The Kardashians"
+    },
+    {
+      "id": 23625,
+      "title": "Yo Nunca"
+    },
+    {
+      "id": 23667,
+      "title": "The Capture"
+    },
+    {
+      "id": 23618,
+      "title": "Barones Del Surf"
+    },
+    {
+      "id": 23326,
+      "title": "La Casa De La Pradera"
+    },
+    {
+      "id": 20630,
+      "title": "LOS 100"
+    },
+    {
+      "id": 23541,
+      "title": "Rapa"
+    },
+    {
+      "id": 23317,
+      "title": "Una Pequeña Luz"
+    },
+    {
+      "id": 23305,
+      "title": "Las Chicas De Surfside"
+    },
+    {
+      "id": 23255,
+      "title": "Twin Peaks"
+    },
+    {
+      "id": 23251,
+      "title": "The Enfield Haunting"
+    },
+    {
+      "id": 23063,
+      "title": "One Tree Hill"
+    },
+    {
+      "id": 23005,
+      "title": "Stargate Universe"
+    },
+    {
+      "id": 23035,
+      "title": "Black Mirror"
+    },
+    {
+      "id": 23027,
+      "title": "La Huida"
+    },
+    {
+      "id": 22996,
+      "title": "Quien Es America"
+    },
+    {
+      "id": 22980,
+      "title": "Stargate Origins"
+    },
+    {
+      "id": 22973,
+      "title": "Sospechoso"
+    },
+    {
+      "id": 1294,
+      "title": "Better Call Saul"
+    },
     {
       "id": 18935,
       "title": "Vikingos: Valhalla"
@@ -79,324 +819,12 @@
       "title": "Transformers (Serie de TV) (1984)"
     },
     {
-      "id": 18269,
-      "title": "Doom Patrol"
-    },
-    {
-      "id": 21982,
-      "title": "Ballers"
-    },
-    {
-      "id": 21709,
-      "title": "La Cosa Del Pantano"
-    },
-    {
-      "id": 21697,
-      "title": "Helstrom"
-    },
-    {
-      "id": 21680,
-      "title": "The Politician"
-    },
-    {
-      "id": 21674,
-      "title": "Outlander"
-    },
-    {
-      "id": 21591,
-      "title": "Mami­Feros"
-    },
-    {
-      "id": 21587,
-      "title": "Mamíferos"
-    },
-    {
-      "id": 21469,
-      "title": "Unorthodox / Poco Ortodoxa"
-    },
-    {
-      "id": 1746,
-      "title": "Dark"
-    },
-    {
-      "id": 21269,
-      "title": "Justo Antes De Cristo"
-    },
-    {
-      "id": 21135,
-      "title": "Doctor En Alaska,"
-    },
-    {
-      "id": 21224,
-      "title": "Doctor En Alaska 1994"
-    },
-    {
-      "id": 21055,
-      "title": "Eureka"
-    },
-    {
-      "id": 21047,
-      "title": "Vamos Juan"
-    },
-    {
-      "id": 20994,
-      "title": "Vota Juan"
-    },
-    {
-      "id": 20990,
-      "title": "En La Playa"
-    },
-    {
-      "id": 20962,
-      "title": "Carnival Row"
-    },
-    {
-      "id": 20941,
-      "title": "Invasion"
-    },
-    {
-      "id": 1,
-      "title": "General"
-    },
-    {
-      "id": 20932,
-      "title": "Alice In Borderland"
-    },
-    {
-      "id": 20870,
-      "title": "The Gifted"
-    },
-    {
-      "id": 20862,
-      "title": "No Me Gusta Conducir"
-    },
-    {
-      "id": 20820,
-      "title": "Mayans M C"
-    },
-    {
-      "id": 20807,
-      "title": "Hermanos De Sangre"
-    },
-    {
-      "id": 20788,
-      "title": "The Spanish Princess"
-    },
-    {
-      "id": 20781,
-      "title": "Citas Barcelona"
-    },
-    {
-      "id": 20735,
-      "title": "Emily En Paris"
-    },
-    {
-      "id": 20630,
-      "title": "▪️ **Titulo ** Los"
-    },
-    {
-      "id": 20450,
-      "title": "Everwood"
-    },
-    {
-      "id": 20383,
-      "title": "El Club De Medianoche"
-    },
-    {
-      "id": 20373,
-      "title": "The Chef Show"
-    },
-    {
-      "id": 20335,
-      "title": "Atracadores La Serie"
-    },
-    {
-      "id": 18848,
-      "title": "Raices"
-    },
-    {
-      "id": 20263,
-      "title": "The Girlfriend Experience"
-    },
-    {
-      "id": 20278,
-      "title": "Kampamento Koral Bob Esponja Primeras Aventuras"
-    },
-    {
-      "id": 20241,
-      "title": "The Great"
-    },
-    {
-      "id": 20183,
-      "title": "El Cuento De La Criada"
-    },
-    {
-      "id": 20130,
-      "title": "Ramy"
-    },
-    {
-      "id": 20011,
-      "title": "Archer"
-    },
-    {
-      "id": 19940,
-      "title": "Dexter"
-    },
-    {
-      "id": 1963,
-      "title": "Cobra Kai"
-    },
-    {
-      "id": 19415,
-      "title": "El Trueno Azul"
-    },
-    {
-      "id": 19522,
-      "title": "Colony"
-    },
-    {
-      "id": 19514,
-      "title": "Secretos De Un Matrimonio"
-    },
-    {
-      "id": 19465,
-      "title": "Muñeca Rusa"
-    },
-    {
-      "id": 19490,
-      "title": "El Gabinete De Curiosidades"
-    },
-    {
-      "id": 19481,
-      "title": "Soldados Proper"
-    },
-    {
-      "id": 1841,
-      "title": "Mr. Inbetween"
-    },
-    {
-      "id": 17284,
-      "title": "Infierno Sobre Ruedas"
-    },
-    {
-      "id": 19255,
-      "title": "Último Aviso / Burn Notice"
-    },
-    {
-      "id": 19118,
-      "title": "Suits"
-    },
-    {
-      "id": 19065,
-      "title": "Batwoman"
-    },
-    {
-      "id": 3013,
-      "title": "The mandalorian"
-    },
-    {
-      "id": 19025,
-      "title": "Sweet Tooth El Niño Ciervo"
-    },
-    {
-      "id": 19014,
-      "title": "Título Original Star Trek Strange New Worlds"
-    },
-    {
-      "id": 19001,
-      "title": "Título Dinero, Reinas De La Calle"
-    },
-    {
-      "id": 18993,
-      "title": "Esto Te Va A Doler"
-    },
-    {
-      "id": 18983,
-      "title": "La Diplomática"
-    },
-    {
-      "id": 18968,
-      "title": "Schmigadoon"
-    },
-    {
-      "id": 18959,
-      "title": "Título Original Wakefield"
-    },
-    {
-      "id": 18881,
-      "title": "Este Mundo No Me Hara Mala Persona"
-    },
-    {
-      "id": 18852,
-      "title": "Raíces"
-    },
-    {
-      "id": 11499,
-      "title": "Mad Men"
-    },
-    {
-      "id": 18691,
-      "title": "Transformers: Beast Wars II"
-    },
-    {
-      "id": 18775,
-      "title": "Transformers: Robots in Disguise"
-    },
-    {
-      "id": 18771,
-      "title": "Transformers: Robot Masters"
-    },
-    {
-      "id": 18734,
-      "title": "Transformers: Beast Wars Neo"
-    },
-    {
-      "id": 18663,
-      "title": "Transformers: Beast Machines"
-    },
-    {
-      "id": 18609,
-      "title": "Transformers: Beast Wars"
-    },
-    {
-      "id": 18569,
-      "title": "Transformers: Victory"
-    },
-    {
-      "id": 18525,
-      "title": "Transformers: Super-God Masterforce"
-    },
-    {
-      "id": 18488,
-      "title": "Transformers: The Headmasters"
-    },
-    {
-      "id": 18388,
-      "title": "Transformers (G1)"
-    },
-    {
-      "id": 18316,
-      "title": "Tiempo De Victoria"
-    },
-    {
-      "id": 18257,
-      "title": "Swamp Thing"
-    },
-    {
-      "id": 16983,
-      "title": "South Park"
-    },
-    {
       "id": 16859,
       "title": "Harlots"
     },
     {
       "id": 16766,
       "title": "Orange Is The New Black"
-    },
-    {
-      "id": 16689,
-      "title": "Billions (2016)"
     },
     {
       "id": 16561,
@@ -519,20 +947,12 @@
       "title": "Sin Novedad"
     },
     {
-      "id": 1294,
-      "title": "Better Call Saul"
-    },
-    {
       "id": 14945,
       "title": "Maggie"
     },
     {
       "id": 14925,
       "title": "Animado Presidente"
-    },
-    {
-      "id": 14125,
-      "title": "Desviados"
     },
     {
       "id": 14798,
@@ -817,6 +1237,38 @@
     {
       "id": 10046,
       "title": "Succession"
+    },
+    {
+      "id": 10406,
+      "title": "Bones"
+    },
+    {
+      "id": 9911,
+      "title": "Ojo De Halcón"
+    },
+    {
+      "id": 10620,
+      "title": "Cosas de casa"
+    },
+    {
+      "id": 9591,
+      "title": "Clark (2022)"
+    },
+    {
+      "id": 10566,
+      "title": "Tierra Amarga"
+    },
+    {
+      "id": 10002,
+      "title": "Luna, El Misterio De Calenda"
+    },
+    {
+      "id": 10068,
+      "title": "Sons Of Anarchy"
+    },
+    {
+      "id": 10058,
+      "title": "La Actriz"
     },
     {
       "id": 10034,
@@ -1219,6 +1671,118 @@
       "title": "Fringe"
     },
     {
+      "id": 3907,
+      "title": "Rumbo al infierno"
+    },
+    {
+      "id": 3794,
+      "title": "Paraiso"
+    },
+    {
+      "id": 3692,
+      "title": "Malcolm"
+    },
+    {
+      "id": 3645,
+      "title": "Cancion triste de hill street"
+    },
+    {
+      "id": 3622,
+      "title": "Mindhunter"
+    },
+    {
+      "id": 3595,
+      "title": "The boys"
+    },
+    {
+      "id": 3361,
+      "title": "Shogun"
+    },
+    {
+      "id": 2271,
+      "title": "Juego de tronos"
+    },
+    {
+      "id": 3451,
+      "title": "Nos vemos en mi 19ª vida"
+    },
+    {
+      "id": 3420,
+      "title": "Lost in space"
+    },
+    {
+      "id": 3407,
+      "title": "Constelación"
+    },
+    {
+      "id": 3369,
+      "title": "Quien mató a Sara?"
+    },
+    {
+      "id": 3342,
+      "title": "El problema de los tres cuerpos"
+    },
+    {
+      "id": 3336,
+      "title": "El triangulo de las bermudas"
+    },
+    {
+      "id": 3317,
+      "title": "Regalo de dios"
+    },
+    {
+      "id": 3297,
+      "title": "Agencia de citas"
+    },
+    {
+      "id": 3277,
+      "title": "Mama enojada"
+    },
+    {
+      "id": 3088,
+      "title": "Farmacia de guardia"
+    },
+    {
+      "id": 3082,
+      "title": "The control room"
+    },
+    {
+      "id": 3063,
+      "title": "Amor, Matrimonio y Divorcio"
+    },
+    {
+      "id": 3039,
+      "title": "Como aman los hombres"
+    },
+    {
+      "id": 2980,
+      "title": "Nuggets de pollo"
+    },
+    {
+      "id": 2971,
+      "title": "Bandidos"
+    },
+    {
+      "id": 2741,
+      "title": "Smallville"
+    },
+    {
+      "id": 2580,
+      "title": "Dragon Ball"
+    },
+    {
+      "id": 2556,
+      "title": "Surreal State"
+    },
+    {
+      "id": 2491,
+      "title": "Breaking Bad"
+    },
+    {
+      "id": 2482,
+      "title": "Castigo"
+    },
+    {
       "id": 2368,
       "title": "El señor de los anillos - los anillos de poder"
     },
@@ -1261,10 +1825,6 @@
     {
       "id": 1176,
       "title": "El juego de la muerte"
-    },
-    {
-      "id": 1128,
-      "title": "Isabel"
     },
     {
       "id": 989,
