@@ -20524,42 +20524,6 @@
     ]
   },
   {
-    "title": "Cmpsn Crtn",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.79,
-    "sample_files": [
-      "cmpsn.crtn.1x01.m1080p.es.mkv.mp4",
-      "cmpsn.crtn.1x02.m1080p.es.mkv.mp4",
-      "cmpsn.crtn.1x09 . mkv.mp4"
-    ],
-    "episodes": [
-      {
-        "id": 451198,
-        "season": 1,
-        "episode": 1,
-        "filename": "cmpsn.crtn.1x01.m1080p.es.mkv.mp4",
-        "size_mb": 255.79
-      },
-      {
-        "id": 451199,
-        "season": 1,
-        "episode": 2,
-        "filename": "cmpsn.crtn.1x02.m1080p.es.mkv.mp4",
-        "size_mb": 254.21
-      },
-      {
-        "id": 451206,
-        "season": 1,
-        "episode": 9,
-        "filename": "cmpsn.crtn.1x09 . mkv.mp4",
-        "size_mb": 301.31
-      }
-    ]
-  },
-  {
     "title": "Code Geass Lelouch El De La Rebelión",
     "total_episodes": 25,
     "seasons": [
@@ -32513,40 +32477,6 @@
         "episode": 24,
         "filename": "[SR] Enen no Shouboutai S2 - 24.mkv",
         "size_mb": 483.85
-      }
-    ]
-  },
-  {
-    "title": "Episodi 37 Bola Pilosa Nasal Llampeguejant!",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.21,
-    "sample_files": [
-      "Episodi 37 - Bola pilosa nasal llampeguejant!.mp4"
-    ],
-    "episodes": [
-      {
-        "id": 399610,
-        "season": 1,
-        "episode": 0,
-        "filename": "Episodi 37 - Bola pilosa nasal llampeguejant!.mp4",
-        "size_mb": 72.22
-      },
-      {
-        "id": 401679,
-        "season": 1,
-        "episode": 0,
-        "filename": "Episodi 37 - Bola pilosa nasal llampeguejant!.mp4",
-        "size_mb": 72.22
-      },
-      {
-        "id": 426090,
-        "season": 1,
-        "episode": 0,
-        "filename": "Episodi 37 - Bola pilosa nasal llampeguejant!.mp4",
-        "size_mb": 72.22
       }
     ]
   },
@@ -62069,12 +61999,12 @@
     ]
   },
   {
-    "title": "Lobezno Y Los Xmen Previsión Parte",
-    "total_episodes": 3,
+    "title": "Lobezno y los X-Men",
+    "total_episodes": 6,
     "seasons": [
       1
     ],
-    "total_gb": 0.24,
+    "total_gb": 0.0,
     "sample_files": [
       "[S01.E23] Lobezno y los XMen - Previsión Parte 1.mp4",
       "[S01.E24] Lobezno y los XMen - Previsión Parte 2.mp4",
@@ -62101,22 +62031,7 @@
         "episode": 3,
         "filename": "[S01.E25] Lobezno y los XMen - Previsión Parte 3.mp4",
         "size_mb": 88.6
-      }
-    ]
-  },
-  {
-    "title": "Lobezno Y Los Xmen Retrospectiva Parte",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.22,
-    "sample_files": [
-      "[S01.E00] Lobezno y los XMen - Retrospectiva Parte 1.mp4",
-      "[S01.E01] Lobezno y los XMen - Retrospectiva Parte 2.mp4",
-      "[S01.E02] Lobezno y los XMen - Retrospectiva Parte 3.mp4"
-    ],
-    "episodes": [
+      },
       {
         "id": 396498,
         "season": 1,
@@ -66066,42 +65981,6 @@
     ]
   },
   {
-    "title": "Mi Vecino Totoro (Hayao Miyazaki, 1988)",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 5.36,
-    "sample_files": [
-      "Mi vecino Totoro (Hayao Miyazaki, 1988) [HDRip 720p VE].avi",
-      "Mi vecino Totoro (Hayao Miyazaki, 1988) [BDRip 720p Dual].mkv",
-      "Mi vecino Totoro (Hayao Miyazaki, 1988) [HD 1080p Dual].mkv"
-    ],
-    "episodes": [
-      {
-        "id": 405898,
-        "season": 1,
-        "episode": 0,
-        "filename": "Mi vecino Totoro (Hayao Miyazaki, 1988) [HDRip 720p VE].avi",
-        "size_mb": 1332.3
-      },
-      {
-        "id": 405899,
-        "season": 1,
-        "episode": 0,
-        "filename": "Mi vecino Totoro (Hayao Miyazaki, 1988) [BDRip 720p Dual].mkv",
-        "size_mb": 2218.08
-      },
-      {
-        "id": 405900,
-        "season": 1,
-        "episode": 0,
-        "filename": "Mi vecino Totoro (Hayao Miyazaki, 1988) [HD 1080p Dual].mkv",
-        "size_mb": 1934.3
-      }
-    ]
-  },
-  {
     "title": "Minelva",
     "total_episodes": 5,
     "seasons": [
@@ -67883,42 +67762,6 @@
         "episode": 72,
         "filename": "Monster Rancher 72.mp4",
         "size_mb": 41.46
-      }
-    ]
-  },
-  {
-    "title": "Monsters El Infierno Del Dragón",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.88,
-    "sample_files": [
-      "Monsters- El infierno del dragón.mkv",
-      "Monsters El infierno del dragón (2024) @ComunidadCastellana.mkv",
-      "Monsters El infierno del dragón (2024).mp4"
-    ],
-    "episodes": [
-      {
-        "id": 407217,
-        "season": 1,
-        "episode": 0,
-        "filename": "Monsters- El infierno del dragón.mkv",
-        "size_mb": 951.31
-      },
-      {
-        "id": 407235,
-        "season": 1,
-        "episode": 0,
-        "filename": "Monsters El infierno del dragón (2024) @ComunidadCastellana.mkv",
-        "size_mb": 950.25
-      },
-      {
-        "id": 407237,
-        "season": 1,
-        "episode": 0,
-        "filename": "Monsters El infierno del dragón (2024).mp4",
-        "size_mb": 1045.22
       }
     ]
   },
@@ -74725,41 +74568,6 @@
     ]
   },
   {
-    "title": "Overlord El Reino Sagrado",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 6.04,
-    "sample_files": [
-      "Overlord El reino sagrado - 2024  HDTS.mp4",
-      "Overlord El Reino Sagrado (2024).mkv"
-    ],
-    "episodes": [
-      {
-        "id": 436887,
-        "season": 1,
-        "episode": 0,
-        "filename": "Overlord El Reino Sagrado (2024).mkv",
-        "size_mb": 1300.41
-      },
-      {
-        "id": 451244,
-        "season": 1,
-        "episode": 0,
-        "filename": "Overlord El Reino Sagrado (2024).mkv",
-        "size_mb": 2976.22
-      },
-      {
-        "id": 433479,
-        "season": 1,
-        "episode": 2024,
-        "filename": "Overlord El reino sagrado - 2024  HDTS.mp4",
-        "size_mb": 1904.75
-      }
-    ]
-  },
-  {
     "title": "Overlord S2 Bd",
     "total_episodes": 13,
     "seasons": [
@@ -75323,77 +75131,6 @@
     ]
   },
   {
-    "title": "Ponyo En El Acantilado",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 10.15,
-    "sample_files": [
-      "Ponyo en el acantilado (2008) [BDRip 1080p Multi].mkv",
-      "Ponyo en el acantilado (2008) [HD 1080p Dual].mkv"
-    ],
-    "episodes": [
-      {
-        "id": 405919,
-        "season": 1,
-        "episode": 0,
-        "filename": "Ponyo en el acantilado (2008) [BDRip 1080p Multi].mkv",
-        "size_mb": 3689.75
-      },
-      {
-        "id": 405920,
-        "season": 1,
-        "episode": 0,
-        "filename": "Ponyo en el acantilado (2008) [HD 1080p Dual].mkv",
-        "size_mb": 3012.79
-      },
-      {
-        "id": 405921,
-        "season": 1,
-        "episode": 0,
-        "filename": "Ponyo en el acantilado (2008) [BDRip 1080p Multi].mkv",
-        "size_mb": 3689.75
-      }
-    ]
-  },
-  {
-    "title": "Porco Rosso (Hayao Miyazaki, 1992)",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 7.04,
-    "sample_files": [
-      "Porco Rosso (Hayao Miyazaki, 1992) [BDRip 720p Dual].mkv",
-      "Porco Rosso (Hayao Miyazaki, 1992) [BDRip 1080p VE].mkv",
-      "Porco Rosso (Hayao Miyazaki, 1992) [HD 1080p Dual].mkv"
-    ],
-    "episodes": [
-      {
-        "id": 405906,
-        "season": 1,
-        "episode": 0,
-        "filename": "Porco Rosso (Hayao Miyazaki, 1992) [BDRip 720p Dual].mkv",
-        "size_mb": 2829.13
-      },
-      {
-        "id": 405907,
-        "season": 1,
-        "episode": 0,
-        "filename": "Porco Rosso (Hayao Miyazaki, 1992) [BDRip 1080p VE].mkv",
-        "size_mb": 1842.58
-      },
-      {
-        "id": 405908,
-        "season": 1,
-        "episode": 0,
-        "filename": "Porco Rosso (Hayao Miyazaki, 1992) [HD 1080p Dual].mkv",
-        "size_mb": 2532.46
-      }
-    ]
-  },
-  {
     "title": "Prag",
     "total_episodes": 13,
     "seasons": [
@@ -75496,42 +75233,6 @@
         "episode": 13,
         "filename": "PrAg-13.mkv",
         "size_mb": 1685.9
-      }
-    ]
-  },
-  {
-    "title": "Quest Picture Drama",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.07,
-    "sample_files": [
-      "1x01 Quest Picture Drama.mkv",
-      "1x02 Quest Picture Drama.mkv",
-      "1x03 Quest Picture Drama.mkv"
-    ],
-    "episodes": [
-      {
-        "id": 428495,
-        "season": 1,
-        "episode": 1,
-        "filename": "1x01 Quest Picture Drama.mkv",
-        "size_mb": 20.48
-      },
-      {
-        "id": 428496,
-        "season": 1,
-        "episode": 2,
-        "filename": "1x02 Quest Picture Drama.mkv",
-        "size_mb": 25.0
-      },
-      {
-        "id": 428497,
-        "season": 1,
-        "episode": 3,
-        "filename": "1x03 Quest Picture Drama.mkv",
-        "size_mb": 28.21
       }
     ]
   },
