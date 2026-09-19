@@ -4,6 +4,7 @@ import json
 import asyncio
 import logging
 import random
+import re
 from collections import defaultdict
 from telethon import TelegramClient, errors
 from telethon.sessions import StringSession
@@ -90,80 +91,29 @@ async def forward_or_copy_messages(client: TelegramClient, chat_peer, msgs: list
             logger.error(f"   -> Error enviando mensaje {m.id}: {err}")
 
 
-async def repair_prison_break_in_transformers(client: TelegramClient, chat_peer, state: dict):
-    """Extrae Prison Break de temas de Transformers y lo mueve al tema canónico de Prison Break (1871)."""
-    logger.info("\n--- [1/6] REPARANDO PRISON BREAK EN TRANSFORMERS ---")
-    prison_break_topic_id = 1871
-
-    # Detectar temas de Transformers
-    transformers_topic_ids = {16869, 18388}
+async def rename_topic_safe(client: TelegramClient, chat_peer, topic_id: int, new_title: str):
+    """Renombra un tema existente en Telegram de forma segura."""
+    if DRY_RUN:
+        logger.info(f"   [DRY-RUN] Se renombraría tema {topic_id} a '{new_title}'")
+        return
     try:
-        res = await client(GetForumTopicsRequest(
+        await client(EditForumTopicRequest(
             peer=chat_peer,
-            offset_date=None,
-            offset_id=0,
-            offset_topic=0,
-            limit=50,
-            q="Transformers"
+            topic_id=topic_id,
+            title=new_title
         ))
-        for t in getattr(res, "topics", []):
-            transformers_topic_ids.add(t.id)
-            logger.info(f"   Tema Transformers detectado: '{t.title}' (ID {t.id})")
+        logger.info(f"   🏷️ Tema {topic_id} renombrado con éxito a: '{new_title}'")
+        await asyncio.sleep(1.0)
     except Exception as e:
-        logger.warning(f"   Aviso buscando temas de Transformers: {e}")
-
-    pb_messages = []
-    logger.info(f"   Buscando mensajes de 'Prison' en el supergrupo...")
-    async for msg in client.iter_messages(chat_peer, search="Prison", limit=150):
-        top_id = None
-        if msg.reply_to:
-            top_id = getattr(msg.reply_to, "reply_to_top_id", None) or getattr(msg.reply_to, "reply_to_msg_id", None)
-        
-        content = extract_text_or_filename(msg)
-        if top_id in transformers_topic_ids:
-            logger.info(f"   🚨 Mensaje de Prison Break encontrado en Transformers ({top_id}): ID {msg.id} | {content[:60]}")
-            pb_messages.append(msg)
-        elif top_id == prison_break_topic_id:
-            logger.info(f"   ✓ Mensaje ya en Prison Break (1871): ID {msg.id}")
-        else:
-            logger.info(f"   Mensaje de Prison en tema {top_id}: ID {msg.id} | {content[:60]}")
-
-    logger.info(f"Mensajes de Prison Break mal ubicados en Transformers: {len(pb_messages)}")
-    if pb_messages:
-        pb_messages.reverse()
-        if DRY_RUN:
-            logger.info(f"[DRY-RUN] Se moverían {len(pb_messages)} mensajes al tema {prison_break_topic_id}")
-        else:
-            await forward_or_copy_messages(client, chat_peer, pb_messages, prison_break_topic_id)
-            pb_ids = [m.id for m in pb_messages]
-            try:
-                await client(DeleteMessagesRequest(id=pb_ids))
-                logger.info(f"   -> {len(pb_ids)} mensajes eliminados de Transformers")
-            except Exception as e:
-                logger.warning(f"   -> No se pudieron eliminar de Transformers: {e}")
-
-    # Limpiar alias erróneo en el caché de temas
-    topics_cache = state.get("series_topics_cache", {})
-    if "serie de tv" in topics_cache:
-        del topics_cache["serie de tv"]
-        logger.info("   -> Eliminada entrada basura 'serie de tv' del caché de temas")
+        logger.warning(f"   -> No se pudo renombrar tema {topic_id}: {e}")
 
 
-async def consolidate_series_topics(client: TelegramClient, chat_peer, state: dict, series_name: str, canonical_id: int, stray_topic_ids: list):
+async def consolidate_series_topics(client: TelegramClient, chat_peer, series_name: str, canonical_id: int, stray_topic_ids: list):
     """Consolida episodios dispersos en un solo tema y elimina los temas sobrantes."""
     logger.info(f"\n--- CONSOLIDANDO '{series_name}' (Tema Principal: {canonical_id}) ---")
     
     # Renombrar tema principal al nombre canónico limpio
-    if not DRY_RUN:
-        try:
-            await client(EditForumTopicRequest(
-                peer=chat_peer,
-                topic_id=canonical_id,
-                title=series_name
-            ))
-            logger.info(f"   -> Tema {canonical_id} renombrado a '{series_name}'")
-        except Exception as e:
-            logger.info(f"   -> No se requirió renombrado de tema {canonical_id}: {e}")
+    await rename_topic_safe(client, chat_peer, canonical_id, series_name)
 
     # Recorrer temas fragmentados
     for stray_id in stray_topic_ids:
@@ -171,7 +121,7 @@ async def consolidate_series_topics(client: TelegramClient, chat_peer, state: di
             continue
         stray_msgs = []
         try:
-            async for msg in client.iter_messages(chat_peer, reply_to=stray_id, limit=50):
+            async for msg in client.iter_messages(chat_peer, reply_to=stray_id, limit=60):
                 if msg.media:
                     stray_msgs.append(msg)
         except Exception as e:
@@ -194,68 +144,83 @@ async def consolidate_series_topics(client: TelegramClient, chat_peer, state: di
                 logger.warning(f"   -> No se pudo borrar tema {stray_id}: {e}")
 
 
-async def purge_junk_topics(client: TelegramClient, chat_peer, state: dict, junk_topic_ids: list):
-    """Elimina temas anónimos que fueron creados por error ('2ª temporada', 'audio', etc.)."""
-    logger.info(f"\n--- PURGANDO TEMAS BASURA / ANÓNIMOS ---")
-    for j_id in junk_topic_ids:
-        # Verificar cuántos mensajes tiene
-        msgs = []
-        try:
-            async for m in client.iter_messages(chat_peer, reply_to=j_id, limit=10):
-                msgs.append(m)
-        except Exception:
-            pass
+async def inspect_and_rename_topic(client: TelegramClient, chat_peer, topic_id: int, fallback_title: str):
+    """Inspecciona los archivos de un tema con nombre corto/raro y le asigna su título correcto."""
+    logger.info(f"\n--- INSPECCIONANDO TEMA {topic_id} ('{fallback_title}') ---")
+    sample_text = ""
+    try:
+        async for m in client.iter_messages(chat_peer, reply_to=topic_id, limit=3):
+            t = extract_text_or_filename(m)
+            if t:
+                sample_text = t
+                break
+    except Exception as e:
+        logger.warning(f"Error leyendo tema {topic_id}: {e}")
 
-        logger.info(f"   Tema basura {j_id}: {len(msgs)} mensajes")
-        if not DRY_RUN:
-            try:
-                await client(DeleteTopicHistoryRequest(peer=chat_peer, top_msg_id=j_id))
-                logger.info(f"   🗑️ Tema basura {j_id} eliminado")
-                await asyncio.sleep(1.0)
-            except Exception as e:
-                logger.warning(f"   -> Error borrando tema basura {j_id}: {e}")
+    logger.info(f"   Muestra de contenido en {topic_id}: {sample_text[:80]}")
+    title_to_set = fallback_title
+    s_low = sample_text.lower()
+    if "sex education" in s_low:
+        title_to_set = "Sex Education"
+    elif "sex/life" in s_low or "sex life" in s_low:
+        title_to_set = "Sex/Life"
+    elif "sex and the city" in s_low or "sexo en nueva york" in s_low:
+        title_to_set = "Sexo en Nueva York"
+    elif "los serrano" in s_low:
+        title_to_set = "Los Serrano"
+
+    await rename_topic_safe(client, chat_peer, topic_id, title_to_set)
+    return title_to_set
 
 
-def cleanup_cache_keys(state: dict):
-    """Limpia las claves corruptas o fragmentadas en series_topics_cache."""
-    logger.info("\n--- LIMPIANDO Y ACTUALIZANDO SERIES_TOPICS_CACHE ---")
+def cleanup_all_cache_keys(state: dict):
+    """Limpia exhaustivamente claves fragmentadas y guarda nombres canónicos."""
+    logger.info("\n--- CONSOLIDANDO Y ACTUALIZANDO SERIES_TOPICS_CACHE ---")
     cache = state.get("series_topics_cache", {})
-    
-    # Lista de claves a eliminar
+
     keys_to_delete = []
     for k in cache:
         k_low = k.lower()
         if any(bad in k_low for bad in [
-            "halcon callejero ", "halcón callejero ",
-            "el trueno azul 0", "el trueno azul 1",
-            "el amor despu", "el amor despues",
-            "entourage-", "entourage the", "entourage meet",
-            "temporada", "serie de tv", "serie", "audio", "completas", "leer", "fin 11",
-            "libro 1", "libro 2", "libro 3", "sinopsis", "sss", "watch", "falta la"
+            "constant s01e", "jingking", "peliculasgoogledrive",
+            "el consultor 1x", "el consultor (serie)",
+            "boardwalk empire - temp", "boardwalk empire temp 2",
+            "como conoc", "la brea", "lupin", "ergo proxy", "los pilares", "dracula"
         ]):
             keys_to_delete.append(k)
 
     for k in keys_to_delete:
-        del cache[k]
-        logger.info(f"   - Clave eliminada: '{k}'")
+        if k in cache:
+            del cache[k]
+            logger.info(f"   - Clave obsoleta eliminada: '{k}'")
 
-    # Reasignar claves canónicas limpias
+    # Mapeos Canónicos Verificados
+    cache["constantine"] = 20349
+    cache["el consultor"] = 18857
+    cache["boardwalk empire"] = 6746
+    cache["como conoci a vuestra madre"] = 8078
+    cache["cómo conocí a vuestra madre"] = 8078
+    cache["la brea"] = 1596
+    cache["lupin"] = 21595
+    cache["los pilares de la tierra"] = 11698
+    cache["dracula"] = 11797
+    cache["drácula"] = 11797
+    cache["ergo proxy"] = 6046
+    cache["los serrano"] = 20677
     cache["halcon callejero"] = 22068
     cache["halcón callejero"] = 22068
     cache["el trueno azul"] = 19415
     cache["el amor despues del amor"] = 20767
     cache["el amor después del amor"] = 20767
     cache["entourage"] = 21869
-    cache["entourage el sequito"] = 21869
-    cache["entourage el séquito"] = 21869
     cache["prison break"] = 1871
     cache["transformers"] = 16869
 
-    # Resetear puntero activo para evitar pegado erróneo
+    # Resetear puntero de sesión activa
     state["current_series_title"] = ""
     state["current_topic_id"] = None
     state["series_topics_cache"] = cache
-    logger.info(f"✅ Cache consolidado. Total temas indexados: {len(cache)}")
+    logger.info(f"✅ Total temas consolidados en caché: {len(cache)}")
 
 
 async def main():
@@ -270,39 +235,41 @@ async def main():
 
         state = load_state()
 
-        # 1. Separar Prison Break de Transformers
-        await repair_prison_break_in_transformers(client, chat_peer, state)
+        # 1. Constantine (Consolidar 10 episodios en el tema 20349 y borrar los 9 sueltos)
+        constantine_strays = [20355, 20357, 20359, 20361, 20363, 20365, 20367, 20369, 20371]
+        await consolidate_series_topics(client, chat_peer, "Constantine", 20349, constantine_strays)
 
-        # 2. Halcón Callejero
-        halcon_strays = [22071, 22073, 22075, 22077, 22079, 22081, 22083, 22085, 22087, 22089, 22091, 22093]
-        await consolidate_series_topics(client, chat_peer, state, "Halcón Callejero", 22068, halcon_strays)
+        # 2. El Consultor (Consolidar 6 temas sueltos en el tema 18857)
+        consultor_strays = [18860, 18862, 18864, 18866, 18868, 18870]
+        await consolidate_series_topics(client, chat_peer, "El Consultor", 18857, consultor_strays)
 
-        # 3. El Trueno Azul
-        trueno_strays = [19418, 19420, 19422, 19424, 19426, 19428, 19430, 19432, 19434, 19436]
-        await consolidate_series_topics(client, chat_peer, state, "El Trueno Azul", 19415, trueno_strays)
+        # 3. Boardwalk Empire (Consolidar 3 temas sueltos de Temp 2 en el tema 6746)
+        boardwalk_strays = [6759, 6768, 7331]
+        await consolidate_series_topics(client, chat_peer, "Boardwalk Empire", 6746, boardwalk_strays)
 
-        # 4. El Amor Después del Amor
-        amor_strays = [20770, 20772, 20775, 20777]
-        await consolidate_series_topics(client, chat_peer, state, "El Amor Después del Amor", 20767, amor_strays)
+        # 4. Cómo Conocí a Vuestra Madre (Consolidar duplicado 8079 en el principal 8078)
+        await consolidate_series_topics(client, chat_peer, "Cómo Conocí a Vuestra Madre", 8078, [8079])
 
-        # 5. Entourage
-        entourage_strays = [21968, 21970, 21972, 21974, 21976, 21978, 21980]
-        await consolidate_series_topics(client, chat_peer, state, "Entourage (El Séquito)", 21869, entourage_strays)
+        # 5. La Brea (Consolidar duplicado 7773 en el principal 1596)
+        await consolidate_series_topics(client, chat_peer, "La Brea", 1596, [7773])
 
-        # 6. Temas Basura Anónimos
-        junk_topics = [
-            12219, 12242, 12265, 12288, 12311, 12334, 12357, 12380, 12403, 12425,
-            7368, 7369, 7550, 8763, 8942, 9310, 15326, 14992, 19334, 19356, 19378,
-            20152, 20727, 20729, 20673, 20547
-        ]
-        await purge_junk_topics(client, chat_peer, state, junk_topics)
+        # 6. Renombrar temas con nombres descriptivos de ripeo o incompletos
+        logger.info("\n--- RENOMBRANDO TEMAS A NOMBRES CANÓNICOS LIMPIOS ---")
+        await rename_topic_safe(client, chat_peer, 21595, "Lupin")
+        await rename_topic_safe(client, chat_peer, 11698, "Los Pilares de la Tierra")
+        await rename_topic_safe(client, chat_peer, 11797, "Drácula")
+        await rename_topic_safe(client, chat_peer, 6046, "Ergo Proxy")
+        await rename_topic_safe(client, chat_peer, 20677, "Los Serrano")
 
-        # 7. Actualizar y guardar estado limpio
-        cleanup_cache_keys(state)
+        # Inspeccionar tema 18935 ("Sex")
+        await inspect_and_rename_topic(client, chat_peer, 18935, "Sex Education")
+
+        # 7. Limpiar caché de estado persistente y guardar
+        cleanup_all_cache_keys(state)
         if not DRY_RUN:
             save_state(state)
 
-        logger.info("\n🎉 REPARACIÓN DEL CATÁLOGO DE SERIES FINALIZADA CON ÉXITO")
+        logger.info("\n🎉 CONSOLIDACIÓN Y LIMPIEZA TOTAL DE SERIES TV COMPLETADA EXITOSAMENTE")
 
 
 if __name__ == "__main__":

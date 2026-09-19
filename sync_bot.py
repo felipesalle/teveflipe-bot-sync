@@ -235,6 +235,18 @@ SERIES_ALIASES = {
     "entourage": "Entourage",
     "entourage el séquito": "Entourage",
     "entourage el sequito": "Entourage",
+    "constantine": "Constantine",
+    "constant": "Constantine",
+    "el consultor": "El Consultor",
+    "boardwalk empire": "Boardwalk Empire",
+    "como conoci a vuestra madre": "Cómo Conocí a Vuestra Madre",
+    "cómo conocí a vuestra madre": "Cómo Conocí a Vuestra Madre",
+    "la brea": "La Brea",
+    "lupin": "Lupin",
+    "los pilares de la tierra": "Los Pilares de la Tierra",
+    "ergo proxy": "Ergo Proxy",
+    "los serrano": "Los Serrano",
+    "sex education": "Sex Education",
 }
 
 
@@ -318,6 +330,7 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
 
     text = re.sub(r"\.[a-zA-Z0-9]{2,4}$", "", text)
     text = re.sub(r"https?://\S+", "", text)
+    text = re.sub(r"(?i)\b(?:www\s*)?\w+\s*(?:com|info|org|net|me|tv|io)\b", " ", text)
     text = re.sub(r"[@#]\w+", "", text)
     text = re.sub(r"\[.*?\]|\(.*?\)", "", text)
     
