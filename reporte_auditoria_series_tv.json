@@ -1,0 +1,1612 @@
+{
+  "total_topics": 378,
+  "suspicious_count": 1,
+  "fragmented_groups_count": 3,
+  "suspicious_topics": [
+    {
+      "id": 1,
+      "title": "General",
+      "top_message": 20953,
+      "is_suspicious": true,
+      "suspicious_reason": "Palabra genérica o decorativa",
+      "normalized": "general"
+    }
+  ],
+  "fragmented_series_groups": {
+    "la brea": [
+      {
+        "id": 1596,
+        "title": "La Brea",
+        "top_message": 14699,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "la brea",
+        "sample_files": [
+          "La brea 2x14 1080p.mkv",
+          "La brea 2x13 1080p.mkv",
+          "La Brea - Cap.212 (1).mp4",
+          "La Brea - Cap.211.mp4",
+          "La Brea - Cap.210 . castellano .avi"
+        ]
+      },
+      {
+        "id": 7773,
+        "title": "La Brea",
+        "top_message": 7805,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "la brea",
+        "sample_files": [
+          "La Brea 3X06 - The Road Home, Part 2.1080p-Bigmaster.mp4",
+          "La Brea 3X05 - The Road Home, Part 1.1080p-Bigmaster.mp4",
+          "La Brea 3x04 - Fire Storm.1080p-Bigmaster.mp4",
+          "La Brea 3x03 - Maya.1080p-Bigmaster.mp4",
+          "La Brea 3x02 - Don't Look Up.1080p-Bigmaster.mp4"
+        ]
+      }
+    ],
+    "como conocí a vuestra madre": [
+      {
+        "id": 8079,
+        "title": "Como conocí a vuestra madre",
+        "top_message": 8454,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "como conocí a vuestra madre",
+        "sample_files": [
+          "CCAVM - 9x24 - Juntos para siempre (2).mkv",
+          "CCAVM - 9x23 - Juntos para siempre (1).mkv",
+          "CCAVM - 9x22 - El camino al altar.mkv",
+          "CCAVM - 9x21 - Gary Blauman.mkv"
+        ]
+      },
+      {
+        "id": 8078,
+        "title": "Como Conocí A Vuestra Madre",
+        "top_message": 8078,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "como conocí a vuestra madre",
+        "sample_files": []
+      }
+    ],
+    "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english": [
+      {
+        "id": 7331,
+        "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English",
+        "top_message": 7332,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english",
+        "sample_files": [
+          "Boardwalk_Empire_Temp_2_HDTVCap_209_HDRIP_Xvid_AC3_5_1Spanish_English.avi"
+        ]
+      },
+      {
+        "id": 6768,
+        "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English",
+        "top_message": 6769,
+        "is_suspicious": false,
+        "suspicious_reason": "",
+        "normalized": "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english",
+        "sample_files": [
+          "Boardwalk_Empire_Temp_2_HDTVCap_209_HDRIP_Xvid_AC3_5_1Spanish_English.avi"
+        ]
+      }
+    ]
+  },
+  "all_topics_summary": [
+    {
+      "id": 21869,
+      "title": "Entourage (El Séquito)"
+    },
+    {
+      "id": 20767,
+      "title": "El Amor Después del Amor"
+    },
+    {
+      "id": 22068,
+      "title": "Halcón Callejero"
+    },
+    {
+      "id": 1871,
+      "title": "Prison Break"
+    },
+    {
+      "id": 16869,
+      "title": "Transformers (Serie de TV) (1984)"
+    },
+    {
+      "id": 18269,
+      "title": "Doom Patrol"
+    },
+    {
+      "id": 21982,
+      "title": "Ballers"
+    },
+    {
+      "id": 20677,
+      "title": "Los"
+    },
+    {
+      "id": 21709,
+      "title": "La Cosa Del Pantano"
+    },
+    {
+      "id": 21697,
+      "title": "Helstrom"
+    },
+    {
+      "id": 21680,
+      "title": "The Politician"
+    },
+    {
+      "id": 21674,
+      "title": "Outlander"
+    },
+    {
+      "id": 21595,
+      "title": "Lupin Segunda Temporada"
+    },
+    {
+      "id": 21591,
+      "title": "Mami­Feros"
+    },
+    {
+      "id": 21587,
+      "title": "Mamíferos"
+    },
+    {
+      "id": 21469,
+      "title": "Unorthodox / Poco Ortodoxa"
+    },
+    {
+      "id": 1746,
+      "title": "Dark"
+    },
+    {
+      "id": 21269,
+      "title": "Justo Antes De Cristo"
+    },
+    {
+      "id": 21135,
+      "title": "Doctor En Alaska,"
+    },
+    {
+      "id": 21224,
+      "title": "Doctor En Alaska 1994"
+    },
+    {
+      "id": 21055,
+      "title": "Eureka"
+    },
+    {
+      "id": 21047,
+      "title": "Vamos Juan"
+    },
+    {
+      "id": 20994,
+      "title": "Vota Juan"
+    },
+    {
+      "id": 20990,
+      "title": "En La Playa"
+    },
+    {
+      "id": 20962,
+      "title": "Carnival Row"
+    },
+    {
+      "id": 20941,
+      "title": "Invasion"
+    },
+    {
+      "id": 1,
+      "title": "General"
+    },
+    {
+      "id": 20932,
+      "title": "Alice In Borderland"
+    },
+    {
+      "id": 20870,
+      "title": "The Gifted"
+    },
+    {
+      "id": 20862,
+      "title": "No Me Gusta Conducir"
+    },
+    {
+      "id": 20820,
+      "title": "Mayans M C"
+    },
+    {
+      "id": 20807,
+      "title": "Hermanos De Sangre"
+    },
+    {
+      "id": 20788,
+      "title": "The Spanish Princess"
+    },
+    {
+      "id": 20781,
+      "title": "Citas Barcelona"
+    },
+    {
+      "id": 20735,
+      "title": "Emily En Paris"
+    },
+    {
+      "id": 20630,
+      "title": "▪️ **Titulo ** Los"
+    },
+    {
+      "id": 20450,
+      "title": "Everwood"
+    },
+    {
+      "id": 20383,
+      "title": "El Club De Medianoche"
+    },
+    {
+      "id": 20373,
+      "title": "The Chef Show"
+    },
+    {
+      "id": 20371,
+      "title": "Constant S01E13Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20369,
+      "title": "Constant S01E12Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20367,
+      "title": "Constant S01E11Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20365,
+      "title": "Constant S01E10Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20363,
+      "title": "Constant S01E09Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20361,
+      "title": "Constant S01E08Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20359,
+      "title": "Constant S01E07Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20357,
+      "title": "Constant S01E06Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20355,
+      "title": "Constant S01E05Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20349,
+      "title": "Constant S01E01Jingking Www Peliculasgoogledrive Info Mkv"
+    },
+    {
+      "id": 20335,
+      "title": "Atracadores La Serie"
+    },
+    {
+      "id": 18848,
+      "title": "Raices"
+    },
+    {
+      "id": 20263,
+      "title": "The Girlfriend Experience"
+    },
+    {
+      "id": 20278,
+      "title": "Kampamento Koral Bob Esponja Primeras Aventuras"
+    },
+    {
+      "id": 20241,
+      "title": "The Great"
+    },
+    {
+      "id": 20183,
+      "title": "El Cuento De La Criada"
+    },
+    {
+      "id": 20130,
+      "title": "Ramy"
+    },
+    {
+      "id": 20011,
+      "title": "Archer"
+    },
+    {
+      "id": 19940,
+      "title": "Dexter"
+    },
+    {
+      "id": 1963,
+      "title": "Cobra Kai"
+    },
+    {
+      "id": 18857,
+      "title": "El Consultor (Serie)"
+    },
+    {
+      "id": 19415,
+      "title": "El Trueno Azul"
+    },
+    {
+      "id": 19522,
+      "title": "Colony"
+    },
+    {
+      "id": 19514,
+      "title": "Secretos De Un Matrimonio"
+    },
+    {
+      "id": 19465,
+      "title": "Muñeca Rusa"
+    },
+    {
+      "id": 19490,
+      "title": "El Gabinete De Curiosidades"
+    },
+    {
+      "id": 19481,
+      "title": "Soldados Proper"
+    },
+    {
+      "id": 1841,
+      "title": "Mr. Inbetween"
+    },
+    {
+      "id": 17284,
+      "title": "Infierno Sobre Ruedas"
+    },
+    {
+      "id": 19255,
+      "title": "Último Aviso / Burn Notice"
+    },
+    {
+      "id": 19118,
+      "title": "Suits"
+    },
+    {
+      "id": 19065,
+      "title": "Batwoman"
+    },
+    {
+      "id": 3013,
+      "title": "The mandalorian"
+    },
+    {
+      "id": 19025,
+      "title": "Sweet Tooth El Niño Ciervo"
+    },
+    {
+      "id": 19014,
+      "title": "Título Original Star Trek Strange New Worlds"
+    },
+    {
+      "id": 19001,
+      "title": "Título Dinero, Reinas De La Calle"
+    },
+    {
+      "id": 18993,
+      "title": "Esto Te Va A Doler"
+    },
+    {
+      "id": 18983,
+      "title": "La Diplomática"
+    },
+    {
+      "id": 18968,
+      "title": "Schmigadoon"
+    },
+    {
+      "id": 18959,
+      "title": "Título Original Wakefield"
+    },
+    {
+      "id": 18935,
+      "title": "Sex"
+    },
+    {
+      "id": 18881,
+      "title": "Este Mundo No Me Hara Mala Persona"
+    },
+    {
+      "id": 18870,
+      "title": "El Consultor 1X08Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18868,
+      "title": "El Consultor 1X07Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18866,
+      "title": "El Consultor 1X06Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18864,
+      "title": "El Consultor 1X05Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18862,
+      "title": "El Consultor 1X04Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18860,
+      "title": "El Consultor 1X02Castellano Web Dl Ddp5 1 +"
+    },
+    {
+      "id": 18852,
+      "title": "Raíces"
+    },
+    {
+      "id": 11499,
+      "title": "Mad Men"
+    },
+    {
+      "id": 18691,
+      "title": "Transformers: Beast Wars II"
+    },
+    {
+      "id": 18775,
+      "title": "Transformers: Robots in Disguise"
+    },
+    {
+      "id": 18771,
+      "title": "Transformers: Robot Masters"
+    },
+    {
+      "id": 18734,
+      "title": "Transformers: Beast Wars Neo"
+    },
+    {
+      "id": 18663,
+      "title": "Transformers: Beast Machines"
+    },
+    {
+      "id": 18609,
+      "title": "Transformers: Beast Wars"
+    },
+    {
+      "id": 18569,
+      "title": "Transformers: Victory"
+    },
+    {
+      "id": 18525,
+      "title": "Transformers: Super-God Masterforce"
+    },
+    {
+      "id": 18488,
+      "title": "Transformers: The Headmasters"
+    },
+    {
+      "id": 18388,
+      "title": "Transformers (G1)"
+    },
+    {
+      "id": 18316,
+      "title": "Tiempo De Victoria"
+    },
+    {
+      "id": 18257,
+      "title": "Swamp Thing"
+    },
+    {
+      "id": 16983,
+      "title": "South Park"
+    },
+    {
+      "id": 16859,
+      "title": "Harlots"
+    },
+    {
+      "id": 16766,
+      "title": "Orange Is The New Black"
+    },
+    {
+      "id": 16689,
+      "title": "Billions (2016)"
+    },
+    {
+      "id": 16561,
+      "title": "Supergirl"
+    },
+    {
+      "id": 16532,
+      "title": "Legión"
+    },
+    {
+      "id": 16528,
+      "title": "Las Gotas De Dios"
+    },
+    {
+      "id": 16507,
+      "title": "Devils"
+    },
+    {
+      "id": 16505,
+      "title": "Anatomía De Grey"
+    },
+    {
+      "id": 16485,
+      "title": "Anatomia De Grey"
+    },
+    {
+      "id": 16448,
+      "title": "Colgados En Filadelfia"
+    },
+    {
+      "id": 16409,
+      "title": "El Inmortal"
+    },
+    {
+      "id": 16255,
+      "title": "Elementary"
+    },
+    {
+      "id": 16188,
+      "title": "Dinosaurios"
+    },
+    {
+      "id": 15968,
+      "title": "The Good Doctor"
+    },
+    {
+      "id": 14654,
+      "title": "Rabo De Peixe"
+    },
+    {
+      "id": 1644,
+      "title": "Arrow"
+    },
+    {
+      "id": 15271,
+      "title": "The Rookie"
+    },
+    {
+      "id": 15949,
+      "title": "Upright"
+    },
+    {
+      "id": 15848,
+      "title": "Stargate Atlantis"
+    },
+    {
+      "id": 15806,
+      "title": "Angie Tribeca - Serie De Tv"
+    },
+    {
+      "id": 15612,
+      "title": "Nacho"
+    },
+    {
+      "id": 15605,
+      "title": "Obsesion"
+    },
+    {
+      "id": 15525,
+      "title": "Heroes"
+    },
+    {
+      "id": 15425,
+      "title": "Gotham"
+    },
+    {
+      "id": 15414,
+      "title": "Una Pizca De Magia En La Ciudad Misteriosa"
+    },
+    {
+      "id": 15382,
+      "title": "The Terror"
+    },
+    {
+      "id": 15373,
+      "title": "Vientos De Guerra"
+    },
+    {
+      "id": 11802,
+      "title": "Valeria"
+    },
+    {
+      "id": 15261,
+      "title": "Tokyo Vice"
+    },
+    {
+      "id": 4617,
+      "title": "This is us"
+    },
+    {
+      "id": 15086,
+      "title": "Rambo La Fuerza De La Libertad"
+    },
+    {
+      "id": 14982,
+      "title": "La Novia Gitana"
+    },
+    {
+      "id": 14974,
+      "title": "Sin Novedad"
+    },
+    {
+      "id": 1294,
+      "title": "Better Call Saul"
+    },
+    {
+      "id": 14945,
+      "title": "Maggie"
+    },
+    {
+      "id": 14925,
+      "title": "Animado Presidente"
+    },
+    {
+      "id": 14125,
+      "title": "Desviados"
+    },
+    {
+      "id": 14798,
+      "title": "Queer As Folk"
+    },
+    {
+      "id": 14790,
+      "title": "Millennium"
+    },
+    {
+      "id": 14743,
+      "title": "Grandes Esperanzas"
+    },
+    {
+      "id": 1586,
+      "title": "El pueblo de los malditos"
+    },
+    {
+      "id": 14725,
+      "title": "Motel Valkirias"
+    },
+    {
+      "id": 14700,
+      "title": "Resident Alien"
+    },
+    {
+      "id": 1596,
+      "title": "La Brea"
+    },
+    {
+      "id": 14669,
+      "title": "Montecristo"
+    },
+    {
+      "id": 14644,
+      "title": "Alma"
+    },
+    {
+      "id": 1527,
+      "title": "Los enviados"
+    },
+    {
+      "id": 14630,
+      "title": "Desaparecida En Lorenskog"
+    },
+    {
+      "id": 14625,
+      "title": "El Apagon"
+    },
+    {
+      "id": 14623,
+      "title": "El Apagón"
+    },
+    {
+      "id": 14609,
+      "title": "Heridas"
+    },
+    {
+      "id": 14597,
+      "title": "Fariña"
+    },
+    {
+      "id": 14580,
+      "title": "Surface"
+    },
+    {
+      "id": 14522,
+      "title": "The Last Ship"
+    },
+    {
+      "id": 14388,
+      "title": "Mash"
+    },
+    {
+      "id": 14380,
+      "title": "Barracuda Queens"
+    },
+    {
+      "id": 14169,
+      "title": "The Office"
+    },
+    {
+      "id": 9990,
+      "title": "Los Simpsons"
+    },
+    {
+      "id": 14204,
+      "title": "Perfil faslo (2023)"
+    },
+    {
+      "id": 14117,
+      "title": "La Caza Guadiana"
+    },
+    {
+      "id": 14106,
+      "title": "Carter"
+    },
+    {
+      "id": 14092,
+      "title": "Beforeigners Los Visitantes"
+    },
+    {
+      "id": 6746,
+      "title": "Título Original: Boardwalk Empire"
+    },
+    {
+      "id": 14021,
+      "title": "Snowfall"
+    },
+    {
+      "id": 13987,
+      "title": "La Unidad"
+    },
+    {
+      "id": 14000,
+      "title": "Kung Fu"
+    },
+    {
+      "id": 13980,
+      "title": "Creepshow"
+    },
+    {
+      "id": 8300,
+      "title": "El Silencio"
+    },
+    {
+      "id": 13964,
+      "title": "Somewhere Boy"
+    },
+    {
+      "id": 13119,
+      "title": "Los Windsor 70 Años Bajo Los Focos"
+    },
+    {
+      "id": 13111,
+      "title": "Expediciones Secretas Nazis"
+    },
+    {
+      "id": 13106,
+      "title": "Vitals"
+    },
+    {
+      "id": 13101,
+      "title": "Arny Historia De Una Infamia"
+    },
+    {
+      "id": 13092,
+      "title": "Love & Death"
+    },
+    {
+      "id": 13087,
+      "title": "En El Nombre De Ellas - El Caso Kote Cabezudo"
+    },
+    {
+      "id": 13078,
+      "title": "Isla Brava"
+    },
+    {
+      "id": 13069,
+      "title": "Lo Último Que Me Dijo"
+    },
+    {
+      "id": 13059,
+      "title": "Fubar"
+    },
+    {
+      "id": 13055,
+      "title": "Madre Teresa ¿Por Amor A Dios?"
+    },
+    {
+      "id": 13045,
+      "title": "Mrs Davis"
+    },
+    {
+      "id": 13018,
+      "title": "A Ambos Lados Del Abismo"
+    },
+    {
+      "id": 13025,
+      "title": "Death Parade"
+    },
+    {
+      "id": 4807,
+      "title": "Terror in Resonance (2014)"
+    },
+    {
+      "id": 7088,
+      "title": "The Big Bang Theory"
+    },
+    {
+      "id": 12662,
+      "title": "Los Thunderman"
+    },
+    {
+      "id": 12583,
+      "title": "Se ha escriito un crimen (1984)"
+    },
+    {
+      "id": 12531,
+      "title": "Los Increíbles Powell"
+    },
+    {
+      "id": 12555,
+      "title": "Izombie"
+    },
+    {
+      "id": 12546,
+      "title": "Bsiders"
+    },
+    {
+      "id": 12484,
+      "title": "Siren"
+    },
+    {
+      "id": 12474,
+      "title": "Saint X"
+    },
+    {
+      "id": 12107,
+      "title": "Columbo"
+    },
+    {
+      "id": 12128,
+      "title": "Decálogo"
+    },
+    {
+      "id": 12090,
+      "title": "The Rain"
+    },
+    {
+      "id": 12025,
+      "title": "Nikita"
+    },
+    {
+      "id": 11863,
+      "title": "El Super Agente 86"
+    },
+    {
+      "id": 11851,
+      "title": "Cuatro Bodas Y Un Funeral"
+    },
+    {
+      "id": 11836,
+      "title": "Chicago Justice"
+    },
+    {
+      "id": 11797,
+      "title": "Dracula 3 Episodios"
+    },
+    {
+      "id": 11708,
+      "title": "The Shield Al Margen De La Ley"
+    },
+    {
+      "id": 11698,
+      "title": "Los Pilares De La Tierra 8 Episodios"
+    },
+    {
+      "id": 11688,
+      "title": "Un Mundo Sin Fin"
+    },
+    {
+      "id": 6680,
+      "title": "Manifest"
+    },
+    {
+      "id": 5284,
+      "title": "Penny Dreadful"
+    },
+    {
+      "id": 11511,
+      "title": "Entre Fantasmas"
+    },
+    {
+      "id": 11367,
+      "title": "Futurama"
+    },
+    {
+      "id": 11351,
+      "title": "Jack Ryan"
+    },
+    {
+      "id": 11270,
+      "title": "Veep"
+    },
+    {
+      "id": 1557,
+      "title": "Dollhouse"
+    },
+    {
+      "id": 10964,
+      "title": "Te Walking Dead - Dead City"
+    },
+    {
+      "id": 10992,
+      "title": "The Chosen"
+    },
+    {
+      "id": 10046,
+      "title": "Succession"
+    },
+    {
+      "id": 10928,
+      "title": "Preacher"
+    },
+    {
+      "id": 10406,
+      "title": "Bones"
+    },
+    {
+      "id": 9911,
+      "title": "Ojo De Halcón"
+    },
+    {
+      "id": 10620,
+      "title": "Cosas de casa"
+    },
+    {
+      "id": 9591,
+      "title": "Clark (2022)"
+    },
+    {
+      "id": 10566,
+      "title": "Tierra Amarga"
+    },
+    {
+      "id": 10002,
+      "title": "Luna, El Misterio De Calenda"
+    },
+    {
+      "id": 10068,
+      "title": "Sons Of Anarchy"
+    },
+    {
+      "id": 10058,
+      "title": "La Actriz"
+    },
+    {
+      "id": 10034,
+      "title": "Cloak And Dagger"
+    },
+    {
+      "id": 10025,
+      "title": "Smith"
+    },
+    {
+      "id": 9761,
+      "title": "Halt And Catch Fire"
+    },
+    {
+      "id": 9737,
+      "title": "Los Originales"
+    },
+    {
+      "id": 9876,
+      "title": "La Delgada Línea Azul"
+    },
+    {
+      "id": 9866,
+      "title": "El Aprendiz De Sumo"
+    },
+    {
+      "id": 9841,
+      "title": "The Hot Zone"
+    },
+    {
+      "id": 9833,
+      "title": "Elfos"
+    },
+    {
+      "id": 9675,
+      "title": "Slow Horses"
+    },
+    {
+      "id": 9506,
+      "title": "Supernatural"
+    },
+    {
+      "id": 9622,
+      "title": "Duda Razonable"
+    },
+    {
+      "id": 9599,
+      "title": "Krypton"
+    },
+    {
+      "id": 9583,
+      "title": "Citadel"
+    },
+    {
+      "id": 9573,
+      "title": "Dopesick"
+    },
+    {
+      "id": 9554,
+      "title": "Altered Carbon"
+    },
+    {
+      "id": 9471,
+      "title": "El Tirador"
+    },
+    {
+      "id": 9325,
+      "title": "Shameless"
+    },
+    {
+      "id": 9139,
+      "title": "Chicago P D"
+    },
+    {
+      "id": 8990,
+      "title": "Chicago Med"
+    },
+    {
+      "id": 8536,
+      "title": "Caballero Luna"
+    },
+    {
+      "id": 8950,
+      "title": "Les Revenants"
+    },
+    {
+      "id": 8968,
+      "title": "Hijos Del Tercer Reich"
+    },
+    {
+      "id": 8943,
+      "title": "Los Fontaneros De La Casa Blanca"
+    },
+    {
+      "id": 8764,
+      "title": "Los Misterios De Murdoch"
+    },
+    {
+      "id": 8711,
+      "title": "Buscate La Vida"
+    },
+    {
+      "id": 8700,
+      "title": "La Verdad Sobre El Caso Harry Quebert"
+    },
+    {
+      "id": 8681,
+      "title": "Ms Marvel"
+    },
+    {
+      "id": 8663,
+      "title": "Dahmer"
+    },
+    {
+      "id": 8569,
+      "title": "Lucifer"
+    },
+    {
+      "id": 8559,
+      "title": "Barons"
+    },
+    {
+      "id": 8538,
+      "title": "Condor"
+    },
+    {
+      "id": 1518,
+      "title": "Into the West"
+    },
+    {
+      "id": 8429,
+      "title": "She-Hulk Abogada Hulka"
+    },
+    {
+      "id": 8499,
+      "title": "La Agencia"
+    },
+    {
+      "id": 2356,
+      "title": "La casa del dragon"
+    },
+    {
+      "id": 8308,
+      "title": "Loki"
+    },
+    {
+      "id": 8079,
+      "title": "Como conocí a vuestra madre"
+    },
+    {
+      "id": 8434,
+      "title": "El Internado de las cumbres"
+    },
+    {
+      "id": 8354,
+      "title": "Star Wars Rebels"
+    },
+    {
+      "id": 8347,
+      "title": "Yo Soy Groot"
+    },
+    {
+      "id": 8336,
+      "title": "Bruja Escarlata Y Visión"
+    },
+    {
+      "id": 8328,
+      "title": "Falcon Y El Soldado De Invierno"
+    },
+    {
+      "id": 8317,
+      "title": "Que Pasaría Si"
+    },
+    {
+      "id": 6820,
+      "title": "Counterpart"
+    },
+    {
+      "id": 8078,
+      "title": "Como Conocí A Vuestra Madre"
+    },
+    {
+      "id": 7815,
+      "title": "La timonel (2026)"
+    },
+    {
+      "id": 7806,
+      "title": "Bienvenido Al Club"
+    },
+    {
+      "id": 7773,
+      "title": "La Brea"
+    },
+    {
+      "id": 7708,
+      "title": "Fauda"
+    },
+    {
+      "id": 7672,
+      "title": "En coma (2026)"
+    },
+    {
+      "id": 7663,
+      "title": "Carta al Rey (2020)"
+    },
+    {
+      "id": 7071,
+      "title": "Somebody Somewhere"
+    },
+    {
+      "id": 6983,
+      "title": "Barry"
+    },
+    {
+      "id": 6943,
+      "title": "La Extraña Pareja"
+    },
+    {
+      "id": 6921,
+      "title": "Yellowjackets"
+    },
+    {
+      "id": 6899,
+      "title": "Patoaventuras"
+    },
+    {
+      "id": 3586,
+      "title": "Sin limites"
+    },
+    {
+      "id": 7374,
+      "title": "`Sin Límites`"
+    },
+    {
+      "id": 6806,
+      "title": "La Celestina"
+    },
+    {
+      "id": 6759,
+      "title": "Boardwalk Empire - Temp 2"
+    },
+    {
+      "id": 7331,
+      "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English"
+    },
+    {
+      "id": 6734,
+      "title": "El Premio De Tu Vida"
+    },
+    {
+      "id": 6673,
+      "title": "1883 105 Colmillos De Libertad"
+    },
+    {
+      "id": 6671,
+      "title": "1883 104 El Cruce"
+    },
+    {
+      "id": 6659,
+      "title": "Halo"
+    },
+    {
+      "id": 6646,
+      "title": "Star Wars Andor"
+    },
+    {
+      "id": 6642,
+      "title": "Obi-Wan Kenobi"
+    },
+    {
+      "id": 6636,
+      "title": "El Libro De Boba Fett"
+    },
+    {
+      "id": 6500,
+      "title": "Los Soprano"
+    },
+    {
+      "id": 6768,
+      "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English"
+    },
+    {
+      "id": 6513,
+      "title": "From"
+    },
+    {
+      "id": 6403,
+      "title": "Californication"
+    },
+    {
+      "id": 6362,
+      "title": "Daredevill"
+    },
+    {
+      "id": 6056,
+      "title": "Friends"
+    },
+    {
+      "id": 2993,
+      "title": "Roma"
+    },
+    {
+      "id": 6139,
+      "title": "The White Lotus"
+    },
+    {
+      "id": 1486,
+      "title": "La fuga de logan"
+    },
+    {
+      "id": 6048,
+      "title": "Ad Vitan"
+    },
+    {
+      "id": 6046,
+      "title": "Ergo Proxy 07 - Re-L124C41"
+    },
+    {
+      "id": 6031,
+      "title": "24 Legacy"
+    },
+    {
+      "id": 5990,
+      "title": "Chuck"
+    },
+    {
+      "id": 5809,
+      "title": "Seinfeld"
+    },
+    {
+      "id": 5040,
+      "title": "The Crown"
+    },
+    {
+      "id": 5098,
+      "title": "Battlestar Galactica"
+    },
+    {
+      "id": 1286,
+      "title": "Chernobyl"
+    },
+    {
+      "id": 4937,
+      "title": "Stranger Things"
+    },
+    {
+      "id": 4915,
+      "title": "Mi otra yo"
+    },
+    {
+      "id": 4792,
+      "title": "Odd Taxi"
+    },
+    {
+      "id": 4760,
+      "title": "Tan muertos como yo"
+    },
+    {
+      "id": 4748,
+      "title": "El desorden que dejas"
+    },
+    {
+      "id": 4604,
+      "title": "Asi aprenderas"
+    },
+    {
+      "id": 4586,
+      "title": "Quanton Leap"
+    },
+    {
+      "id": 4484,
+      "title": "Pacific Blue"
+    },
+    {
+      "id": 4472,
+      "title": "La maldición de Widow’s Bay"
+    },
+    {
+      "id": 4461,
+      "title": "Barrio Esperanza"
+    },
+    {
+      "id": 4456,
+      "title": "La odisea"
+    },
+    {
+      "id": 4444,
+      "title": "Star Wars: Maul - Señor de las sombras (2026)"
+    },
+    {
+      "id": 4431,
+      "title": "Stranger Things Relatos del 85"
+    },
+    {
+      "id": 4199,
+      "title": "Expediente x"
+    },
+    {
+      "id": 4184,
+      "title": "Hasta que el cielo nos reúna"
+    },
+    {
+      "id": 3822,
+      "title": "La doctora quinn"
+    },
+    {
+      "id": 4148,
+      "title": "El chacal"
+    },
+    {
+      "id": 4129,
+      "title": "Silo"
+    },
+    {
+      "id": 4112,
+      "title": "Aurora Teagarden"
+    },
+    {
+      "id": 4083,
+      "title": "Noche y dia"
+    },
+    {
+      "id": 4073,
+      "title": "Creaciones de ensueño"
+    },
+    {
+      "id": 2381,
+      "title": "Fringe"
+    },
+    {
+      "id": 3907,
+      "title": "Rumbo al infierno"
+    },
+    {
+      "id": 3794,
+      "title": "Paraiso"
+    },
+    {
+      "id": 3692,
+      "title": "Malcolm"
+    },
+    {
+      "id": 3645,
+      "title": "Cancion triste de hill street"
+    },
+    {
+      "id": 3622,
+      "title": "Mindhunter"
+    },
+    {
+      "id": 3595,
+      "title": "The boys"
+    },
+    {
+      "id": 3560,
+      "title": "Eric"
+    },
+    {
+      "id": 3361,
+      "title": "Shogun"
+    },
+    {
+      "id": 2271,
+      "title": "Juego de tronos"
+    },
+    {
+      "id": 3451,
+      "title": "Nos vemos en mi 19ª vida"
+    },
+    {
+      "id": 3420,
+      "title": "Lost in space"
+    },
+    {
+      "id": 3407,
+      "title": "Constelación"
+    },
+    {
+      "id": 3369,
+      "title": "Quien mató a Sara?"
+    },
+    {
+      "id": 3342,
+      "title": "El problema de los tres cuerpos"
+    },
+    {
+      "id": 3336,
+      "title": "El triangulo de las bermudas"
+    },
+    {
+      "id": 3317,
+      "title": "Regalo de dios"
+    },
+    {
+      "id": 3297,
+      "title": "Agencia de citas"
+    },
+    {
+      "id": 3277,
+      "title": "Mama enojada"
+    },
+    {
+      "id": 3088,
+      "title": "Farmacia de guardia"
+    },
+    {
+      "id": 3082,
+      "title": "The control room"
+    },
+    {
+      "id": 3063,
+      "title": "Amor, Matrimonio y Divorcio"
+    },
+    {
+      "id": 3039,
+      "title": "Como aman los hombres"
+    },
+    {
+      "id": 2980,
+      "title": "Nuggets de pollo"
+    },
+    {
+      "id": 2971,
+      "title": "Bandidos"
+    },
+    {
+      "id": 2741,
+      "title": "Smallville"
+    },
+    {
+      "id": 2580,
+      "title": "Dragon Ball"
+    },
+    {
+      "id": 2556,
+      "title": "Surreal State"
+    },
+    {
+      "id": 2491,
+      "title": "Breaking Bad"
+    },
+    {
+      "id": 2482,
+      "title": "Castigo"
+    },
+    {
+      "id": 2368,
+      "title": "El señor de los anillos - los anillos de poder"
+    },
+    {
+      "id": 2258,
+      "title": "Atrapa a un ladrón"
+    },
+    {
+      "id": 2238,
+      "title": "Carlos Rey Emperador"
+    },
+    {
+      "id": 2023,
+      "title": "7 Vidas"
+    },
+    {
+      "id": 1793,
+      "title": "Mr Robot"
+    },
+    {
+      "id": 1538,
+      "title": "The revenants"
+    },
+    {
+      "id": 1444,
+      "title": "Spartacus"
+    },
+    {
+      "id": 1383,
+      "title": "Seaquest"
+    },
+    {
+      "id": 1347,
+      "title": "The AO"
+    },
+    {
+      "id": 360,
+      "title": "Se ha escrito un crimen"
+    },
+    {
+      "id": 1176,
+      "title": "El juego de la muerte"
+    },
+    {
+      "id": 1128,
+      "title": "Isabel"
+    },
+    {
+      "id": 989,
+      "title": "Jovenes Jinetes"
+    },
+    {
+      "id": 891,
+      "title": "El ministerio del tiempo"
+    },
+    {
+      "id": 462,
+      "title": "Agujetas de color de rosa"
+    },
+    {
+      "id": 263,
+      "title": "Equipo A"
+    },
+    {
+      "id": 184,
+      "title": "Banshee"
+    },
+    {
+      "id": 82,
+      "title": "Aguila Roja"
+    },
+    {
+      "id": 2,
+      "title": "Solo asesinatos en el edificio"
+    }
+  ]
+}
