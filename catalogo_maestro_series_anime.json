@@ -220,6 +220,185 @@
     ]
   },
   {
+    "title": "Ataque A Los Titanes",
+    "total_episodes": 131,
+    "seasons": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "total_gb": 103.87,
+    "sub_bloques": 26,
+    "ranges": [
+      "413380 - 499813",
+      "413385 - 499818",
+      "413386 - 499819",
+      "413393 - 499801",
+      "413395 - 499803",
+      "413396 - 499804",
+      "413397 - 499805",
+      "413398 - 499806",
+      "413400 - 499808",
+      "413437 - 413453",
+      "413438 - 413454",
+      "413439 - 413455",
+      "413440 - 413456",
+      "413441 - 413457",
+      "413442 - 413458",
+      "413443 - 413459",
+      "413444 - 413460",
+      "413445 - 413461",
+      "413446 - 413462",
+      "413447 - 413463",
+      "413448 - 413464",
+      "413449 - 413465",
+      "413450 - 413466",
+      "413451 - 413467",
+      "413452 - 413468",
+      "413561 - 413624"
+    ],
+    "sample_files": [
+      "Ataque_a_los_Titanes_S01E13_Deseos_primarios_La_defensa_de_Trost.mp4",
+      "Ataque_a_los_Titanes_S01E13_Deseos_primarios_La_defensa_de_Trost.mkv",
+      "Ataque_a_los_Titanes_S01E18_El_bosque_de_los_árboles_gigantes_57ª.mp4"
+    ]
+  },
+  {
+    "title": "Baki Hanma",
+    "total_episodes": 130,
+    "seasons": [
+      1,
+      2
+    ],
+    "total_gb": 81.88,
+    "sub_bloques": 41,
+    "ranges": [
+      "396446 - 402863",
+      "396447 - 402864",
+      "396448 - 402865",
+      "396449 - 402866",
+      "396450 - 402867",
+      "396451 - 402868",
+      "396452 - 402869",
+      "396453 - 402870",
+      "396454 - 402871",
+      "396455 - 402872",
+      "396456 - 402873",
+      "396457 - 402874",
+      "396458 - 402903",
+      "396459 - 402904",
+      "396460 - 402905",
+      "396461 - 402906",
+      "396462 - 402907",
+      "396463 - 402908",
+      "396464 - 402909",
+      "396465 - 402910",
+      "396466 - 402911",
+      "396467 - 402912",
+      "396468 - 402913",
+      "396469 - 402914",
+      "396470 - 402915",
+      "396472 - 402901",
+      "396474 - 402891",
+      "398602 - 402916",
+      "398603 - 402917",
+      "398604 - 402918",
+      "398605 - 402919",
+      "398606 - 402920",
+      "398607 - 402921",
+      "398608 - 402922",
+      "398609 - 402923",
+      "398610 - 402924",
+      "398611 - 402925",
+      "398612 - 402926",
+      "398613 - 402927",
+      "398614 - 402928",
+      "398615 - 402929"
+    ],
+    "sample_files": [
+      "Baki Hanma_S01E01_El estudiante más fuerte del mundo.mkv",
+      "Baki Hanma_S01E02_Diferentes estilos de artes marciales.mkv",
+      "Baki Hanma_S01E03_Prisión e infierno.mkv"
+    ]
+  },
+  {
+    "title": "The Rising Of The Shield Hero",
+    "total_episodes": 129,
+    "seasons": [
+      1,
+      4
+    ],
+    "total_gb": 58.04,
+    "sub_bloques": 59,
+    "ranges": [
+      "426134 - 481284",
+      "426135 - 481285",
+      "426136 - 481286",
+      "426137 - 481287",
+      "426138 - 481343",
+      "426139 - 481289",
+      "426140 - 481290",
+      "426143 - 481293",
+      "426144 - 481294",
+      "426145 - 481295",
+      "426146 - 481296",
+      "426147 - 481297",
+      "426149 - 481299",
+      "426150 - 481300",
+      "426151 - 481301",
+      "426152 - 481302",
+      "426153 - 481303",
+      "426154 - 481304",
+      "426155 - 481305",
+      "426156 - 481306",
+      "426157 - 481307",
+      "426158 - 481308",
+      "544276 - 544350",
+      "544277 - 544351",
+      "544278 - 544352",
+      "544279 - 544353",
+      "544280 - 544354",
+      "544281 - 544355",
+      "544282 - 544356",
+      "544283 - 544357",
+      "544284 - 544358",
+      "544285 - 544359",
+      "544286 - 544360",
+      "544287 - 544361",
+      "544288 - 544362",
+      "544290 - 544364",
+      "544291 - 544365",
+      "544292 - 544366",
+      "544293 - 544367",
+      "544294 - 544368",
+      "544295 - 544369",
+      "544296 - 544370",
+      "544297 - 544371",
+      "544298 - 544372",
+      "544299 - 544373",
+      "544300 - 544374",
+      "544301 - 544375",
+      "544302 - 544376",
+      "544303 - 544377",
+      "544304 - 544378",
+      "544305 - 544379",
+      "544306 - 544380",
+      "544307 - 544381",
+      "544308 - 544382",
+      "544309 - 544383",
+      "544310 - 544384",
+      "544311 - 544385",
+      "544312 - 544386",
+      "544313 - 544387"
+    ],
+    "sample_files": [
+      "The_Rising_of_the_Shield_Hero_1x01_El_Héroe_del_Escudo_1080p.mkv",
+      "The_Rising_of_the_Shield_Hero_1x02_La_Niña_Esclava_1080p.mkv",
+      "The_Rising_of_the_Shield_Hero_1x03_Olas_de_la_Calamidad_1080p.mkv"
+    ]
+  },
+  {
     "title": "Fullmetal Alchemist Brotherhood",
     "total_episodes": 121,
     "seasons": [
@@ -408,25 +587,6 @@
     "sample_files": [
       "(SNGK) Supercampeones ~ Ashita e Freekick -DVDBOX DUAL- 01.avi",
       "(SNGK) Supercampeones ~ Ashita e Freekick -DVDBOX DUAL- 02.avi"
-    ]
-  },
-  {
-    "title": "Ataque A Los Titanes",
-    "total_episodes": 81,
-    "seasons": [
-      2,
-      3,
-      4
-    ],
-    "total_gb": 78.65,
-    "sub_bloques": 1,
-    "ranges": [
-      "413561 - 413624"
-    ],
-    "sample_files": [
-      "Ataque a los Titanes - 2x01 - El titán bestia.mp4",
-      "Ataque a los Titanes - S02E01 - El titán bestia @Compartir.mkv",
-      "Ataque a los Titanes - 2x02 - He vuelto a casa.mp4"
     ]
   },
   {
@@ -870,45 +1030,6 @@
     ]
   },
   {
-    "title": "The Rising Of The Shield Hero",
-    "total_episodes": 55,
-    "seasons": [
-      1,
-      4
-    ],
-    "total_gb": 20.53,
-    "sub_bloques": 22,
-    "ranges": [
-      "426134 - 481284",
-      "426135 - 481285",
-      "426136 - 481286",
-      "426137 - 481287",
-      "426138 - 481343",
-      "426139 - 481289",
-      "426140 - 481290",
-      "426143 - 481293",
-      "426144 - 481294",
-      "426145 - 481295",
-      "426146 - 481296",
-      "426147 - 481297",
-      "426149 - 481299",
-      "426150 - 481300",
-      "426151 - 481301",
-      "426152 - 481302",
-      "426153 - 481303",
-      "426154 - 481304",
-      "426155 - 481305",
-      "426156 - 481306",
-      "426157 - 481307",
-      "426158 - 481308"
-    ],
-    "sample_files": [
-      "The_Rising_of_the_Shield_Hero_1x01_El_Héroe_del_Escudo_1080p.mkv",
-      "The_Rising_of_the_Shield_Hero_1x02_La_Niña_Esclava_1080p.mkv",
-      "The_Rising_of_the_Shield_Hero_1x03_Olas_de_la_Calamidad_1080p.mkv"
-    ]
-  },
-  {
     "title": "Pollyanna",
     "total_episodes": 53,
     "seasons": [
@@ -1198,6 +1319,27 @@
     ]
   },
   {
+    "title": "Jujutsu Kaisen",
+    "total_episodes": 50,
+    "seasons": [
+      1,
+      2,
+      3
+    ],
+    "total_gb": 20.6,
+    "sub_bloques": 3,
+    "ranges": [
+      "407137 - 546334",
+      "407169 - 407183",
+      "410378 - 410378"
+    ],
+    "sample_files": [
+      "Jujutsu Kaisen 1x01 - Ryomen Sukuna [1080p].mkv",
+      "Jujutsu Kaisen 1x02 - Por mí [1080p].mkv",
+      "Jujutsu Kaisen 1x03 - Chica de Acero [1080p].mkv"
+    ]
+  },
+  {
     "title": "Shangri La Frontier",
     "total_episodes": 50,
     "seasons": [
@@ -1213,26 +1355,6 @@
       "Shangri-La Frontier 1x01.1080p.Dual.SANDISKO.mkv",
       "Shangri-La Frontier 1x02.1080p.Dual.SANDISKO.mkv",
       "Shangri-La Frontier 1x03.1080p.Dual.SANDISKO.mkv"
-    ]
-  },
-  {
-    "title": "Jujutsu Kaisen",
-    "total_episodes": 49,
-    "seasons": [
-      1,
-      2,
-      3
-    ],
-    "total_gb": 20.22,
-    "sub_bloques": 2,
-    "ranges": [
-      "407137 - 546334",
-      "407169 - 407183"
-    ],
-    "sample_files": [
-      "Jujutsu Kaisen 1x01 - Ryomen Sukuna [1080p].mkv",
-      "Jujutsu Kaisen 1x02 - Por mí [1080p].mkv",
-      "Jujutsu Kaisen 1x03 - Chica de Acero [1080p].mkv"
     ]
   },
   {
@@ -1926,20 +2048,52 @@
     ]
   },
   {
-    "title": "Ova",
+    "title": "The Eminence In Shadow",
     "total_episodes": 36,
     "seasons": [
       1
     ],
-    "total_gb": 21.0,
-    "sub_bloques": 1,
+    "total_gb": 11.65,
+    "sub_bloques": 33,
     "ranges": [
-      "398849 - 404949"
+      "428376 - 428376",
+      "428377 - 428377",
+      "428378 - 428378",
+      "428379 - 428379",
+      "428380 - 428380",
+      "428381 - 428381",
+      "428382 - 428382",
+      "428383 - 428383",
+      "428384 - 428384",
+      "428385 - 428385",
+      "428386 - 428386",
+      "428387 - 428387",
+      "428388 - 428388",
+      "428389 - 428389",
+      "428390 - 428390",
+      "428391 - 428391",
+      "428392 - 428392",
+      "428393 - 428393",
+      "428394 - 428394",
+      "428395 - 428395",
+      "428396 - 428396",
+      "428397 - 428397",
+      "428398 - 428398",
+      "428399 - 428399",
+      "428400 - 428400",
+      "428401 - 428401",
+      "428402 - 428402",
+      "428403 - 428403",
+      "428404 - 428404",
+      "428405 - 428405",
+      "428406 - 428406",
+      "428407 - 428407",
+      "481447 - 481453"
     ],
     "sample_files": [
-      "01 - OVA.mkv",
-      "02 - OVA.mkv",
-      "03 - OVA.mkv"
+      "The Eminence in Shadow_S01E01_Episodio 1.mkv",
+      "The Eminence in Shadow_S01E02_Episodio 2.mkv",
+      "The Eminence in Shadow_S01E03_Episodio 3.mkv"
     ]
   },
   {
@@ -2800,22 +2954,6 @@
     ]
   },
   {
-    "title": "Baki Hanma",
-    "total_episodes": 24,
-    "seasons": [
-      2
-    ],
-    "total_gb": 29.22,
-    "sub_bloques": 1,
-    "ranges": [
-      "396472 - 402901"
-    ],
-    "sample_files": [
-      "Baki Hanma - S02E01 - New History of Mankind @Compartir.mkv",
-      "Baki Hanma - S02E02 - Completely Surrounded @Compartir.mkv"
-    ]
-  },
-  {
     "title": "Onimusha",
     "total_episodes": 24,
     "seasons": [
@@ -3657,6 +3795,37 @@
     ]
   },
   {
+    "title": "De Yakuza A Amo De Casa",
+    "total_episodes": 15,
+    "seasons": [
+      1
+    ],
+    "total_gb": 3.34,
+    "sub_bloques": 15,
+    "ranges": [
+      "395629 - 395629",
+      "395630 - 395630",
+      "395631 - 395631",
+      "395632 - 395632",
+      "395633 - 395633",
+      "395634 - 395634",
+      "395635 - 395635",
+      "395636 - 395636",
+      "395637 - 395637",
+      "395638 - 395638",
+      "395639 - 395639",
+      "395640 - 395640",
+      "395641 - 395641",
+      "395642 - 395642",
+      "395643 - 395643"
+    ],
+    "sample_files": [
+      "De yakuza a amo de casa_S01E01_Episodio 1.mkv",
+      "De yakuza a amo de casa_S01E02_Episodio 2.mkv",
+      "De yakuza a amo de casa_S01E03_Episodio 3.mkv"
+    ]
+  },
+  {
     "title": "Mazinger Z @La Comunidad",
     "total_episodes": 15,
     "seasons": [
@@ -4151,21 +4320,6 @@
     ]
   },
   {
-    "title": "Casi 15 Años Melodia Juvenil Piano",
-    "total_episodes": 12,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.78,
-    "sub_bloques": 1,
-    "ranges": [
-      "384731 - 384742"
-    ],
-    "sample_files": [
-      "Casi_15_años_Melodia_Juvenil_Piano.mp4"
-    ]
-  },
-  {
     "title": "Btooom!",
     "total_episodes": 12,
     "seasons": [
@@ -4523,6 +4677,34 @@
     ]
   },
   {
+    "title": "Kakegurui",
+    "total_episodes": 12,
+    "seasons": [
+      1
+    ],
+    "total_gb": 3.5,
+    "sub_bloques": 12,
+    "ranges": [
+      "408112 - 408112",
+      "408113 - 408113",
+      "408114 - 408114",
+      "408115 - 408115",
+      "408116 - 408116",
+      "408117 - 408117",
+      "408118 - 408118",
+      "408119 - 408119",
+      "408120 - 408120",
+      "408121 - 408121",
+      "408122 - 408122",
+      "408123 - 408123"
+    ],
+    "sample_files": [
+      "Kakegurui_S01E01_Episodio 1.mkv",
+      "Kakegurui_S01E02_Episodio 2.mkv",
+      "Kakegurui_S01E03_Episodio 3.mkv"
+    ]
+  },
+  {
     "title": "Signos De Afecto",
     "total_episodes": 12,
     "seasons": [
@@ -4672,6 +4854,56 @@
     ]
   },
   {
+    "title": "Después De La Lluvia",
+    "total_episodes": 12,
+    "seasons": [
+      1
+    ],
+    "total_gb": 3.11,
+    "sub_bloques": 12,
+    "ranges": [
+      "428363 - 428363",
+      "428364 - 428364",
+      "428365 - 428365",
+      "428366 - 428366",
+      "428367 - 428367",
+      "428368 - 428368",
+      "428369 - 428369",
+      "428370 - 428370",
+      "428371 - 428371",
+      "428372 - 428372",
+      "428373 - 428373",
+      "428374 - 428374"
+    ],
+    "sample_files": [
+      "Después de la lluvia_S01E01_Episodio 1.mkv",
+      "Después de la lluvia_S01E02_Episodio 2.mkv",
+      "Después de la lluvia_S01E03_Episodio 3.mkv"
+    ]
+  },
+  {
+    "title": "Lupin Zero",
+    "total_episodes": 12,
+    "seasons": [
+      1
+    ],
+    "total_gb": 18.18,
+    "sub_bloques": 6,
+    "ranges": [
+      "433481 - 434897",
+      "433482 - 434898",
+      "433483 - 434899",
+      "433484 - 434900",
+      "433485 - 434901",
+      "433486 - 434902"
+    ],
+    "sample_files": [
+      "Lupin Zero_S01E01_El joven Lupin conoce al lobo.mkv",
+      "Lupin Zero_S01E02_A por el tesoro secreto del tren.mkv",
+      "Lupin Zero_S01E03_El nieto del Primero pelea por su herencia.mkv"
+    ]
+  },
+  {
     "title": "Kabaneri @Anime Ocean",
     "total_episodes": 12,
     "seasons": [
@@ -4686,23 +4918,6 @@
       "[S1-01] Kabaneri [720pxDub] @Anime_Ocean.mkv",
       "[S1-02] Kabaneri [720pxDub] @Anime_Ocean.mkv",
       "[S1-03] Kabaneri [720pxDub] @Anime_Ocean.mkv"
-    ]
-  },
-  {
-    "title": "Ballenacast",
-    "total_episodes": 12,
-    "seasons": [
-      1
-    ],
-    "total_gb": 3.72,
-    "sub_bloques": 1,
-    "ranges": [
-      "434867 - 434878"
-    ],
-    "sample_files": [
-      "BallenaCast - 01.mp4",
-      "BallenaCast - 02.mp4",
-      "BallenaCast - 03.mp4"
     ]
   },
   {
@@ -5029,22 +5244,6 @@
     ]
   },
   {
-    "title": "Opening",
-    "total_episodes": 11,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.19,
-    "sub_bloques": 1,
-    "ranges": [
-      "383892 - 387638"
-    ],
-    "sample_files": [
-      "00 Opening.mp4",
-      "00. opening - [DVDrip] [spanish].mp4"
-    ]
-  },
-  {
     "title": "Dna²",
     "total_episodes": 11,
     "seasons": [
@@ -5179,23 +5378,6 @@
       "ulises 31 1x02 Heratos 1080p stereo dual AC3 fixed_new.mkv",
       "ulises 31 1x05 El planeta perdido 1080p stereo dual AC3_new.mkv",
       "Ulises 31 1x09 La Esfinge 1080p stereo dual AC3 (1)_new.mkv"
-    ]
-  },
-  {
-    "title": "Gok",
-    "total_episodes": 10,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.0,
-    "sub_bloques": 1,
-    "ranges": [
-      "385797 - 385806"
-    ],
-    "sample_files": [
-      "Gok-01.mkv",
-      "Gok-02.mkv",
-      "Gok-03.mkv"
     ]
   },
   {
@@ -5340,7 +5522,7 @@
     ]
   },
   {
-    "title": "Callofthenight",
+    "title": "Callofthenigh",
     "total_episodes": 10,
     "seasons": [
       1
@@ -5885,6 +6067,30 @@
     ]
   },
   {
+    "title": "X09",
+    "total_episodes": 7,
+    "seasons": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "total_gb": 4.74,
+    "sub_bloques": 5,
+    "ranges": [
+      "384904 - 384904",
+      "387293 - 387293",
+      "399361 - 399390",
+      "409739 - 409970",
+      "409741 - 409741"
+    ],
+    "sample_files": [
+      "04x09 - Voluntarios.mkv",
+      "03x09.mkv",
+      "02x09 - Episodio 9.mkv"
+    ]
+  },
+  {
     "title": "X02",
     "total_episodes": 7,
     "seasons": [
@@ -5961,6 +6167,28 @@
     ]
   },
   {
+    "title": "Tougen Anki",
+    "total_episodes": 7,
+    "seasons": [
+      1
+    ],
+    "total_gb": 3.31,
+    "sub_bloques": 6,
+    "ranges": [
+      "451547 - 451548",
+      "522184 - 522184",
+      "522185 - 522185",
+      "522186 - 522186",
+      "522187 - 522187",
+      "522188 - 522188"
+    ],
+    "sample_files": [
+      "Tougen Anki 1x1.mkv",
+      "Tougen Anki 1x2.mkv",
+      "Tougen Anki_S01E17_Episodio 17.mkv"
+    ]
+  },
+  {
     "title": "Tatsuki Fujimoto 17 26",
     "total_episodes": 7,
     "seasons": [
@@ -5992,23 +6220,6 @@
       "Yakitori Soldados de la desdicha - S01E01.mkv",
       "Yakitori Soldados de la desdicha - S01E02.mkv",
       "Yakitori Soldados de la desdicha - S01E03.mkv"
-    ]
-  },
-  {
-    "title": "Ending",
-    "total_episodes": 6,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.09,
-    "sub_bloques": 1,
-    "ranges": [
-      "383906 - 400037"
-    ],
-    "sample_files": [
-      "Ending.mp4",
-      "ending - [DVDrip] [spanish].mp4",
-      "27 ending.mp4"
     ]
   },
   {
@@ -6056,25 +6267,48 @@
     ]
   },
   {
-    "title": "X09",
+    "title": "X07",
     "total_episodes": 6,
     "seasons": [
-      1,
       2,
       3
     ],
-    "total_gb": 4.4,
-    "sub_bloques": 4,
+    "total_gb": 4.49,
+    "sub_bloques": 5,
     "ranges": [
-      "387293 - 387293",
-      "399361 - 399390",
-      "409739 - 409970",
-      "409741 - 409741"
+      "387291 - 387291",
+      "389545 - 389545",
+      "396955 - 396955",
+      "399359 - 399388",
+      "409968 - 409968"
     ],
     "sample_files": [
-      "03x09.mkv",
-      "02x09 - Episodio 9.mkv",
-      "2X09.mp4"
+      "03x07.mkv",
+      "02x07 - Voluntad.mkv",
+      "2x07 - Capitulo de la tortuga negra. Caos.avi"
+    ]
+  },
+  {
+    "title": "X08",
+    "total_episodes": 6,
+    "seasons": [
+      2,
+      3,
+      4
+    ],
+    "total_gb": 4.31,
+    "sub_bloques": 5,
+    "ranges": [
+      "387292 - 387292",
+      "396956 - 396956",
+      "399360 - 399389",
+      "409969 - 409969",
+      "425628 - 425628"
+    ],
+    "sample_files": [
+      "03x08.mkv",
+      "2x08 - Capitulo del ave Bermellon. Un dia fatal.avi",
+      "02x08 - Episodio 8.mkv"
     ]
   },
   {
@@ -6134,20 +6368,21 @@
     ]
   },
   {
-    "title": "Dias",
+    "title": "Lobezno Y Los Xmen",
     "total_episodes": 6,
     "seasons": [
       1
     ],
-    "total_gb": 1.46,
-    "sub_bloques": 1,
+    "total_gb": 0.46,
+    "sub_bloques": 2,
     "ranges": [
-      "392380 - 392387"
+      "396498 - 396500",
+      "396521 - 396523"
     ],
     "sample_files": [
-      "19 14 dias (1 de 6) [Spanish DVDRip].avi",
-      "20 14 dias (2 de 6)[Spanish DVDRip].avi",
-      "21 14 dias (3 de 6)[Spanish DVDRip].avi"
+      "[S01.E00] Lobezno y los XMen - Retrospectiva Parte 1.mp4",
+      "[S01.E01] Lobezno y los XMen - Retrospectiva Parte 2.mp4",
+      "[S01.E02] Lobezno y los XMen - Retrospectiva Parte 3.mp4"
     ]
   },
   {
@@ -6319,48 +6554,6 @@
       "03x06.mkv",
       "02x06 - Episodio 6.mkv",
       "2X06.mp4"
-    ]
-  },
-  {
-    "title": "X07",
-    "total_episodes": 5,
-    "seasons": [
-      2,
-      3
-    ],
-    "total_gb": 3.8,
-    "sub_bloques": 4,
-    "ranges": [
-      "387291 - 387291",
-      "396955 - 396955",
-      "399359 - 399388",
-      "409968 - 409968"
-    ],
-    "sample_files": [
-      "03x07.mkv",
-      "2x07 - Capitulo de la tortuga negra. Caos.avi",
-      "02x07 - Episodio 7.mkv"
-    ]
-  },
-  {
-    "title": "X08",
-    "total_episodes": 5,
-    "seasons": [
-      2,
-      3
-    ],
-    "total_gb": 4.2,
-    "sub_bloques": 4,
-    "ranges": [
-      "387292 - 387292",
-      "396956 - 396956",
-      "399360 - 399389",
-      "409969 - 409969"
-    ],
-    "sample_files": [
-      "03x08.mkv",
-      "2x08 - Capitulo del ave Bermellon. Un dia fatal.avi",
-      "02x08 - Episodio 8.mkv"
     ]
   },
   {
@@ -6854,6 +7047,25 @@
       "Baki Dou El samurái invencible S01E02 El ritmo @Compartir.mkv",
       "Baki Dou El samurái invencible S01E04 Chico @Compartir.mkv",
       "Baki Dou El samurái invencible S01E07 Pluma @Compartir.mkv"
+    ]
+  },
+  {
+    "title": "Diente De León",
+    "total_episodes": 5,
+    "seasons": [
+      1
+    ],
+    "total_gb": 3.97,
+    "sub_bloques": 3,
+    "ranges": [
+      "543514 - 545136",
+      "543516 - 545138",
+      "545133 - 545133"
+    ],
+    "sample_files": [
+      "Diente_de_león_S01E05_Todo_el_mundo_ha_sido_un_genio_alguna_vez.mp4",
+      "Diente_de_león_S01E05_Todo_el_mundo_ha_sido_un_genio_alguna_vez.mkv",
+      "Diente_de_león_S01E07_No_dejes_para_mañana_lo_que_puedas_hacer_hoy.mp4"
     ]
   },
   {
@@ -7455,23 +7667,6 @@
     ]
   },
   {
-    "title": "Promesa",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.3,
-    "sub_bloques": 1,
-    "ranges": [
-      "386418 - 402590"
-    ],
-    "sample_files": [
-      "09. Promesa.avi",
-      "08  Promesa.avi",
-      "05 - Promesa.mkv"
-    ]
-  },
-  {
     "title": "X11",
     "total_episodes": 4,
     "seasons": [
@@ -7526,201 +7721,6 @@
     ]
   },
   {
-    "title": "Baki Hanma S02E01 Una Nueva Historia De La Humanidad",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.88,
-    "sub_bloques": 1,
-    "ranges": [
-      "396458 - 402903"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E01_Una nueva historia de la humanidad.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E02 Completamente Rodeado",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.73,
-    "sub_bloques": 1,
-    "ranges": [
-      "396459 - 402904"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E02_Completamente rodeado.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E03 Fuerza De La Naturaleza Contra Fuerza Brutal",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.87,
-    "sub_bloques": 1,
-    "ranges": [
-      "396460 - 402905"
-    ],
-    "sample_files": [
-      "Baki_Hanma_S02E03_Fuerza_de_la_naturaleza_contra_fuerza_brutal.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E04 Las Lágrimas De Pickle",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.74,
-    "sub_bloques": 1,
-    "ranges": [
-      "396461 - 402906"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E04_Las lágrimas de Pickle.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E05 Solo Quiero Verte",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.75,
-    "sub_bloques": 1,
-    "ranges": [
-      "396462 - 402907"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E05_Solo quiero verte.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E06 Más Allá De La Barrera Del Sonido",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.64,
-    "sub_bloques": 1,
-    "ranges": [
-      "396463 - 402908"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E06_Más allá de la barrera del sonido.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E07 El Momento Álgido",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.01,
-    "sub_bloques": 1,
-    "ranges": [
-      "396464 - 402909"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E07_El momento álgido.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E08 Un Alma Salvaje",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.08,
-    "sub_bloques": 1,
-    "ranges": [
-      "396465 - 402910"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E08_Un alma salvaje.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E09 Devorándose Entre Ellos",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.16,
-    "sub_bloques": 1,
-    "ranges": [
-      "396466 - 402911"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E09_Devorándose entre ellos.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E10 La Reserva De Alimentos",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.98,
-    "sub_bloques": 1,
-    "ranges": [
-      "396467 - 402912"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E10_La reserva de alimentos.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E11 El Débil Se Come Al Poderoso",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.17,
-    "sub_bloques": 1,
-    "ranges": [
-      "396468 - 402913"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E11_El débil se come al poderoso.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E12 La Forma Definitiva",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.98,
-    "sub_bloques": 1,
-    "ranges": [
-      "396469 - 402914"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E12_La forma definitiva.mkv"
-    ]
-  },
-  {
-    "title": "Baki Hanma S02E13 La Norma No Escrita Del Combate",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.1,
-    "sub_bloques": 1,
-    "ranges": [
-      "396470 - 402915"
-    ],
-    "sample_files": [
-      "Baki Hanma_S02E13_La norma no escrita del combate.mkv"
-    ]
-  },
-  {
     "title": "X14 Dragon Ball Super",
     "total_episodes": 4,
     "seasons": [
@@ -7759,23 +7759,6 @@
       "Yu-Gi-Oh! S01E02 El Desafío [Multi-Audio] [Multi-Subs].mkv",
       "Yu-Gi-Oh! S01E11 Un Manta [Multi-Audio] [Multi-Subs].mkv",
       "Yu-Gi-Oh! S02E04 Dar La Cara [Multi-Audio] [Multi-Subs].mkv"
-    ]
-  },
-  {
-    "title": "King",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.67,
-    "sub_bloques": 1,
-    "ranges": [
-      "402825 - 402828"
-    ],
-    "sample_files": [
-      "KingS1 - 02.mp4",
-      "KingS1 - 03.mp4",
-      "KingS1 - 04.mp4"
     ]
   },
   {
@@ -8065,23 +8048,6 @@
     ]
   },
   {
-    "title": "The Eminence In Shadow",
-    "total_episodes": 4,
-    "seasons": [
-      1
-    ],
-    "total_gb": 4.22,
-    "sub_bloques": 1,
-    "ranges": [
-      "481447 - 481453"
-    ],
-    "sample_files": [
-      "The Eminence in Shadow 1x01 (1080p).mkv",
-      "The Eminence in Shadow 1x02 (1080p).mkv",
-      "The Eminence in Shadow 1x03 (1080p).mkv"
-    ]
-  },
-  {
     "title": "Dominion",
     "total_episodes": 4,
     "seasons": [
@@ -8114,54 +8080,6 @@
       "[CR] BLUELOCK - S01E03 [720p].mp4",
       "[YK] BLUELOCK (Spanish Dub) - S01E04 [720p].mp4",
       "[YK] BLUELOCK Season 1 Episode 23.mp4"
-    ]
-  },
-  {
-    "title": "La Foto Familiar",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.65,
-    "sub_bloques": 1,
-    "ranges": [
-      "387172 - 387175"
-    ],
-    "sample_files": [
-      "45 - La foto familiar.avi"
-    ]
-  },
-  {
-    "title": "Eding",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.05,
-    "sub_bloques": 1,
-    "ranges": [
-      "387691 - 387693"
-    ],
-    "sample_files": [
-      "99 Eding 1.mp4",
-      "99 Eding 2.mp4",
-      "99 Eding 3.mp4"
-    ]
-  },
-  {
-    "title": "Conflicto",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.74,
-    "sub_bloques": 1,
-    "ranges": [
-      "391633 - 402599"
-    ],
-    "sample_files": [
-      "17  Conflicto.avi",
-      "6 - Conflicto.mkv"
     ]
   },
   {
@@ -8199,41 +8117,7 @@
     ]
   },
   {
-    "title": "Lobezno Y Los Xmen Retrospectiva Parte",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.22,
-    "sub_bloques": 1,
-    "ranges": [
-      "396498 - 396500"
-    ],
-    "sample_files": [
-      "[S01.E00] Lobezno y los XMen - Retrospectiva Parte 1.mp4",
-      "[S01.E01] Lobezno y los XMen - Retrospectiva Parte 2.mp4",
-      "[S01.E02] Lobezno y los XMen - Retrospectiva Parte 3.mp4"
-    ]
-  },
-  {
-    "title": "Lobezno Y Los Xmen Previsión Parte",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.24,
-    "sub_bloques": 1,
-    "ranges": [
-      "396521 - 396523"
-    ],
-    "sample_files": [
-      "[S01.E23] Lobezno y los XMen - Previsión Parte 1.mp4",
-      "[S01.E24] Lobezno y los XMen - Previsión Parte 2.mp4",
-      "[S01.E25] Lobezno y los XMen - Previsión Parte 3.mp4"
-    ]
-  },
-  {
-    "title": "Ova El Que Espera A Las Estrellas Parte",
+    "title": "Ova El Que Espera A Las Estrellas",
     "total_episodes": 3,
     "seasons": [
       1
@@ -8247,23 +8131,6 @@
       "OVA -  El que espera a las estrellas - Parte 1.mkv",
       "OVA -  El que espera a las estrellas - Parte 2.mkv",
       "OVA -  El que espera a las estrellas - Parte 3.mkv"
-    ]
-  },
-  {
-    "title": "Video 2019",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.52,
-    "sub_bloques": 1,
-    "ranges": [
-      "397187 - 397191"
-    ],
-    "sample_files": [
-      "video_2019-05-13_10-20-00.mp4",
-      "video_2019-06-03_10-34-14.mp4",
-      "video_2019-06-10_10-38-48.mp4"
     ]
   },
   {
@@ -8372,40 +8239,6 @@
     ]
   },
   {
-    "title": "Encuentro Fugaz",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.48,
-    "sub_bloques": 1,
-    "ranges": [
-      "398785 - 398787"
-    ],
-    "sample_files": [
-      "24 Encuentro Fugaz (parte 1).mkv",
-      "25 Encuentro Fugaz (parte 2).mkv",
-      "26 Encuentro Fugaz (parte 3).mkv"
-    ]
-  },
-  {
-    "title": "La Final",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.15,
-    "sub_bloques": 1,
-    "ranges": [
-      "399069 - 506729"
-    ],
-    "sample_files": [
-      "40 - La final [DVD+VHS dual].avi",
-      "028. La final.mkv",
-      "198. La final.mkv"
-    ]
-  },
-  {
     "title": "X12",
     "total_episodes": 3,
     "seasons": [
@@ -8420,21 +8253,6 @@
     "sample_files": [
       "02x12 - Episodio 12.mkv",
       "2X12.mp4"
-    ]
-  },
-  {
-    "title": "Episodi 37 Bola Pilosa Nasal Llampeguejant!",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.21,
-    "sub_bloques": 1,
-    "ranges": [
-      "399610 - 426090"
-    ],
-    "sample_files": [
-      "Episodi 37 - Bola pilosa nasal llampeguejant!.mp4"
     ]
   },
   {
@@ -9049,23 +8867,6 @@
     ]
   },
   {
-    "title": "Cmpsn Crtn",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 0.79,
-    "sub_bloques": 1,
-    "ranges": [
-      "451198 - 451206"
-    ],
-    "sample_files": [
-      "cmpsn.crtn.1x01.m1080p.es.mkv.mp4",
-      "cmpsn.crtn.1x02.m1080p.es.mkv.mp4",
-      "cmpsn.crtn.1x09 . mkv.mp4"
-    ]
-  },
-  {
     "title": "El Verano En Que Hikaru Murio",
     "total_episodes": 3,
     "seasons": [
@@ -9080,40 +8881,6 @@
       "El Verano en que Hikaru murio 1x1.mkv",
       "El Verano en que Hikaru murio 1x2.mkv",
       "El Verano en que Hikaru murio 1x3.mkv"
-    ]
-  },
-  {
-    "title": "La Última Esperanza",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 1.39,
-    "sub_bloques": 1,
-    "ranges": [
-      "506287 - 506633"
-    ],
-    "sample_files": [
-      "110. La última esperanza.mkv",
-      "033. La última esperanza.mkv",
-      "102. La última esperanza.mkv"
-    ]
-  },
-  {
-    "title": "Un Error Fatal",
-    "total_episodes": 3,
-    "seasons": [
-      1
-    ],
-    "total_gb": 2.25,
-    "sub_bloques": 1,
-    "ranges": [
-      "506605 - 506802"
-    ],
-    "sample_files": [
-      "074. Un error fatal.mkv",
-      "265. Un error fatal.mkv",
-      "272. Un error fatal.mkv"
     ]
   },
   {
