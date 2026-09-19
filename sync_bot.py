@@ -227,6 +227,14 @@ SERIES_ALIASES = {
     "transformers beast machines": "Transformers: Beast Machines",
     "robot masters": "Transformers: Robot Masters",
     "transformers robot masters": "Transformers: Robot Masters",
+    "halcon callejero": "Halcón Callejero",
+    "halcón callejero": "Halcón Callejero",
+    "el trueno azul": "El Trueno Azul",
+    "el amor despues del amor": "El Amor Después del Amor",
+    "el amor después del amor": "El Amor Después del Amor",
+    "entourage": "Entourage",
+    "entourage el séquito": "Entourage",
+    "entourage el sequito": "Entourage",
 }
 
 
@@ -237,6 +245,14 @@ def is_junk_series_title(title: str) -> bool:
     t = title.strip()
     if t.lower() in KNOWN_VALID_NUMERIC_SERIES:
         return False
+
+    t_low = t.lower()
+    if t_low in {
+        "serie", "series", "serie de tv", "serie tv", "series tv",
+        "audio", "completas", "leer", "fin 11", "en emision", "en emisión",
+        "falta la", "titulo", "título", "sinopsis", "sss", "watch", "libro 1", "libro 2", "libro 3"
+    }:
+        return True
 
     # Si empieza con un número de episodio (ej. "01 - Protocolo De Batalla", "02 - ", "35 - ")
     m_num = re.match(r"^(\d{1,3})\s*[-–—.:_]\s*", t)
@@ -332,6 +348,13 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     text = re.sub(r"(?i)\b\d+\s+episodio.*$", "", text)
     text = re.sub(r"(?i)\b(?:finalizada|completa|miniserie|precuela)\b.*$", "", text)
 
+    # Quitar extras, making-of, deleted scenes y tomas falsas que causan fragmentación
+    text = re.sub(
+        r"(?i)\s*[-–—:/|]*\s*\b(?:the\s+making\s+of|making\s+of|deleted\s+scenes?|gag\s+reel|featurette|behind\s+the\s+scenes|bloopers?|trailer|extras?)\b.*$",
+        "",
+        text
+    )
+
     # Quitar cabeceras de temporada al inicio (ej. "▶️ Segunda Temporada", "Temporada 2", etc.)
     text = re.sub(r"(?i)^[▶►\s*]*(?:primera|segunda|tercera|cuarta|quinta|sexta|séptima|septima|octava|novena|décima|decima|última|ultima|\d+ª?)\s+temporada\s*[-–—:/|]*\s*", "", text)
 
@@ -346,9 +369,9 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     text = re.sub(r"\b\d{1,2}[-–/]\d{1,2}[-–/]\d{2,4}\b", " ", text)
     text = re.sub(r"\b\d{4}[-–/]\d{1,2}[-–/]\d{1,2}\b", " ", text)
 
-    # Cortar en patrones de temporada/episodio (ej. 1x01, 1X01, 1×01, S01E01, Temporada 2, T 2, y códigos 101, 111, 120...)
+    # Cortar en patrones de temporada/episodio (ej. 1x01, 1X01, 1×01, S01E01, Temporada 2, T 2, y códigos 01 -, 101, 111, 120...)
     parts = re.split(
-        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|Ep(?:isodio|\.)?\s*\d+|Parte\s*\d+|T\s*\d+|\b\d{1,2}\s*(?:TV|VOSE|HD)\b|\b[1-9]\d{2}\b)\b",
+        r"(?i)\b(?:S\d+(?:E\d+)?|T\d+(?:E\d+)?|Temporada\s*\d+|\d+[xX×\u00d7]\d+|Cap(?:[iíãÃ\ufffd\xad\s]*tulo|\.)?\s*\d+|Ep(?:isodio|\.)?\s*\d+|Parte\s*\d+|T\s*\d+|\b\d{1,2}\s*[-–—]|\b\d{1,2}\s*(?:TV|VOSE|HD)\b|\b[1-9]\d{2}\b)\b",
         text
     )
     
@@ -404,7 +427,7 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
         
     norm = title.lower().strip()
     for alias_key, canonical in SERIES_ALIASES.items():
-        if norm == alias_key or norm.startswith(alias_key + " ") or norm.startswith(alias_key + "_"):
+        if norm == alias_key or norm.startswith(alias_key + " ") or norm.startswith(alias_key + "_") or norm.startswith(alias_key + "-") or norm.startswith(alias_key + " -"):
             return canonical
         
     return title.title()
@@ -413,6 +436,11 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
 
 def resolve_series_name(video_title: Optional[str], current_series_title: Optional[str]) -> Optional[str]:
     """Determina inteligentemente el nombre de la serie evitando confundir nombres de episodios."""
+    if current_series_title and is_junk_series_title(current_series_title):
+        current_series_title = None
+    if video_title and is_junk_series_title(video_title):
+        video_title = None
+
     if not video_title and current_series_title:
         return current_series_title
     if video_title and not current_series_title:
@@ -420,9 +448,11 @@ def resolve_series_name(video_title: Optional[str], current_series_title: Option
     if video_title and current_series_title:
         v_low = video_title.lower()
         c_low = current_series_title.lower()
+        if c_low == v_low:
+            return current_series_title
         # Si uno está contenido en el otro (ej. "seinfeld" en "the seinfeld chronicles"),
         # el nombre de la serie oficial (póster) siempre tiene prioridad sobre el título del episodio
-        if c_low in v_low or v_low in c_low:
+        if c_low in v_low:
             return current_series_title
         # Si el video tiene un nombre completamente distinto y válido, el video manda
         return video_title
@@ -816,6 +846,12 @@ async def sync_series(client: TelegramClient, state: dict):
                     current_series_title = resolved
                     state["current_series_title"] = current_series_title
                     current_topic_id = None
+
+            if current_series_title and is_junk_series_title(current_series_title):
+                current_series_title = ""
+                current_topic_id = None
+                state["current_series_title"] = ""
+                state["current_topic_id"] = None
 
             target_series = current_series_title
             if not target_series or not is_series_allowed(target_series, msg.id, state):
