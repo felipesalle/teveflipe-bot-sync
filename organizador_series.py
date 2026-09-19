@@ -288,20 +288,27 @@ def get_message_filename(message) -> str:
 # -----------------------------------------------------------------------------
 async def analizar_canal_origen(client: TelegramClient, tmdb: TmdbNormalizer) -> Tuple[Dict[str, List[Dict[str, Any]]], List[Dict[str, Any]]]:
     """Escanea el canal origen y clasifica todos los archivos de video en series canónicas."""
-    logger.info(f"Iniciando escaneo del canal origen: chat {SERIES_SOURCE_CHAT}, topic {SERIES_SOURCE_TOPIC}...")
+    min_id = int(os.getenv("SERIES_MIN_ID", "157000"))
+    logger.info(f"Iniciando escaneo del canal origen: chat {SERIES_SOURCE_CHAT}, topic {SERIES_SOURCE_TOPIC}, min_id {min_id}...")
     source_entity = await client.get_entity(SERIES_SOURCE_CHAT)
 
-    series_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    raw_candidates_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     dudosos: List[Dict[str, Any]] = []
 
+    total_scanned = 0
     total_videos = 0
 
     async for msg in client.iter_messages(
         source_entity,
         reply_to=SERIES_SOURCE_TOPIC if SERIES_SOURCE_TOPIC else None,
+        min_id=min_id,
         limit=None,
         reverse=True
     ):
+        total_scanned += 1
+        if total_scanned % 1000 == 0:
+            logger.info(f"   Escaneados {total_scanned} mensajes ({total_videos} videos encontrados)...")
+
         if not is_video_message(msg):
             continue
 
@@ -325,10 +332,7 @@ async def analizar_canal_origen(client: TelegramClient, tmdb: TmdbNormalizer) ->
             })
             continue
 
-        # Normalizar con TMDb
-        canonical_series = tmdb.normalize(cand_title)
-
-        series_dict[canonical_series].append({
+        raw_candidates_dict[cand_title].append({
             "message_id": msg.id,
             "raw_filename": raw_name,
             "season": season,
@@ -336,13 +340,22 @@ async def analizar_canal_origen(client: TelegramClient, tmdb: TmdbNormalizer) ->
             "date": str(msg.date)
         })
 
-        if total_videos % 50 == 0:
-            logger.info(f"   Analizados {total_videos} archivos de video...")
+    logger.info(f"Escaneo inicial finalizado: {total_scanned} msgs | {total_videos} videos | {len(raw_candidates_dict)} títulos preliminares.")
+
+    # 2. Normalizar títulos únicos con TMDb (rápido y sin peticiones repetidas)
+    logger.info(f"Normalizando {len(raw_candidates_dict)} series únicas con la API de TMDb...")
+    series_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+
+    for i, (cand_title, eps) in enumerate(raw_candidates_dict.items(), 1):
+        canonical_series = tmdb.normalize(cand_title)
+        series_dict[canonical_series].extend(eps)
+        if i % 15 == 0 or i == len(raw_candidates_dict):
+            logger.info(f"   Normalizadas {i}/{len(raw_candidates_dict)} series con TMDb...")
 
     # Guardar caché de TMDb actualizado
     tmdb.save_cache()
 
-    logger.info(f"Escaneo finalizado. Total videos: {total_videos}. Series detectadas: {len(series_dict)}.")
+    logger.info(f"Normalización completada. Total series canónicas únicas: {len(series_dict)}.")
     return series_dict, dudosos
 
 
