@@ -1,9 +1,8 @@
 name: Sincronizar Catalogo Telegram
 
 on:
-  schedule:
-    # Se ejecuta automáticamente cada 3 horas
-    - cron: '0 */3 * * *'
+  # schedule:
+  #   - cron: '0 */3 * * *'
   workflow_dispatch: # Permite ejecutar manualmente con un clic en GitHub
 
 permissions:
