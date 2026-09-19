@@ -1,7 +1,7 @@
 {
-  "total_topics": 378,
+  "total_topics": 320,
   "suspicious_count": 1,
-  "fragmented_groups_count": 3,
+  "fragmented_groups_count": 0,
   "suspicious_topics": [
     {
       "id": 1,
@@ -12,90 +12,52 @@
       "normalized": "general"
     }
   ],
-  "fragmented_series_groups": {
-    "la brea": [
-      {
-        "id": 1596,
-        "title": "La Brea",
-        "top_message": 14699,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "la brea",
-        "sample_files": [
-          "La brea 2x14 1080p.mkv",
-          "La brea 2x13 1080p.mkv",
-          "La Brea - Cap.212 (1).mp4",
-          "La Brea - Cap.211.mp4",
-          "La Brea - Cap.210 . castellano .avi"
-        ]
-      },
-      {
-        "id": 7773,
-        "title": "La Brea",
-        "top_message": 7805,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "la brea",
-        "sample_files": [
-          "La Brea 3X06 - The Road Home, Part 2.1080p-Bigmaster.mp4",
-          "La Brea 3X05 - The Road Home, Part 1.1080p-Bigmaster.mp4",
-          "La Brea 3x04 - Fire Storm.1080p-Bigmaster.mp4",
-          "La Brea 3x03 - Maya.1080p-Bigmaster.mp4",
-          "La Brea 3x02 - Don't Look Up.1080p-Bigmaster.mp4"
-        ]
-      }
-    ],
-    "como conocí a vuestra madre": [
-      {
-        "id": 8079,
-        "title": "Como conocí a vuestra madre",
-        "top_message": 8454,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "como conocí a vuestra madre",
-        "sample_files": [
-          "CCAVM - 9x24 - Juntos para siempre (2).mkv",
-          "CCAVM - 9x23 - Juntos para siempre (1).mkv",
-          "CCAVM - 9x22 - El camino al altar.mkv",
-          "CCAVM - 9x21 - Gary Blauman.mkv"
-        ]
-      },
-      {
-        "id": 8078,
-        "title": "Como Conocí A Vuestra Madre",
-        "top_message": 8078,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "como conocí a vuestra madre",
-        "sample_files": []
-      }
-    ],
-    "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english": [
-      {
-        "id": 7331,
-        "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English",
-        "top_message": 7332,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english",
-        "sample_files": [
-          "Boardwalk_Empire_Temp_2_HDTVCap_209_HDRIP_Xvid_AC3_5_1Spanish_English.avi"
-        ]
-      },
-      {
-        "id": 6768,
-        "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English",
-        "top_message": 6769,
-        "is_suspicious": false,
-        "suspicious_reason": "",
-        "normalized": "boardwalk empire temp 2 hdtvcap 209 xvid 5 1spanish english",
-        "sample_files": [
-          "Boardwalk_Empire_Temp_2_HDTVCap_209_HDRIP_Xvid_AC3_5_1Spanish_English.avi"
-        ]
-      }
-    ]
-  },
+  "fragmented_series_groups": {},
   "all_topics_summary": [
+    {
+      "id": 18935,
+      "title": "Vikingos: Valhalla"
+    },
+    {
+      "id": 20677,
+      "title": "Los Serrano"
+    },
+    {
+      "id": 6046,
+      "title": "Ergo Proxy"
+    },
+    {
+      "id": 11797,
+      "title": "Drácula"
+    },
+    {
+      "id": 11698,
+      "title": "Los Pilares de la Tierra"
+    },
+    {
+      "id": 21595,
+      "title": "Lupin"
+    },
+    {
+      "id": 1596,
+      "title": "La Brea"
+    },
+    {
+      "id": 8078,
+      "title": "Cómo Conocí a Vuestra Madre"
+    },
+    {
+      "id": 6746,
+      "title": "Boardwalk Empire"
+    },
+    {
+      "id": 18857,
+      "title": "El Consultor"
+    },
+    {
+      "id": 20349,
+      "title": "Constantine"
+    },
     {
       "id": 21869,
       "title": "Entourage (El Séquito)"
@@ -125,10 +87,6 @@
       "title": "Ballers"
     },
     {
-      "id": 20677,
-      "title": "Los"
-    },
-    {
       "id": 21709,
       "title": "La Cosa Del Pantano"
     },
@@ -143,10 +101,6 @@
     {
       "id": 21674,
       "title": "Outlander"
-    },
-    {
-      "id": 21595,
-      "title": "Lupin Segunda Temporada"
     },
     {
       "id": 21591,
@@ -253,46 +207,6 @@
       "title": "The Chef Show"
     },
     {
-      "id": 20371,
-      "title": "Constant S01E13Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20369,
-      "title": "Constant S01E12Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20367,
-      "title": "Constant S01E11Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20365,
-      "title": "Constant S01E10Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20363,
-      "title": "Constant S01E09Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20361,
-      "title": "Constant S01E08Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20359,
-      "title": "Constant S01E07Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20357,
-      "title": "Constant S01E06Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20355,
-      "title": "Constant S01E05Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
-      "id": 20349,
-      "title": "Constant S01E01Jingking Www Peliculasgoogledrive Info Mkv"
-    },
-    {
       "id": 20335,
       "title": "Atracadores La Serie"
     },
@@ -331,10 +245,6 @@
     {
       "id": 1963,
       "title": "Cobra Kai"
-    },
-    {
-      "id": 18857,
-      "title": "El Consultor (Serie)"
     },
     {
       "id": 19415,
@@ -413,36 +323,8 @@
       "title": "Título Original Wakefield"
     },
     {
-      "id": 18935,
-      "title": "Sex"
-    },
-    {
       "id": 18881,
       "title": "Este Mundo No Me Hara Mala Persona"
-    },
-    {
-      "id": 18870,
-      "title": "El Consultor 1X08Castellano Web Dl Ddp5 1 +"
-    },
-    {
-      "id": 18868,
-      "title": "El Consultor 1X07Castellano Web Dl Ddp5 1 +"
-    },
-    {
-      "id": 18866,
-      "title": "El Consultor 1X06Castellano Web Dl Ddp5 1 +"
-    },
-    {
-      "id": 18864,
-      "title": "El Consultor 1X05Castellano Web Dl Ddp5 1 +"
-    },
-    {
-      "id": 18862,
-      "title": "El Consultor 1X04Castellano Web Dl Ddp5 1 +"
-    },
-    {
-      "id": 18860,
-      "title": "El Consultor 1X02Castellano Web Dl Ddp5 1 +"
     },
     {
       "id": 18852,
@@ -677,10 +559,6 @@
       "title": "Resident Alien"
     },
     {
-      "id": 1596,
-      "title": "La Brea"
-    },
-    {
       "id": 14669,
       "title": "Montecristo"
     },
@@ -751,10 +629,6 @@
     {
       "id": 14092,
       "title": "Beforeigners Los Visitantes"
-    },
-    {
-      "id": 6746,
-      "title": "Título Original: Boardwalk Empire"
     },
     {
       "id": 14021,
@@ -897,16 +771,8 @@
       "title": "Chicago Justice"
     },
     {
-      "id": 11797,
-      "title": "Dracula 3 Episodios"
-    },
-    {
       "id": 11708,
       "title": "The Shield Al Margen De La Ley"
-    },
-    {
-      "id": 11698,
-      "title": "Los Pilares De La Tierra 8 Episodios"
     },
     {
       "id": 11688,
@@ -951,42 +817,6 @@
     {
       "id": 10046,
       "title": "Succession"
-    },
-    {
-      "id": 10928,
-      "title": "Preacher"
-    },
-    {
-      "id": 10406,
-      "title": "Bones"
-    },
-    {
-      "id": 9911,
-      "title": "Ojo De Halcón"
-    },
-    {
-      "id": 10620,
-      "title": "Cosas de casa"
-    },
-    {
-      "id": 9591,
-      "title": "Clark (2022)"
-    },
-    {
-      "id": 10566,
-      "title": "Tierra Amarga"
-    },
-    {
-      "id": 10002,
-      "title": "Luna, El Misterio De Calenda"
-    },
-    {
-      "id": 10068,
-      "title": "Sons Of Anarchy"
-    },
-    {
-      "id": 10058,
-      "title": "La Actriz"
     },
     {
       "id": 10034,
@@ -1133,10 +963,6 @@
       "title": "Loki"
     },
     {
-      "id": 8079,
-      "title": "Como conocí a vuestra madre"
-    },
-    {
       "id": 8434,
       "title": "El Internado de las cumbres"
     },
@@ -1165,20 +991,12 @@
       "title": "Counterpart"
     },
     {
-      "id": 8078,
-      "title": "Como Conocí A Vuestra Madre"
-    },
-    {
       "id": 7815,
       "title": "La timonel (2026)"
     },
     {
       "id": 7806,
       "title": "Bienvenido Al Club"
-    },
-    {
-      "id": 7773,
-      "title": "La Brea"
     },
     {
       "id": 7708,
@@ -1225,14 +1043,6 @@
       "title": "La Celestina"
     },
     {
-      "id": 6759,
-      "title": "Boardwalk Empire - Temp 2"
-    },
-    {
-      "id": 7331,
-      "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English"
-    },
-    {
       "id": 6734,
       "title": "El Premio De Tu Vida"
     },
@@ -1265,10 +1075,6 @@
       "title": "Los Soprano"
     },
     {
-      "id": 6768,
-      "title": "Boardwalk Empire Temp 2 Hdtvcap 209 Xvid 5 1Spanish English"
-    },
-    {
       "id": 6513,
       "title": "From"
     },
@@ -1299,10 +1105,6 @@
     {
       "id": 6048,
       "title": "Ad Vitan"
-    },
-    {
-      "id": 6046,
-      "title": "Ergo Proxy 07 - Re-L124C41"
     },
     {
       "id": 6031,
@@ -1415,122 +1217,6 @@
     {
       "id": 2381,
       "title": "Fringe"
-    },
-    {
-      "id": 3907,
-      "title": "Rumbo al infierno"
-    },
-    {
-      "id": 3794,
-      "title": "Paraiso"
-    },
-    {
-      "id": 3692,
-      "title": "Malcolm"
-    },
-    {
-      "id": 3645,
-      "title": "Cancion triste de hill street"
-    },
-    {
-      "id": 3622,
-      "title": "Mindhunter"
-    },
-    {
-      "id": 3595,
-      "title": "The boys"
-    },
-    {
-      "id": 3560,
-      "title": "Eric"
-    },
-    {
-      "id": 3361,
-      "title": "Shogun"
-    },
-    {
-      "id": 2271,
-      "title": "Juego de tronos"
-    },
-    {
-      "id": 3451,
-      "title": "Nos vemos en mi 19ª vida"
-    },
-    {
-      "id": 3420,
-      "title": "Lost in space"
-    },
-    {
-      "id": 3407,
-      "title": "Constelación"
-    },
-    {
-      "id": 3369,
-      "title": "Quien mató a Sara?"
-    },
-    {
-      "id": 3342,
-      "title": "El problema de los tres cuerpos"
-    },
-    {
-      "id": 3336,
-      "title": "El triangulo de las bermudas"
-    },
-    {
-      "id": 3317,
-      "title": "Regalo de dios"
-    },
-    {
-      "id": 3297,
-      "title": "Agencia de citas"
-    },
-    {
-      "id": 3277,
-      "title": "Mama enojada"
-    },
-    {
-      "id": 3088,
-      "title": "Farmacia de guardia"
-    },
-    {
-      "id": 3082,
-      "title": "The control room"
-    },
-    {
-      "id": 3063,
-      "title": "Amor, Matrimonio y Divorcio"
-    },
-    {
-      "id": 3039,
-      "title": "Como aman los hombres"
-    },
-    {
-      "id": 2980,
-      "title": "Nuggets de pollo"
-    },
-    {
-      "id": 2971,
-      "title": "Bandidos"
-    },
-    {
-      "id": 2741,
-      "title": "Smallville"
-    },
-    {
-      "id": 2580,
-      "title": "Dragon Ball"
-    },
-    {
-      "id": 2556,
-      "title": "Surreal State"
-    },
-    {
-      "id": 2491,
-      "title": "Breaking Bad"
-    },
-    {
-      "id": 2482,
-      "title": "Castigo"
     },
     {
       "id": 2368,
