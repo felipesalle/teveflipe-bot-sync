@@ -278,13 +278,23 @@ async def main():
         logger.info(f"Destino Películas: {getattr(movies_channel, 'title', movies_channel_id)}")
         logger.info(f"Destino Series: {getattr(series_group, 'title', series_group_id)}")
 
-        if SYNC_MODE in ("all", "movies"):
-            await sync_movies(client, source_entity, movies_channel, analysis, state)
+        try:
+            if SYNC_MODE in ("all", "movies"):
+                await sync_movies(client, source_entity, movies_channel, analysis, state)
 
-        if SYNC_MODE in ("all", "series"):
-            await sync_series(client, source_entity, series_group, analysis, state)
+            if SYNC_MODE in ("all", "series"):
+                await sync_series(client, source_entity, series_group, analysis, state)
 
-        logger.info("\n🎉 Sesión de sincronización finalizada con éxito.")
+            logger.info("\n🎉 Sesión de sincronización finalizada con éxito.")
+        finally:
+            save_json(STATE_FILE, state)
+            try:
+                await client.disconnect()
+            except Exception:
+                pass
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    finally:
+        os._exit(0)
