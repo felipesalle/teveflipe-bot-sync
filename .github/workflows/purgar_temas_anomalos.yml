@@ -40,6 +40,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add sync_state_anime.json catalogo_maestro_series_anime.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Purgar temas anómalos de series anime [skip ci]" && git push)
+          git commit -m "Purgar temas anómalos de series anime [skip ci]" || echo "No changes"
+          git pull --rebase origin main
+          git push
