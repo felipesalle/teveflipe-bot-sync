@@ -51,6 +51,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add sync_state.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Corregir catálogo de series TV y limpiar temas erróneos [skip ci]" && git push)
+          git commit -m "Corregir catálogo de series TV y limpiar temas erróneos [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push

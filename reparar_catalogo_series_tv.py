@@ -91,32 +91,56 @@ async def forward_or_copy_messages(client: TelegramClient, chat_peer, msgs: list
 
 
 async def repair_prison_break_in_transformers(client: TelegramClient, chat_peer, state: dict):
-    """Extrae Prison Break del tema de Transformers (16869) y lo mueve al tema de Prison Break (1871)."""
-    logger.info("\n--- [1/6] REPARANDO PRISON BREAK EN TRANSFORMERS (16869) ---")
-    transformers_topic_id = 16869
+    """Extrae Prison Break de temas de Transformers y lo mueve al tema canónico de Prison Break (1871)."""
+    logger.info("\n--- [1/6] REPARANDO PRISON BREAK EN TRANSFORMERS ---")
     prison_break_topic_id = 1871
 
-    pb_messages = []
-    async for msg in client.iter_messages(chat_peer, reply_to=transformers_topic_id, limit=200):
-        content = extract_text_or_filename(msg).lower()
-        if "prison" in content and "break" in content:
-            pb_messages.append(msg)
+    # Detectar temas de Transformers
+    transformers_topic_ids = {16869, 18388}
+    try:
+        res = await client(GetForumTopicsRequest(
+            peer=chat_peer,
+            offset_date=None,
+            offset_id=0,
+            offset_topic=0,
+            limit=50,
+            q="Transformers"
+        ))
+        for t in getattr(res, "topics", []):
+            transformers_topic_ids.add(t.id)
+            logger.info(f"   Tema Transformers detectado: '{t.title}' (ID {t.id})")
+    except Exception as e:
+        logger.warning(f"   Aviso buscando temas de Transformers: {e}")
 
-    logger.info(f"Mensajes de Prison Break detectados en Transformers (16869): {len(pb_messages)}")
+    pb_messages = []
+    logger.info(f"   Buscando mensajes de 'Prison' en el supergrupo...")
+    async for msg in client.iter_messages(chat_peer, search="Prison", limit=150):
+        top_id = None
+        if msg.reply_to:
+            top_id = getattr(msg.reply_to, "reply_to_top_id", None) or getattr(msg.reply_to, "reply_to_msg_id", None)
+        
+        content = extract_text_or_filename(msg)
+        if top_id in transformers_topic_ids:
+            logger.info(f"   🚨 Mensaje de Prison Break encontrado en Transformers ({top_id}): ID {msg.id} | {content[:60]}")
+            pb_messages.append(msg)
+        elif top_id == prison_break_topic_id:
+            logger.info(f"   ✓ Mensaje ya en Prison Break (1871): ID {msg.id}")
+        else:
+            logger.info(f"   Mensaje de Prison en tema {top_id}: ID {msg.id} | {content[:60]}")
+
+    logger.info(f"Mensajes de Prison Break mal ubicados en Transformers: {len(pb_messages)}")
     if pb_messages:
-        # Revertir orden para mantener orden cronológico
         pb_messages.reverse()
         if DRY_RUN:
             logger.info(f"[DRY-RUN] Se moverían {len(pb_messages)} mensajes al tema {prison_break_topic_id}")
         else:
             await forward_or_copy_messages(client, chat_peer, pb_messages, prison_break_topic_id)
-            # Eliminar del tema transformers
             pb_ids = [m.id for m in pb_messages]
             try:
                 await client(DeleteMessagesRequest(id=pb_ids))
-                logger.info(f"   -> {len(pb_ids)} mensajes eliminados de Transformers (16869)")
+                logger.info(f"   -> {len(pb_ids)} mensajes eliminados de Transformers")
             except Exception as e:
-                logger.warning(f"   -> No se pudieron eliminar de 16869: {e}")
+                logger.warning(f"   -> No se pudieron eliminar de Transformers: {e}")
 
     # Limpiar alias erróneo en el caché de temas
     topics_cache = state.get("series_topics_cache", {})
@@ -133,7 +157,7 @@ async def consolidate_series_topics(client: TelegramClient, chat_peer, state: di
     if not DRY_RUN:
         try:
             await client(EditForumTopicRequest(
-                channel=chat_peer,
+                peer=chat_peer,
                 topic_id=canonical_id,
                 title=series_name
             ))
