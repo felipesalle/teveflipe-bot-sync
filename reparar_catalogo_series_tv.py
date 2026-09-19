@@ -160,7 +160,9 @@ async def inspect_and_rename_topic(client: TelegramClient, chat_peer, topic_id: 
     logger.info(f"   Muestra de contenido en {topic_id}: {sample_text[:80]}")
     title_to_set = fallback_title
     s_low = sample_text.lower()
-    if "sex education" in s_low:
+    if "vikingos" in s_low or "valhalla" in s_low:
+        title_to_set = "Vikingos: Valhalla"
+    elif "sex education" in s_low:
         title_to_set = "Sex Education"
     elif "sex/life" in s_low or "sex life" in s_low:
         title_to_set = "Sex/Life"
@@ -207,6 +209,8 @@ def cleanup_all_cache_keys(state: dict):
     cache["drácula"] = 11797
     cache["ergo proxy"] = 6046
     cache["los serrano"] = 20677
+    cache["vikingos: valhalla"] = 18935
+    cache["vikingos valhalla"] = 18935
     cache["halcon callejero"] = 22068
     cache["halcón callejero"] = 22068
     cache["el trueno azul"] = 19415
