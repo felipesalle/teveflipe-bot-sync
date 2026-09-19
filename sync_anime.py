@@ -136,11 +136,16 @@ async def sync_movies(client, source_entity, movies_channel, analysis_data, stat
     logger.info("=" * 60)
 
     synced_movies = set(state.setdefault("synced_movie_ids", []))
-    peliculas = analysis_data.get("peliculas", [])
+    criba = load_json("criba_peliculas_reporte.json")
+    if criba and "peliculas" in criba and isinstance(criba["peliculas"], list):
+        peliculas = criba["peliculas"]
+        logger.info(f"Usando reporte de criba limpio con {len(peliculas)} largometrajes confirmados.")
+    else:
+        peliculas = analysis_data.get("peliculas", [])
 
     # Filtrar solo películas válidas
-    pending_pelis = [p for p in peliculas if p["message_id"] not in synced_movies and len(p.get("title", "")) > 1]
-    logger.info(f"Total películas detectadas: {len(peliculas)} | Ya sincronizadas: {len(synced_movies)} | Pendientes: {len(pending_pelis)}")
+    pending_pelis = [p for p in peliculas if p["message_id"] not in synced_movies]
+    logger.info(f"Total películas limpias: {len(peliculas)} | Ya sincronizadas: {len(synced_movies)} | Pendientes: {len(pending_pelis)}")
 
     if not pending_pelis:
         logger.info("✅ Todas las películas anime ya están sincronizadas.")
