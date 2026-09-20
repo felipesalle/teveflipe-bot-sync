@@ -1,0 +1,30 @@
+{
+  "turcas_y_telenovelas": {
+    "id": -1002160549536,
+    "title": "📺 Series Turcas y Telenovelas - TeveFlipe",
+    "category": "telenovela",
+    "is_forum": true,
+    "invite_link": ""
+  },
+  "espanolas": {
+    "id": -1004419790119,
+    "title": "📺 Series Españolas - TeveFlipe",
+    "category": "serie",
+    "is_forum": true,
+    "invite_link": "https://t.me/+svC9_d8Rqv0yZWJj"
+  },
+  "retro_clasicas": {
+    "id": -1004388643765,
+    "title": "📺 Series Retro y Clásicas - TeveFlipe",
+    "category": "serie",
+    "is_forum": true,
+    "invite_link": "https://t.me/+mlWPE0j0STg5YzIz"
+  },
+  "internacionales": {
+    "id": -1002097175258,
+    "title": "📺 Series TV - TeveFlipe",
+    "category": "serie",
+    "is_forum": true,
+    "invite_link": "https://t.me/+KZKWHKIT3wA2ZWE7"
+  }
+}
