@@ -1,0 +1,31 @@
+name: Crear Supergrupo Turcas y Telenovelas
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  crear:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install telethon
+      - env:
+          PYTHONUNBUFFERED: "1"
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+        run: python crear_grupo_turcas.py
+      - if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add config_supergrupos_series.json || true
+          git commit -m "config: supergrupo de turcas y telenovelas creado [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push
