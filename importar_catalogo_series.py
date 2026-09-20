@@ -163,13 +163,80 @@ async def get_or_create_topic(
             return None
 
 
+async def resolve_entity_robust(client: TelegramClient, target: Any):
+    target_str = str(target).strip(" '\"")
+
+    # Si coincide con clave en config_supergrupos_series.json (ej: turcas_y_telenovelas)
+    if os.path.exists("config_supergrupos_series.json"):
+        try:
+            with open("config_supergrupos_series.json", "r", encoding="utf-8") as f:
+                cfg = json.load(f)
+            if target_str in cfg:
+                item = cfg[target_str]
+                if item.get("invite_link"):
+                    try:
+                        return await client.get_entity(item["invite_link"])
+                    except Exception:
+                        pass
+                if item.get("id"):
+                    target_str = str(item["id"])
+            else:
+                for item in cfg.values():
+                    if str(item.get("id")) == target_str and item.get("invite_link"):
+                        try:
+                            return await client.get_entity(item["invite_link"])
+                        except Exception:
+                            pass
+        except Exception as e:
+            logger.warning(f"Aviso leyendo config_supergrupos_series.json: {e}")
+
+    if re.match(r"^-?\d+$", target_str):
+        num_id = int(target_str)
+        try:
+            return await client.get_entity(num_id)
+        except Exception:
+            pass
+
+        try:
+            dialogs = await client.get_dialogs(limit=150)
+            for d in dialogs:
+                if d.id == num_id:
+                    return d.entity
+            return await client.get_entity(num_id)
+        except Exception:
+            pass
+
+        try:
+            from telethon.tl.types import PeerChannel
+            cid = abs(num_id)
+            if str(cid).startswith("100") and len(str(cid)) > 10:
+                cid = int(str(cid)[3:])
+            return await client.get_entity(PeerChannel(cid))
+        except Exception:
+            pass
+
+    return await client.get_entity(target_str)
+
+
 async def importar_catalogo(
     input_file: str,
-    destino_chat: Any,
+    destino_chat: Any = None,
     source_chat: int = DEFAULT_SOURCE_CHAT,
     limit_series: Optional[int] = None,
     dry_run: bool = False
 ):
+    # Auto-detección si no se especificó destino
+    if not destino_chat:
+        fn = os.path.basename(input_file).replace(".json", "")
+        if "turca" in fn or "telenovela" in fn:
+            destino_chat = "turcas_y_telenovelas"
+        elif "espanola" in fn:
+            destino_chat = "espanolas"
+        elif "retro" in fn or "clasica" in fn:
+            destino_chat = "retro_clasicas"
+        elif "internacional" in fn:
+            destino_chat = "internacionales"
+
     logger.info("=" * 70)
     logger.info("🚀 INICIANDO IMPORTACIÓN DE SERIES A SUPERGRUPO DE TELEGRAM")
     logger.info(f"Catálogo origen: {input_file}")
@@ -213,9 +280,9 @@ async def importar_catalogo(
     async with TelegramClient(StringSession(STRING_SESSION), API_ID, API_HASH) as client:
         # Resolver entidades
         try:
-            dest_entity = await client.get_entity(destino_chat)
+            dest_entity = await resolve_entity_robust(client, destino_chat)
             dest_input = await client.get_input_entity(dest_entity)
-            source_entity = await client.get_entity(source_chat)
+            source_entity = await resolve_entity_robust(client, source_chat)
             source_input = await client.get_input_entity(source_entity)
             dest_title = getattr(dest_entity, "title", str(destino_chat))
             logger.info(f"Conexión exitosa. Supergrupo destino: '{dest_title}'")
@@ -309,17 +376,18 @@ async def importar_catalogo(
 def main():
     parser = argparse.ArgumentParser(description="Importador masivo de series hacia supergrupos de Telegram con Foros.")
     parser.add_argument("--input", required=True, help="Archivo JSON del catálogo a importar (ej. series_turcas_y_telenovelas.json)")
-    parser.add_argument("--destino", required=True, help="ID numérico o enlace de invitación del Supergrupo destino")
+    parser.add_argument("--destino", required=False, default=None, help="ID numérico, alias o enlace de invitación del Supergrupo destino")
     parser.add_argument("--source-chat", type=int, default=DEFAULT_SOURCE_CHAT, help="ID del canal origen de los videos")
     parser.add_argument("--limit-series", type=int, default=None, help="Límite de series a procesar en esta tanda")
     parser.add_argument("--dry-run", action="store_true", help="Simulación sin modificar Telegram")
 
     args = parser.parse_args()
 
-    # Parsear destino (si es entero tipo -100...)
-    dest = args.destino.strip()
-    if re.match(r"^-?\d+$", dest):
-        dest = int(dest)
+    dest = None
+    if args.destino:
+        dest = args.destino.strip(" '\"")
+        if re.match(r"^-?\d+$", dest):
+            dest = int(dest)
 
     asyncio.run(importar_catalogo(
         input_file=args.input,
