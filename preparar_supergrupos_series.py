@@ -109,14 +109,17 @@ async def main():
                 except Exception:
                     chat_obj = None
 
-            # 2. Buscar en diálogos existentes
+            # 2. Buscar en diálogos existentes donde el usuario sea creador o administrador
             if not chat_obj:
                 for d in dialogs:
+                    is_admin = getattr(d.entity, 'creator', False) or getattr(d.entity, 'admin_rights', None)
+                    if not is_admin:
+                        continue
                     d_title = d.title.lower()
                     if any(kw in d_title for kw in search_kws):
                         chat_obj = d.entity
                         chat_id = utils.get_peer_id(chat_obj)
-                        logger.info(f"✅ Encontrado en diálogos existentes: '{d.title}' [ID: {chat_id}]")
+                        logger.info(f"✅ Encontrado en diálogos existentes propios: '{d.title}' [ID: {chat_id}]")
                         break
 
             # 3. Si no existe, crear el Supergrupo privado
