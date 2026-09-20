@@ -22,6 +22,7 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.messages import (
     GetForumTopicsRequest,
     CreateForumTopicRequest,
+    ForwardMessagesRequest,
 )
 
 if sys.platform == "win32":
@@ -213,7 +214,9 @@ async def importar_catalogo(
         # Resolver entidades
         try:
             dest_entity = await client.get_entity(destino_chat)
+            dest_input = await client.get_input_entity(dest_entity)
             source_entity = await client.get_entity(source_chat)
+            source_input = await client.get_input_entity(source_entity)
             dest_title = getattr(dest_entity, "title", str(destino_chat))
             logger.info(f"Conexión exitosa. Supergrupo destino: '{dest_title}'")
         except Exception as e:
@@ -251,21 +254,23 @@ async def importar_catalogo(
             msg_ids = [c["message_id"] for c in sorted_caps]
             logger.info(f"Reenviando {len(msg_ids)} episodios ordenados hacia el tema '{series_name}' (ID {topic_id})...")
 
-            # 3. Reenviar en lotes de 10 mensajes
+            # 3. Reenviar en lotes de 10 mensajes usando ForwardMessagesRequest con top_msg_id
             lote_tamano = 10
             for i in range(0, len(msg_ids), lote_tamano):
                 chunk = msg_ids[i:i + lote_tamano]
+                rand_ids = [random.randint(1, 2**63 - 1) for _ in chunk]
                 success = False
 
                 while not success:
                     try:
-                        await client.forward_messages(
-                            entity=dest_entity,
-                            messages=chunk,
-                            from_peer=source_entity,
-                            reply_to=topic_id,
-                            drop_author=True
-                        )
+                        await client(ForwardMessagesRequest(
+                            from_peer=source_input,
+                            to_peer=dest_input,
+                            id=chunk,
+                            random_id=rand_ids,
+                            drop_author=True,
+                            top_msg_id=topic_id
+                        ))
                         success = True
                         await asyncio.sleep(1.8)
 
@@ -277,13 +282,14 @@ async def importar_catalogo(
                         logger.warning(f"Fallo en lote ({ex_lote}). Intentando reenvío individual...")
                         for single_id in chunk:
                             try:
-                                await client.forward_messages(
-                                    entity=dest_entity,
-                                    messages=[single_id],
-                                    from_peer=source_entity,
-                                    reply_to=topic_id,
-                                    drop_author=True
-                                )
+                                await client(ForwardMessagesRequest(
+                                    from_peer=source_input,
+                                    to_peer=dest_input,
+                                    id=[single_id],
+                                    random_id=[random.randint(1, 2**63 - 1)],
+                                    drop_author=True,
+                                    top_msg_id=topic_id
+                                ))
                                 await asyncio.sleep(1.8)
                             except Exception as ex_single:
                                 logger.error(f"No se pudo reenviar mensaje {single_id}: {ex_single}")
