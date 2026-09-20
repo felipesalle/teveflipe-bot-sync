@@ -24,7 +24,7 @@ concurrency:
 jobs:
   organize:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 90
 
     steps:
       - name: Descargar repositorio
@@ -61,6 +61,7 @@ jobs:
           python organizador_series.py $FLAGS
 
       - name: Guardar Reporte y Caché
+        if: always()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -68,3 +69,15 @@ jobs:
           git commit -m "Actualizar propuesta y analisis de Series TV [skip ci]" || exit 0
           git pull --rebase origin main
           git push
+
+      - name: Subir Artefactos de Reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-series-tv
+          path: |
+            PROPUESTA_SERIES_TV.md
+            propuesta_series_tv.json
+            dudosos.txt
+            tmdb_series_cache.json
+          if-no-files-found: ignore
