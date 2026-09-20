@@ -13,10 +13,10 @@ import json
 import asyncio
 import logging
 import urllib.parse
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Optional, Tuple, Dict, List, Any
 from collections import defaultdict
-
-import urllib.request
 from telethon import TelegramClient, errors
 from telethon.sessions import StringSession
 from telethon.tl.types import (
@@ -250,6 +250,46 @@ class TmdbNormalizer:
         self.cache[key] = fallback_name
         return fallback_name
 
+    def normalize_batch(self, candidate_titles: List[str], max_workers: int = 20) -> Dict[str, str]:
+        """Normaliza una lista de títulos candidatos en paralelo con un pool de hilos."""
+        results: Dict[str, str] = {}
+        to_query: List[str] = []
+
+        for cand in candidate_titles:
+            key = (cand or "").strip().lower()
+            if key in self.cache:
+                results[cand] = self.cache[key] or cand.strip().title()
+            elif len(key) < 3 or key.isdigit():
+                self.cache[key] = cand.strip().title()
+                results[cand] = self.cache[key]
+            else:
+                to_query.append(cand)
+
+        logger.info(f"Normalizando {len(to_query)} títulos únicos con TMDb (paralelo {max_workers} hilos)... ({len(candidate_titles) - len(to_query)} en caché local)")
+
+        if not to_query:
+            return results
+
+        completed_count = 0
+        def _worker(c: str) -> Tuple[str, str]:
+            return c, self.normalize(c)
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(_worker, c) for c in to_query]
+            for f in as_completed(futures):
+                try:
+                    c, canonical = f.result()
+                    results[c] = canonical
+                except Exception as ex:
+                    logger.debug(f"Excepción en worker TMDb: {ex}")
+                completed_count += 1
+                if completed_count % 1000 == 0 or completed_count == len(to_query):
+                    logger.info(f"   TMDb progreso: {completed_count}/{len(to_query)} títulos normalizados...")
+                    self.save_cache()
+
+        self.save_cache()
+        return results
+
 
 # -----------------------------------------------------------------------------
 # Detección y Extracción de Archivos de Video en Telegram
@@ -301,13 +341,15 @@ async def analizar_canal_origen(client: TelegramClient, tmdb: TmdbNormalizer) ->
     async for msg in client.iter_messages(
         source_entity,
         reply_to=SERIES_SOURCE_TOPIC if SERIES_SOURCE_TOPIC else None,
-        min_id=min_id,
-        limit=None,
-        reverse=True
+        limit=None
     ):
         total_scanned += 1
-        if total_scanned % 1000 == 0:
-            logger.info(f"   Escaneados {total_scanned} mensajes ({total_videos} videos encontrados)...")
+        if min_id and msg.id < min_id:
+            logger.info(f"Alcanzado límite inferior min_id ({msg.id} < {min_id}). Finalizando lectura de mensajes.")
+            break
+
+        if total_scanned % 500 == 0:
+            logger.info(f"   Escaneados {total_scanned} mensajes (ID actual: {msg.id}, {total_videos} videos encontrados)...")
 
         if not is_video_message(msg):
             continue
@@ -342,18 +384,14 @@ async def analizar_canal_origen(client: TelegramClient, tmdb: TmdbNormalizer) ->
 
     logger.info(f"Escaneo inicial finalizado: {total_scanned} msgs | {total_videos} videos | {len(raw_candidates_dict)} títulos preliminares.")
 
-    # 2. Normalizar títulos únicos con TMDb (rápido y sin peticiones repetidas)
-    logger.info(f"Normalizando {len(raw_candidates_dict)} series únicas con la API de TMDb...")
+    # 2. Normalizar títulos únicos con TMDb en paralelo (multihilo de alta velocidad)
+    candidate_titles_list = list(raw_candidates_dict.keys())
+    normalized_mapping = tmdb.normalize_batch(candidate_titles_list, max_workers=25)
+
     series_dict: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
-
-    for i, (cand_title, eps) in enumerate(raw_candidates_dict.items(), 1):
-        canonical_series = tmdb.normalize(cand_title)
+    for cand_title, eps in raw_candidates_dict.items():
+        canonical_series = normalized_mapping.get(cand_title) or cand_title.strip().title()
         series_dict[canonical_series].extend(eps)
-        if i % 15 == 0 or i == len(raw_candidates_dict):
-            logger.info(f"   Normalizadas {i}/{len(raw_candidates_dict)} series con TMDb...")
-
-    # Guardar caché de TMDb actualizado
-    tmdb.save_cache()
 
     logger.info(f"Normalización completada. Total series canónicas únicas: {len(series_dict)}.")
     return series_dict, dudosos
