@@ -1,0 +1,82 @@
+name: Importar Catálogo de Series a Supergrupo
+
+on:
+  workflow_dispatch:
+    inputs:
+      catalogo_json:
+        description: 'Catálogo JSON a importar'
+        required: true
+        type: choice
+        options:
+          - series_turcas_y_telenovelas.json
+          - series_espanolas.json
+          - series_retro_clasicas.json
+          - series_internacionales.json
+        default: series_turcas_y_telenovelas.json
+      destino_chat_id:
+        description: 'ID del Supergrupo Destino (ej: -100xxxxxxxxxx)'
+        required: true
+        type: string
+      limit_series:
+        description: 'Límite de series a procesar en esta ejecución (dejar vacío para todas)'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Modo Dry-Run (simulación sin modificar Telegram)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install telethon
+
+      - name: Ejecutar Importador de Series
+        env:
+          PYTHONUNBUFFERED: "1"
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+          SERIES_SOURCE_CHAT: "-1002257262928"
+        run: |
+          FLAGS="--input ${{ inputs.catalogo_json }} --destino \"${{ inputs.destino_chat_id }}\""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            FLAGS="$FLAGS --dry-run"
+          fi
+          if [ -n "${{ inputs.limit_series }}" ]; then
+            FLAGS="$FLAGS --limit-series ${{ inputs.limit_series }}"
+          fi
+          python importar_catalogo_series.py $FLAGS
+
+      - name: Guardar Checkpoints de Progreso
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add progreso_importacion.json || true
+          git commit -m "progreso: actualización de checkpoint de importación [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push
