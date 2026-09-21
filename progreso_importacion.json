@@ -590,6 +590,18 @@
       "Innato",
       "El barco",
       "Isla Brava"
+    ],
+    "series_retro_clasicas.json": [
+      "Los Simpson",
+      "Se ha escrito un crimen",
+      "Expediente X",
+      "Sobrenatural",
+      "Anatomía de Grey",
+      "Doctor Who",
+      "Friends",
+      "Big Bang",
+      "South Park",
+      "Mentes criminales"
     ]
   },
   "topics_cache": {}
