@@ -28,9 +28,15 @@ on:
         required: false
         type: boolean
         default: false
+      auto_chain:
+        description: 'Encadenar automáticamente la siguiente tanda al terminar'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: telegram-session
@@ -84,3 +90,22 @@ jobs:
           git commit -m "progreso: actualización de checkpoint de importación [skip ci]" || exit 0
           git pull --rebase origin main
           git push
+
+      - name: Encadenar siguiente tanda si quedan series pendientes
+        if: success()
+        run: |
+          if [ "${{ inputs.auto_chain }}" = "true" ] && [ -f .more_series ]; then
+            REMAINING=$(cat .more_series)
+            echo "Quedan $REMAINING series pendientes. Esperando 30 segundos antes de disparar la siguiente tanda..."
+            sleep 30
+            gh workflow run importar_series.yml \
+              -f catalogo_json="${{ inputs.catalogo_json }}" \
+              -f destino_chat_id="${{ inputs.destino_chat_id }}" \
+              -f limit_series="${{ inputs.limit_series }}" \
+              -f auto_chain="true" \
+              -f dry_run="false" || true
+          else
+            echo "No quedan más series pendientes o auto_chain desactivado."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

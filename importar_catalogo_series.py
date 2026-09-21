@@ -368,6 +368,23 @@ async def importar_catalogo(
             save_progress(progress)
             logger.info(f"✅ Serie '{series_name}' completada ({len(msg_ids)} caps). Checkpoint actualizado.")
 
+    # 5. Comprobar si restan más series por importar para auto-encadenamiento
+    pendientes_restantes = [s for s in series_dict.keys() if s not in completed_set]
+    if pendientes_restantes:
+        logger.info(f"ℹ️ Quedan {len(pendientes_restantes)} series pendientes en este catálogo.")
+        try:
+            with open(".more_series", "w", encoding="utf-8") as f:
+                f.write(str(len(pendientes_restantes)))
+        except Exception as e:
+            logger.warning(f"No se pudo escribir .more_series: {e}")
+    else:
+        logger.info("🎉 ¡Todas las series del catálogo han sido importadas con éxito!")
+        if os.path.exists(".more_series"):
+            try:
+                os.remove(".more_series")
+            except Exception:
+                pass
+
     logger.info("=" * 70)
     logger.info("🎉 ¡PROCESO DE IMPORTACIÓN FINALIZADO CON ÉXITO!")
     logger.info("=" * 70)
