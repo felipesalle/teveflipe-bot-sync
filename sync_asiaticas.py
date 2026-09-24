@@ -233,5 +233,19 @@ async def main():
         logger.info(f"Total mensajes multimedia sincronizados: {len(state['synced_message_ids'])}")
         save_json(STATE_FILE, state)
 
+        # Comprobar si aún quedan series pendientes para encadenar
+        remaining_pending = [s for s in all_series if s["titulo"].strip().lower() not in set(state["completed_series"])]
+        if remaining_pending:
+            logger.info(f"Aún quedan {len(remaining_pending)} series pendientes. Creando archivo señal .more_series para auto-encadenamiento.")
+            with open(".more_series", "w", encoding="utf-8") as f:
+                f.write(str(len(remaining_pending)))
+        else:
+            logger.info("🎉 ¡Catálogo completo! No quedan más series pendientes.")
+            if os.path.exists(".more_series"):
+                try:
+                    os.remove(".more_series")
+                except Exception:
+                    pass
+
 if __name__ == "__main__":
     asyncio.run(main())

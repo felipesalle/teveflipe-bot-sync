@@ -6,7 +6,7 @@ on:
       batch_limit:
         description: 'Cantidad de series a procesar en esta ejecución'
         required: false
-        default: '15'
+        default: '20'
 
 concurrency:
   group: telegram-session
@@ -14,6 +14,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -39,7 +40,7 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
-          SERIES_BATCH_LIMIT: ${{ github.event.inputs.batch_limit || '15' }}
+          SERIES_BATCH_LIMIT: ${{ github.event.inputs.batch_limit || '20' }}
         run: |
           python sync_asiaticas.py
 
@@ -47,6 +48,21 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git add sync_state_asiaticas.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "progreso: sincronizacion series asiaticas [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "progreso: sincronizacion series asiaticas [skip ci]" && git push origin main)
+
+      - name: Encadenar siguiente tanda si quedan series pendientes
+        if: success()
+        run: |
+          if [ -f .more_series ]; then
+            REMAINING=$(cat .more_series)
+            echo "Aún quedan $REMAINING series pendientes por sincronizar."
+            echo "Esperando 15 segundos antes de disparar el siguiente lote continuo..."
+            sleep 15
+            gh workflow run sync_asiaticas.yml || true
+          else
+            echo "🎉 ¡Todas las series del catálogo han sido sincronizadas con éxito!"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
