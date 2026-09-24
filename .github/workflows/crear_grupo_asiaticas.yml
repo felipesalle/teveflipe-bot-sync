@@ -41,6 +41,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add config_asiaticas.json config_supergrupos_series.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Crear supergrupo Series Asiaticas con foros [skip ci]" && git push)
+          git commit -m "Crear supergrupo Series Asiaticas con foros [skip ci]" || true
+          git pull --rebase origin main
+          git push origin main

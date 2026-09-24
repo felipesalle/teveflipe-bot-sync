@@ -24,7 +24,7 @@ SESSION = os.getenv("TELEGRAM_STRING_SESSION") or ""
 
 CONFIG_FILE = "config_asiaticas.json"
 STATE_FILE = "sync_state_asiaticas.json"
-AUDIT_FILE = "auditoria_series_asiaticas.json"
+AUDIT_FILE = os.getenv("AUDIT_FILE", "catalogo_maestro_series_asiaticas.json")
 
 SERIES_BATCH_LIMIT = int(os.getenv("SERIES_BATCH_LIMIT", "15"))  # Series a procesar por ejecución
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "5"))                  # Mensajes por lote de reenvío
@@ -191,13 +191,16 @@ async def main():
                     state["synced_message_ids"].append(poster_id)
                     save_json(STATE_FILE, state)
 
-            # 3. Recopilar todos los mensajes de video de todas las temporadas
+            # 3. Recopilar todos los mensajes de video
             video_msg_ids = []
-            for t_name, t_info in s["temporadas"].items():
-                for ep in t_info["episodios_detalle"]:
-                    for m_id in ep.get("msg_ids", []):
-                        if m_id not in video_msg_ids and m_id not in synced_msgs_set:
-                            video_msg_ids.append(m_id)
+            if "msg_ids" in s:
+                video_msg_ids = [m_id for m_id in s["msg_ids"] if m_id not in synced_msgs_set]
+            elif "temporadas" in s:
+                for t_name, t_info in s["temporadas"].items():
+                    for ep in t_info.get("episodios_detalle", []):
+                        for m_id in ep.get("msg_ids", []):
+                            if m_id not in video_msg_ids and m_id not in synced_msgs_set:
+                                video_msg_ids.append(m_id)
 
             logger.info(f"Episodios pendientes de reenvío para '{stitle}': {len(video_msg_ids)}")
 
