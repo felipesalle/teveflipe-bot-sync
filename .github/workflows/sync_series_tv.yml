@@ -1,12 +1,15 @@
 name: Sincronizar Series TV
 
 on:
+  schedule:
+    # Salvaguarda automática periódica para mantener el proceso continuo
+    - cron: '*/25 * * * *'
   workflow_dispatch:
     inputs:
       batch_limit:
         description: 'Cantidad de series a procesar en esta tanda'
         required: false
-        default: '15'
+        default: '12'
 
 concurrency:
   group: telegram-session
@@ -45,7 +48,8 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           BUNKER_SERIES_TV: "-1002097175258"
           PROD_SERIES_TV: "-1004331019870"
-          SERIES_BATCH_LIMIT: ${{ github.event.inputs.batch_limit || '15' }}
+          SERIES_BATCH_LIMIT: ${{ github.event.inputs.batch_limit || '12' }}
+          CHUNK_SIZE: "5"
         run: |
           python sync_series_tv.py
 
@@ -54,14 +58,17 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase --autostash origin main || true
           if [ -f sync_state_series_tv.json ]; then
             git add sync_state_series_tv.json
-            git diff --quiet && git diff --staged --quiet || (git commit -m "progreso: sincronizacion series tv [skip ci]" && git push origin main)
+            if ! git diff --staged --quiet; then
+              git commit -m "progreso: sincronizacion series tv [skip ci]"
+              git pull --rebase --autostash origin main
+              git push origin main
+            fi
           fi
 
       - name: Encadenar siguiente tanda si quedan series pendientes
-        if: success()
+        if: always()
         run: |
           if [ -f .more_series ]; then
             REMAINING=$(cat .more_series)

@@ -30,8 +30,8 @@ BUNKER_SERIES_TV = int(os.getenv("BUNKER_SERIES_TV", "-1002097175258"))
 PROD_SERIES_TV = int(os.getenv("PROD_SERIES_TV", "-1004331019870"))
 
 STATE_FILE = "sync_state_series_tv.json"
-SERIES_BATCH_LIMIT = int(os.getenv("SERIES_BATCH_LIMIT", "15"))  # Series a procesar por ejecución
-CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "12"))                  # Mensajes por lote de reenvío
+SERIES_BATCH_LIMIT = int(os.getenv("SERIES_BATCH_LIMIT", "12"))  # Series a procesar por ejecución
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "5"))                  # Mensajes por lote de reenvío (5 seguro contra desconexiones MTProto)
 
 def load_json(filepath: str, default=None):
     if os.path.exists(filepath):
@@ -49,12 +49,28 @@ def save_json(filepath: str, data: dict):
     except Exception as e:
         logger.error(f"Error guardando {filepath}: {e}")
 
+async def ensure_connected(client: TelegramClient, name: str = "Client"):
+    if not client.is_connected():
+        logger.info(f"🔄 Cliente {name} desconectado. Reconectando...")
+        try:
+            await client.connect()
+            logger.info(f"✅ Cliente {name} conectado exitosamente.")
+        except Exception as e:
+            logger.warning(f"⚠️ Error conectando {name}: {e}. Reintentando en 3s...")
+            await asyncio.sleep(3)
+            await client.connect()
+
+async def ensure_clients(cb: TelegramClient, cp: TelegramClient):
+    await ensure_connected(cb, "Búnker")
+    await ensure_connected(cp, "Producción")
+
 async def get_all_bunker_topics(client, entity):
     topics = []
     offset_date = 0
     offset_id = 0
     offset_topic = 0
     while True:
+        await ensure_connected(client, "Búnker")
         res = await client(GetForumTopicsRequest(
             peer=entity,
             offset_date=offset_date,
@@ -85,6 +101,7 @@ async def get_or_create_prod_topic(cp: TelegramClient, prod_entity, title: str, 
     clean_name = title.strip()[:120]
     for attempt in range(1, 5):
         try:
+            await ensure_connected(cp, "Producción")
             logger.info(f"Creando nuevo tema en Producción: '{clean_name}' (Intento {attempt})...")
             created = await cp(CreateForumTopicRequest(
                 peer=prod_entity,
@@ -175,97 +192,126 @@ async def main():
         stitle = t.title.strip()
         logger.info(f"\n[{idx}/{len(current_batch)}] 📺 Sincronizando serie: '{stitle}' (Tema Búnker {t.id})...")
 
-        # 1. Obtener mensajes del tema en Búnker
-        b_msgs = [m async for m in cb.iter_messages(ent_bunker, reply_to=t.id, reverse=True) if not m.action and (m.media or m.text)]
-        msg_ids = [m.id for m in b_msgs]
-        logger.info(f"   Episodios / archivos encontrados: {len(msg_ids)}")
+        try:
+            await ensure_clients(cb, cp)
 
-        if not msg_ids:
-            logger.info("   Tema vacío en búnker, marcando como completado.")
-            state["completed_bunker_topics"].append(t.id)
-            save_json(STATE_FILE, state)
-            continue
+            # 1. Obtener mensajes del tema en Búnker
+            b_msgs = [m async for m in cb.iter_messages(ent_bunker, reply_to=t.id, reverse=True) if not m.action and (m.media or m.text)]
+            msg_ids = [m.id for m in b_msgs]
+            logger.info(f"   Episodios / archivos encontrados en Búnker: {len(msg_ids)}")
 
-        # 2. Crear u obtener tema en Producción
-        p_tid = await get_or_create_prod_topic(cp, ent_prod, stitle, state)
-        if not p_tid:
-            logger.error(f"   ❌ No se pudo crear tema en Producción para '{stitle}'. Saltando...")
-            continue
+            if not msg_ids:
+                logger.info("   Tema vacío en Búnker, marcando como completado.")
+                state["completed_bunker_topics"].append(t.id)
+                save_json(STATE_FILE, state)
+                continue
 
-        # 3. Replicar mensajes vía Relay seguro
-        all_ok = True
-        for i in range(0, len(msg_ids), CHUNK_SIZE):
-            chunk = msg_ids[i:i + CHUNK_SIZE]
-            exito_chunk = False
-            for attempt in range(1, 4):
-                try:
-                    # A. Bunker -> DM Prod
-                    fwd_res = await cb.forward_messages(
-                        entity=prod_user,
-                        messages=chunk,
-                        from_peer=ent_bunker,
-                        drop_author=True
-                    )
-                    b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
+            # 2. Crear u obtener tema en Producción
+            p_tid = await get_or_create_prod_topic(cp, ent_prod, stitle, state)
+            if not p_tid:
+                logger.error(f"   ❌ No se pudo crear/obtener tema en Producción para '{stitle}'. Saltando...")
+                continue
 
-                    # B. Prod recibe de DM
-                    recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
-                    if not isinstance(recv, list):
-                        recv = [recv]
-                    p_recv = [m.id for m in reversed(recv) if not m.action]
+            # 3. Comprobar si ya existen mensajes en Producción (reanudación inteligente)
+            p_msgs = [m async for m in cp.iter_messages(ent_prod, reply_to=p_tid) if not m.action and (m.media or m.text)]
+            p_count = len(p_msgs)
+            if p_count >= len(msg_ids):
+                logger.info(f"   ℹ️ El tema en Producción ya contiene todos los episodios ({p_count}/{len(msg_ids)}). Marcando como completado.")
+                if t.id not in state["completed_bunker_topics"]:
+                    state["completed_bunker_topics"].append(t.id)
+                save_json(STATE_FILE, state)
+                continue
+            elif p_count > 0:
+                logger.info(f"   ℹ️ El tema en Producción ya tiene {p_count}/{len(msg_ids)} episodios. Reanudando desde episodio {p_count + 1}...")
+                remaining_msg_ids = msg_ids[p_count:]
+            else:
+                remaining_msg_ids = msg_ids
 
-                    # C. Prod reenvía al canal oficial
-                    if p_recv:
-                        r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
-                        await cp(ForwardMessagesRequest(
-                            from_peer=await cp.get_input_entity(bunker_user),
-                            to_peer=ent_prod,
-                            id=p_recv,
-                            random_id=r_ids,
-                            drop_author=True,
-                            top_msg_id=p_tid
-                        ))
-
-                    # D. Limpieza inmediata de DMs
+            # 4. Replicar mensajes vía Relay seguro
+            all_ok = True
+            for i in range(0, len(remaining_msg_ids), CHUNK_SIZE):
+                chunk = remaining_msg_ids[i:i + CHUNK_SIZE]
+                exito_chunk = False
+                for attempt in range(1, 4):
                     try:
-                        await cb.delete_messages(prod_user, b_fwd, revoke=True)
-                        await cp.delete_messages(bunker_user, p_recv, revoke=True)
-                    except Exception:
-                        pass
+                        await ensure_clients(cb, cp)
 
-                    exito_chunk = True
-                    state["total_messages_synced"] = state.get("total_messages_synced", 0) + len(chunk)
-                    logger.info(f"   Replicados {min(i + CHUNK_SIZE, len(msg_ids))}/{len(msg_ids)} episodios en '{stitle}'...")
+                        # A. Bunker -> DM Prod
+                        fwd_res = await cb.forward_messages(
+                            entity=prod_user,
+                            messages=chunk,
+                            from_peer=ent_bunker,
+                            drop_author=True
+                        )
+                        b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
+
+                        # B. Prod recibe de DM
+                        recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
+                        if not isinstance(recv, list):
+                            recv = [recv]
+                        p_recv = [m.id for m in reversed(recv) if not m.action]
+
+                        # C. Prod reenvía al canal oficial
+                        if p_recv:
+                            r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
+                            await cp(ForwardMessagesRequest(
+                                from_peer=await cp.get_input_entity(bunker_user),
+                                to_peer=ent_prod,
+                                id=p_recv,
+                                random_id=r_ids,
+                                drop_author=True,
+                                top_msg_id=p_tid
+                            ))
+
+                        # D. Limpieza inmediata de DMs
+                        try:
+                            await cb.delete_messages(prod_user, b_fwd, revoke=True)
+                            await cp.delete_messages(bunker_user, p_recv, revoke=True)
+                        except Exception:
+                            pass
+
+                        exito_chunk = True
+                        state["total_messages_synced"] = state.get("total_messages_synced", 0) + len(chunk)
+                        curr_synced = p_count + i + len(chunk)
+                        logger.info(f"   Replicados {curr_synced}/{len(msg_ids)} episodios en '{stitle}'...")
+                        break
+                    except errors.FloodWaitError as fe:
+                        logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
+                        await asyncio.sleep(fe.seconds + 2)
+                    except Exception as ce:
+                        logger.warning(f"Aviso en lote ({attempt}/3) para '{stitle}': {ce}")
+                        await asyncio.sleep(4.0)
+                        await ensure_clients(cb, cp)
+
+                if not exito_chunk:
+                    all_ok = False
+                    logger.error(f"❌ Falló réplica de lote en '{stitle}'. Se continuará en siguiente tanda.")
                     break
-                except errors.FloodWaitError as fe:
-                    logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
-                    await asyncio.sleep(fe.seconds + 2)
-                except Exception as ce:
-                    logger.warning(f"Aviso en lote ({attempt}/3): {ce}")
-                    await asyncio.sleep(3.0)
 
-            if not exito_chunk:
-                all_ok = False
-                logger.error(f"❌ Falló réplica de lote en '{stitle}'. Se continuará en siguiente ejecución.")
-                break
+                await asyncio.sleep(2.5)
 
-            await asyncio.sleep(1.8)
+            if all_ok:
+                logger.info(f"✅ ¡Serie '{stitle}' sincronizada al 100% en Producción!")
+                if t.id not in state["completed_bunker_topics"]:
+                    state["completed_bunker_topics"].append(t.id)
+                save_json(STATE_FILE, state)
 
-        if all_ok:
-            logger.info(f"✅ ¡Serie '{stitle}' sincronizada al 100% en Producción!")
-            state["completed_bunker_topics"].append(t.id)
-            save_json(STATE_FILE, state)
+            processed_count += 1
+            await asyncio.sleep(2.0)
 
-        processed_count += 1
-        await asyncio.sleep(2.0)
+        except Exception as se:
+            logger.error(f"❌ Error inesperado procesando serie '{stitle}' (Tema {t.id}): {se}")
+            await asyncio.sleep(5.0)
+            await ensure_clients(cb, cp)
 
+    # Guardar estado final
     save_json(STATE_FILE, state)
 
-    # Verificar si aún quedan series pendientes
-    remaining_after = [t for t in all_topics if t.id not in set(state["completed_bunker_topics"])]
+    completed_set = set(state.get("completed_bunker_topics", []))
+    remaining_after = [t for t in all_topics if t.id not in completed_set]
     logger.info("\n" + "=" * 80)
     logger.info(f"🎉 Tanda finalizada. Series procesadas en esta ejecución: {processed_count}")
-    logger.info(f"Total acumulado: {len(state['completed_bunker_topics'])} / {len(all_topics)} series completadas.")
+    logger.info(f"Total acumulado: {len(completed_set)} / {len(all_topics)} series completadas.")
     logger.info(f"Total episodios sincronizados: {state.get('total_messages_synced', 0)}")
     logger.info(f"Series pendientes restantes: {len(remaining_after)}")
 
@@ -281,8 +327,11 @@ async def main():
             except Exception:
                 pass
 
-    await cb.disconnect()
-    await cp.disconnect()
+    try:
+        await cb.disconnect()
+        await cp.disconnect()
+    except Exception:
+        pass
 
 if __name__ == '__main__':
     asyncio.run(main())
