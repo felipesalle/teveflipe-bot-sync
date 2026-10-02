@@ -1,0 +1,76 @@
+name: Sincronizar Series TV
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch_limit:
+        description: 'Cantidad de series a procesar en esta tanda'
+        required: false
+        default: '15'
+
+concurrency:
+  group: telegram-session
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  sync_series_tv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install telethon
+
+      - name: Ejecutar Sincronización de Series TV
+        env:
+          PYTHONUNBUFFERED: "1"
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+          SESSION_PROD: ${{ secrets.SESSION_PROD }}
+          BUNKER_SERIES_TV: "-1002097175258"
+          PROD_SERIES_TV: "-1004331019870"
+          SERIES_BATCH_LIMIT: ${{ github.event.inputs.batch_limit || '15' }}
+        run: |
+          python sync_series_tv.py
+
+      - name: Guardar Progreso de Sincronización
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash origin main || true
+          if [ -f sync_state_series_tv.json ]; then
+            git add sync_state_series_tv.json
+            git diff --quiet && git diff --staged --quiet || (git commit -m "progreso: sincronizacion series tv [skip ci]" && git push origin main)
+          fi
+
+      - name: Encadenar siguiente tanda si quedan series pendientes
+        if: success()
+        run: |
+          if [ -f .more_series ]; then
+            REMAINING=$(cat .more_series)
+            echo "Aún quedan $REMAINING series pendientes por sincronizar."
+            echo "Esperando 15 segundos antes de disparar el siguiente lote continuo..."
+            sleep 15
+            gh workflow run sync_series_tv.yml || true
+          else
+            echo "🎉 ¡Todas las series del catálogo han sido sincronizadas con éxito!"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
