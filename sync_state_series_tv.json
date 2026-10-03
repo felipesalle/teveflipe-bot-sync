@@ -109,7 +109,19 @@
     6362,
     6056,
     2993,
-    6139
+    6139,
+    6048,
+    6031,
+    3622,
+    3595,
+    3361,
+    2271,
+    3420,
+    3407,
+    3369,
+    3342,
+    3336,
+    3297
   ],
   "prod_topics_map": {
     "eric (2024)": 3,
@@ -210,7 +222,19 @@
     "daredevil": 6537,
     "friends": 6578,
     "roma": 6814,
-    "the white lotus": 6856
+    "the white lotus": 6856,
+    "ad vitam": 6871,
+    "24 legacy": 6879,
+    "mindhunter": 6893,
+    "the boys": 6916,
+    "shogun": 6943,
+    "juego de tronos": 6961,
+    "lost in space": 7127,
+    "constelación": 7157,
+    "quien mató a sara?": 7169,
+    "el problema de los tres cuerpos": 7206,
+    "el triangulo de las bermudas": 7225,
+    "agencia de citas": 7231
   },
-  "total_messages_synced": 7070
+  "total_messages_synced": 7439
 }
