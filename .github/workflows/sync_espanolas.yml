@@ -1,9 +1,6 @@
 name: Sincronizar Series Espanolas
 
 on:
-  schedule:
-    # Se ejecuta cada 20 minutos como salvaguarda automática
-    - cron: '*/20 * * * *'
   workflow_dispatch:
 
 permissions:
