@@ -37,7 +37,19 @@
     18269,
     21982,
     21709,
-    21697
+    21697,
+    21680,
+    21674,
+    21591,
+    20011,
+    19940,
+    1963,
+    19415,
+    19522,
+    19514,
+    19465,
+    19490,
+    19481
   ],
   "prod_topics_map": {
     "eric (2024)": 3,
@@ -66,7 +78,19 @@
     "doom patrol": 1858,
     "ballers": 1979,
     "la cosa del pantano": 2076,
-    "helstrom": 2099
+    "helstrom": 2099,
+    "the politician": 2122,
+    "outlander": 2155,
+    "mamíferos": 2166,
+    "archer": 2173,
+    "dexter": 2292,
+    "cobra kai": 2362,
+    "el trueno azul": 2470,
+    "colony": 2483,
+    "secretos de un matrimonio": 2520,
+    "muñeca rusa": 2528,
+    "el gabinete de curiosidades": 2559,
+    "soldados proper": 2568
   },
-  "total_messages_synced": 2123
+  "total_messages_synced": 2567
 }
