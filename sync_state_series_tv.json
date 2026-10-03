@@ -61,7 +61,19 @@
     15968,
     1644,
     15271,
-    15949
+    15949,
+    15848,
+    15806,
+    15425,
+    14380,
+    14169,
+    9990,
+    14106,
+    14092,
+    14021,
+    14000,
+    13980,
+    13964
   ],
   "prod_topics_map": {
     "eric (2024)": 3,
@@ -114,7 +126,19 @@
     "the good doctor": 3123,
     "arrow": 3241,
     "the rookie": 3428,
-    "upright": 3504
+    "upright": 3504,
+    "stargate atlantis": 3523,
+    "angie tribeca": 3605,
+    "gotham": 3639,
+    "barracuda queens": 3720,
+    "the office": 3727,
+    "los simpsons": 3877,
+    "carter": 4487,
+    "beforeigners los visitantes": 4494,
+    "snowfall": 4505,
+    "kung fu": 4553,
+    "creepshow": 4565,
+    "somewhere boy": 4570
   },
-  "total_messages_synced": 3504
+  "total_messages_synced": 4796
 }
