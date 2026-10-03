@@ -85,7 +85,19 @@
     11351,
     11270,
     1557,
-    10964
+    10964,
+    10992,
+    10406,
+    10620,
+    8764,
+    8711,
+    8700,
+    8681,
+    8663,
+    8569,
+    8559,
+    8538,
+    1518
   ],
   "prod_topics_map": {
     "eric (2024)": 3,
@@ -162,7 +174,19 @@
     "jack ryan": 5113,
     "veep": 5129,
     "dollhouse": 5201,
-    "the walking dead: dead city": 5257
+    "the walking dead: dead city": 5257,
+    "the chosen": 5284,
+    "bones": 5303,
+    "cosas de casa": 5551,
+    "los misterios de murdoch": 5770,
+    "buscate la vida": 5946,
+    "la verdad sobre el caso harry quebert": 5998,
+    "ms marvel": 6009,
+    "dahmer": 6017,
+    "lucifer": 6028,
+    "barons": 6122,
+    "condor": 6132,
+    "into the west": 6153
   },
-  "total_messages_synced": 5494
+  "total_messages_synced": 6369
 }
