@@ -12,7 +12,8 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.messages import (
     ForwardMessagesRequest,
     CreateForumTopicRequest,
-    GetForumTopicsRequest
+    GetForumTopicsRequest,
+    ToggleNoForwardsRequest
 )
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -131,64 +132,94 @@ def get_tmdb_card(query: str, year: str = ""):
 async def sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
     msg_ids = [m.id for m in new_msgs]
     titles_added = []
+    max_synced_id = c.get("ultimo_id_sincronizado", 0)
     
-    for i in range(0, len(msg_ids), CHUNK_SIZE):
-        chunk = msg_ids[i:i + CHUNK_SIZE]
-        for attempt in range(1, 4):
-            try:
-                await ensure_clients(cb, cp)
-                
-                # A. Bunker -> DM Prod
-                fwd_res = await cb.forward_messages(
-                    entity=prod_user,
-                    messages=chunk,
-                    from_peer=ent_bunker,
-                    drop_author=True
-                )
-                b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
-                
-                # B. Prod recibe de DM
-                recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
-                if not isinstance(recv, list):
-                    recv = [recv]
-                p_recv = [m.id for m in reversed(recv) if not m.action]
-                
-                # C. Prod reenvía al canal oficial
-                if p_recv:
-                    r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
-                    await cp(ForwardMessagesRequest(
-                        from_peer=await cp.get_input_entity(bunker_user),
-                        to_peer=ent_prod,
-                        id=p_recv,
-                        random_id=r_ids,
-                        drop_author=True
-                    ))
-                
-                # D. Limpieza de DM
-                try:
-                    await cb.delete_messages(prod_user, b_fwd, revoke=True)
-                    await cp.delete_messages(bunker_user, p_recv, revoke=True)
-                except Exception:
-                    pass
-                
-                break
-            except errors.FloodWaitError as fe:
-                logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
-                await asyncio.sleep(fe.seconds + 2)
-            except Exception as e:
-                logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
-                await asyncio.sleep(4.0)
-                await ensure_clients(cb, cp)
-        
-        await asyncio.sleep(2.0)
-        
-    for m in new_msgs:
-        fname = m.file.name if m.file and m.file.name else ""
-        q, y = clean_for_search(m.text or "", fname)
-        if q and not any(it["query"] == q for it in titles_added):
-            titles_added.append({"query": q, "year": y, "type": "pelicula"})
+    # Manejar protección contra copia/reenvío (noforwards) si está activada
+    was_protected = False
+    try:
+        full_bunker = await cb.get_entity(ent_bunker)
+        if getattr(full_bunker, 'noforwards', False):
+            logger.info(f"🔓 Desactivando temporalmente restricción 'noforwards' en '{c['nombre']}'...")
+            await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=False))
+            was_protected = True
+    except Exception as e:
+        logger.warning(f"No se pudo consultar/modificar noforwards en '{c['nombre']}': {e}")
+
+    try:
+        for i in range(0, len(msg_ids), CHUNK_SIZE):
+            chunk = msg_ids[i:i + CHUNK_SIZE]
+            chunk_msgs = [m for m in new_msgs if m.id in chunk]
+            chunk_ok = False
             
-    return titles_added
+            for attempt in range(1, 4):
+                try:
+                    await ensure_clients(cb, cp)
+                    
+                    # A. Bunker -> DM Prod
+                    fwd_res = await cb.forward_messages(
+                        entity=prod_user,
+                        messages=chunk,
+                        from_peer=ent_bunker,
+                        drop_author=True
+                    )
+                    b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
+                    
+                    # B. Prod recibe de DM
+                    recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
+                    if not isinstance(recv, list):
+                        recv = [recv]
+                    p_recv = [m.id for m in reversed(recv) if not m.action]
+                    
+                    # C. Prod reenvía al canal oficial
+                    if p_recv:
+                        r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
+                        await cp(ForwardMessagesRequest(
+                            from_peer=await cp.get_input_entity(bunker_user),
+                            to_peer=ent_prod,
+                            id=p_recv,
+                            random_id=r_ids,
+                            drop_author=True
+                        ))
+                    
+                    # D. Limpieza de DM
+                    try:
+                        await cb.delete_messages(prod_user, b_fwd, revoke=True)
+                        await cp.delete_messages(bunker_user, p_recv, revoke=True)
+                    except Exception:
+                        pass
+                    
+                    chunk_ok = True
+                    break
+                except errors.FloodWaitError as fe:
+                    logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
+                    await asyncio.sleep(fe.seconds + 2)
+                except Exception as e:
+                    logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
+                    await asyncio.sleep(4.0)
+                    await ensure_clients(cb, cp)
+            
+            if chunk_ok:
+                max_synced_id = max(max_synced_id, max(chunk))
+                for m in chunk_msgs:
+                    fname = m.file.name if m.file and m.file.name else ""
+                    q, y = clean_for_search(m.text or "", fname)
+                    if q and not any(it["query"] == q for it in titles_added):
+                        titles_added.append({"query": q, "year": y, "type": "pelicula"})
+            else:
+                logger.error(f"❌ Falló el envío del lote {chunk} en '{c['nombre']}'. Se interrumpirá para reintentar luego.")
+                break
+                
+            await asyncio.sleep(2.0)
+            
+    finally:
+        if was_protected:
+            try:
+                logger.info(f"🔒 Restaurando restricción 'noforwards' en '{c['nombre']}'...")
+                await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=True))
+            except Exception as e:
+                logger.warning(f"No se pudo restaurar noforwards en '{c['nombre']}': {e}")
+                
+    return titles_added, max_synced_id
 
 async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
     msgs_by_topic = {}
@@ -219,111 +250,142 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
         offset_topic = last.id
         
     series_added = []
+    max_synced_id = c.get("ultimo_id_sincronizado", 0)
     
-    for b_tid, t_msgs in msgs_by_topic.items():
-        topic_title = f"Tema {b_tid}"
-        try:
-            head_msg = await cb.get_messages(ent_bunker, ids=b_tid)
-            if head_msg and hasattr(head_msg, 'action') and hasattr(head_msg.action, 'title'):
-                topic_title = head_msg.action.title.strip()
-            elif head_msg and head_msg.file and head_msg.file.name:
-                q, _ = clean_for_search("", head_msg.file.name)
-                topic_title = q
-            elif head_msg and head_msg.text:
-                q, _ = clean_for_search(head_msg.text, "")
-                topic_title = q
-        except Exception:
-            pass
-            
-        bt_key = topic_title.lower()
-        p_tid = p_topics.get(bt_key)
-        is_new = False
-        
-        if not p_tid:
-            is_new = True
-            logger.info(f"✨ Creando nuevo tema en Producción: '{topic_title}'...")
+    # Manejar protección contra copia/reenvío (noforwards) si está activada
+    was_protected = False
+    try:
+        full_bunker = await cb.get_entity(ent_bunker)
+        if getattr(full_bunker, 'noforwards', False):
+            logger.info(f"🔓 Desactivando temporalmente restricción 'noforwards' en '{c['nombre']}'...")
+            await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=False))
+            was_protected = True
+    except Exception as e:
+        logger.warning(f"No se pudo consultar/modificar noforwards en '{c['nombre']}': {e}")
+
+    try:
+        for b_tid, t_msgs in msgs_by_topic.items():
+            topic_title = f"Tema {b_tid}"
             try:
-                created = await cp(CreateForumTopicRequest(
-                    peer=ent_prod,
-                    title=topic_title[:120],
-                    random_id=random.randint(1, 2**63 - 1)
-                ))
-                for u in created.updates:
-                    if hasattr(u, 'id'):
-                        p_tid = u.id
-                        break
-                    if hasattr(u, 'message') and hasattr(u.message, 'action') and hasattr(u.message.action, 'title'):
-                        p_tid = u.message.id
-                        break
-                if p_tid:
-                    p_topics[bt_key] = p_tid
-            except Exception as e:
-                logger.error(f"Error creando tema '{topic_title}': {e}")
+                head_msg = await cb.get_messages(ent_bunker, ids=b_tid)
+                if head_msg and hasattr(head_msg, 'action') and hasattr(head_msg.action, 'title'):
+                    topic_title = head_msg.action.title.strip()
+                elif head_msg and head_msg.file and head_msg.file.name:
+                    q, _ = clean_for_search("", head_msg.file.name)
+                    topic_title = q
+                elif head_msg and head_msg.text:
+                    q, _ = clean_for_search(head_msg.text, "")
+                    topic_title = q
+            except Exception:
+                pass
+                
+            bt_key = topic_title.lower()
+            p_tid = p_topics.get(bt_key)
+            is_new = False
+            
+            if not p_tid:
+                is_new = True
+                logger.info(f"✨ Creando nuevo tema en Producción: '{topic_title}'...")
+                try:
+                    created = await cp(CreateForumTopicRequest(
+                        peer=ent_prod,
+                        title=topic_title[:120],
+                        random_id=random.randint(1, 2**63 - 1)
+                    ))
+                    for u in created.updates:
+                        if hasattr(u, 'id'):
+                            p_tid = u.id
+                            break
+                        if hasattr(u, 'message') and hasattr(u.message, 'action') and hasattr(u.message.action, 'title'):
+                            p_tid = u.message.id
+                            break
+                    if p_tid:
+                        p_topics[bt_key] = p_tid
+                except Exception as e:
+                    logger.error(f"Error creando tema '{topic_title}': {e}")
+                    continue
+                    
+            if not p_tid:
                 continue
                 
-        if not p_tid:
-            continue
-            
-        msg_ids = [m.id for m in t_msgs if not m.action]
-        if not msg_ids:
-            continue
-            
-        for i in range(0, len(msg_ids), CHUNK_SIZE):
-            chunk = msg_ids[i:i + CHUNK_SIZE]
-            for attempt in range(1, 4):
-                try:
-                    await ensure_clients(cb, cp)
-                    
-                    # A. Bunker -> DM Prod
-                    fwd_res = await cb.forward_messages(
-                        entity=prod_user,
-                        messages=chunk,
-                        from_peer=ent_bunker,
-                        drop_author=True
-                    )
-                    b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
-                    
-                    # B. Prod recibe de DM
-                    recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
-                    if not isinstance(recv, list):
-                        recv = [recv]
-                    p_recv = [m.id for m in reversed(recv) if not m.action]
-                    
-                    # C. Prod reenvía al canal oficial
-                    if p_recv:
-                        r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
-                        await cp(ForwardMessagesRequest(
-                            from_peer=await cp.get_input_entity(bunker_user),
-                            to_peer=ent_prod,
-                            id=p_recv,
-                            random_id=r_ids,
-                            drop_author=True,
-                            top_msg_id=p_tid
-                        ))
-                    
-                    # D. Limpieza de DM
+            msg_ids = [m.id for m in t_msgs if not m.action]
+            if not msg_ids:
+                continue
+                
+            series_ok = True
+            for i in range(0, len(msg_ids), CHUNK_SIZE):
+                chunk = msg_ids[i:i + CHUNK_SIZE]
+                chunk_ok = False
+                for attempt in range(1, 4):
                     try:
-                        await cb.delete_messages(prod_user, b_fwd, revoke=True)
-                        await cp.delete_messages(bunker_user, p_recv, revoke=True)
-                    except Exception:
-                        pass
-                    
+                        await ensure_clients(cb, cp)
+                        
+                        # A. Bunker -> DM Prod
+                        fwd_res = await cb.forward_messages(
+                            entity=prod_user,
+                            messages=chunk,
+                            from_peer=ent_bunker,
+                            drop_author=True
+                        )
+                        b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
+                        
+                        # B. Prod recibe de DM
+                        recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
+                        if not isinstance(recv, list):
+                            recv = [recv]
+                        p_recv = [m.id for m in reversed(recv) if not m.action]
+                        
+                        # C. Prod reenvía al canal oficial
+                        if p_recv:
+                            r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
+                            await cp(ForwardMessagesRequest(
+                                from_peer=await cp.get_input_entity(bunker_user),
+                                to_peer=ent_prod,
+                                id=p_recv,
+                                random_id=r_ids,
+                                drop_author=True,
+                                top_msg_id=p_tid
+                            ))
+                        
+                        # D. Limpieza de DM
+                        try:
+                            await cb.delete_messages(prod_user, b_fwd, revoke=True)
+                            await cp.delete_messages(bunker_user, p_recv, revoke=True)
+                        except Exception:
+                            pass
+                        
+                        chunk_ok = True
+                        break
+                    except errors.FloodWaitError as fe:
+                        logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
+                        await asyncio.sleep(fe.seconds + 2)
+                    except Exception as e:
+                        logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
+                        await asyncio.sleep(4.0)
+                        await ensure_clients(cb, cp)
+                        
+                if not chunk_ok:
+                    logger.error(f"❌ Falló el envío del lote de episodios {chunk} para '{topic_title}'.")
+                    series_ok = False
                     break
-                except errors.FloodWaitError as fe:
-                    logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
-                    await asyncio.sleep(fe.seconds + 2)
-                except Exception as e:
-                    logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
-                    await asyncio.sleep(4.0)
-                    await ensure_clients(cb, cp)
                     
-            await asyncio.sleep(2.0)
-            
-        q, y = clean_for_search(topic_title, "")
-        extra_note = "Nueva Serie" if is_new else f"+{len(msg_ids)} nuevos episodios"
-        series_added.append({"query": q, "year": y, "type": "serie", "note": extra_note})
-            
-    return series_added
+                max_synced_id = max(max_synced_id, max(chunk))
+                await asyncio.sleep(2.0)
+                
+            if series_ok:
+                q, y = clean_for_search(topic_title, "")
+                extra_note = "Nueva Serie" if is_new else f"+{len(msg_ids)} nuevos episodios"
+                series_added.append({"query": q, "year": y, "type": "serie", "note": extra_note})
+                
+    finally:
+        if was_protected:
+            try:
+                logger.info(f"🔒 Restaurando restricción 'noforwards' en '{c['nombre']}'...")
+                await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=True))
+            except Exception as e:
+                logger.warning(f"No se pudo restaurar noforwards en '{c['nombre']}': {e}")
+                
+    return series_added, max_synced_id
 
 async def send_rich_community_cards(cp, novedades):
     """Envía fichas atractivas con póster oficial, puntuación y sinopsis al tema 22."""
@@ -450,14 +512,14 @@ async def main():
                 
             ent_prod = await cp.get_input_entity(c["produccion_id"])
             if not is_forum:
-                items = await sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
+                items, new_last_id = await sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
             else:
-                items = await sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
+                items, new_last_id = await sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
                 
-            c["ultimo_id_sincronizado"] = current_top
+            c["ultimo_id_sincronizado"] = new_last_id
             if items:
                 novedades_detectadas[c_nombre] = items
-                logger.info(f"✅ {len(items)} títulos procesados en '{c_nombre}'.")
+                logger.info(f"✅ {len(items)} títulos procesados exitosamente en '{c_nombre}'.")
                 
         except Exception as e:
             logger.error(f"Error procesando canal '{c_nombre}': {e}")
