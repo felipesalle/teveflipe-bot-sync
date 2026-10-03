@@ -1,9 +1,6 @@
 name: Sincronizar Series TV
 
 on:
-  schedule:
-    # Salvaguarda automática periódica para mantener el proceso continuo
-    - cron: '*/25 * * * *'
   workflow_dispatch:
     inputs:
       batch_limit:
