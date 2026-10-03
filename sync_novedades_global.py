@@ -1,10 +1,12 @@
 import asyncio
+import io
 import json
 import logging
 import os
 import random
 import re
 import sys
+import requests
 from telethon import TelegramClient, utils, errors
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import (
@@ -28,6 +30,7 @@ SESSION_PROD = os.getenv("SESSION_PROD") or ""
 
 COMMUNITY_GROUP_ID = int(os.getenv("COMMUNITY_GROUP_ID", "-1003990716596"))
 COMMUNITY_TOPIC_ID = int(os.getenv("COMMUNITY_TOPIC_ID", "22"))
+TMDB_API_KEY = os.getenv("TMDB_API_KEY", "2b7cd7b237fe99884613b230a910a09c")
 
 MAP_FILE = "canales_map.json"
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "5"))
@@ -63,21 +66,69 @@ async def ensure_clients(cb: TelegramClient, cp: TelegramClient):
     await ensure_connected(cb, "Búnker")
     await ensure_connected(cp, "Producción")
 
-def clean_title(text: str, filename: str) -> str:
-    raw = ""
-    if filename:
-        raw = os.path.splitext(filename)[0]
-    elif text:
-        first_line = text.strip().split("\n")[0]
-        raw = first_line[:80]
-    else:
-        return "Nuevo Contenido"
+def clean_for_search(text: str, filename: str) -> tuple[str, str]:
+    """Extrae un título limpio y el año para buscar en TMDb."""
+    raw = filename or text or ""
+    raw = os.path.splitext(raw)[0]
     
-    clean = re.sub(r'\[.*?\]|\(.*?\)', '', raw).strip()
-    return clean[:60] if clean else raw[:60]
+    # Extraer año
+    y_match = re.search(r'\b(19\d\d|20\d\d)\b', raw)
+    year = y_match.group(1) if y_match else ""
+    
+    # Si hay año, recortar lo que viene después de año
+    if y_match:
+        raw = raw[:y_match.end()]
+        
+    # Reemplazar caracteres especiales
+    clean = re.sub(r'[\._\-+]', ' ', raw)
+    # Limpiar etiquetas comunes de ripeo
+    clean = re.sub(r'(?i)\b(webdl|web-dl|1080p|720p|4k|x264|x265|hevc|eac3|dts|aac|dual|castellano|latino|cine|completo|completos|repack|pelicula|capitulo)\b', ' ', clean)
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    return clean or "Estreno", year
+
+def get_tmdb_card(query: str, year: str = ""):
+    """Consulta TMDb para obtener póster oficial, título formateado, sinopsis y puntuación."""
+    try:
+        url = f"https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&language=es-ES&query={requests.utils.quote(query)}"
+        r = requests.get(url, timeout=5)
+        if r.status_code == 200:
+            results = r.json().get("results", [])
+            if results:
+                best = results[0]
+                if year:
+                    for res in results[:3]:
+                        date = res.get("release_date") or res.get("first_air_date") or ""
+                        if date.startswith(year):
+                            best = res
+                            break
+                            
+                name = best.get("title") or best.get("name") or query
+                date = best.get("release_date") or best.get("first_air_date") or ""
+                y = date[:4] if date else year
+                overview = best.get("overview") or ""
+                rating = best.get("vote_average", 0)
+                poster = best.get("poster_path")
+                poster_url = f"https://image.tmdb.org/t/p/w500{poster}" if poster else None
+                
+                return {
+                    "title": name,
+                    "year": y,
+                    "overview": overview[:240] + ("..." if len(overview) > 240 else ""),
+                    "rating": round(rating, 1),
+                    "poster_url": poster_url
+                }
+    except Exception as e:
+        logger.warning(f"Error buscando '{query}' en TMDb: {e}")
+        
+    return {
+        "title": query,
+        "year": year,
+        "overview": "",
+        "rating": 0,
+        "poster_url": None
+    }
 
 async def sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
-    """Reenvía nuevas películas."""
     msg_ids = [m.id for m in new_msgs]
     titles_added = []
     
@@ -133,25 +184,22 @@ async def sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, 
         
     for m in new_msgs:
         fname = m.file.name if m.file and m.file.name else ""
-        t_clean = clean_title(m.text or "", fname)
-        if t_clean and t_clean not in titles_added:
-            titles_added.append(t_clean)
+        q, y = clean_for_search(m.text or "", fname)
+        if q and not any(it["query"] == q for it in titles_added):
+            titles_added.append({"query": q, "year": y, "type": "pelicula"})
             
     return titles_added
 
 async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
-    """Reenvía nuevos episodios / series a sus respectivos temas."""
-    # Agrupar mensajes por topic_id
     msgs_by_topic = {}
     for m in new_msgs:
         top_id = None
         if m.reply_to:
             top_id = getattr(m.reply_to, 'reply_to_top_id', None) or getattr(m.reply_to, 'reply_to_msg_id', None)
         if not top_id:
-            top_id = m.id  # Puede ser el mensaje de creación del tema
+            top_id = m.id
         msgs_by_topic.setdefault(top_id, []).append(m)
         
-    # Obtener temas de Producción
     p_topics = {}
     offset_date = offset_id = offset_topic = 0
     while True:
@@ -173,16 +221,17 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
     series_added = []
     
     for b_tid, t_msgs in msgs_by_topic.items():
-        # Obtener título del tema en Búnker
         topic_title = f"Tema {b_tid}"
         try:
             head_msg = await cb.get_messages(ent_bunker, ids=b_tid)
             if head_msg and hasattr(head_msg, 'action') and hasattr(head_msg.action, 'title'):
                 topic_title = head_msg.action.title.strip()
             elif head_msg and head_msg.file and head_msg.file.name:
-                topic_title = clean_title("", head_msg.file.name)
+                q, _ = clean_for_search("", head_msg.file.name)
+                topic_title = q
             elif head_msg and head_msg.text:
-                topic_title = clean_title(head_msg.text, "")
+                q, _ = clean_for_search(head_msg.text, "")
+                topic_title = q
         except Exception:
             pass
             
@@ -191,7 +240,6 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
         is_new = False
         
         if not p_tid:
-            # Crear tema nuevo en Producción
             is_new = True
             logger.info(f"✨ Creando nuevo tema en Producción: '{topic_title}'...")
             try:
@@ -216,7 +264,6 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
         if not p_tid:
             continue
             
-        # Replicar mensajes a p_tid
         msg_ids = [m.id for m in t_msgs if not m.action]
         if not msg_ids:
             continue
@@ -272,51 +319,86 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
                     
             await asyncio.sleep(2.0)
             
-        if is_new:
-            series_added.append(f"{topic_title} (Nueva Serie)")
-        else:
-            series_added.append(f"{topic_title} (+{len(msg_ids)} nuevos eps)")
+        q, y = clean_for_search(topic_title, "")
+        extra_note = "Nueva Serie" if is_new else f"+{len(msg_ids)} nuevos episodios"
+        series_added.append({"query": q, "year": y, "type": "serie", "note": extra_note})
             
     return series_added
 
-async def send_community_announcement(cp, novedades):
+async def send_rich_community_cards(cp, novedades):
+    """Envía fichas atractivas con póster oficial, puntuación y sinopsis al tema 22."""
     if not novedades:
         return
         
-    logger.info("📢 Publicando aviso de estrenos en el grupo Comunidad...")
+    logger.info("📢 Publicando fichas de estreno con carátulas en el grupo Comunidad...")
     try:
         ent_comm = await cp.get_input_entity(COMMUNITY_GROUP_ID)
         
-        lines = [
-            "✨ **¡ESTRENOS Y NUEVOS CONTENIDOS EN TEVEFLIPE!** ✨",
-            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            "Se acaban de agregar nuevos títulos a los canales oficiales:\n"
-        ]
-        
-        for cat_name, items in novedades.items():
-            lines.append(f"📌 **{cat_name}:**")
-            for it in items[:10]:
-                lines.append(f"  • {it}")
-            if len(items) > 10:
-                lines.append(f"  • ... y {len(items)-10} más.")
-            lines.append("")
-            
-        lines.append("🍿 _¡Ya disponible para ver y disfrutar en TeVeFLIPE!_")
-        message_text = "\n".join(lines)
-        
-        await cp.send_message(
-            entity=ent_comm,
-            message=message_text,
-            reply_to=COMMUNITY_TOPIC_ID,
-            parse_mode="markdown"
-        )
-        logger.info("✅ ¡Aviso de estrenos enviado con éxito al tema 22 de la Comunidad!")
+        for c_nombre, items in novedades.items():
+            for item in items[:6]:  # Máximo 6 fichas destacadas por tanda para no saturar
+                q = item["query"]
+                y = item.get("year", "")
+                mtype = item.get("type", "pelicula")
+                note = item.get("note", "")
+                
+                meta = get_tmdb_card(q, y)
+                title_display = f"{meta['title']} ({meta['year']})" if meta['year'] else meta['title']
+                
+                caption_lines = [
+                    "✨ **¡ESTRENO DISPONIBLE EN TEVEFLIPE!** ✨",
+                    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                    f"🎬 **{title_display}**" if mtype == "pelicula" else f"📺 **{title_display}**"
+                ]
+                
+                if note:
+                    caption_lines.append(f"📌 **Estado:** {note}")
+                if meta['rating'] > 0:
+                    caption_lines.append(f"⭐ **Puntuación:** {meta['rating']} / 10")
+                caption_lines.append(f"📁 **Canal Oficial:** {c_nombre}")
+                
+                if meta['overview']:
+                    caption_lines.append(f"\n📝 **Sinopsis:**\n{meta['overview']}")
+                    
+                caption_lines.append("\n🍿 _¡Ya disponible para ver y disfrutar en TeVeFLIPE!_")
+                caption_text = "\n".join(caption_lines)
+                
+                # Si tenemos póster oficial, descargar y enviar con foto
+                if meta['poster_url']:
+                    try:
+                        img_res = requests.get(meta['poster_url'], timeout=6)
+                        if img_res.status_code == 200:
+                            img_io = io.BytesIO(img_res.content)
+                            img_io.name = "poster.jpg"
+                            await cp.send_file(
+                                entity=ent_comm,
+                                file=img_io,
+                                caption=caption_text,
+                                reply_to=COMMUNITY_TOPIC_ID,
+                                parse_mode="markdown"
+                            )
+                            logger.info(f"  ✅ Ficha con carátula enviada para '{title_display}'")
+                            await asyncio.sleep(2.0)
+                            continue
+                    except Exception as pe:
+                        logger.warning(f"Error enviando imagen de '{title_display}': {pe}")
+                        
+                # Si no hay imagen, enviar como mensaje con formato enriquecido
+                await cp.send_message(
+                    entity=ent_comm,
+                    message=caption_text,
+                    reply_to=COMMUNITY_TOPIC_ID,
+                    parse_mode="markdown"
+                )
+                logger.info(f"  ✅ Mensaje enriquecido enviado para '{title_display}'")
+                await asyncio.sleep(2.0)
+                
+        logger.info("🎉 ¡Todas las fichas con carátula han sido enviadas a la Comunidad!")
     except Exception as e:
-        logger.error(f"❌ Error enviando aviso a la Comunidad: {e}")
+        logger.error(f"❌ Error enviando fichas a la Comunidad: {e}")
 
 async def main():
     logger.info("=" * 80)
-    logger.info("🚀 ESCÁNER DE NOVEDADES BÚNKER ➔ PRODUCCIÓN + AVISO COMUNIDAD")
+    logger.info("🚀 ESCÁNER DE NOVEDADES BÚNKER ➔ PRODUCCIÓN + FICHAS CON CARÁTULAS")
     logger.info("=" * 80)
     
     if not SESSION_BUNKER or not SESSION_PROD:
@@ -356,12 +438,10 @@ async def main():
             current_top = latest[0].id if latest else 0
             
             if current_top <= last_id:
-                # Canal al día, comprobación instantánea (0.1s)
                 continue
                 
             logger.info(f"🔔 Detectada actividad en '{c_nombre}' (IDs {last_id} ➔ {current_top})")
             
-            # Obtener solo mensajes nuevos
             new_msgs = [m async for m in cb.iter_messages(ent_bunker, min_id=last_id, reverse=True) 
                         if not m.action and (m.media or m.text)]
             if not new_msgs:
@@ -382,13 +462,11 @@ async def main():
         except Exception as e:
             logger.error(f"Error procesando canal '{c_nombre}': {e}")
             
-    # Guardar estado actualizado en canales_map.json
     save_json(MAP_FILE, canales)
     
-    # Publicar anuncio en Comunidad si hubo novedades
     if novedades_detectadas:
-        logger.info("\n🎉 Novedades detectadas en esta revisión. Enviando aviso...")
-        await send_community_announcement(cp, novedades_detectadas)
+        logger.info("\n🎉 Novedades detectadas en esta revisión. Enviando fichas con carátula...")
+        await send_rich_community_cards(cp, novedades_detectadas)
     else:
         logger.info("\n☕ Sin novedades en ningún búnker. Todo el catálogo se encuentra al día.")
         
