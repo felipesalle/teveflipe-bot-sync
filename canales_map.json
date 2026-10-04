@@ -156,5 +156,18 @@
     "ultimo_id_sincronizado": 1622026,
     "filtro_inteligente": "documentales",
     "activo": true
+  },
+  {
+    "id": "conciertos",
+    "nombre": "🎸 Conciertos & Música - TeVeFLIPE",
+    "bunker_id": -1003567099600,
+    "bunker_nombre": "Música Comunidad Castellana",
+    "topic_id": 20,
+    "produccion_id": -1004296746003,
+    "invite_link": "https://t.me/+ip5U3FLPTm8zY2Yx",
+    "categoria": "musica",
+    "is_forum": false,
+    "ultimo_id_sincronizado": 305061,
+    "activo": true
   }
 ]
