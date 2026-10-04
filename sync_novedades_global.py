@@ -129,6 +129,62 @@ def get_tmdb_card(query: str, year: str = ""):
         "poster_url": None
     }
 
+BLACKLIST_TV_SHOWS = [
+    'la isla de las tentaciones', 'pesadilla en la cocina', 'la voz', 'masterchef',
+    'supervivientes', 'gran hermano', 'el hormiguero', 'horizonte', 'cuarto milenio',
+    'first dates', 'got talent', 'operacion triunfo', 'habilidad fisica', 'tu cara me suena',
+    'la ruleta de la suerte', 'pasapalabra', 'el chiringuito', 'salvame', 'mask singer',
+    'al rojo vivo', 'la sexta noche', 'el intermedio', 'equip de investigacio', 'fiesta',
+    'conquis', 'drag race', 'bachelor', 'tentaciones', 'habilidad física'
+]
+
+DOC_KEYWORDS = [
+    'documental', 'docuserie', 'bbc', 'national geographic', 'natgeo', 'history channel',
+    'discovery', 'planeta', 'tierra', 'naturaleza', 'wild', 'historia', 'biografia',
+    'true crime', 'crimen de', 'el caso', 'secrets of', 'life on our planet', 'apolo',
+    'vida de', 'el otro chiquito', 'chiquito', 'warhol'
+]
+
+def is_valid_documentary(msg) -> bool:
+    """Clasificador inteligente híbrido: descarta programas de TV y retiene documentales reales."""
+    fname = msg.file.name if msg.file and msg.file.name else ""
+    text = msg.text or ""
+    combined = f"{fname} {text}".lower()
+    
+    # 1. Filtro instantáneo de programas de entretenimiento / realities
+    for kw in BLACKLIST_TV_SHOWS:
+        if kw in combined:
+            return False
+            
+    # Solo admitir videos reales mkv / mp4
+    if not fname.lower().endswith(('.mkv', '.mp4')):
+        if not (msg.media and getattr(msg, 'video', None)):
+            return False
+            
+    clean, year = clean_for_search(text, fname)
+    
+    # 2. Verificación oficial en TMDb (Género 99 = Documentary)
+    try:
+        url = f"https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&language=es-ES&query={requests.utils.quote(clean)}"
+        r = requests.get(url, timeout=3).json()
+        results = r.get("results", [])
+        if results:
+            first = results[0]
+            g_ids = first.get("genre_ids", [])
+            if 99 in g_ids:
+                return True
+            if any(g in [10764, 10763, 10767] for g in g_ids): # Reality, News, Talk
+                return False
+    except Exception:
+        pass
+        
+    # 3. Detección por palabras clave documentales
+    for kw in DOC_KEYWORDS:
+        if kw in combined:
+            return True
+            
+    return False
+
 async def sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
     msg_ids = [m.id for m in new_msgs]
     titles_added = []
@@ -504,8 +560,20 @@ async def main():
                 
             logger.info(f"🔔 Detectada actividad en '{c_nombre}' (IDs {last_id} ➔ {current_top})")
             
-            new_msgs = [m async for m in cb.iter_messages(ent_bunker, min_id=last_id, reverse=True) 
+            topic_id = c.get("topic_id")
+            filtro_intel = c.get("filtro_inteligente")
+            
+            iter_kwargs = {"min_id": last_id, "reverse": True}
+            if topic_id:
+                iter_kwargs["reply_to"] = topic_id
+                
+            new_msgs = [m async for m in cb.iter_messages(ent_bunker, **iter_kwargs) 
                         if not m.action and (m.media or m.text)]
+                        
+            if filtro_intel == "documentales":
+                # Aplicar filtro inteligente descartando programas de televisión
+                new_msgs = [m for m in new_msgs if is_valid_documentary(m)]
+                
             if not new_msgs:
                 c["ultimo_id_sincronizado"] = current_top
                 continue
@@ -516,7 +584,7 @@ async def main():
             else:
                 items, new_last_id = await sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
                 
-            c["ultimo_id_sincronizado"] = new_last_id
+            c["ultimo_id_sincronizado"] = max(new_last_id, current_top)
             if items:
                 novedades_detectadas[c_nombre] = items
                 logger.info(f"✅ {len(items)} títulos procesados exitosamente en '{c_nombre}'.")

@@ -142,5 +142,19 @@
     "is_forum": true,
     "ultimo_id_sincronizado": 55056,
     "activo": true
+  },
+  {
+    "id": "documentales",
+    "nombre": "🌍 Documentales - TeVeFLIPE",
+    "bunker_id": -1001905652210,
+    "bunker_nombre": "Comunidad Castellana (Solo Documentales)",
+    "topic_id": 11,
+    "produccion_id": -1004390222354,
+    "invite_link": "https://t.me/+m55509Q2gDZkNjMx",
+    "categoria": "documentales",
+    "is_forum": false,
+    "ultimo_id_sincronizado": 1621844,
+    "filtro_inteligente": "documentales",
+    "activo": true
   }
 ]
