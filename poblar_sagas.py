@@ -3,8 +3,8 @@ import os
 import sys
 from telethon import TelegramClient, utils
 from telethon.sessions import StringSession
-from telethon.tl.functions.channels import CreateForumTopicRequest
-from telethon.tl.functions.messages import ForwardMessagesRequest
+from telethon.tl.functions.channels import GetForumTopicsRequest
+from telethon.tl.functions.messages import ForwardMessagesRequest, CreateForumTopicRequest
 
 sys.stdout.reconfigure(encoding='utf-8')
 
