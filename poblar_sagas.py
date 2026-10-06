@@ -200,12 +200,12 @@ async def main():
         print(f"🎯 Conectado al grupo destino: {target_group.title} (ID: {SAGAS_GROUP_ID})")
 
         # Comprobar temas existentes en el grupo de Sagas para no duplicar
-        from telethon.tl.functions.channels import GetForumTopicsRequest
+        from telethon.tl.functions.messages import GetForumTopicsRequest
         existing_topics = {}
         try:
             res_topics = await client(GetForumTopicsRequest(
-                channel=target_group,
-                offset_date=0,
+                peer=target_group,
+                offset_date=None,
                 offset_id=0,
                 offset_topic=0,
                 limit=100
