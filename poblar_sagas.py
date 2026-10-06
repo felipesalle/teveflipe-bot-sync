@@ -180,6 +180,197 @@ SAGAS_PLAN = [
             (-1003763464899, 639, "2. Mad Max 2: El guerrero de la carretera (1981)"),
             (-1003763464899, 640, "3. Mad Max 3: Más allá de la cúpula del trueno (1985)"),
         ]
+    },
+    {
+        "topic": "🦁 El Rey León",
+        "icon_color": 0xFFCC00, # gold
+        "movies": [
+            (-1004326583216, 257, "1. El Rey León (1994)"),
+            (-1004467288762, 4861, "2. El Rey León II: El tesoro de Simba (1998)"),
+            (-1004326583216, 258, "3. El Rey León 3: Hakuna Matata (2004)"),
+        ]
+    },
+    {
+        "topic": "❄️ La Era de Hielo (Ice Age)",
+        "icon_color": 0x5AC8FA, # light blue
+        "movies": [
+            (-1004326583216, 171, "1. La Era de Hielo 2 (2006)"),
+            (-1004326583216, 172, "2. La Era de Hielo 3 (2009)"),
+            (-1004326583216, 174, "3. La Era de Hielo 4: La deriva continental (2012)"),
+            (-1004326583216, 176, "4. La Era de Hielo 5: Choque de mundos (2016)"),
+        ]
+    },
+    {
+        "topic": "🟡 Gru: Mi Villano Favorito & Minions",
+        "icon_color": 0xFFCC00, # yellow
+        "movies": [
+            (-1004326583216, 402, "1. Gru, Mi villano favorito (2010)"),
+            (-1004326583216, 403, "2. Gru 2, Mi villano favorito (2013)"),
+            (-1004326583216, 404, "3. Los Minions (2015)"),
+            (-1004326583216, 405, "4. Gru 3, Mi villano favorito (2017)"),
+            (-1004326583216, 406, "5. Minions: El origen de Gru (2022)"),
+            (-1004326583216, 407, "6. Gru 4, Mi villano favorito (2024)"),
+        ]
+    },
+    {
+        "topic": "🩸 Pesadilla en Elm Street",
+        "icon_color": 0xFF3B30, # red
+        "movies": [
+            (-1004467288762, 189, "1. Pesadilla en Elm Street (1984)"),
+            (-1004467288762, 3538, "2. Pesadilla en Elm Street 2: La venganza de Freddy (1985)"),
+            (-1004467288762, 3537, "3. Pesadilla en Elm Street 3: Los guerreros del sueño (1987)"),
+            (-1004467288762, 3536, "4. Pesadilla en Elm Street 4: El amo del sueño (1988)"),
+            (-1004467288762, 3535, "5. Pesadilla en Elm Street 5: El niño de los sueños (1989)"),
+        ]
+    },
+    {
+        "topic": "🏒 Viernes 13 (Jason Voorhees)",
+        "icon_color": 0x8E8E93, # gray
+        "movies": [
+            (-1004467288762, 2412, "1. Viernes 13: Parte 2 (1981)"),
+            (-1004467288762, 2411, "2. Viernes 13: Parte 3 (1982)"),
+            (-1004467288762, 2410, "3. Viernes 13: Parte 4 - Último capítulo (1984)"),
+            (-1004467288762, 2409, "4. Viernes 13: Parte 5 - Un nuevo comienzo (1985)"),
+            (-1004467288762, 2408, "5. Viernes 13: Parte 6 - Jason vive (1986)"),
+            (-1004467288762, 2407, "6. Viernes 13: Parte 7 - Sangre nueva (1988)"),
+            (-1004467288762, 2406, "7. Viernes 13: Parte 8 - Jason toma Manhattan (1989)"),
+            (-1004467288762, 2405, "8. Viernes 13: Parte 9 - Jason se va al infierno (1993)"),
+        ]
+    },
+    {
+        "topic": "🎃 Halloween (Michael Myers)",
+        "icon_color": 0xFF9500, # orange
+        "movies": [
+            (-1004467288762, 2816, "1. Halloween II: Sanguinario (1981)"),
+            (-1004467288762, 2815, "2. Halloween III: El día de la bruja (1982)"),
+            (-1004467288762, 2814, "3. Halloween 4: El regreso de Michael Myers (1988)"),
+            (-1004467288762, 2813, "4. Halloween 5: La venganza de Michael Myers (1989)"),
+            (-1004467288762, 2812, "5. Halloween 6: La maldición de Michael Myers (1995)"),
+        ]
+    },
+    {
+        "topic": "⛓️ Hellraiser",
+        "icon_color": 0x5856D6, # purple
+        "movies": [
+            (-1004467288762, 2738, "1. Hellraiser (1987)"),
+            (-1004467288762, 2737, "2. Hellraiser II: Hellbound (1988)"),
+            (-1004467288762, 2736, "3. Hellraiser III: Infierno en la Tierra (1992)"),
+            (-1004467288762, 2735, "4. Hellraiser IV: Bloodline (1996)"),
+        ]
+    },
+    {
+        "topic": "🔪 Muñeco Diabólico (Chucky)",
+        "icon_color": 0xFF3B30, # red
+        "movies": [
+            (-1004467288762, 103, "1. Muñeco diabólico (1988)"),
+            (-1004467288762, 102, "2. Muñeco diabólico 2 (1990)"),
+            (-1004467288762, 101, "3. Muñeco diabólico 3 (1991)"),
+            (-1004467288762, 2426, "4. La novia de Chucky (1998)"),
+        ]
+    },
+    {
+        "topic": "🦈 Tiburón (Jaws)",
+        "icon_color": 0x007AFF, # blue
+        "movies": [
+            (-1003763464899, 558, "1. Tiburón (1975)"),
+            (-1003763464899, 559, "2. Tiburón 2 (1978)"),
+            (-1004467288762, 4820, "3. Tiburón 3-D (1983)"),
+            (-1004467288762, 4818, "4. Tiburón 4: La venganza (1987)"),
+        ]
+    },
+    {
+        "topic": "🥋 Karate Kid",
+        "icon_color": 0xFF9500, # orange
+        "movies": [
+            (-1003763464899, 522, "1. Karate Kid: El momento de la verdad (1984)"),
+            (-1003763464899, 523, "2. Karate Kid II: La historia continúa (1986)"),
+            (-1003763464899, 524, "3. Karate Kid III: El desafío final (1989)"),
+            (-1004467288762, 4981, "4. El nuevo Karate Kid (1994)"),
+        ]
+    },
+    {
+        "topic": "👮 Loca Academia de Policía",
+        "icon_color": 0x007AFF, # blue
+        "movies": [
+            (-1004467288762, 1608, "1. Loca academia de policía (1984)"),
+            (-1004467288762, 1607, "2. Loca academia de policía 2: Su primera misión (1985)"),
+            (-1004467288762, 1606, "3. Loca academia de policía 3: De vuelta a la escuela (1986)"),
+            (-1004467288762, 1605, "4. Loca academia de policía 4: Los ciudadanos se defienden (1987)"),
+            (-1004467288762, 1604, "5. Loca academia de policía 5: Operación Miami Beach (1988)"),
+            (-1004467288762, 1603, "6. Loca academia de policía 6: Ciudad sitiada (1989)"),
+        ]
+    },
+    {
+        "topic": "🕶️ Superdetective en Hollywood",
+        "icon_color": 0x5856D6, # purple
+        "movies": [
+            (-1003763464899, 533, "1. Superdetective en Hollywood (1984)"),
+            (-1003763464899, 534, "2. Superdetective en Hollywood II (1987)"),
+            (-1003763464899, 535, "3. Superdetective en Hollywood III (1994)"),
+            (-1003763464899, 1400, "4. Superdetective en Hollywood: Axel F (2024)"),
+        ]
+    },
+    {
+        "topic": "🐊 Cocodrilo Dundee",
+        "icon_color": 0x4CD964, # green
+        "movies": [
+            (-1003763464899, 1560, "1. Cocodrilo Dundee (1986)"),
+            (-1003763464899, 1562, "2. Cocodrilo Dundee II (1988)"),
+            (-1003763464899, 1564, "3. Cocodrilo Dundee en Los Ángeles (2001)"),
+        ]
+    },
+    {
+        "topic": "🗡️ Blade (El Cazavampiros)",
+        "icon_color": 0x8E8E93, # gray
+        "movies": [
+            (-1003763464899, 588, "1. Blade (1998)"),
+            (-1003763464899, 589, "2. Blade II (2002)"),
+            (-1003763464899, 590, "3. Blade: Trinity (2004)"),
+        ]
+    },
+    {
+        "topic": "👾 Gremlins",
+        "icon_color": 0x4CD964, # green
+        "movies": [
+            (-1003763464899, 516, "1. Gremlins (1984)"),
+            (-1003763464899, 517, "2. Gremlins 2: La nueva generación (1990)"),
+        ]
+    },
+    {
+        "topic": "🐉 La Historia Interminable",
+        "icon_color": 0x5AC8FA, # blue
+        "movies": [
+            (-1003763464899, 1566, "1. La historia interminable (1984)"),
+            (-1004467288762, 4004, "2. La historia interminable II: El siguiente capítulo (1990)"),
+            (-1004467288762, 1914, "3. La historia interminable 3 (1994)"),
+        ]
+    },
+    {
+        "topic": "🕵️ Agárralo como puedas",
+        "icon_color": 0x007AFF, # blue
+        "movies": [
+            (-1004467288762, 4177, "1. Agárralo como puedas (1988)"),
+            (-1004467288762, 4176, "2. Agárralo como puedas 2½: El aroma del miedo (1991)"),
+            (-1004467288762, 4175, "3. Agárralo como puedas 33⅓: El insulto final (1994)"),
+        ]
+    },
+    {
+        "topic": "✈️ Aterriza como puedas",
+        "icon_color": 0x5AC8FA, # light blue
+        "movies": [
+            (-1004467288762, 4280, "1. Aterriza como puedas (1980)"),
+            (-1004467288762, 4279, "2. Aterriza como puedas II (1982)"),
+        ]
+    },
+    {
+        "topic": "🕵️ Misión Imposible",
+        "icon_color": 0xFF3B30, # red
+        "movies": [
+            (-1003763464899, 593, "1. Misión Imposible (1996)"),
+            (-1003763464899, 594, "2. Misión Imposible 2 (2000)"),
+            (-1003763464899, 595, "3. Misión Imposible 3 (2006)"),
+            (-1002146236969, 684, "4. Misión Imposible: Protocolo Fantasma (2011)"),
+        ]
     }
 ]
 
