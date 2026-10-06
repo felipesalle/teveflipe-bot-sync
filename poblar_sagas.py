@@ -194,6 +194,38 @@ async def main():
             entity_cache[utils.get_peer_id(d.entity)] = d.entity
         print(f"✅ Diálogos cargados ({len(dialogs)} encontrados).")
 
+        # Resolver y asegurar acceso a los canales de origen usando invite links o get_entity
+        from telethon.tl.functions.messages import CheckChatInviteRequest, ImportChatInviteRequest
+        from telethon.tl.types import ChatInviteAlready
+        channel_invites = {
+            -1003763464899: "VpmsvyK63OplZGIx", # Estrenos
+            -1004467288762: "qNjPZZ7F5hFmYmRh", # 80 y 90
+            -1004326583216: "FTpg2qBHORMwNTNh", # Infantiles
+            -1003886841797: "odH9vFdVUtMzOWNh", # Clásicas
+        }
+        for cid, inv_hash in channel_invites.items():
+            if cid not in entity_cache:
+                try:
+                    check = await client(CheckChatInviteRequest(inv_hash))
+                    if isinstance(check, ChatInviteAlready):
+                        entity_cache[cid] = check.chat
+                        entity_cache[utils.get_peer_id(check.chat)] = check.chat
+                        print(f"✅ Canal {cid} resuelto vía invite existente: {getattr(check.chat, 'title', cid)}")
+                    else:
+                        imp = await client(ImportChatInviteRequest(inv_hash))
+                        chat = imp.chats[0]
+                        entity_cache[cid] = chat
+                        entity_cache[utils.get_peer_id(chat)] = chat
+                        print(f"✅ Canal {cid} unido vía invite: {getattr(chat, 'title', cid)}")
+                except Exception as e:
+                    print(f"⚠️ No se pudo resolver {cid} con invite {inv_hash}: {e}")
+                    try:
+                        ent = await client.get_entity(cid)
+                        entity_cache[cid] = ent
+                        entity_cache[utils.get_peer_id(ent)] = ent
+                    except Exception as e2:
+                        print(f"   ⚠️ Falló get_entity directo para {cid}: {e2}")
+
         target_group = entity_cache.get(SAGAS_GROUP_ID)
         if not target_group:
             target_group = await client.get_entity(SAGAS_GROUP_ID)
