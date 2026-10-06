@@ -169,5 +169,17 @@
     "is_forum": false,
     "ultimo_id_sincronizado": 317507,
     "activo": true
+  },
+  {
+    "id": "sagas_franquicias",
+    "nombre": "🪐 Sagas & Franquicias - TeVeFLIPE",
+    "bunker_id": null,
+    "bunker_nombre": null,
+    "produccion_id": -1003913363596,
+    "invite_link": "https://t.me/+t-BpUupzDgIwMDRj",
+    "categoria": "sagas",
+    "is_forum": true,
+    "ultimo_id_sincronizado": 0,
+    "activo": true
   }
 ]
