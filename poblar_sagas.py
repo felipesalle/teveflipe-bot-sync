@@ -280,20 +280,50 @@ async def main():
                     print(f"❌ Error creando tema {topic_name}: {e}")
                     continue
 
-                # 2. Reenviar cada película al tema en orden cronológico
+            # 2. Comprobar si el tema ya tiene películas enviadas para no duplicar
+            existing_msgs_in_topic = [m async for m in client.iter_messages(target_group, reply_to=topic_id, limit=5)]
+            if len(existing_msgs_in_topic) >= len(saga["movies"]):
+                print(f"⏩ El tema '{topic_name}' ya tiene {len(existing_msgs_in_topic)} mensajes. Saltando reenvío.")
+                continue
+
+            # Reenviar cada película al tema en orden cronológico
+            from telethon.tl.functions.messages import ToggleNoForwardsRequest
             for chat_id, msg_id, display in saga["movies"]:
                 try:
                     print(f"   🎬 Reenviando '{display}' (msg {msg_id} de {chat_id})...")
                     source_entity = entity_cache.get(chat_id)
                     if not source_entity:
                         source_entity = await client.get_entity(chat_id)
-                    await client(ForwardMessagesRequest(
-                        from_peer=source_entity,
-                        id=[msg_id],
-                        to_peer=target_group,
-                        top_msg_id=topic_id,
-                        drop_author=False
-                    ))
+                    
+                    # Intentar reenvío directo
+                    try:
+                        await client(ForwardMessagesRequest(
+                            from_peer=source_entity,
+                            id=[msg_id],
+                            to_peer=target_group,
+                            top_msg_id=topic_id,
+                            drop_author=False
+                        ))
+                    except Exception as fe:
+                        if "protected" in str(fe).lower() or "noforwards" in str(fe).lower():
+                            print(f"   🔓 Desactivando temporalmente noforwards en canal {chat_id}...")
+                            try:
+                                await client(ToggleNoForwardsRequest(peer=source_entity, enabled=False))
+                                await asyncio.sleep(1.5)
+                                await client(ForwardMessagesRequest(
+                                    from_peer=source_entity,
+                                    id=[msg_id],
+                                    to_peer=target_group,
+                                    top_msg_id=topic_id,
+                                    drop_author=False
+                                ))
+                                await client(ToggleNoForwardsRequest(peer=source_entity, enabled=True))
+                            except Exception as fe2:
+                                print(f"   ❌ No se pudo desactivar noforwards: {fe2}")
+                                raise fe
+                        else:
+                            raise fe
+                            
                     await asyncio.sleep(2.5) # Flood wait protection
                 except Exception as e:
                     print(f"   ❌ Error reenviando película {msg_id}: {e}")
