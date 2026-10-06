@@ -195,7 +195,7 @@ async def main():
             try:
                 # 1. Crear tema de foro
                 res = await client(CreateForumTopicRequest(
-                    channel=target_group,
+                    peer=target_group,
                     title=topic_name,
                     icon_color=saga.get("icon_color", 0x5AC8FA)
                 ))
