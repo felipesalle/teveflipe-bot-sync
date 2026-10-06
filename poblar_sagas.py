@@ -185,60 +185,90 @@ SAGAS_PLAN = [
 
 async def main():
     async with TelegramClient(StringSession(SESSION), API_ID, API_HASH) as client:
-        target_group = await client.get_entity(SAGAS_GROUP_ID)
+        # Pre-cargar entidades desde los diálogos de la sesión para evitar "Could not find the input entity"
+        print("🔄 Cargando lista de diálogos para poblar caché de entidades...")
+        dialogs = await client.get_dialogs(limit=200)
+        entity_cache = {}
+        for d in dialogs:
+            entity_cache[d.id] = d.entity
+            entity_cache[utils.get_peer_id(d.entity)] = d.entity
+        print(f"✅ Diálogos cargados ({len(dialogs)} encontrados).")
+
+        target_group = entity_cache.get(SAGAS_GROUP_ID)
+        if not target_group:
+            target_group = await client.get_entity(SAGAS_GROUP_ID)
         print(f"🎯 Conectado al grupo destino: {target_group.title} (ID: {SAGAS_GROUP_ID})")
+
+        # Comprobar temas existentes en el grupo de Sagas para no duplicar
+        from telethon.tl.functions.channels import GetForumTopicsRequest
+        existing_topics = {}
+        try:
+            res_topics = await client(GetForumTopicsRequest(
+                channel=target_group,
+                offset_date=0,
+                offset_id=0,
+                offset_topic=0,
+                limit=100
+            ))
+            for t in res_topics.topics:
+                existing_topics[t.title.strip().lower()] = t.id
+            print(f"📋 Temas existentes en el grupo: {len(existing_topics)}")
+        except Exception as e:
+            print(f"⚠️ No se pudieron listar temas existentes: {e}")
 
         for saga in SAGAS_PLAN:
             topic_name = saga["topic"]
-            print(f"\n📁 Creando tema en foro: {topic_name}...")
+            topic_id = existing_topics.get(topic_name.strip().lower())
             
-            try:
-                # 1. Crear tema de foro
-                res = await client(CreateForumTopicRequest(
-                    peer=target_group,
-                    title=topic_name,
-                    icon_color=saga.get("icon_color", 0x5AC8FA)
-                ))
-                # Extraer topic_id
-                topic_id = None
-                for update in res.updates:
-                    if hasattr(update, 'message') and hasattr(update.message, 'id'):
-                        topic_id = update.message.id
-                        break
-                    elif hasattr(update, 'id'):
-                        topic_id = update.id
-                        break
-                
-                if not topic_id:
-                    print(f"⚠️ No se pudo obtener topic_id para {topic_name}, saltando.")
+            if topic_id:
+                print(f"\n📂 Tema existente detectado: '{topic_name}' (ID: {topic_id})")
+            else:
+                print(f"\n📁 Creando tema en foro: '{topic_name}'...")
+                try:
+                    res = await client(CreateForumTopicRequest(
+                        peer=target_group,
+                        title=topic_name,
+                        icon_color=saga.get("icon_color", 0x5AC8FA)
+                    ))
+                    for update in res.updates:
+                        if hasattr(update, 'message') and hasattr(update.message, 'id'):
+                            topic_id = update.message.id
+                            break
+                        elif hasattr(update, 'id'):
+                            topic_id = update.id
+                            break
+                    
+                    if not topic_id:
+                        print(f"⚠️ No se pudo obtener topic_id para {topic_name}, saltando.")
+                        continue
+
+                    print(f"✅ Tema creado con éxito! topic_id: {topic_id}")
+                    await asyncio.sleep(2.0)
+                except Exception as e:
+                    print(f"❌ Error creando tema {topic_name}: {e}")
                     continue
 
-                print(f"✅ Tema creado con éxito! topic_id: {topic_id}")
-                await asyncio.sleep(2.0)
-
                 # 2. Reenviar cada película al tema en orden cronológico
-                for chat_id, msg_id, display in saga["movies"]:
-                    try:
-                        print(f"   🎬 Reenviando '{display}' (msg {msg_id} de {chat_id})...")
+            for chat_id, msg_id, display in saga["movies"]:
+                try:
+                    print(f"   🎬 Reenviando '{display}' (msg {msg_id} de {chat_id})...")
+                    source_entity = entity_cache.get(chat_id)
+                    if not source_entity:
                         source_entity = await client.get_entity(chat_id)
-                        await client(ForwardMessagesRequest(
-                            from_peer=source_entity,
-                            id=[msg_id],
-                            to_peer=target_group,
-                            top_msg_id=topic_id,
-                            drop_author=False
-                        ))
-                        await asyncio.sleep(2.5) # Flood wait protection
-                    except Exception as e:
-                        print(f"   ❌ Error reenviando película {msg_id}: {e}")
-                        await asyncio.sleep(3.0)
+                    await client(ForwardMessagesRequest(
+                        from_peer=source_entity,
+                        id=[msg_id],
+                        to_peer=target_group,
+                        top_msg_id=topic_id,
+                        drop_author=False
+                    ))
+                    await asyncio.sleep(2.5) # Flood wait protection
+                except Exception as e:
+                    print(f"   ❌ Error reenviando película {msg_id}: {e}")
+                    await asyncio.sleep(3.0)
 
-                print(f"🎉 Saga '{topic_name}' completada ({len(saga['movies'])} películas).")
-                await asyncio.sleep(3.0)
-
-            except Exception as e:
-                print(f"❌ Error procesando saga {topic_name}: {e}")
-                await asyncio.sleep(5.0)
+            print(f"🎉 Saga '{topic_name}' completada ({len(saga['movies'])} películas).")
+            await asyncio.sleep(3.0)
 
         print("\n🚀 ¡Todas las sagas iniciales han sido creadas y pobladas con éxito!")
 
