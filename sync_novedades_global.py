@@ -542,7 +542,7 @@ async def main():
     novedades_detectadas = {}
     
     for c in canales:
-        if not c.get("activo", True) or not c.get("produccion_id"):
+        if not c.get("activo", True) or not c.get("produccion_id") or not c.get("bunker_id"):
             continue
             
         c_nombre = c["nombre"]
@@ -584,7 +584,8 @@ async def main():
             else:
                 items, new_last_id = await sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
                 
-            c["ultimo_id_sincronizado"] = max(new_last_id, current_top)
+            if new_last_id > last_id:
+                c["ultimo_id_sincronizado"] = new_last_id
             if items:
                 novedades_detectadas[c_nombre] = items
                 logger.info(f"✅ {len(items)} títulos procesados exitosamente en '{c_nombre}'.")
