@@ -173,13 +173,13 @@
   {
     "id": "sagas_franquicias",
     "nombre": "🪐 Sagas & Franquicias - TeVeFLIPE",
-    "bunker_id": null,
-    "bunker_nombre": null,
-    "produccion_id": -1003913363596,
-    "invite_link": "https://t.me/+t-BpUupzDgIwMDRj",
+    "bunker_id": -1003913363596,
+    "bunker_nombre": "BÚNKER - Sagas & Franquicias",
+    "produccion_id": -1004405196455,
+    "invite_link": "https://t.me/+ldiiLRsHWXw0MzQx",
     "categoria": "sagas",
     "is_forum": true,
-    "ultimo_id_sincronizado": 0,
+    "ultimo_id_sincronizado": 236,
     "activo": true
   }
 ]
