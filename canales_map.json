@@ -8,7 +8,7 @@
     "invite_link": "https://t.me/+VpmsvyK63OplZGIx",
     "categoria": "peliculas",
     "is_forum": false,
-    "ultimo_id_sincronizado": 1951,
+    "ultimo_id_sincronizado": 1952,
     "activo": true
   },
   {
@@ -20,7 +20,7 @@
     "invite_link": "https://t.me/+HaVzd5DeADAxMGE5",
     "categoria": "series",
     "is_forum": true,
-    "ultimo_id_sincronizado": 26805,
+    "ultimo_id_sincronizado": 26839,
     "activo": true
   },
   {
@@ -45,7 +45,7 @@
     "invite_link": "https://t.me/+odH9vFdVUtMzOWNh",
     "categoria": "clasicos",
     "is_forum": false,
-    "ultimo_id_sincronizado": 1125,
+    "ultimo_id_sincronizado": 1126,
     "activo": true
   },
   {
@@ -154,7 +154,7 @@
     "invite_link": "https://t.me/+m55509Q2gDZkNjMx",
     "categoria": "documentales",
     "is_forum": false,
-    "ultimo_id_sincronizado": 1624271,
+    "ultimo_id_sincronizado": 1624357,
     "filtro_inteligente": "documentales",
     "activo": true
   },
@@ -180,7 +180,7 @@
     "invite_link": "https://t.me/+ldiiLRsHWXw0MzQx",
     "categoria": "sagas",
     "is_forum": true,
-    "ultimo_id_sincronizado": 272,
+    "ultimo_id_sincronizado": 274,
     "activo": true
   }
 ]
