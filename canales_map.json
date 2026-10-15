@@ -20,7 +20,7 @@
     "invite_link": "https://t.me/+HaVzd5DeADAxMGE5",
     "categoria": "series",
     "is_forum": true,
-    "ultimo_id_sincronizado": 27586,
+    "ultimo_id_sincronizado": 27656,
     "activo": true
   },
   {
@@ -154,7 +154,7 @@
     "invite_link": "https://t.me/+m55509Q2gDZkNjMx",
     "categoria": "documentales",
     "is_forum": false,
-    "ultimo_id_sincronizado": 1626084,
+    "ultimo_id_sincronizado": 1626314,
     "filtro_inteligente": "documentales",
     "activo": true
   },
@@ -180,7 +180,7 @@
     "invite_link": "https://t.me/+ldiiLRsHWXw0MzQx",
     "categoria": "sagas",
     "is_forum": true,
-    "ultimo_id_sincronizado": 297,
+    "ultimo_id_sincronizado": 301,
     "activo": true
   }
 ]
