@@ -31,7 +31,7 @@ jobs:
       - name: Instalar dependencias
         run: |
           pip install --upgrade pip
-          pip install telethon requests
+          pip install --upgrade --no-cache-dir "telethon>=1.40.0" requests
 
       - name: Ejecutar Escáner de Novedades
         env:
