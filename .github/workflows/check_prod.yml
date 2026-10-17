@@ -26,4 +26,4 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
         run: |
-          python check_prod_dialogs.py
+          python inspect_ruina_prod.py
