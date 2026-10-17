@@ -1,0 +1,29 @@
+name: Editar Caption Wan
+on:
+  workflow_dispatch:
+
+jobs:
+  edit_caption:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade --no-cache-dir "telethon>=1.40.0"
+
+      - name: Ejecutar script de edición
+        env:
+          PYTHONUNBUFFERED: "1"
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION_PROD: ${{ secrets.SESSION_PROD }}
+        run: |
+          python edit_caption_wan.py
