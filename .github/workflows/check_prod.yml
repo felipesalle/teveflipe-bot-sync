@@ -27,4 +27,4 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python verify_8414.py
+          python limpiar_resto_8414.py
