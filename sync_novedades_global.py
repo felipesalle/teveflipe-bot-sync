@@ -26,7 +26,6 @@ logger = logging.getLogger("SyncNovedadesGlobal")
 
 API_ID = int(os.getenv("TELEGRAM_API_ID", "28045969"))
 API_HASH = os.getenv("TELEGRAM_API_HASH", "d8e515c5687943e5e0bf046f87c3d2cc")
-SESSION_BUNKER = os.getenv("SESSION_BUNKER") or ""
 SESSION_PROD = os.getenv("SESSION_PROD") or ""
 
 COMMUNITY_GROUP_ID = int(os.getenv("COMMUNITY_GROUP_ID", "-1003990716596"))
@@ -63,221 +62,154 @@ async def ensure_connected(client: TelegramClient, name: str = "Client"):
             await asyncio.sleep(3)
             await client.connect()
 
-async def ensure_clients(cb: TelegramClient, cp: TelegramClient):
-    await ensure_connected(cb, "Búnker")
-    await ensure_connected(cp, "Producción")
-
 def clean_for_search(text: str, filename: str) -> tuple[str, str]:
-    """Extrae un título limpio y el año para buscar en TMDb."""
-    raw = filename or text or ""
-    raw = os.path.splitext(raw)[0]
-    
-    # Extraer año
-    y_match = re.search(r'\b(19\d\d|20\d\d)\b', raw)
-    year = y_match.group(1) if y_match else ""
-    
-    # Si hay año, recortar lo que viene después de año
-    if y_match:
-        raw = raw[:y_match.end()]
+    raw = (text or "").strip()
+    if not raw and filename:
+        raw = os.path.splitext(filename)[0]
         
-    # Reemplazar caracteres especiales
-    clean = re.sub(r'[\._\-+]', ' ', raw)
-    # Limpiar etiquetas comunes de ripeo
-    clean = re.sub(r'(?i)\b(webdl|web-dl|1080p|720p|4k|x264|x265|hevc|eac3|dts|aac|dual|castellano|latino|cine|completo|completos|repack|pelicula|capitulo)\b', ' ', clean)
-    clean = re.sub(r'\s+', ' ', clean).strip()
-    return clean or "Estreno", year
+    line = raw.split("\n")[0].strip()
+    line = re.sub(r"^[🎬📺🎥🎞️👶💥🥢✨📼🌍🎸🪐\[\(#\s*]+", "", line)
+    line = re.sub(r"\[.*?\]|\(.*?\)", "", line)
+    line = re.sub(r"(?i)\b(1080p|720p|4k|2160p|bluray|web-dl|webrip|hdrip|x264|x265|hevc|aac|dts|dual|latino|castellano|subtitulado|sub|temporada|capitulo|completa|t\d+|s\d+|e\d+|cap\b).*$", "", line)
+    line = re.sub(r"[._\-–—]", " ", line)
+    line = re.sub(r"\s+", " ", line).strip()
+    
+    match_year = re.search(r"\b(19\d{2}|20\d{2})\b", raw)
+    year = match_year.group(1) if match_year else ""
+    return line, year
 
-def get_tmdb_card(query: str, year: str = ""):
-    """Consulta TMDb para obtener póster oficial, título formateado, sinopsis y puntuación."""
-    try:
-        url = f"https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&language=es-ES&query={requests.utils.quote(query)}"
-        r = requests.get(url, timeout=5)
-        if r.status_code == 200:
-            results = r.json().get("results", [])
-            if results:
-                best = results[0]
-                if year:
-                    for res in results[:3]:
-                        date = res.get("release_date") or res.get("first_air_date") or ""
-                        if date.startswith(year):
-                            best = res
-                            break
-                            
-                name = best.get("title") or best.get("name") or query
-                date = best.get("release_date") or best.get("first_air_date") or ""
-                y = date[:4] if date else year
-                overview = best.get("overview") or ""
-                rating = best.get("vote_average", 0)
-                poster = best.get("poster_path")
-                poster_url = f"https://image.tmdb.org/t/p/w500{poster}" if poster else None
-                
-                return {
-                    "title": name,
-                    "year": y,
-                    "overview": overview[:240] + ("..." if len(overview) > 240 else ""),
-                    "rating": round(rating, 1),
-                    "poster_url": poster_url
-                }
-    except Exception as e:
-        logger.warning(f"Error buscando '{query}' en TMDb: {e}")
-        
-    return {
+def get_tmdb_card(query: str, year: str = "") -> dict:
+    default_meta = {
         "title": query,
         "year": year,
         "overview": "",
-        "rating": 0,
-        "poster_url": None
+        "poster_url": None,
+        "rating": 0.0
     }
+    if not TMDB_API_KEY or not query:
+        return default_meta
+        
+    try:
+        url = "https://api.themoviedb.org/3/search/multi"
+        params = {
+            "api_key": TMDB_API_KEY,
+            "query": query,
+            "language": "es-ES",
+            "include_adult": "false"
+        }
+        if year:
+            params["year"] = year
+            
+        res = requests.get(url, params=params, timeout=5).json()
+        results = res.get("results", [])
+        if not results:
+            if year:
+                params.pop("year", None)
+                res = requests.get(url, params=params, timeout=5).json()
+                results = res.get("results", [])
+                
+        if results:
+            best = results[0]
+            title = best.get("title") or best.get("name") or query
+            date_str = best.get("release_date") or best.get("first_air_date") or ""
+            res_year = date_str[:4] if date_str else year
+            poster_path = best.get("poster_path")
+            poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}" if poster_path else None
+            
+            return {
+                "title": title,
+                "year": res_year,
+                "overview": best.get("overview", "").strip(),
+                "poster_url": poster_url,
+                "rating": round(best.get("vote_average", 0.0), 1)
+            }
+    except Exception as e:
+        logger.warning(f"Error consultando TMDB para '{query}': {e}")
+        
+    return default_meta
 
-BLACKLIST_TV_SHOWS = [
-    'la isla de las tentaciones', 'pesadilla en la cocina', 'la voz', 'masterchef',
-    'supervivientes', 'gran hermano', 'el hormiguero', 'horizonte', 'cuarto milenio',
-    'first dates', 'got talent', 'operacion triunfo', 'habilidad fisica', 'tu cara me suena',
-    'la ruleta de la suerte', 'pasapalabra', 'el chiringuito', 'salvame', 'mask singer',
-    'al rojo vivo', 'la sexta noche', 'el intermedio', 'equip de investigacio', 'fiesta',
-    'conquis', 'drag race', 'bachelor', 'tentaciones', 'habilidad física'
+NON_DOC_KEYWORDS = [
+    "cuarto milenio", "horizonte", "el hormiguero", "la resistencia", "la revuelta",
+    "el chiringuito", "masterchef", "supervivientes", "gran hermano", "gh vip",
+    "la isla de las tentaciones", "first dates", "salvame", "deluxe", "fiesta",
+    "la ruleta de la suerte", "pasapalabra", "tu cara me suena", "got talent",
+    "la voz", "operacion triunfo", "ot 20", "pesadilla en la cocina", "equipodeinvestigacion",
+    "equipo de investigacion", "la sexta noche", "la sexta columna", "al rojo vivo",
+    "espejo publico", "el programa de ana rosa", "vamos a ver", "y ahora sonsoles",
+    "cuatro al dia", "telediario", "antena 3 noticias", "informativos telecinco",
+    "noticias cuatro", "la noche en 24h", "el intermediario", "el intermedio",
+    "el club de la comedia", "ilustres ignorantes", "nadie sabe nada"
 ]
 
 DOC_KEYWORDS = [
-    'documental', 'docuserie', 'bbc', 'national geographic', 'natgeo', 'history channel',
-    'discovery', 'planeta', 'tierra', 'naturaleza', 'wild', 'historia', 'biografia',
-    'true crime', 'crimen de', 'el caso', 'secrets of', 'life on our planet', 'apolo',
-    'vida de', 'el otro chiquito', 'chiquito', 'warhol'
+    "documental", "docu", "bbc", "national geographic", "nat geo", "discovery",
+    "history channel", "netflix doc", "biografia", "naturaleza", "planeta",
+    "universo", "historia de", "la segunda guerra", "la primera guerra",
+    "secretos de", "misterios de", "vida salvaje", "fauna", "oceano", "dinosaurios",
+    "cosmos", "apolo", "nasa", "expedicion", "arqueologia", "imperio", "civilizacion",
+    "egipto", "roma", "grecia", "ciencia", "origen de"
 ]
 
 def is_valid_documentary(msg) -> bool:
-    """Clasificador inteligente híbrido: descarta programas de TV y retiene documentales reales."""
-    fname = msg.file.name if msg.file and msg.file.name else ""
-    text = msg.text or ""
-    combined = f"{fname} {text}".lower()
+    text = (msg.text or "").lower()
+    fname = (msg.file.name.lower() if msg.file and hasattr(msg.file, 'name') and msg.file.name else "")
+    combined = f"{text} {fname}"
     
-    # 1. Filtro instantáneo de programas de entretenimiento / realities
-    for kw in BLACKLIST_TV_SHOWS:
+    for kw in NON_DOC_KEYWORDS:
         if kw in combined:
             return False
             
-    # Solo admitir videos reales mkv / mp4
-    if not fname.lower().endswith(('.mkv', '.mp4')):
-        if not (msg.media and getattr(msg, 'video', None)):
-            return False
-            
-    clean, year = clean_for_search(text, fname)
-    
-    # 2. Verificación oficial en TMDb (Género 99 = Documentary)
-    try:
-        url = f"https://api.themoviedb.org/3/search/multi?api_key={TMDB_API_KEY}&language=es-ES&query={requests.utils.quote(clean)}"
-        r = requests.get(url, timeout=3).json()
-        results = r.get("results", [])
-        if results:
-            first = results[0]
-            g_ids = first.get("genre_ids", [])
-            if 99 in g_ids:
-                return True
-            if any(g in [10764, 10763, 10767] for g in g_ids): # Reality, News, Talk
-                return False
-    except Exception:
-        pass
-        
-    # 3. Detección por palabras clave documentales
     for kw in DOC_KEYWORDS:
         if kw in combined:
             return True
             
     return False
 
-async def sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
+async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
     msg_ids = [m.id for m in new_msgs]
     titles_added = []
     max_synced_id = c.get("ultimo_id_sincronizado", 0)
     
-    # Manejar protección contra copia/reenvío (noforwards) si está activada
-    was_protected = False
-    try:
-        full_bunker = await cb.get_entity(ent_bunker)
-        if getattr(full_bunker, 'noforwards', False):
-            logger.info(f"🔓 Desactivando temporalmente restricción 'noforwards' en '{c['nombre']}'...")
-            await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=False))
-            was_protected = True
-    except Exception as e:
-        logger.warning(f"No se pudo consultar/modificar noforwards en '{c['nombre']}': {e}")
-
-    try:
-        for i in range(0, len(msg_ids), CHUNK_SIZE):
-            chunk = msg_ids[i:i + CHUNK_SIZE]
-            chunk_msgs = [m for m in new_msgs if m.id in chunk]
-            chunk_ok = False
-            
-            for attempt in range(1, 4):
-                try:
-                    await ensure_clients(cb, cp)
-                    
-                    # A. Bunker -> DM Prod
-                    fwd_res = await cb.forward_messages(
-                        entity=prod_user,
-                        messages=chunk,
-                        from_peer=ent_bunker,
-                        drop_author=True
-                    )
-                    b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
-                    
-                    # B. Prod recibe de DM
-                    recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
-                    if not isinstance(recv, list):
-                        recv = [recv]
-                    p_recv = [m.id for m in reversed(recv) if not m.action]
-                    
-                    # C. Prod reenvía al canal oficial
-                    if p_recv:
-                        r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
-                        await cp(ForwardMessagesRequest(
-                            from_peer=await cp.get_input_entity(bunker_user),
-                            to_peer=ent_prod,
-                            id=p_recv,
-                            random_id=r_ids,
-                            drop_author=True
-                        ))
-                    
-                    # D. Limpieza de DM
-                    try:
-                        await cb.delete_messages(prod_user, b_fwd, revoke=True)
-                        await cp.delete_messages(bunker_user, p_recv, revoke=True)
-                    except Exception:
-                        pass
-                    
-                    chunk_ok = True
-                    break
-                except errors.FloodWaitError as fe:
-                    logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
-                    await asyncio.sleep(fe.seconds + 2)
-                except Exception as e:
-                    logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
-                    await asyncio.sleep(4.0)
-                    await ensure_clients(cb, cp)
-            
-            if chunk_ok:
-                max_synced_id = max(max_synced_id, max(chunk))
-                for m in chunk_msgs:
-                    fname = m.file.name if m.file and m.file.name else ""
-                    q, y = clean_for_search(m.text or "", fname)
-                    if q and not any(it["query"] == q for it in titles_added):
-                        titles_added.append({"query": q, "year": y, "type": "pelicula"})
-            else:
-                logger.error(f"❌ Falló el envío del lote {chunk} en '{c['nombre']}'. Se interrumpirá para reintentar luego.")
-                break
-                
-            await asyncio.sleep(2.0)
-            
-    finally:
-        if was_protected:
+    for i in range(0, len(msg_ids), CHUNK_SIZE):
+        chunk = msg_ids[i:i + CHUNK_SIZE]
+        chunk_msgs = [m for m in new_msgs if m.id in chunk]
+        chunk_ok = False
+        
+        for attempt in range(1, 4):
             try:
-                logger.info(f"🔒 Restaurando restricción 'noforwards' en '{c['nombre']}'...")
-                await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=True))
+                await ensure_connected(cp, "Producción")
+                await cp(ForwardMessagesRequest(
+                    from_peer=ent_bunker,
+                    to_peer=ent_prod,
+                    id=chunk,
+                    random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
+                    drop_author=True
+                ))
+                chunk_ok = True
+                break
+            except errors.FloodWaitError as fe:
+                logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
+                await asyncio.sleep(fe.seconds + 2)
             except Exception as e:
-                logger.warning(f"No se pudo restaurar noforwards en '{c['nombre']}': {e}")
-                
+                logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
+                await asyncio.sleep(3.0)
+        
+        if chunk_ok:
+            max_synced_id = max(max_synced_id, max(chunk))
+            for m in chunk_msgs:
+                fname = m.file.name if m.file and hasattr(m.file, 'name') and m.file.name else ""
+                q, y = clean_for_search(m.text or "", fname)
+                if q and not any(it["query"] == q for it in titles_added):
+                    titles_added.append({"query": q, "year": y, "type": "pelicula"})
+        else:
+            logger.error(f"❌ Falló el envío del lote {chunk} en '{c['nombre']}'. Se interrumpirá para reintentar luego.")
+            break
+            
+        await asyncio.sleep(1.0)
+            
     return titles_added, max_synced_id
 
-async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs):
+async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
     msgs_by_topic = {}
     for m in new_msgs:
         top_id = None
@@ -307,144 +239,95 @@ async def sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent
         
     series_added = []
     max_synced_id = c.get("ultimo_id_sincronizado", 0)
-    
-    # Manejar protección contra copia/reenvío (noforwards) si está activada
-    was_protected = False
-    try:
-        full_bunker = await cb.get_entity(ent_bunker)
-        if getattr(full_bunker, 'noforwards', False):
-            logger.info(f"🔓 Desactivando temporalmente restricción 'noforwards' en '{c['nombre']}'...")
-            await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=False))
-            was_protected = True
-    except Exception as e:
-        logger.warning(f"No se pudo consultar/modificar noforwards en '{c['nombre']}': {e}")
 
-    try:
-        for b_tid, t_msgs in msgs_by_topic.items():
-            topic_title = f"Tema {b_tid}"
-            try:
-                head_msg = await cb.get_messages(ent_bunker, ids=b_tid)
-                if head_msg and hasattr(head_msg, 'action') and hasattr(head_msg.action, 'title'):
-                    topic_title = head_msg.action.title.strip()
-                elif head_msg and head_msg.file and head_msg.file.name:
-                    q, _ = clean_for_search("", head_msg.file.name)
-                    topic_title = q
-                elif head_msg and head_msg.text:
-                    q, _ = clean_for_search(head_msg.text, "")
-                    topic_title = q
-            except Exception:
-                pass
-                
-            bt_key = topic_title.lower()
-            p_tid = p_topics.get(bt_key)
-            is_new = False
+    for b_tid, t_msgs in msgs_by_topic.items():
+        topic_title = f"Tema {b_tid}"
+        try:
+            head_msg = await cp.get_messages(ent_bunker, ids=b_tid)
+            if head_msg and hasattr(head_msg, 'action') and hasattr(head_msg.action, 'title'):
+                topic_title = head_msg.action.title.strip()
+            elif head_msg and head_msg.file and hasattr(head_msg.file, 'name') and head_msg.file.name:
+                q, _ = clean_for_search("", head_msg.file.name)
+                topic_title = q
+            elif head_msg and head_msg.text:
+                q, _ = clean_for_search(head_msg.text, "")
+                topic_title = q
+        except Exception:
+            pass
             
-            if not p_tid:
-                is_new = True
-                logger.info(f"✨ Creando nuevo tema en Producción: '{topic_title}'...")
-                try:
-                    created = await cp(CreateForumTopicRequest(
-                        peer=ent_prod,
-                        title=topic_title[:120],
-                        random_id=random.randint(1, 2**63 - 1)
-                    ))
-                    for u in created.updates:
-                        if hasattr(u, 'id'):
-                            p_tid = u.id
-                            break
-                        if hasattr(u, 'message') and hasattr(u.message, 'action') and hasattr(u.message.action, 'title'):
-                            p_tid = u.message.id
-                            break
-                    if p_tid:
-                        p_topics[bt_key] = p_tid
-                except Exception as e:
-                    logger.error(f"Error creando tema '{topic_title}': {e}")
-                    continue
-                    
-            if not p_tid:
-                continue
-                
-            msg_ids = [m.id for m in t_msgs if not m.action]
-            if not msg_ids:
-                continue
-                
-            series_ok = True
-            for i in range(0, len(msg_ids), CHUNK_SIZE):
-                chunk = msg_ids[i:i + CHUNK_SIZE]
-                chunk_ok = False
-                for attempt in range(1, 4):
-                    try:
-                        await ensure_clients(cb, cp)
-                        
-                        # A. Bunker -> DM Prod
-                        fwd_res = await cb.forward_messages(
-                            entity=prod_user,
-                            messages=chunk,
-                            from_peer=ent_bunker,
-                            drop_author=True
-                        )
-                        b_fwd = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
-                        
-                        # B. Prod recibe de DM
-                        recv = await cp.get_messages(bunker_user, limit=len(b_fwd))
-                        if not isinstance(recv, list):
-                            recv = [recv]
-                        p_recv = [m.id for m in reversed(recv) if not m.action]
-                        
-                        # C. Prod reenvía al canal oficial
-                        if p_recv:
-                            r_ids = [random.randint(1, 2**63 - 1) for _ in p_recv]
-                            await cp(ForwardMessagesRequest(
-                                from_peer=await cp.get_input_entity(bunker_user),
-                                to_peer=ent_prod,
-                                id=p_recv,
-                                random_id=r_ids,
-                                drop_author=True,
-                                top_msg_id=p_tid
-                            ))
-                        
-                        # D. Limpieza de DM
-                        try:
-                            await cb.delete_messages(prod_user, b_fwd, revoke=True)
-                            await cp.delete_messages(bunker_user, p_recv, revoke=True)
-                        except Exception:
-                            pass
-                        
-                        chunk_ok = True
-                        break
-                    except errors.FloodWaitError as fe:
-                        logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
-                        await asyncio.sleep(fe.seconds + 2)
-                    except Exception as e:
-                        logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
-                        await asyncio.sleep(4.0)
-                        await ensure_clients(cb, cp)
-                        
-                if not chunk_ok:
-                    logger.error(f"❌ Falló el envío del lote de episodios {chunk} para '{topic_title}'.")
-                    series_ok = False
-                    break
-                    
-                max_synced_id = max(max_synced_id, max(chunk))
-                await asyncio.sleep(2.0)
-                
-            if series_ok:
-                q, y = clean_for_search(topic_title, "")
-                extra_note = "Nueva Serie" if is_new else f"+{len(msg_ids)} nuevos episodios"
-                series_added.append({"query": q, "year": y, "type": "serie", "note": extra_note})
-                
-    finally:
-        if was_protected:
+        bt_key = topic_title.lower()
+        p_tid = p_topics.get(bt_key)
+        is_new = False
+        
+        if not p_tid:
+            is_new = True
+            logger.info(f"✨ Creando nuevo tema en Producción: '{topic_title}'...")
             try:
-                logger.info(f"🔒 Restaurando restricción 'noforwards' en '{c['nombre']}'...")
-                await cb(ToggleNoForwardsRequest(peer=ent_bunker, enabled=True))
+                created = await cp(CreateForumTopicRequest(
+                    peer=ent_prod,
+                    title=topic_title[:120],
+                    random_id=random.randint(1, 2**63 - 1)
+                ))
+                for u in created.updates:
+                    if hasattr(u, 'id'):
+                        p_tid = u.id
+                        break
+                    if hasattr(u, 'message') and hasattr(u.message, 'action') and hasattr(u.message.action, 'title'):
+                        p_tid = u.message.id
+                        break
+                if p_tid:
+                    p_topics[bt_key] = p_tid
             except Exception as e:
-                logger.warning(f"No se pudo restaurar noforwards en '{c['nombre']}': {e}")
+                logger.error(f"Error creando tema '{topic_title}': {e}")
+                continue
+                
+        if not p_tid:
+            continue
+            
+        msg_ids = [m.id for m in t_msgs if not m.action]
+        if not msg_ids:
+            continue
+            
+        series_ok = True
+        for i in range(0, len(msg_ids), CHUNK_SIZE):
+            chunk = msg_ids[i:i + CHUNK_SIZE]
+            chunk_ok = False
+            for attempt in range(1, 4):
+                try:
+                    await ensure_connected(cp, "Producción")
+                    await cp(ForwardMessagesRequest(
+                        from_peer=ent_bunker,
+                        to_peer=ent_prod,
+                        id=chunk,
+                        random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
+                        drop_author=True,
+                        top_msg_id=p_tid
+                    ))
+                    chunk_ok = True
+                    break
+                except errors.FloodWaitError as fe:
+                    logger.warning(f"FloodWait de {fe.seconds}s. Esperando...")
+                    await asyncio.sleep(fe.seconds + 2)
+                except Exception as e:
+                    logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
+                    await asyncio.sleep(3.0)
+                    
+            if not chunk_ok:
+                logger.error(f"❌ Falló el envío del lote de episodios {chunk} para '{topic_title}'.")
+                series_ok = False
+                break
+                
+            max_synced_id = max(max_synced_id, max(chunk))
+            await asyncio.sleep(1.0)
+            
+        if series_ok:
+            q, y = clean_for_search(topic_title, "")
+            extra_note = "Nueva Serie" if is_new else f"+{len(msg_ids)} nuevos episodios"
+            series_added.append({"query": q, "year": y, "type": "serie", "note": extra_note})
                 
     return series_added, max_synced_id
 
 async def send_rich_community_cards(cp, novedades):
-    """Envía fichas atractivas con póster oficial, puntuación y sinopsis al tema 22."""
     if not novedades:
         return
         
@@ -453,7 +336,7 @@ async def send_rich_community_cards(cp, novedades):
         ent_comm = await cp.get_input_entity(COMMUNITY_GROUP_ID)
         
         for c_nombre, items in novedades.items():
-            for item in items[:6]:  # Máximo 6 fichas destacadas por tanda para no saturar
+            for item in items[:6]:
                 q = item["query"]
                 y = item.get("year", "")
                 mtype = item.get("type", "pelicula")
@@ -480,7 +363,6 @@ async def send_rich_community_cards(cp, novedades):
                 caption_lines.append("\n🍿 _¡Ya disponible para ver y disfrutar en TeVeFLIPE!_")
                 caption_text = "\n".join(caption_lines)
                 
-                # Si tenemos póster oficial, descargar y enviar con foto
                 if meta['poster_url']:
                     try:
                         img_res = requests.get(meta['poster_url'], timeout=6)
@@ -498,41 +380,33 @@ async def send_rich_community_cards(cp, novedades):
                             await asyncio.sleep(2.0)
                             continue
                     except Exception as pe:
-                        logger.warning(f"Error enviando imagen de '{title_display}': {pe}")
+                        logger.warning(f"Aviso descargando póster TMDB: {pe}")
                         
-                # Si no hay imagen, enviar como mensaje con formato enriquecido
                 await cp.send_message(
                     entity=ent_comm,
                     message=caption_text,
                     reply_to=COMMUNITY_TOPIC_ID,
                     parse_mode="markdown"
                 )
-                logger.info(f"  ✅ Mensaje enriquecido enviado para '{title_display}'")
-                await asyncio.sleep(2.0)
-                
-        logger.info("🎉 ¡Todas las fichas con carátula han sido enviadas a la Comunidad!")
+                logger.info(f"  ✅ Ficha en texto enviada para '{title_display}'")
+                await asyncio.sleep(1.5)
     except Exception as e:
-        logger.error(f"❌ Error enviando fichas a la Comunidad: {e}")
+        logger.error(f"Error enviando avisos a la comunidad: {e}")
 
 async def main():
     logger.info("=" * 80)
-    logger.info("🚀 ESCÁNER DE NOVEDADES BÚNKER ➔ PRODUCCIÓN + FICHAS CON CARÁTULAS")
+    logger.info("🛰️ INICIANDO ESCÁNER INTELIGENTE DE NOVEDADES BÚNKERS ➔ PRODUCCIÓN")
     logger.info("=" * 80)
     
-    if not SESSION_BUNKER or not SESSION_PROD:
-        logger.error("❌ ERROR: SESSION_BUNKER o SESSION_PROD no configuradas.")
+    if not SESSION_PROD:
+        logger.error("❌ ERROR: SESSION_PROD no configurada.")
         sys.exit(1)
         
-    cb = TelegramClient(StringSession(SESSION_BUNKER), API_ID, API_HASH)
     cp = TelegramClient(StringSession(SESSION_PROD), API_ID, API_HASH)
-    
-    await cb.start()
     await cp.start()
     
     me_p = await cp.get_me()
-    me_b = await cb.get_me()
-    prod_user = await cb.get_input_entity(me_p.id)
-    bunker_user = await cp.get_input_entity(me_b.id)
+    logger.info(f"Conectado como: {me_p.first_name} (ID: {me_p.id})")
     
     canales = load_json(MAP_FILE, default=[])
     if not canales:
@@ -551,8 +425,8 @@ async def main():
         is_forum = c.get("is_forum", False)
         
         try:
-            ent_bunker = await cb.get_input_entity(b_id)
-            latest = await cb.get_messages(ent_bunker, limit=1)
+            ent_bunker = await cp.get_input_entity(b_id)
+            latest = await cp.get_messages(ent_bunker, limit=1)
             current_top = latest[0].id if latest else 0
             
             if current_top <= last_id:
@@ -567,11 +441,10 @@ async def main():
             if topic_id:
                 iter_kwargs["reply_to"] = topic_id
                 
-            new_msgs = [m async for m in cb.iter_messages(ent_bunker, **iter_kwargs) 
+            new_msgs = [m async for m in cp.iter_messages(ent_bunker, **iter_kwargs) 
                         if not m.action and (m.media or m.text)]
                         
             if filtro_intel == "documentales":
-                # Aplicar filtro inteligente descartando programas de televisión
                 new_msgs = [m for m in new_msgs if is_valid_documentary(m)]
                 
             if not new_msgs:
@@ -580,9 +453,9 @@ async def main():
                 
             ent_prod = await cp.get_input_entity(c["produccion_id"])
             if not is_forum:
-                items, new_last_id = await sync_channel_peliculas(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
+                items, new_last_id = await sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs)
             else:
-                items, new_last_id = await sync_channel_series(cb, cp, c, prod_user, bunker_user, ent_bunker, ent_prod, new_msgs)
+                items, new_last_id = await sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs)
                 
             if new_last_id > last_id:
                 c["ultimo_id_sincronizado"] = new_last_id
@@ -601,7 +474,6 @@ async def main():
     else:
         logger.info("\n☕ Sin novedades en ningún búnker. Todo el catálogo se encuentra al día.")
         
-    await cb.disconnect()
     await cp.disconnect()
 
 if __name__ == "__main__":
