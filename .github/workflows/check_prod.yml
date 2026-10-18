@@ -27,4 +27,4 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python check_bunker_topics.py
+          python reorganizar_topic_8414.py
