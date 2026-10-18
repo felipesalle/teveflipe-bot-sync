@@ -25,5 +25,6 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
+          SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python check_estrenos_recent.py
+          python inspect_topic_8414.py
