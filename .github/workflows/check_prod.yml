@@ -27,4 +27,4 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python buscar_true_blood.py
+          python sync_true_blood_and_delete_isabel.py
