@@ -27,4 +27,4 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python auditar_series_tv_prod.py
+          python inspect_topic_schema.py
