@@ -13,13 +13,12 @@ SESSION_PROD = os.getenv("SESSION_PROD", "")
 
 PROD_SERIES = -1004331019870
 
-def extract_base_series_name(file_name):
+def clean_series_name(file_name):
     if not file_name:
         return ""
     name = re.sub(r'\.(mkv|mp4|avi|ts|m4v)$', '', file_name, flags=re.I)
     name = re.sub(r'@\w+', '', name)
     name = re.sub(r'(?i)\b(?:1080p?|720p?|2160p?|4k|hdtv|x264|x265|hevc|castellano|latino|dual|dvdrip|bluray|web-dl|webrip|amzn)\b', '', name)
-    # Separar en temporada o capitulo: s01e01, 1x01, etc.
     parts = re.split(r'(?i)[_\s\.\-]*(?:s\d{1,2}|temporada|\d{1,2}x\d{1,2}|cap[íi]tulo|cap\d+|\b\d{1,2}\.\d{1,2}\b)', name)
     base = parts[0].strip(" .-_#")
     if not base or base.isdigit():
@@ -28,7 +27,7 @@ def extract_base_series_name(file_name):
             base = m.group(1).strip(" .-_#")
         else:
             base = name
-    base = re.sub(r'\s+', ' ', base).strip(" .-_")
+    base = re.sub(r'[\s_]+', ' ', base).strip(" .-_")
     return base
 
 async def main():
@@ -41,7 +40,7 @@ async def main():
         offset_topic = 0
         all_topics = []
 
-        print("Recuperando listado completo de temas...")
+        print("Recuperando todos los temas del foro...")
         while True:
             res = await client(GetForumTopicsRequest(
                 peer=chat,
@@ -54,7 +53,6 @@ async def main():
             if not topics:
                 break
             all_topics.extend(topics)
-            print(f"   Recuperados {len(all_topics)} temas...")
             if len(topics) < 100:
                 break
             last = topics[-1]
@@ -63,118 +61,100 @@ async def main():
             offset_date = last.date
             await asyncio.sleep(0.3)
 
-        print(f"\nTotal temas encontrados en el foro: {len(all_topics)}")
+        print(f"Total temas en el supergrupo: {len(all_topics)}")
 
         empty_topics = []
-        low_message_topics = [] # 1 o 2 mensajes
-        topics_with_messages = []
+        active_topics = []
 
         for t in all_topics:
-            t_id = t.id
-            t_title = t.title
-            tot_msgs = getattr(t, "total_messages", 0)
-
-            if t_id == 1 or t_title.lower() in ("general", "#general"):
+            if t.id == 1 or t.title.lower() in ("general", "#general"):
                 continue
-
-            if tot_msgs <= 1:
-                empty_topics.append({"id": t_id, "title": t_title, "total_messages": tot_msgs})
-            elif tot_msgs <= 2:
-                low_message_topics.append({"id": t_id, "title": t_title, "total_messages": tot_msgs})
+            
+            # Si top_message == id, el tema no tiene ningún mensaje posterior a su creación
+            if t.top_message == t.id:
+                empty_topics.append({"id": t.id, "title": t.title})
             else:
-                topics_with_messages.append({"id": t_id, "title": t_title, "total_messages": tot_msgs})
+                active_topics.append({"id": t.id, "title": t.title, "top_message": t.top_message})
 
-        print(f"\n📊 RESUMEN INICIAL:")
-        print(f"- Temas vacíos (<= 1 mensaje): {len(empty_topics)}")
-        print(f"- Temas casi vacíos (2 mensajes): {len(low_message_topics)}")
-        print(f"- Temas con contenido (> 2 mensajes): {len(topics_with_messages)}")
+        print(f"\n📊 RESUMEN:")
+        print(f"- Temas Vacíos (0 mensajes): {len(empty_topics)}")
+        print(f"- Temas Activos (con contenido): {len(active_topics)}")
 
         if empty_topics:
-            print(f"\n🗑️ TEMAS VACÍOS DETECTADOS ({len(empty_topics)}):")
-            for t in empty_topics[:25]:
-                print(f"   • Topic {t['id']}: '{t['title']}' (total_msgs={t['total_messages']})")
-            if len(empty_topics) > 25:
-                print(f"   ... y {len(empty_topics) - 25} temas vacíos más.")
+            print(f"\n🗑️ LISTA DE TEMAS VACÍOS ({len(empty_topics)}):")
+            for t in empty_topics:
+                print(f"   • ID {t['id']}: '{t['title']}'")
 
-        # 3. Detectar mezclas en temas con contenido
-        print(f"\n🔍 ANALIZANDO POSIBLES MEZCLAS EN LOS TEMAS CON CONTENIDO...")
+        # Inspeccionar cada tema activo para detectar posibles mezclas
+        print(f"\n🔍 INSPECCIONANDO CONTENIDO DE LOS {len(active_topics)} TEMAS ACTIVOS...")
         mixed_topics = []
+        single_episode_topics = []
 
-        # Analizar temas cuyo título sea sospechoso de colisión (palabras cortas como You, The, One, etc.)
-        # O temas con muchos mensajes o títulos genéricos
-        for idx, t in enumerate(topics_with_messages):
+        for idx, t in enumerate(active_topics):
             t_id = t["id"]
             t_title = t["title"]
-            tot = t["total_messages"]
-
-            # Si el título es muy corto (<= 4 caracteres) o tiene muchos mensajes (> 80), o es una palabra común:
-            # Inspeccionar los mensajes internos
-            is_suspicious_candidate = (
-                len(t_title.strip()) <= 4 or
-                tot >= 70 or
-                t_title.lower() in ("the", "it", "one", "him", "her", "we", "us", "see", "all", "now", "lost")
-            )
-
-            # Para todos los temas, hagamos un muestreo rápido de 15 mensajes si es sospechoso, o 5 mensajes si es normal
-            sample_limit = 25 if is_suspicious_candidate else 6
             
-            try:
-                distinct_bases = set()
-                sample_files = []
-                count_sampled = 0
+            # Obtener mensajes del tema (hasta 40 mensajes de muestra)
+            msgs = []
+            files = []
+            async for m in client.iter_messages(chat, reply_to=t_id, limit=40):
+                msgs.append(m)
+                if m.file:
+                    fn = m.file.name or ""
+                    files.append(fn)
 
-                async for m in client.iter_messages(chat, reply_to=t_id, limit=sample_limit):
-                    if m.file:
-                        fn = m.file.name or ""
-                        sample_files.append(fn)
-                        base = extract_base_series_name(fn)
-                        if base and len(base) > 2:
-                            distinct_bases.add(base.lower())
-                    count_sampled += 1
+            total_sample = len(msgs)
+            if total_sample <= 1:
+                single_episode_topics.append({"id": t_id, "title": t_title, "file": files[0] if files else "Sin archivo"})
 
-                # Normalizar bases parecidas
-                grouped_bases = set()
-                for b in distinct_bases:
-                    # ignorar diferencias menores
-                    b_clean = re.sub(r'[\s_]+', ' ', b).strip()
-                    if len(b_clean) >= 3:
-                        grouped_bases.add(b_clean)
+            # Detectar series distintas en los nombres de archivo
+            series_bases = defaultdict(int)
+            for fn in files:
+                base = clean_series_name(fn)
+                if base:
+                    # Normalizar a minúsculas y quitar caracteres raros
+                    base_key = re.sub(r'[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]', '', base).strip().lower()
+                    if len(base_key) >= 3:
+                        series_bases[base_key] += 1
 
-                if len(grouped_bases) >= 2:
-                    # Comprobar si son series verdaderamente distintas o solo variaciones del mismo nombre
-                    first_word_set = {b.split()[0] for b in grouped_bases if b.split()}
-                    if len(first_word_set) >= 2:
-                        mixed_topics.append({
-                            "id": t_id,
-                            "title": t_title,
-                            "total_messages": tot,
-                            "detected_series": list(grouped_bases)[:5],
-                            "samples": sample_files[:4]
-                        })
-            except Exception as e:
-                pass
+            # Si encontramos más de 1 serie con nombres claramente distintos:
+            if len(series_bases) >= 2:
+                # Filtrar si solo son variaciones de la misma serie (ej: "you" y "you s04")
+                first_words = {k.split()[0] for k in series_bases.keys() if k.split()}
+                if len(first_words) >= 2:
+                    mixed_topics.append({
+                        "id": t_id,
+                        "title": t_title,
+                        "total_sampled": total_sample,
+                        "detected_series": dict(series_bases),
+                        "sample_files": files[:5]
+                    })
 
-            if (idx + 1) % 50 == 0:
-                print(f"   Analizados {idx + 1}/{len(topics_with_messages)} temas...")
+            if (idx + 1) % 25 == 0 or (idx + 1) == len(active_topics):
+                print(f"   Analizados {idx + 1}/{len(active_topics)} temas...")
 
         print(f"\n==================================================")
-        print(f"📊 INFORME DE MEZCLAS DETECTADAS ({len(mixed_topics)} temas sospechosos):")
+        print(f"⚠️ TEMAS CON MEZCLAS DETECTADOS: {len(mixed_topics)}")
         print(f"==================================================")
         for m in mixed_topics:
-            print(f"⚠️ Topic {m['id']} ('{m['title']}') - Total: {m['total_messages']} msgs")
-            print(f"   Series detectadas: {m['detected_series']}")
-            print(f"   Archivos muestra: {m['samples']}\n")
+            print(f"📌 Topic {m['id']}: '{m['title']}' (Muestra: {m['total_sampled']} archivos)")
+            print(f"   Series encontradas: {m['detected_series']}")
+            print(f"   Ejemplos de archivos: {m['sample_files']}\n")
 
-        # Guardar reporte JSON
-        audit_result = {
+        # Guardar reporte
+        report = {
             "total_topics": len(all_topics),
+            "empty_topics_count": len(empty_topics),
             "empty_topics": empty_topics,
-            "low_message_topics": low_message_topics,
-            "mixed_topics": mixed_topics
+            "active_topics_count": len(active_topics),
+            "mixed_topics_count": len(mixed_topics),
+            "mixed_topics": mixed_topics,
+            "single_episode_topics": single_episode_topics
         }
-        with open("auditoria_produccion_series_tv.json", "w", encoding="utf-8") as f:
-            json.dump(audit_result, f, ensure_ascii=False, indent=2)
-        print("Reporte guardado en auditoria_produccion_series_tv.json")
+        with open("auditoria_series_tv_prod_final.json", "w", encoding="utf-8") as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+
+        print("\n✅ Auditoría completa guardada en auditoria_series_tv_prod_final.json")
 
 if __name__ == "__main__":
     asyncio.run(main())
