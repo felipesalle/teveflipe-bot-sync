@@ -27,4 +27,4 @@ jobs:
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
         run: |
-          python limpiar_todos_los_bunkers.py
+          python comparar_sagas.py
