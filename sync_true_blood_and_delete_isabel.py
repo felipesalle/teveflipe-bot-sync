@@ -5,7 +5,8 @@ from telethon import TelegramClient, errors
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import (
     ForwardMessagesRequest,
-    DeleteTopicHistoryRequest
+    DeleteTopicHistoryRequest,
+    ToggleNoForwardsRequest
 )
 
 API_ID = int(os.getenv("TELEGRAM_API_ID", "28045969"))
@@ -29,57 +30,74 @@ async def main():
         print(f"Búnker: {bunker.title} ({bunker.id})")
         print(f"Producción: {prod.title} ({prod.id})")
 
-        # 1. Eliminar tema vacío 'Isabel' (Topic 2) en Producción
-        print(f"\n🗑️ Eliminando tema vacío 'Isabel' (Topic {PROD_TOPIC_ISABEL}) en Producción...")
+        # 1. Asegurar eliminación del tema vacío 'Isabel' (Topic 2) en Producción
+        print(f"\n🗑️ Verificando tema 'Isabel' (Topic {PROD_TOPIC_ISABEL}) en Producción...")
         try:
             await client(DeleteTopicHistoryRequest(peer=prod, top_msg_id=PROD_TOPIC_ISABEL))
-            print(f"✅ Tema {PROD_TOPIC_ISABEL} ('Isabel') eliminado correctamente de Producción.")
+            print(f"✅ Tema {PROD_TOPIC_ISABEL} ('Isabel') eliminado correctamente.")
         except Exception as e:
-            print(f"⚠️ Error eliminando tema {PROD_TOPIC_ISABEL}: {e}")
+            print(f"ℹ️ Estado tema {PROD_TOPIC_ISABEL}: {e}")
 
-        # 2. Recopilar capítulos de True Blood desde el Búnker
-        print(f"\n📥 Leyendo capítulos de 'True Blood' desde Búnker (Topic {BUNKER_TOPIC_TRUE_BLOOD})...")
-        bunker_msg_ids = []
-        async for m in client.iter_messages(bunker, reply_to=BUNKER_TOPIC_TRUE_BLOOD, reverse=True):
-            if m.id == BUNKER_TOPIC_TRUE_BLOOD:
-                continue
-            if m.file:
-                bunker_msg_ids.append(m.id)
+        # 2. Deshabilitar temporalmente protección noforwards en Búnker
+        bunker_toggled = False
+        try:
+            await client(ToggleNoForwardsRequest(peer=bunker, enabled=False))
+            bunker_toggled = True
+            print("🔓 noforwards deshabilitado temporalmente en Búnker.")
+        except Exception as e:
+            print(f"⚠️ Error/Aviso al cambiar noforwards en Búnker: {e}")
 
-        print(f"Total capítulos encontrados en Búnker: {len(bunker_msg_ids)}")
+        try:
+            # 3. Recopilar capítulos de True Blood desde el Búnker
+            print(f"\n📥 Leyendo capítulos de 'True Blood' desde Búnker (Topic {BUNKER_TOPIC_TRUE_BLOOD})...")
+            bunker_msg_ids = []
+            async for m in client.iter_messages(bunker, reply_to=BUNKER_TOPIC_TRUE_BLOOD, reverse=True):
+                if m.id == BUNKER_TOPIC_TRUE_BLOOD:
+                    continue
+                if m.file:
+                    bunker_msg_ids.append(m.id)
 
-        if not bunker_msg_ids:
-            print("❌ No se encontraron mensajes con archivos en el tema de Búnker.")
-            return
+            print(f"Total capítulos encontrados en Búnker: {len(bunker_msg_ids)}")
 
-        # 3. Reenviar ordenadamente a Producción Topic 9464
-        print(f"\n🚀 Reenviando {len(bunker_msg_ids)} capítulos a Producción (Topic {PROD_TOPIC_TRUE_BLOOD})...")
-        chunk_size = 10
-        total = len(bunker_msg_ids)
+            if not bunker_msg_ids:
+                print("❌ No se encontraron mensajes con archivos en el tema de Búnker.")
+                return
 
-        for i in range(0, total, chunk_size):
-            chunk = bunker_msg_ids[i:i + chunk_size]
-            while True:
+            # 4. Reenviar ordenadamente a Producción Topic 9464
+            print(f"\n🚀 Reenviando {len(bunker_msg_ids)} capítulos a Producción (Topic {PROD_TOPIC_TRUE_BLOOD})...")
+            chunk_size = 10
+            total = len(bunker_msg_ids)
+
+            for i in range(0, total, chunk_size):
+                chunk = bunker_msg_ids[i:i + chunk_size]
+                while True:
+                    try:
+                        await client(ForwardMessagesRequest(
+                            from_peer=bunker,
+                            to_peer=prod,
+                            id=chunk,
+                            random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
+                            drop_author=True,
+                            top_msg_id=PROD_TOPIC_TRUE_BLOOD
+                        ))
+                        print(f"   [{min(i + chunk_size, total)}/{total}] Reenviados {len(chunk)} capítulos.", flush=True)
+                        await safe_sleep(1.0)
+                        break
+                    except errors.FloodWaitError as e:
+                        print(f"   ⏳ FloodWait: esperando {e.seconds}s...", flush=True)
+                        await safe_sleep(e.seconds + 2)
+                    except Exception as e:
+                        print(f"   ❌ Error reenviando bloque {chunk}: {e}", flush=True)
+                        break
+        finally:
+            if bunker_toggled:
                 try:
-                    await client(ForwardMessagesRequest(
-                        from_peer=bunker,
-                        to_peer=prod,
-                        id=chunk,
-                        random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
-                        drop_author=True,
-                        top_msg_id=PROD_TOPIC_TRUE_BLOOD
-                    ))
-                    print(f"   [{min(i + chunk_size, total)}/{total}] Reenviados {len(chunk)} capítulos.", flush=True)
-                    await safe_sleep(1.0)
-                    break
-                except errors.FloodWaitError as e:
-                    print(f"   ⏳ FloodWait: esperando {e.seconds}s...", flush=True)
-                    await safe_sleep(e.seconds + 2)
+                    await client(ToggleNoForwardsRequest(peer=bunker, enabled=True))
+                    print("🔒 noforwards restaurado con éxito en Búnker.")
                 except Exception as e:
-                    print(f"   ❌ Error reenviando bloque {chunk}: {e}", flush=True)
-                    break
+                    print(f"⚠️ Error restaurando noforwards en Búnker: {e}")
 
-        # 4. Verificación final en Producción
+        # 5. Verificación final en Producción
         print(f"\n🔍 Verificando mensajes en Producción (Topic {PROD_TOPIC_TRUE_BLOOD})...")
         count_prod = 0
         samples = []
