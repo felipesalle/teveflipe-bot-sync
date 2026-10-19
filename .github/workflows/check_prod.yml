@@ -26,5 +26,6 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+          TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
         run: |
           python auditar_30_imprescindibles.py
