@@ -5,14 +5,15 @@ import unicodedata
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import GetForumTopicsRequest
-from telethon.tl.types import InputMessagesFilterDocument, InputMessagesFilterVideo
 
 API_ID = int(os.getenv("TELEGRAM_API_ID", "28045969"))
 API_HASH = os.getenv("TELEGRAM_API_HASH", "d8e515c5687943e5e0bf046f87c3d2cc")
 SESSION_PROD = os.getenv("SESSION_PROD", "")
+TELEGRAM_STRING_SESSION = os.getenv("TELEGRAM_STRING_SESSION", "")
 
 BUNKER_SERIES = -1002097175258
 PROD_SERIES = -1004331019870
+COMMUNITY_SERIES_CHAT = -1002257262928
 
 TARGET_SERIES = [
     {"id": "the_wire", "names": ["The Wire", "Bajo escucha"], "years": "2002-2008"},
@@ -54,16 +55,21 @@ def normalize(s: str) -> str:
 
 def is_title_match(names, raw_title):
     norm_title = normalize(raw_title)
-    # Palabras a evitar si el nombre es corto
-    disallowed_short = {
-        "dark": ["matter", "winds", "angel", "skies", "shadows", "knight", "crystal"],
-        "lost": ["space", "girl", "room", "canvas", "in", "tapes"],
+    
+    # Descalificaciones específicas
+    disallowed_map = {
+        "the wire": ["wire in the blood"],
+        "dark": ["matter", "winds", "angel", "skies", "shadows", "knight", "crystal", "justice", "runner"],
+        "lost": ["space", "girl", "room", "canvas", "in the", "in space", "tapes", "dawson"],
         "arcane": ["league"],
-        "the bear": ["bear in the big blue house", "grizzly"],
+        "the bear": ["masha", "grizzly", "bear in the big"],
         "fargo": [],
         "atlanta": [],
-        "the americans": ["crime", "horror", "pie", "gods", "dad"],
-        "the office": ["uk", "australia", "india", "chile", "france"]
+        "the americans": ["greatest", "horror", "pie", "gods", "dad", "crime"],
+        "the office": ["uk", "australia", "india", "chile", "france"],
+        "separacion": ["cinco grados", "dorama", "amor de verdad"],
+        "gambito de dama": ["reglas del juego"],
+        "hermanos de sangre": ["s04", "sangre de mi"],
     }
 
     for name in names:
@@ -75,38 +81,32 @@ def is_title_match(names, raw_title):
         if norm_title == norm_name:
             return True
 
-        # Chequear descalificaciones para nombres cortos
-        if norm_name in disallowed_short:
-            disqualified = False
-            for dis in disallowed_short[norm_name]:
-                if dis in norm_title:
-                    disqualified = True
-                    break
-            if disqualified:
+        # Descartar si contiene términos prohibidos
+        if norm_name in disallowed_map:
+            if any(dis in norm_title for dis in disallowed_map[norm_name]):
                 continue
 
-        # Comprobar límite de palabra
+        # Búsqueda por límite de palabra
         pattern = r'(?:^|\b)' + re.escape(norm_name) + r'(?:\b|$)'
         if re.search(pattern, norm_title):
-            # Si el nombre es de 1 sola palabra corta (<= 5 caracteres), asegurarnos de que lo que sigue es año, temporada o calidad
+            # Para términos de 1 sola palabra corta
             if len(norm_name.split()) == 1 and len(norm_name) <= 6:
                 rem = norm_title.replace(norm_name, '').strip()
                 if not rem:
                     return True
-                # Si lo restante contiene dígitos (año o t01), o temporada/completa, o resolución
                 if re.search(r'\b(19\d\d|20\d\d|t\d+|s\d+|temporada|completa|1080p|720p|2160p|4k|hdtv|web)\b', rem):
                     return True
-                # Si no, podría ser otra cosa
                 continue
             return True
 
     return False
 
 async def get_all_topics(client, entity):
-    topics = []
+    all_topics = []
     offset_date = None
     offset_id = 0
     offset_topic = 0
+
     while True:
         try:
             res = await client(GetForumTopicsRequest(
@@ -116,19 +116,21 @@ async def get_all_topics(client, entity):
                 offset_topic=offset_topic,
                 limit=100
             ))
-            if not res.topics:
+            topics = getattr(res, "topics", [])
+            if not topics:
                 break
-            topics.extend(res.topics)
-            if len(res.topics) < 100:
+            all_topics.extend(topics)
+            if len(topics) < 100:
                 break
-            last_t = res.topics[-1]
-            offset_date = res.messages[-1].date if res.messages else None
-            offset_id = res.messages[-1].id if res.messages else 0
-            offset_topic = last_t.id
+            last = topics[-1]
+            offset_topic = last.id
+            offset_id = last.top_message
+            offset_date = last.date
+            await asyncio.sleep(0.3)
         except Exception as e:
-            print(f"Error obteniendo topics: {e}")
+            print(f"Error recuperando temas: {e}")
             break
-    return topics
+    return all_topics
 
 async def count_files_in_topic(client, entity, topic_id):
     count = 0
@@ -137,7 +139,7 @@ async def count_files_in_topic(client, entity, topic_id):
     other_count = 0
     samples = []
     try:
-        async for m in client.iter_messages(entity, reply_to=topic_id, limit=600):
+        async for m in client.iter_messages(entity, reply_to=topic_id, limit=500):
             if m.id == topic_id:
                 continue
             if m.file:
@@ -155,34 +157,57 @@ async def count_files_in_topic(client, entity, topic_id):
         print(f"Error contando archivos en topic {topic_id}: {e}")
     return count, mkv_count, mp4_count, other_count, samples
 
+async def search_in_community_chat(client, chat_entity, names, target_topic_id=None):
+    valid_files = []
+    for name in names:
+        try:
+            # Buscar mensajes de documentos/videos con la query
+            kwargs = {"search": name, "limit": 60}
+            if target_topic_id:
+                kwargs["reply_to"] = target_topic_id
+            
+            async for m in client.iter_messages(chat_entity, **kwargs):
+                if not m.file:
+                    continue
+                fname = (getattr(m.file, 'name', '') or '').lower()
+                caption = (m.text or '').lower()
+                # Exclusivamente MKV o MP4
+                if not (fname.endswith('.mkv') or fname.endswith('.mp4')):
+                    continue
+                
+                # Comprobar si el archivo es realmente de la serie (evitar falsos positivos)
+                combined = fname + " " + caption
+                if not is_title_match(names, combined):
+                    continue
+
+                valid_files.append(m)
+            
+            if valid_files:
+                break
+        except Exception as e:
+            print(f"Error buscando '{name}' en chat: {e}")
+            
+    return valid_files
+
 async def main():
     async with TelegramClient(StringSession(SESSION_PROD), API_ID, API_HASH) as client:
         me = await client.get_me()
         print(f"🔍 Conectado como: {me.first_name} (ID: {me.id})")
-        
-        # 1. Obtener diálogos accesibles
-        print("\n📡 Inspeccionando diálogos accesibles...")
-        dialogs = await client.get_dialogs(limit=150)
-        accessible_chats = {}
-        for d in dialogs:
-            title_norm = normalize(d.title)
-            accessible_chats[d.id] = d
-            if any(k in title_norm for k in ["castellana", "series", "comunidad", "bunker", "flipe"]):
-                print(f"   Chat encontrado: '{d.title}' (ID: {d.id}, es foro: {getattr(d.entity, 'forum', False)})")
 
-        # 2. Catálogo de Búnker Series TV
+        # 1. Analizar exhaustivamente el Búnker SERIES TV
         print(f"\n📡 Analizando Búnker 'SERIES TV' ({BUNKER_SERIES})...")
         bunker_ent = await client.get_entity(BUNKER_SERIES)
         bunker_topics = await get_all_topics(client, bunker_ent)
-        print(f"Total temas en Búnker: {len(bunker_topics)}")
+        print(f"✅ Total temas recuperados en Búnker: {len(bunker_topics)}")
 
-        # 3. Comprobar cada una de las 30 series en el Búnker
         results = []
         missing_series = []
 
         for item in TARGET_SERIES:
             serie_name_main = item["names"][0]
             matched_topic = None
+            
+            # Buscar tema en Búnker
             for t in bunker_topics:
                 if is_title_match(item["names"], t.title):
                     matched_topic = t
@@ -202,6 +227,7 @@ async def main():
                     "other": other,
                     "samples": samples
                 })
+                print(f"   ✓ [BÚNKER] '{serie_name_main}' -> Tema '{matched_topic.title}' (ID {matched_topic.id}): {c} caps ({mkv} mkv, {mp4} mp4)")
             else:
                 missing_series.append(item)
                 results.append({
@@ -217,76 +243,102 @@ async def main():
                     "samples": []
                 })
 
-        print(f"\n📊 Series encontradas en Búnker: {len(results) - len(missing_series)} / 30")
-        print(f"📊 Series no encontradas en Búnker: {len(missing_series)} / 30")
+        print(f"\n📊 Resumen Búnker: {len(results) - len(missing_series)} / 30 encontradas.")
+        print(f"📊 Faltan en Búnker: {len(missing_series)} / 30.")
 
-        # 4. Para las no encontradas en Búnker, buscar en los canales de Comunidad Castellana
-        comm_candidates = []
-        for cid, d in accessible_chats.items():
-            if cid in [BUNKER_SERIES, PROD_SERIES]:
+        # 2. Búsqueda en Comunidad Castellana para las faltantes
+        print("\n📡 Analizando canales de Comunidad Castellana y repositorios fuente...")
+        
+        # Intentar acceder al canal de Series Comunidad Castellana (-1002257262928)
+        comm_ent = None
+        try:
+            comm_ent = await client.get_entity(COMMUNITY_SERIES_CHAT)
+            print(f"✅ Acceso confirmado a Series Comunidad Castellana: '{comm_ent.title}' ({comm_ent.id})")
+        except Exception as e:
+            print(f"⚠️ No se pudo resolver directamente {COMMUNITY_SERIES_CHAT} desde SESSION_PROD: {e}")
+
+        # Otros canales disponibles en la cuenta
+        dialogs = await client.get_dialogs(limit=150)
+        source_candidates = []
+        if comm_ent:
+            source_candidates.append(comm_ent)
+        for d in dialogs:
+            if d.id in [BUNKER_SERIES, PROD_SERIES]:
+                continue
+            if comm_ent and d.id == comm_ent.id:
                 continue
             t_norm = normalize(d.title)
-            if "castellana" in t_norm or "comunidad" in t_norm or "series" in t_norm:
-                comm_candidates.append(d)
+            if any(k in t_norm for k in ["castellana", "series retro", "series clasicas", "comunidad", "demo"]):
+                source_candidates.append(d.entity)
 
-        print(f"\n📡 Buscando en {len(comm_candidates)} canales comunitarios disponibles...")
-        for cchat in comm_candidates:
-            print(f"\n   -> Explorando: '{cchat.title}' (ID: {cchat.id})")
-            is_forum = getattr(cchat.entity, 'forum', False)
-            c_topics = []
-            if is_forum:
-                c_topics = await get_all_topics(client, cchat.entity)
-                print(f"      Total temas en '{cchat.title}': {len(c_topics)}")
+        print(f"Canales fuente a explorar: {len(source_candidates)}")
 
-            for m_item in missing_series:
-                m_res = next(r for r in results if r["name"] == m_item["names"][0])
+        for m_item in missing_series:
+            m_res = next(r for r in results if r["name"] == m_item["names"][0])
+            
+            for src_chat in source_candidates:
                 if m_res.get("found_in_community"):
-                    continue
+                    break
+                
+                src_title = getattr(src_chat, 'title', str(src_chat.id))
+                is_forum = getattr(src_chat, 'forum', False)
+                
+                # Si es foro (como -1002257262928), chequear topics relevantes primero
+                if is_forum:
+                    # En Comunidad Castellana, topic 157592 es SERIES COMPLETAS, 470115 es EMISIÓN
+                    topics_to_search = [157592, 470115] if src_chat.id == COMMUNITY_SERIES_CHAT else [None]
+                    for top_id in topics_to_search:
+                        msgs = await search_in_community_chat(client, src_chat, m_item["names"], target_topic_id=top_id)
+                        if msgs:
+                            mkvs = sum(1 for m in msgs if (getattr(m.file, 'name', '') or '').lower().endswith('.mkv'))
+                            mp4s = sum(1 for m in msgs if (getattr(m.file, 'name', '') or '').lower().endswith('.mp4'))
+                            samples = [getattr(m.file, 'name', '') for m in msgs[:3]]
+                            
+                            m_res["found_in_community"] = True
+                            m_res["comm_chat_id"] = src_chat.id
+                            m_res["comm_chat_title"] = src_title
+                            m_res["comm_topic_id"] = top_id
+                            m_res["comm_topic_title"] = "SERIES COMPLETAS" if top_id == 157592 else ("EN EMISIÓN" if top_id == 470115 else "General")
+                            m_res["comm_files"] = len(msgs)
+                            m_res["comm_mkv"] = mkvs
+                            m_res["comm_mp4"] = mp4s
+                            m_res["comm_samples"] = samples
+                            print(f"   🎯 [COMUNIDAD] '{m_item['names'][0]}' encontrada en '{src_title}' -> {len(msgs)} caps ({mkvs} mkv, {mp4s} mp4)")
+                            break
 
-                # 4.1 Buscar por temas del foro si es foro
-                if is_forum and c_topics:
-                    for ct in c_topics:
-                        if is_title_match(m_item["names"], ct.title):
-                            fc, mkv, mp4, oth, sam = await count_files_in_topic(client, cchat.entity, ct.id)
-                            if fc > 0 and (mkv > 0 or mp4 > 0):
-                                m_res["found_in_community"] = True
-                                m_res["comm_chat_id"] = cchat.id
-                                m_res["comm_chat_title"] = cchat.title
-                                m_res["comm_topic_id"] = ct.id
-                                m_res["comm_topic_title"] = ct.title
-                                m_res["comm_files"] = fc
-                                m_res["comm_mkv"] = mkv
-                                m_res["comm_mp4"] = mp4
-                                m_res["comm_samples"] = sam
-                                print(f"      🎯 [TEMA] '{m_item['names'][0]}' en '{ct.title}' ({fc} archivos: {mkv} mkv, {mp4} mp4)")
-                                break
-
-                # 4.2 Si no se encontró por tema, buscar mensajes de vídeo/archivo en el chat
+                # Si no es foro o no apareció en los topics específicos, búsqueda general en el chat
                 if not m_res.get("found_in_community"):
-                    for name in m_item["names"]:
-                        try:
-                            search_msgs = await client.get_messages(cchat.entity, search=name, limit=30)
-                            valid_files = [m for m in search_msgs if m.file and (m.file.name or '').lower().endswith(('.mkv', '.mp4'))]
-                            if valid_files:
-                                m_res["found_in_community"] = True
-                                m_res["comm_chat_id"] = cchat.id
-                                m_res["comm_chat_title"] = cchat.title
-                                top_id = getattr(valid_files[0].reply_to, 'reply_to_top_id', None) or getattr(valid_files[0].reply_to, 'reply_to_msg_id', None)
-                                m_res["comm_topic_id"] = top_id
-                                m_res["comm_topic_title"] = f"Búsqueda mensaje ({len(valid_files)}+ caps)"
-                                m_res["comm_files"] = len(valid_files)
-                                m_res["comm_mkv"] = sum(1 for vf in valid_files if (vf.file.name or '').lower().endswith('.mkv'))
-                                m_res["comm_mp4"] = sum(1 for vf in valid_files if (vf.file.name or '').lower().endswith('.mp4'))
-                                m_res["comm_samples"] = [vf.file.name for vf in valid_files[:3] if vf.file and vf.file.name]
-                                print(f"      🎯 [BÚSQUEDA] '{m_item['names'][0]}' en '{cchat.title}' ({len(valid_files)} archivos encontrados)")
-                                break
-                        except Exception as e:
-                            pass
+                    msgs = await search_in_community_chat(client, src_chat, m_item["names"])
+                    if msgs:
+                        mkvs = sum(1 for m in msgs if (getattr(m.file, 'name', '') or '').lower().endswith('.mkv'))
+                        mp4s = sum(1 for m in msgs if (getattr(m.file, 'name', '') or '').lower().endswith('.mp4'))
+                        samples = [getattr(m.file, 'name', '') for m in msgs[:3]]
+                        
+                        m_res["found_in_community"] = True
+                        m_res["comm_chat_id"] = src_chat.id
+                        m_res["comm_chat_title"] = src_title
+                        m_res["comm_topic_id"] = None
+                        m_res["comm_topic_title"] = "Chat General / Archivos"
+                        m_res["comm_files"] = len(msgs)
+                        m_res["comm_mkv"] = mkvs
+                        m_res["comm_mp4"] = mp4s
+                        m_res["comm_samples"] = samples
+                        print(f"   🎯 [COMUNIDAD] '{m_item['names'][0]}' encontrada en '{src_title}' -> {len(msgs)} caps ({mkvs} mkv, {mp4s} mp4)")
 
-        # 5. Generar informe formateado en consola
+        # 3. Presentación final del informe estructurado
         print("\n" + "="*85)
         print("INFORME DE AUDITORÍA: 30 SERIES IMPRESCINDIBLES DEL SIGLO XXI")
         print("="*85)
+        
+        bunker_count = sum(1 for r in results if r["status"] == "DISPONIBLE_BUNKER")
+        comm_count = sum(1 for r in results if r.get("found_in_community"))
+        missing_count = 30 - bunker_count - comm_count
+
+        print(f"Resumen General:")
+        print(f"  • Disponibles en el Búnker: {bunker_count} / 30")
+        print(f"  • Localizadas en Comunidad Castellana / Canales fuente: {comm_count} / 30")
+        print(f"  • Pendientes de localizar: {missing_count} / 30\n")
+
         for idx, r in enumerate(results, 1):
             if r["status"] == "DISPONIBLE_BUNKER":
                 fmt = f"MKV: {r['mkv']}, MP4: {r['mp4']}"
@@ -300,13 +352,13 @@ async def main():
             elif r.get("found_in_community"):
                 fmt = f"MKV: {r['comm_mkv']}, MP4: {r['comm_mp4']}"
                 print(f"{idx:2d}. [DISPONIBLE EN COMUNIDAD] {r['name']} ({r['year']})")
-                print(f"    Canal: \"{r['comm_chat_title']}\" | Tema: \"{r['comm_topic_title']}\" (ID: {r['comm_topic_id']})")
-                print(f"    Capítulos localizados: {r['comm_files']} ({fmt})")
+                print(f"    Canal: \"{r['comm_chat_title']}\" | Sección: \"{r['comm_topic_title']}\"")
+                print(f"    Capítulos disponibles: {r['comm_files']} ({fmt})")
                 if r['comm_samples']:
                     print(f"    Muestra: {r['comm_samples'][:2]}")
             else:
                 print(f"{idx:2d}. [NO LOCALIZADA] {r['name']} ({r['year']})")
-                print(f"    No se encontró en Búnker ni en Comunidad Castellana actual.")
+                print(f"    No se encontró actualmente con formato MKV/MP4.")
 
         print("="*85)
 
