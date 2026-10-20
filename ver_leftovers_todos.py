@@ -1,0 +1,27 @@
+import asyncio
+import os
+import re
+from telethon import TelegramClient
+from telethon.sessions import StringSession
+
+API_ID = int(os.getenv("TELEGRAM_API_ID", "28045969"))
+API_HASH = os.getenv("TELEGRAM_API_HASH", "d8e515c5687943e5e0bf046f87c3d2cc")
+TELEGRAM_STRING_SESSION = os.getenv("TELEGRAM_STRING_SESSION", "")
+COMMUNITY_SERIES = -1002257262928
+
+async def main():
+    client_comm = TelegramClient(StringSession(TELEGRAM_STRING_SESSION), API_ID, API_HASH)
+    await client_comm.connect()
+    comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
+
+    print("=== TODOS LOS MENSAJES LEFTOVERS EN 530935 - 530970 ===")
+    async for m in client_comm.iter_messages(comm_ent, min_id=530935, max_id=530971):
+        if m.file:
+            print(f"[{m.id}] {getattr(m.file, 'name', '')}")
+        elif m.text:
+            print(f"[{m.id}] TEXTO: {m.text[:60]}")
+
+    await client_comm.disconnect()
+
+if __name__ == "__main__":
+    asyncio.run(main())
