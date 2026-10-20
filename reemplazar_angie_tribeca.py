@@ -2,6 +2,7 @@ import asyncio
 import os
 import sys
 import re
+import random
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import ForwardMessagesRequest
@@ -16,7 +17,6 @@ COMMUNITY_SERIES = -1002257262928
 TOPIC_ANGIE = 3605
 
 def parse_episode_sort_key(filename: str):
-    # ej: 1x01 - Angie Tribeca.mkv o S01E01
     m = re.search(r'(?:(\d{1,2})x(\d{1,2})|[sS](\d{1,2})[eE](\d{1,2}))', filename)
     if m:
         season = int(m.group(1) or m.group(3))
@@ -25,93 +25,115 @@ def parse_episode_sort_key(filename: str):
     return (99, 99)
 
 async def main():
-    print("🚀 INICIANDO SUSTITUCIÓN Y LIMPIEZA DE ANGIE TRIBECA")
+    print("🚀 INICIANDO SINCRONIZACIÓN Y LIMPIEZA DE ANGIE TRIBECA VÍA RELAY SEGURO")
     
-    # 1. Conectar con TELEGRAM_STRING_SESSION para recuperar los 40 episodios oficiales en MKV
-    print("\n📡 1. Recuperando los 40 episodios MKV desde Comunidad Castellana...")
+    client_comm = TelegramClient(StringSession(TELEGRAM_STRING_SESSION), API_ID, API_HASH)
+    client_prod = TelegramClient(StringSession(SESSION_PROD), API_ID, API_HASH)
+
+    await client_comm.connect()
+    await client_prod.connect()
+
+    me_comm = await client_comm.get_me()
+    me_prod = await client_prod.get_me()
+    print(f"✅ Conectado Comm: {me_comm.first_name} (ID: {me_comm.id})")
+    print(f"✅ Conectado Prod: {me_prod.first_name} (ID: {me_prod.id})")
+
+    # 1. Recuperar los 40 episodios en MKV de Comunidad Castellana
+    comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
+    prod_ent = await client_prod.get_entity(PROD_SERIES)
+
+    print("\n📡 1. Buscando los 40 episodios MKV oficiales...")
     mkv_episodes = []
-    
-    async with TelegramClient(StringSession(TELEGRAM_STRING_SESSION), API_ID, API_HASH) as client_comm:
-        comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
-        async for m in client_comm.iter_messages(comm_ent, search="Angie Tribeca", limit=100):
-            if m.file:
-                fn = getattr(m.file, 'name', '') or ''
-                if fn.lower().endswith('.mkv') and 'angie tribeca' in fn.lower():
-                    s_key = parse_episode_sort_key(fn)
-                    mkv_episodes.append({
-                        "msg_id": m.id,
-                        "filename": fn,
-                        "sort_key": s_key
-                    })
+    async for m in client_comm.iter_messages(comm_ent, search="Angie Tribeca", limit=100):
+        if m.file:
+            fn = getattr(m.file, 'name', '') or ''
+            if fn.lower().endswith('.mkv') and 'angie tribeca' in fn.lower():
+                s_key = parse_episode_sort_key(fn)
+                mkv_episodes.append({
+                    "msg_id": m.id,
+                    "filename": fn,
+                    "sort_key": s_key
+                })
 
-        # Ordenar cronológicamente T1E01 -> T4E10
-        mkv_episodes.sort(key=lambda x: x["sort_key"])
-        print(f"✅ Recuperados y ordenados {len(mkv_episodes)} capítulos en MKV:")
-        for ep in mkv_episodes[:5]:
-            print(f"   • T{ep['sort_key'][0]}E{ep['sort_key'][1]}: {ep['filename']} (ID: {ep['msg_id']})")
-        print(f"   ... ({len(mkv_episodes)-10} episodios intermedios) ...")
-        for ep in mkv_episodes[-5:]:
-            print(f"   • T{ep['sort_key'][0]}E{ep['sort_key'][1]}: {ep['filename']} (ID: {ep['msg_id']})")
+    mkv_episodes.sort(key=lambda x: x["sort_key"])
+    print(f"✅ Total episodios encontrados y ordenados: {len(mkv_episodes)}")
+    for ep in mkv_episodes[:3]:
+        print(f"   • T{ep['sort_key'][0]}E{ep['sort_key'][1]}: {ep['filename']}")
+    print("   ...")
+    for ep in mkv_episodes[-3:]:
+        print(f"   • T{ep['sort_key'][0]}E{ep['sort_key'][1]}: {ep['filename']}")
 
-    if len(mkv_episodes) < 40:
-        print(f"⚠️ Atención: Solo se encontraron {len(mkv_episodes)} episodios MKV en lugar de 40.")
+    # 2. Verificar estado actual del tema 3605 en Producción
+    print(f"\n📡 2. Verificando tema {TOPIC_ANGIE} en Producción...")
+    current_prod_msgs = []
+    async for m in client_prod.iter_messages(prod_ent, reply_to=TOPIC_ANGIE):
+        if m.id != TOPIC_ANGIE and not m.action:
+            current_prod_msgs.append(m)
 
-    # 2. Conectar con SESSION_PROD para borrar los mensajes .avi antiguos en el tema 3605
-    print("\n🗑️ 2. Borrando mensajes viejos .avi en el tema 3605 de Producción...")
-    async with TelegramClient(StringSession(SESSION_PROD), API_ID, API_HASH) as client_prod:
-        prod_ent = await client_prod.get_entity(PROD_SERIES)
+    # Si quedase algún .avi residual, borrarlo
+    residual_avi = [m.id for m in current_prod_msgs if m.file and (getattr(m.file, 'name', '') or '').lower().endswith('.avi')]
+    if residual_avi:
+        print(f"Borrando {len(residual_avi)} archivos .avi residuales...")
+        await client_prod.delete_messages(prod_ent, residual_avi)
+        print("✓ Archivos residuales borrados.")
+
+    # 3. Comprobar cuántos MKV ya están en Producción (reanudación inteligente)
+    already_in_prod = [m for m in current_prod_msgs if m.file and (getattr(m.file, 'name', '') or '').lower().endswith('.mkv')]
+    print(f"Episodios MKV ya presentes en Producción: {len(already_in_prod)} / {len(mkv_episodes)}")
+
+    if len(already_in_prod) >= len(mkv_episodes):
+        print("🎉 ¡Todos los episodios ya están sincronizados en Producción!")
+        await client_comm.disconnect()
+        await client_prod.disconnect()
+        return
+
+    remaining_episodes = mkv_episodes[len(already_in_prod):]
+    print(f"Episodios pendientes de transferir: {len(remaining_episodes)}")
+
+    # 4. Transferencia por Relay Seguro (Comm -> DM Prod -> Tema 3605 en Producción)
+    CHUNK_SIZE = 5
+    for i in range(0, len(remaining_episodes), CHUNK_SIZE):
+        batch = remaining_episodes[i:i + CHUNK_SIZE]
+        batch_ids = [b["msg_id"] for b in batch]
         
-        msgs_to_delete = []
-        async for m in client_prod.iter_messages(prod_ent, reply_to=TOPIC_ANGIE):
-            if m.id != TOPIC_ANGIE:
-                msgs_to_delete.append(m.id)
+        print(f"\n🔄 Procesando lote {i // CHUNK_SIZE + 1} ({len(batch)} episodios): {[b['filename'] for b in batch]}...")
 
-        print(f"Total mensajes antiguos a eliminar en topic {TOPIC_ANGIE}: {len(msgs_to_delete)}")
-        if msgs_to_delete:
-            # Borrar en lotes de 50
-            for i in range(0, len(msgs_to_delete), 50):
-                chunk = msgs_to_delete[i:i+50]
-                await client_prod.delete_messages(prod_ent, chunk)
-                print(f"   ✓ Eliminados {len(chunk)} mensajes...")
-                await asyncio.sleep(1)
-        print("✅ Tema 3605 limpiado por completo.")
-
-        # 3. Enviar sinopsis limpia primero
-        sinopsis = (
-            "**Angie Tribeca** (Serie de TV, 2016–2018)\n\n"
-            "• **Temporadas:** 4 (Completa)\n"
-            "• **Episodios:** 40\n"
-            "• **Formato:** MKV 1080p / 720p Dual Castellano\n"
-            "• **Género:** Comedia, Policíaco, Sátira\n\n"
-            "**Sinopsis:** Parodia policiaca creada por Steve Carell y Nancy Walls Carell. "
-            "Sigue a la veterana detective Angie Tribeca (Rashida Jones) y a un equipo de excéntricos "
-            "investigadores del Departamento de Policía de Los Ángeles mientras resuelven los crímenes más disparatados."
+        # A. Comm -> DM Prod
+        fwd_res = await client_comm.forward_messages(
+            entity=me_prod,
+            messages=batch_ids,
+            from_peer=comm_ent,
+            drop_author=True
         )
-        await client_prod.send_message(prod_ent, sinopsis, reply_to=TOPIC_ANGIE)
-        print("✅ Sinopsis publicada en el tema.")
+        fwd_dm_ids = [m.id for m in fwd_res] if isinstance(fwd_res, list) else [fwd_res.id]
+        await asyncio.sleep(2)
 
-    # 4. Reenviar los 40 episodios MKV ordenados desde Comunidad Castellana hacia Producción
-    print("\n📦 3. Reenviando los 40 episodios MKV en orden cronológico...")
-    async with TelegramClient(StringSession(TELEGRAM_STRING_SESSION), API_ID, API_HASH) as client_comm:
-        comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
-        prod_ent = await client_comm.get_entity(PROD_SERIES)
-        
-        source_msg_ids = [ep["msg_id"] for ep in mkv_episodes]
-        
-        # Reenviar en bloques de 5 para evitar bloqueos
-        for i in range(0, len(source_msg_ids), 5):
-            batch = source_msg_ids[i:i+5]
-            await client_comm(ForwardMessagesRequest(
-                from_peer=comm_ent,
+        # B. Prod recupera desde DM con Comm
+        recv = await client_prod.get_messages(me_comm, limit=len(fwd_dm_ids))
+        if not isinstance(recv, list):
+            recv = [recv]
+        p_recv = [m.id for m in reversed(recv) if not m.action and m.file]
+
+        # C. Prod reenvía al tema 3605 en Producción
+        if p_recv:
+            await client_prod(ForwardMessagesRequest(
+                from_peer=await client_prod.get_input_entity(me_comm),
                 to_peer=prod_ent,
-                id=batch,
+                id=p_recv,
                 top_msg_id=TOPIC_ANGIE,
                 drop_author=True
             ))
-            print(f"   ✓ Reenviados episodios {i+1} a {min(i+5, len(source_msg_ids))} de {len(source_msg_ids)}...")
-            await asyncio.sleep(2)
+            print(f"   ✓ Lote {i // CHUNK_SIZE + 1} publicado exitosamente en tema {TOPIC_ANGIE}.")
 
-    print("\n🎉 ¡PROCESO COMPLETADO CON ÉXITO! Angie Tribeca está limpia y en calidad MKV en Producción.")
+            # D. Limpieza del DM privado
+            await client_prod.delete_messages(me_comm, p_recv)
+            await client_comm.delete_messages(me_prod, fwd_dm_ids)
+
+        await asyncio.sleep(2.5)
+
+    print("\n🎉 ¡PROCESO DE REEMPLAZO COMPLETADO! Todos los episodios están en MKV y ordenados cronológicamente.")
+    await client_comm.disconnect()
+    await client_prod.disconnect()
 
 if __name__ == "__main__":
     asyncio.run(main())
