@@ -28,4 +28,4 @@ jobs:
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
         run: |
-          python copiar_lote_6_al_bunker.py
+          python busqueda_profunda_5_series.py
