@@ -38,30 +38,45 @@ async def main():
     prod_ent = await client_prod.get_entity(PROD_SERIES)
     comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
 
-    # 1. Asegurar que client_comm está en el canal de Producción
-    print("\n📡 1. Añadiendo a la cuenta secundaria a Producción Series TV...")
+    # 1. Asegurar que client_comm tiene el canal en sus diálogos con su propio access_hash
+    print("\n📡 1. Invitando y sincronizando canal de Producción en client_comm...")
     try:
         await client_prod(InviteToChannelRequest(channel=prod_ent, users=[me_comm]))
-        print("✅ Cuenta secundaria invitada exitosamente al canal.")
+        print("✅ Invitación enviada desde Prod.")
     except Exception as e:
-        print(f"Nota invitación (puede que ya estuviera o requiera link): {e}")
+        print(f"Nota invitación: {e}")
+
+    await asyncio.sleep(2)
+
+    # Refrescar diálogos en client_comm para capturar el canal
+    comm_prod_target = None
+    dialogs = await client_comm.get_dialogs(limit=100)
+    for d in dialogs:
+        if d.id == PROD_SERIES or str(d.id).endswith("4331019870"):
+            comm_prod_target = d.input_entity
+            print(f"✅ Encontrado en diálogos de Comm: '{d.title}' (ID {d.id})")
+            break
+
+    if not comm_prod_target:
+        print("⚠️ No estaba en diálogos; generando invite link para unirse...")
         try:
             invite = await client_prod(ExportChatInviteRequest(peer=prod_ent))
-            print(f"Enlace generado: {invite.link}")
+            print(f"Link generado: {invite.link}")
             link_hash = invite.link.split('/')[-1].replace('+', '')
             await client_comm(ImportChatInviteRequest(link_hash))
-            print("✅ Cuenta secundaria unida mediante enlace.")
-        except Exception as e2:
-            print(f"Nota unión por enlace: {e2}")
+            await asyncio.sleep(2)
+            dialogs = await client_comm.get_dialogs(limit=50)
+            for d in dialogs:
+                if d.id == PROD_SERIES or str(d.id).endswith("4331019870"):
+                    comm_prod_target = d.input_entity
+                    print(f"✅ Ahora sí en diálogos tras unirse: '{d.title}'")
+                    break
+        except Exception as e_link:
+            print(f"Error unión por link: {e_link}")
 
-    # Verificar que client_comm puede resolver prod_ent
-    try:
-        comm_prod_ent = await client_comm.get_entity(PROD_SERIES)
-        print(f"✅ client_comm resolvió exitosamente: '{comm_prod_ent.title}' ({comm_prod_ent.id})")
-    except Exception as e:
-        print(f"❌ Error resolviendo con client_comm: {e}")
-        # Probar usando el objeto entity obtenido por prod
-        comm_prod_ent = prod_ent
+    if not comm_prod_target:
+        print("❌ Imposible obtener input_entity válido para client_comm. Abortando.")
+        return
 
     # 2. Recuperar y ordenar los 40 episodios MKV de Comunidad Castellana
     print("\n📡 2. Recuperando episodios MKV de Angie Tribeca...")
@@ -89,7 +104,7 @@ async def main():
         batch = source_msg_ids[i:i + CHUNK_SIZE]
         await client_comm(ForwardMessagesRequest(
             from_peer=comm_ent,
-            to_peer=comm_prod_ent,
+            to_peer=comm_prod_target,
             id=batch,
             top_msg_id=TOPIC_ANGIE,
             drop_author=True
