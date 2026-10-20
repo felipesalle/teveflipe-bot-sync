@@ -23,59 +23,60 @@ def parse_episode_sort_key(filename: str):
         return (int(m2.group(1)), int(m2.group(2)))
     return (99, 99)
 
-async def check_lost(client_comm, comm_ent):
+async def check_lost_s1(client_comm, comm_ent):
     print("\n" + "="*60)
-    print("1. PERDIDOS (LOST) EN COMUNIDAD (572750 - 572860)")
+    print("1. LOST T1 ANTES DE 572750")
     print("="*60)
-    lost_files = []
-    async for m in client_comm.iter_messages(comm_ent, min_id=572750, max_id=572865):
+    async for m in client_comm.iter_messages(comm_ent, min_id=572700, max_id=572760):
         if m.file:
             fn = getattr(m.file, 'name', '') or ''
-            if fn.lower().endswith(('.mkv', '.mp4')) and ('perdidos' in fn.lower() or 'lost' in fn.lower()):
-                s, e = parse_episode_sort_key(fn)
-                lost_files.append((s, e, m.id, fn, m.file.size))
+            print(f"  [{m.id}] {fn}")
 
-    by_season = {}
-    for s, e, mid, fn, sz in lost_files:
-        by_season.setdefault(s, {})[e] = (mid, fn, sz)
-
-    for s in sorted(by_season.keys()):
-        eps = by_season[s]
-        print(f"  Temporada {s}: {len(eps)} episodios -> {sorted(eps.keys())}")
-
-async def check_leftovers_other(client_comm, client_prod, comm_ent, retro_ent):
+async def check_stranger_things(client_comm, comm_ent):
     print("\n" + "="*60)
-    print("2. THE LEFTOVERS EN RETRO Y OTRAS BÚSQUEDAS")
+    print("2. STRANGER THINGS EN COMUNIDAD")
     print("="*60)
-    # En Retro
-    async for m in client_prod.iter_messages(retro_ent, search="Leftovers", limit=20):
-        if m.file:
-            fn = getattr(m.file, 'name', '') or ''
-            print(f"  [Retro {m.id}] {fn}")
-    # En Comunidad buscando 1x01 mkv
-    async for m in client_comm.iter_messages(comm_ent, search="Leftovers 1x01", limit=10):
-        if m.file:
-            fn = getattr(m.file, 'name', '') or ''
-            print(f"  [Comunidad {m.id}] {fn}")
-
-async def check_stranger_things_clean(client_comm, client_prod, comm_ent, retro_ent):
-    print("\n" + "="*60)
-    print("3. STRANGER THINGS PACK COMPLETO")
-    print("="*60)
-    async for m in client_prod.iter_messages(retro_ent, search="Stranger Things", limit=20):
-        if m.file:
-            fn = getattr(m.file, 'name', '') or ''
-            print(f"  [Retro {m.id}] {fn}")
-
-async def check_americans_s1(client_comm, client_prod, comm_ent, retro_ent):
-    print("\n" + "="*60)
-    print("4. THE AMERICANS S01E01 Y S01E09 (MKV)")
-    print("="*60)
-    for q in ["The Americans 1x01", "The Americans S01E01", "The Americans 1x09"]:
-        async for m in client_comm.iter_messages(comm_ent, search=q, limit=5):
+    for q in ["Stranger Things S01", "Stranger Things 1x01", "Stranger Things S04", "Stranger Things"]:
+        print(f"--- Buscando: {q} ---")
+        cnt = 0
+        async for m in client_comm.iter_messages(comm_ent, search=q, limit=15):
             if m.file:
                 fn = getattr(m.file, 'name', '') or ''
-                print(f"  [Comunidad {m.id}] {fn}")
+                print(f"  [{m.id}] {fn}")
+                cnt += 1
+            if cnt >= 5:
+                break
+
+async def check_fargo(client_comm, comm_ent):
+    print("\n" + "="*60)
+    print("3. FARGO EN COMUNIDAD")
+    print("="*60)
+    async for m in client_comm.iter_messages(comm_ent, search="Fargo", limit=30):
+        if m.file:
+            fn = getattr(m.file, 'name', '') or ''
+            if 'fargo' in fn.lower():
+                print(f"  [{m.id}] {fn}")
+
+async def check_the_bear(client_comm, comm_ent):
+    print("\n" + "="*60)
+    print("4. THE BEAR EN COMUNIDAD")
+    print("="*60)
+    async for m in client_comm.iter_messages(comm_ent, search="The Bear S0", limit=30):
+        if m.file:
+            fn = getattr(m.file, 'name', '') or ''
+            if 'masha' not in fn.lower():
+                print(f"  [{m.id}] {fn}")
+
+async def check_dark(client_comm, comm_ent):
+    print("\n" + "="*60)
+    print("5. DARK EN COMUNIDAD (T1, T2, T3)")
+    print("="*60)
+    for q in ["Dark S01", "Dark S02", "Dark S03", "Dark 3x01"]:
+        print(f"--- Buscando {q} ---")
+        async for m in client_comm.iter_messages(comm_ent, search=q, limit=10):
+            if m.file:
+                fn = getattr(m.file, 'name', '') or ''
+                print(f"  [{m.id}] {fn}")
 
 async def main():
     client_comm = TelegramClient(StringSession(TELEGRAM_STRING_SESSION), API_ID, API_HASH)
@@ -86,10 +87,11 @@ async def main():
     comm_ent = await client_comm.get_entity(COMMUNITY_SERIES)
     retro_ent = await client_prod.get_entity(RETRO_SERIES)
 
-    await check_lost(client_comm, comm_ent)
-    await check_leftovers_other(client_comm, client_prod, comm_ent, retro_ent)
-    await check_stranger_things_clean(client_comm, client_prod, comm_ent, retro_ent)
-    await check_americans_s1(client_comm, client_prod, comm_ent, retro_ent)
+    await check_lost_s1(client_comm, comm_ent)
+    await check_stranger_things(client_comm, comm_ent)
+    await check_fargo(client_comm, comm_ent)
+    await check_the_bear(client_comm, comm_ent)
+    await check_dark(client_comm, comm_ent)
 
     await client_comm.disconnect()
     await client_prod.disconnect()
