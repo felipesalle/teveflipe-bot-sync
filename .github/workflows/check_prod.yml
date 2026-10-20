@@ -28,4 +28,4 @@ jobs:
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
         run: |
-          python buscar_retro.py
+          python preparar_lote_6.py
