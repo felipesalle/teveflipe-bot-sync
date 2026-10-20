@@ -28,4 +28,4 @@ jobs:
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
         run: |
-          python ver_leftovers_stranger.py
+          python verificar_leftovers_exacto.py
