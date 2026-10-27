@@ -210,6 +210,7 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
     return titles_added, max_synced_id
 
 async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
+    topic_id_filter = c.get("topic_id")
     msgs_by_topic = {}
     for m in new_msgs:
         top_id = None
@@ -217,6 +218,12 @@ async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
             top_id = getattr(m.reply_to, 'reply_to_top_id', None) or getattr(m.reply_to, 'reply_to_msg_id', None)
         if not top_id:
             top_id = m.id
+        
+        # Filtro estricto: si este canal de origen requiere un tema específico (ej. tema 21 para españolas),
+        # jamás permitir que se mezclen mensajes de otros temas (como el tema 5 de turcas)
+        if topic_id_filter and top_id != topic_id_filter:
+            continue
+
         msgs_by_topic.setdefault(top_id, []).append(m)
         
     p_topics = {}
@@ -426,16 +433,21 @@ async def main():
         
         try:
             ent_bunker = await cp.get_input_entity(b_id)
-            latest = await cp.get_messages(ent_bunker, limit=1)
+            topic_id = c.get("topic_id")
+            filtro_intel = c.get("filtro_inteligente")
+
+            # Si el canal lee de un topic específico, comprobar actividad SOLO en ese topic
+            if topic_id:
+                latest = await cp.get_messages(ent_bunker, reply_to=topic_id, limit=1)
+            else:
+                latest = await cp.get_messages(ent_bunker, limit=1)
+
             current_top = latest[0].id if latest else 0
             
             if current_top <= last_id:
                 continue
                 
             logger.info(f"🔔 Detectada actividad en '{c_nombre}' (IDs {last_id} ➔ {current_top})")
-            
-            topic_id = c.get("topic_id")
-            filtro_intel = c.get("filtro_inteligente")
             
             iter_kwargs = {"min_id": last_id, "reverse": True}
             if topic_id:
