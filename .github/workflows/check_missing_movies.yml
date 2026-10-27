@@ -1,0 +1,28 @@
+name: Check Missing Movies in Peliculas Estrenos
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  check_movies:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install telethon
+
+    - name: Run movie comparison script
+      run: python check_missing_movies.py
+      env:
+        TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+        TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+        SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+        SESSION_PROD: ${{ secrets.SESSION_PROD }}
