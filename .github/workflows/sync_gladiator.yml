@@ -1,0 +1,40 @@
+name: Sincronizar Película Gladiator
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Motivo de la ejecución manual (opcional)'
+        required: false
+        default: 'Búsqueda y sincronización de Gladiator'
+
+jobs:
+  sync_gladiator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install telethon
+
+      - name: Run Gladiator search and sync script
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+          SESSION_PROD: ${{ secrets.SESSION_PROD }}
+        run: python search_and_sync_gladiator.py
+
+      - name: Commit automatic update (if any)
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add canales_map.json || true
+          git commit -m 'auto: actualizar ultimo_id [skip ci]' || true
+          git push || true
