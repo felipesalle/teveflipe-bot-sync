@@ -319,6 +319,18 @@ def is_series_allowed(series_title: Optional[str], msg_id: int, state: dict) -> 
 
 
 
+def normalize_series_title(title: str) -> str:
+    """Normaliza estrictamente el título de una serie para comparación exacta.
+    Elimina tildes/diacríticos, minúsculas, puntuación residual y espacios múltiples."""
+    if not title:
+        return ""
+    n = unicodedata.normalize('NFKD', title)
+    n = "".join(c for c in n if not unicodedata.combining(c))
+    n = n.lower().strip()
+    n = re.sub(r"[._\-–—:,'\"!?()\[\]{}]+", " ", n)
+    n = re.sub(r"\s+", " ", n).strip()
+    return n
+
 def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
     """Limpia el título para extraer únicamente el nombre base de la serie."""
     if not raw_title:
@@ -448,7 +460,7 @@ def clean_series_title(raw_title: str, is_filename: bool = False) -> str:
 
 
 def resolve_series_name(video_title: Optional[str], current_series_title: Optional[str]) -> Optional[str]:
-    """Determina inteligentemente el nombre de la serie evitando confundir nombres de episodios."""
+    """Determina inteligentemente el nombre de la serie evitando colisiones de subcadenas cortas."""
     if current_series_title and is_junk_series_title(current_series_title):
         current_series_title = None
     if video_title and is_junk_series_title(video_title):
@@ -459,16 +471,26 @@ def resolve_series_name(video_title: Optional[str], current_series_title: Option
     if video_title and not current_series_title:
         return video_title
     if video_title and current_series_title:
-        v_low = video_title.lower()
-        c_low = current_series_title.lower()
-        if c_low == v_low:
+        v_norm = normalize_series_title(video_title)
+        c_norm = normalize_series_title(current_series_title)
+
+        # 1. Coincidencia exacta normalizada
+        if c_norm == v_norm:
             return current_series_title
-        # Si uno está contenido en el otro (ej. "seinfeld" en "the seinfeld chronicles"),
-        # el nombre de la serie oficial (póster) siempre tiene prioridad sobre el título del episodio
-        if c_low in v_low:
+
+        # 2. Regla estricta para títulos cortos (< 5 caracteres, ej. "You", "Dark", "See", "1923"):
+        # Bajo ninguna circunstancia permitir coincidencia parcial ni difusa.
+        if len(c_norm) < 5 or len(v_norm) < 5:
+            return video_title
+
+        # 3. Para títulos largos (>= 5 caracteres): solo permitir si el video empieza exactamente
+        # por el nombre de la serie seguido de límite de palabra (ej. "Seinfeld Chronicles" empieza por "Seinfeld ")
+        if re.match(r"^" + re.escape(c_norm) + r"\b", v_norm):
             return current_series_title
-        # Si el video tiene un nombre completamente distinto y válido, el video manda
+
+        # Si el video tiene un nombre distinto (ej. "Watching You" vs "You", "All You Need Is Crime"), manda el video
         return video_title
+
     return None
 
 
@@ -654,7 +676,9 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
         logger.warning(f"Título de serie inválido o decorativo descartado: '{series_name}'")
         return None
 
-    normalized_name = clean_name.strip().lower()
+    normalized_name = normalize_series_title(clean_name)
+    if not normalized_name:
+        return None
     
     # 1. Comprobar caché local
     cached_topics = state.setdefault("series_topics_cache", {})
@@ -701,12 +725,16 @@ async def get_or_create_forum_topic(client: TelegramClient, dest_chat, series_na
                     if t_clean:
                         cached_topics[t_clean] = t_id
                         
-                    if t_lower == normalized_name or t_clean == normalized_name:
+                    t_norm = normalize_series_title(t_raw)
+                    cached_topics[t_norm] = t_id
+                    t_clean_norm = normalize_series_title(t_clean)
+                    if t_clean_norm:
+                        cached_topics[t_clean_norm] = t_id
+
+                    # COINCIDENCIA ESTRICTA Y EXACTA NORMALIZADA (PROHIBIDO 'in' o subcadenas)
+                    if t_norm == normalized_name or t_clean_norm == normalized_name:
                         matched_id = t_id
                         break
-                    elif len(normalized_name) >= 4 and (normalized_name in t_lower or t_lower in normalized_name):
-                        if matched_id is None:
-                            matched_id = t_id
 
             if matched_id:
                 break

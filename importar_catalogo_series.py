@@ -9,6 +9,7 @@ Gestiona creación de Topics anti-duplicados, reenvío ordenado por lotes y pers
 import os
 import sys
 import re
+import unicodedata
 import json
 import time
 import random
@@ -103,6 +104,18 @@ async def get_existing_forum_topics(client: TelegramClient, dest_entity) -> Dict
     return topics_map
 
 
+def normalize_series_title(title: str) -> str:
+    """Normaliza estrictamente el título de una serie para comparación exacta.
+    Elimina tildes/diacríticos, minúsculas, puntuación residual y espacios múltiples."""
+    if not title:
+        return ""
+    n = unicodedata.normalize('NFKD', title)
+    n = "".join(c for c in n if not unicodedata.combining(c))
+    n = n.lower().strip()
+    n = re.sub(r"[._\-–—:,'\"!?()\[\]{}]+", " ", n)
+    n = re.sub(r"\s+", " ", n).strip()
+    return n
+
 async def get_or_create_topic(
     client: TelegramClient,
     dest_entity,
@@ -110,18 +123,19 @@ async def get_or_create_topic(
     topics_map: Dict[str, int]
 ) -> Optional[int]:
     """Busca si el tema ya existe o crea uno nuevo de forma segura."""
-    norm_name = series_name.strip().lower()
+    norm_name = normalize_series_title(series_name)
+    if not norm_name:
+        return None
 
-    # 1. Búsqueda exacta
+    # 1. Búsqueda exacta en mapa
     if norm_name in topics_map:
         return topics_map[norm_name]
 
-    # 2. Búsqueda aproximada (por si hay pequeñas variaciones de acentos o puntuación)
-    for existing_title, tid in topics_map.items():
-        if norm_name == existing_title or norm_name in existing_title or existing_title in norm_name:
-            if len(norm_name) >= 4:
-                topics_map[norm_name] = tid
-                return tid
+    # 2. Búsqueda exacta normalizada (sin tildes/puntuación). PROHIBIDO coincidencia por subcadena 'in'
+    for existing_title, tid in list(topics_map.items()):
+        if normalize_series_title(existing_title) == norm_name:
+            topics_map[norm_name] = tid
+            return tid
 
     # 3. Crear nuevo tema
     clean_title = series_name.strip()[:128]
