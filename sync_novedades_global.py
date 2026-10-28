@@ -165,16 +165,83 @@ def is_valid_documentary(msg) -> bool:
             
     return False
 
+SERIES_EPISODE_REGEX = re.compile(
+    r'(?i)(?:\b[sS]\d{1,2}[eE]\d{1,2}\b|\b\d{1,2}x\d{1,2}\b|\bcap[ií]tulo\s*\d+|\btemporada\s*\d+|\bseason\s*\d+)'
+)
+
+def is_series_episode(text: str, filename: str) -> bool:
+    content = f"{text or ''} {filename or ''}"
+    return bool(SERIES_EPISODE_REGEX.search(content))
+
 async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
-    msg_ids = [m.id for m in new_msgs]
+    # 1. Obtener historial reciente de Producción para armar caché anti-duplicados
+    existing_fingerprints = set()
+    try:
+        await ensure_connected(cp, "Producción")
+        async for pm in cp.iter_messages(ent_prod, limit=250):
+            pfname = pm.file.name if pm.file and hasattr(pm.file, 'name') and pm.file.name else ""
+            ptext = pm.text or ""
+            pq, py = clean_for_search(ptext, pfname)
+            if pq:
+                key = f"{pq.lower()} {py}".strip()
+                existing_fingerprints.add(key)
+                existing_fingerprints.add(pq.lower().strip())
+            if pfname:
+                existing_fingerprints.add(pfname.lower().strip())
+    except Exception as e:
+        logger.warning(f"No se pudo consultar historial reciente de Producción en '{c['nombre']}': {e}")
+
+    # 2. Filtrar mensajes descartando series y duplicados existentes
+    processed_items = []
+    last_processed_id = c.get("ultimo_id_sincronizado", 0)
+
+    for m in new_msgs:
+        fname = m.file.name if m.file and hasattr(m.file, 'name') and m.file.name else ""
+        text = m.text or ""
+
+        # Omitir episodios de series infiltrados en canales de películas
+        if is_series_episode(text, fname):
+            logger.info(f"🚫 Omitiendo episodio de serie en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
+            processed_items.append((m.id, None, None, None, "skip"))
+            continue
+
+        q, y = clean_for_search(text, fname)
+        title_key = f"{q.lower()} {y}".strip() if q else ""
+
+        # Omitir si ya existe en Producción
+        if (title_key and title_key in existing_fingerprints) or (q and q.lower().strip() in existing_fingerprints) or (fname and fname.lower().strip() in existing_fingerprints):
+            logger.info(f"⏩ Omitiendo '{q} ({y})' [Msg {m.id}] en '{c['nombre']}': ya existe en Producción.")
+            processed_items.append((m.id, None, None, None, "skip"))
+            continue
+
+        # Mensaje válido para reenvío
+        processed_items.append((m.id, m, q, y, "forward"))
+        if title_key:
+            existing_fingerprints.add(title_key)
+        if q:
+            existing_fingerprints.add(q.lower().strip())
+        if fname:
+            existing_fingerprints.add(fname.lower().strip())
+
     titles_added = []
-    max_synced_id = c.get("ultimo_id_sincronizado", 0)
-    
+    max_synced_id = last_processed_id
+
+    # 3. Reenviar en bloques solo los mensajes marcados para "forward"
+    to_forward = [item for item in processed_items if item[4] == "forward"]
+
+    if not to_forward:
+        # Todos los mensajes nuevos fueron descartados/duplicados; avanzamos hasta el último ID visto
+        if processed_items:
+            max_synced_id = max(item[0] for item in processed_items)
+        return titles_added, max_synced_id
+
+    msg_ids = [item[0] for item in to_forward]
+    forward_dict = {item[0]: (item[1], item[2], item[3]) for item in to_forward}
+
     for i in range(0, len(msg_ids), CHUNK_SIZE):
         chunk = msg_ids[i:i + CHUNK_SIZE]
-        chunk_msgs = [m for m in new_msgs if m.id in chunk]
         chunk_ok = False
-        
+
         for attempt in range(1, 4):
             try:
                 await ensure_connected(cp, "Producción")
@@ -193,20 +260,23 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
             except Exception as e:
                 logger.warning(f"Error en reenvío lote ({attempt}/3): {e}")
                 await asyncio.sleep(3.0)
-        
+
         if chunk_ok:
-            max_synced_id = max(max_synced_id, max(chunk))
-            for m in chunk_msgs:
-                fname = m.file.name if m.file and hasattr(m.file, 'name') and m.file.name else ""
-                q, y = clean_for_search(m.text or "", fname)
+            max_in_chunk = max(chunk)
+            max_synced_id = max(max_synced_id, max_in_chunk)
+            for cid in chunk:
+                _, q, y = forward_dict[cid]
                 if q and not any(it["query"] == q for it in titles_added):
                     titles_added.append({"query": q, "year": y, "type": "pelicula"})
         else:
-            logger.error(f"❌ Falló el envío del lote {chunk} en '{c['nombre']}'. Se interrumpirá para reintentar luego.")
+            logger.error(f"❌ Falló el envío del lote {chunk} en '{c['nombre']}'. Se detiene para no perder sincronía.")
             break
-            
+
         await asyncio.sleep(1.0)
-            
+
+    if chunk_ok and processed_items:
+        max_synced_id = max(max_synced_id, max(item[0] for item in processed_items))
+
     return titles_added, max_synced_id
 
 async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
