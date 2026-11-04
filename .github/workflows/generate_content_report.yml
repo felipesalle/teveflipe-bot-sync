@@ -1,0 +1,32 @@
+name: 📊 Generar Informe de Contenido (Cubatas)
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Motivo para generar el informe (opcional)'
+        required: false
+        default: 'Solicitud manual'
+
+jobs:
+  generate_report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Instalar dependencias
+        run: |
+          pip install telethon
+
+      - name: 🚀 Ejecutar script de informe de contenido
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+        run: python generate_content_report.py
