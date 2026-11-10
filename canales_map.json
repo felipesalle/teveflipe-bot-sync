@@ -8,7 +8,7 @@
     "invite_link": "https://t.me/+VpmsvyK63OplZGIx",
     "categoria": "peliculas",
     "is_forum": false,
-    "ultimo_id_sincronizado": 2047,
+    "ultimo_id_sincronizado": 2053,
     "activo": true
   },
   {
@@ -20,7 +20,7 @@
     "invite_link": "https://t.me/+HaVzd5DeADAxMGE5",
     "categoria": "series",
     "is_forum": true,
-    "ultimo_id_sincronizado": 30012,
+    "ultimo_id_sincronizado": 30041,
     "activo": true
   },
   {
@@ -57,7 +57,7 @@
     "invite_link": "https://t.me/+qNjPZZ7F5hFmYmRh",
     "categoria": "peliculas",
     "is_forum": false,
-    "ultimo_id_sincronizado": 5919,
+    "ultimo_id_sincronizado": 5920,
     "activo": true
   },
   {
@@ -69,7 +69,7 @@
     "invite_link": "https://t.me/+FTpg2qBHORMwNTNh",
     "categoria": "kids",
     "is_forum": false,
-    "ultimo_id_sincronizado": 520,
+    "ultimo_id_sincronizado": 521,
     "activo": true
   },
   {
@@ -81,7 +81,7 @@
     "invite_link": "https://t.me/+J15eKBk0lHBhZmQx",
     "categoria": "kids",
     "is_forum": true,
-    "ultimo_id_sincronizado": 31348,
+    "ultimo_id_sincronizado": 31349,
     "activo": true
   },
   {
@@ -142,7 +142,7 @@
     "invite_link": "https://t.me/+Jb3mNj8JybczYzcx",
     "categoria": "series",
     "is_forum": true,
-    "ultimo_id_sincronizado": 55411,
+    "ultimo_id_sincronizado": 55502,
     "activo": true
   },
   {
@@ -181,7 +181,7 @@
     "invite_link": "https://t.me/+ldiiLRsHWXw0MzQx",
     "categoria": "sagas",
     "is_forum": true,
-    "ultimo_id_sincronizado": 520,
+    "ultimo_id_sincronizado": 521,
     "activo": true
   }
 ]
