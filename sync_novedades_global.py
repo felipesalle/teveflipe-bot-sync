@@ -170,6 +170,20 @@ SERIES_EPISODE_REGEX = re.compile(
     r'(?i)(?:\b[sS]\d{1,2}[eE]\d{1,2}\b|\b\d{1,2}x\d{1,2}\b|\bcap[ií]tulo\s*\d+|\btemporada\s*\d+|\bseason\s*\d+)'
 )
 
+BANNED_EXTENSIONS = ('.rar', '.zip', '.7z', '.tar', '.gz', '.iso', '.torrent', '.txt', '.nfo', '.exe')
+VIDEO_EXTENSIONS = ('.mkv', '.mp4', '.avi', '.ts', '.mov', '.m4v', '.webm', '.flv', '.wmv')
+
+def is_compressed_archive(fname: str, text: str = "") -> bool:
+    fn = (fname or "").lower().strip()
+    tx = (text or "").lower().strip()
+    if any(fn.endswith(ext) for ext in BANNED_EXTENSIONS):
+        return True
+    if re.search(r'\.part\d+\.rar$', fn) or re.search(r'\.part\d+$', fn) or re.search(r'\.r\d{2}$', fn):
+        return True
+    if ".part1.rar" in tx or ".part2.rar" in tx:
+        return True
+    return False
+
 def is_series_episode(text: str, filename: str) -> bool:
     content = f"{text or ''} {filename or ''}"
     return bool(SERIES_EPISODE_REGEX.search(content))
@@ -199,6 +213,22 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
     for m in new_msgs:
         fname = m.file.name if m.file and hasattr(m.file, 'name') and m.file.name else ""
         text = m.text or ""
+
+        # Omitir archivos comprimidos o empaquetados (.rar, .part1.rar, .zip, etc.)
+        if is_compressed_archive(fname, text):
+            logger.info(f"🚫 Omitiendo archivo comprimido en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
+            processed_items.append((m.id, None, None, None, "skip"))
+            continue
+
+        # Verificar que tenga formato reproducible de video
+        is_video = (
+            any((fname or "").lower().endswith(ext) for ext in VIDEO_EXTENSIONS) or
+            bool(m.file and hasattr(m.file, 'mime_type') and 'video' in m.file.mime_type)
+        )
+        if not is_video:
+            logger.info(f"🚫 Omitiendo archivo sin formato de video en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
+            processed_items.append((m.id, None, None, None, "skip"))
+            continue
 
         # Omitir episodios de series infiltrados en canales de películas
         if is_series_episode(text, fname):
@@ -294,15 +324,17 @@ def normalize_series_title(title: str) -> str:
 
 def is_valid_series_video(msg) -> bool:
     """Regla estricta TAREA 3: Verifica si el mensaje contiene video o episodio válido.
-    Descarta mensajes de texto de normas, fotos decorativas, enlaces o avisos administrativos."""
+    Descarta mensajes de texto de normas, fotos decorativas, enlaces, avisos o archivos comprimidos."""
     if not msg or getattr(msg, "action", None):
         return False
     if not getattr(msg, "media", None):
         return False
     fname = (msg.file.name.lower() if msg.file and hasattr(msg.file, 'name') and msg.file.name else "")
     text = (msg.text or "").lower()
+    if is_compressed_archive(fname, text):
+        return False
     combined = f"{fname} {text}"
-    is_video_ext = any(fname.endswith(ext) for ext in [".mkv", ".mp4", ".avi", ".ts", ".mov", ".m4v"])
+    is_video_ext = any(fname.endswith(ext) for ext in VIDEO_EXTENSIONS)
     has_video_attr = bool(msg.file and hasattr(msg.file, 'mime_type') and 'video' in msg.file.mime_type)
     has_ep_pattern = bool(re.search(r'(?i)(?:\b[sS]\d{1,2}[eE]\d{1,2}\b|\b\d{1,2}x\d{1,2}\b|\bcap[ií]tulo\s*\d+|\btemporada\s*\d+)', combined))
     return (is_video_ext or has_video_attr or has_ep_pattern)
