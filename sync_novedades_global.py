@@ -170,17 +170,22 @@ SERIES_EPISODE_REGEX = re.compile(
     r'(?i)(?:\b[sS]\d{1,2}[eE]\d{1,2}\b|\b\d{1,2}x\d{1,2}\b|\bcap[ií]tulo\s*\d+|\btemporada\s*\d+|\bseason\s*\d+)'
 )
 
-BANNED_EXTENSIONS = ('.rar', '.zip', '.7z', '.tar', '.gz', '.iso', '.torrent', '.txt', '.nfo', '.exe')
-VIDEO_EXTENSIONS = ('.mkv', '.mp4', '.avi', '.ts', '.mov', '.m4v', '.webm', '.flv', '.wmv')
+BANNED_EXTENSIONS = ('.zip', '.tar', '.gz', '.iso', '.torrent', '.txt', '.nfo', '.exe')
+VIDEO_EXTENSIONS = ('.mkv', '.mp4', '.avi', '.ts', '.mov', '.m4v', '.webm', '.flv', '.wmv', '.rar', '.7z')
 
-def is_compressed_archive(fname: str, text: str = "") -> bool:
+def is_banned_file(fname: str, text: str = "") -> bool:
     fn = (fname or "").lower().strip()
-    tx = (text or "").lower().strip()
-    if any(fn.endswith(ext) for ext in BANNED_EXTENSIONS):
+    return any(fn.endswith(ext) for ext in BANNED_EXTENSIONS)
+
+def is_video_or_multipart(fname: str, mime_type: str = "") -> bool:
+    fn = (fname or "").lower().strip()
+    if is_banned_file(fn):
+        return False
+    if any(fn.endswith(ext) for ext in VIDEO_EXTENSIONS):
         return True
-    if re.search(r'\.part\d+\.rar$', fn) or re.search(r'\.part\d+$', fn) or re.search(r'\.r\d{2}$', fn):
+    if re.search(r'\.(?:part\d+\.rar|7z\.\d+|\d{2,4})$', fn):
         return True
-    if ".part1.rar" in tx or ".part2.rar" in tx:
+    if mime_type and 'video' in mime_type.lower():
         return True
     return False
 
@@ -189,11 +194,12 @@ def is_series_episode(text: str, filename: str) -> bool:
     return bool(SERIES_EPISODE_REGEX.search(content))
 
 async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
-    # 1. Obtener historial reciente de Producción para armar caché anti-duplicados
+    # 1. Obtener historial exhaustivo de Producción para armar caché anti-duplicados
     existing_fingerprints = set()
+    existing_filenames = set()
     try:
         await ensure_connected(cp, "Producción")
-        async for pm in cp.iter_messages(ent_prod, limit=250):
+        async for pm in cp.iter_messages(ent_prod, limit=3000):
             pfname = pm.file.name if pm.file and hasattr(pm.file, 'name') and pm.file.name else ""
             ptext = pm.text or ""
             pq, py = clean_for_search(ptext, pfname)
@@ -202,7 +208,7 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
                 existing_fingerprints.add(key)
                 existing_fingerprints.add(pq.lower().strip())
             if pfname:
-                existing_fingerprints.add(pfname.lower().strip())
+                existing_filenames.add(pfname.lower().strip())
     except Exception as e:
         logger.warning(f"No se pudo consultar historial reciente de Producción en '{c['nombre']}': {e}")
 
@@ -213,20 +219,17 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
     for m in new_msgs:
         fname = m.file.name if m.file and hasattr(m.file, 'name') and m.file.name else ""
         text = m.text or ""
+        mime = getattr(getattr(m, 'file', None), 'mime_type', '') or ''
 
-        # Omitir archivos comprimidos o empaquetados (.rar, .part1.rar, .zip, etc.)
-        if is_compressed_archive(fname, text):
-            logger.info(f"🚫 Omitiendo archivo comprimido en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
+        # Omitir archivos dañados o no admitidos (.zip, .txt, .exe, etc.)
+        if is_banned_file(fname, text):
+            logger.info(f"🚫 Omitiendo archivo no admitido en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
             processed_items.append((m.id, None, None, None, "skip"))
             continue
 
-        # Verificar que tenga formato reproducible de video
-        is_video = (
-            any((fname or "").lower().endswith(ext) for ext in VIDEO_EXTENSIONS) or
-            bool(m.file and hasattr(m.file, 'mime_type') and 'video' in m.file.mime_type)
-        )
-        if not is_video:
-            logger.info(f"🚫 Omitiendo archivo sin formato de video en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
+        # Verificar que tenga formato reproducible de video o parte multiparte (.rar, .7z, etc.)
+        if not is_video_or_multipart(fname, mime):
+            logger.info(f"🚫 Omitiendo archivo sin formato de video/partes en '{c['nombre']}' (Msg {m.id}): {fname or text[:35]}")
             processed_items.append((m.id, None, None, None, "skip"))
             continue
 
@@ -238,21 +241,37 @@ async def sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs):
 
         q, y = clean_for_search(text, fname)
         title_key = f"{q.lower()} {y}".strip() if q else ""
+        fn_clean = fname.lower().strip()
 
-        # Omitir si ya existe en Producción
-        if (title_key and title_key in existing_fingerprints) or (q and q.lower().strip() in existing_fingerprints) or (fname and fname.lower().strip() in existing_fingerprints):
-            logger.info(f"⏩ Omitiendo '{q} ({y})' [Msg {m.id}] en '{c['nombre']}': ya existe en Producción.")
-            processed_items.append((m.id, None, None, None, "skip"))
-            continue
+        # Detección de piezas multiparte (.7z.001, .part1.rar, etc.)
+        is_multipart_piece = bool(
+            re.search(r'(?i)\.(?:part\d+\.rar|7z\.\d+|\d{2,4})$', fname) or
+            re.search(r'(?i)[._\s\-\(\[]part(?:e|\s)?0*\d+', fname)
+        )
+
+        # BLINDAJE ANTI-DUPLICADOS ESTRICTO:
+        if is_multipart_piece:
+            # En partes multiparte: solo se descarta si el archivo EXACTO ya está en Producción
+            if fn_clean and fn_clean in existing_filenames:
+                logger.info(f"⏩ Omitiendo parte multiparte '{fname}' [Msg {m.id}] en '{c['nombre']}': ya existe en Producción.")
+                processed_items.append((m.id, None, None, None, "skip"))
+                continue
+        else:
+            # En películas independientes completas: descartar si coincide título, clave o nombre de archivo
+            if (title_key and title_key in existing_fingerprints) or (q and q.lower().strip() in existing_fingerprints) or (fn_clean and fn_clean in existing_filenames):
+                logger.info(f"⏩ Omitiendo película '{q} ({y})' [Msg {m.id}] en '{c['nombre']}': ya existe en Producción.")
+                processed_items.append((m.id, None, None, None, "skip"))
+                continue
 
         # Mensaje válido para reenvío
         processed_items.append((m.id, m, q, y, "forward"))
-        if title_key:
-            existing_fingerprints.add(title_key)
-        if q:
-            existing_fingerprints.add(q.lower().strip())
-        if fname:
-            existing_fingerprints.add(fname.lower().strip())
+        if fn_clean:
+            existing_filenames.add(fn_clean)
+        if not is_multipart_piece:
+            if title_key:
+                existing_fingerprints.add(title_key)
+            if q:
+                existing_fingerprints.add(q.lower().strip())
 
     titles_added = []
     max_synced_id = last_processed_id
@@ -323,21 +342,22 @@ def normalize_series_title(title: str) -> str:
     return n
 
 def is_valid_series_video(msg) -> bool:
-    """Regla estricta TAREA 3: Verifica si el mensaje contiene video o episodio válido.
-    Descarta mensajes de texto de normas, fotos decorativas, enlaces, avisos o archivos comprimidos."""
+    """Regla estricta: Verifica si el mensaje contiene video o episodio válido.
+    Descarta mensajes de texto de normas, fotos decorativas, enlaces o archivos no admitidos."""
     if not msg or getattr(msg, "action", None):
         return False
     if not getattr(msg, "media", None):
         return False
     fname = (msg.file.name.lower() if msg.file and hasattr(msg.file, 'name') and msg.file.name else "")
     text = (msg.text or "").lower()
-    if is_compressed_archive(fname, text):
+    if is_banned_file(fname, text):
         return False
     combined = f"{fname} {text}"
     is_video_ext = any(fname.endswith(ext) for ext in VIDEO_EXTENSIONS)
+    is_multipart = bool(re.search(r'\.(?:part\d+\.rar|7z\.\d+|\d{2,4})$', fname))
     has_video_attr = bool(msg.file and hasattr(msg.file, 'mime_type') and 'video' in msg.file.mime_type)
     has_ep_pattern = bool(re.search(r'(?i)(?:\b[sS]\d{1,2}[eE]\d{1,2}\b|\b\d{1,2}x\d{1,2}\b|\bcap[ií]tulo\s*\d+|\btemporada\s*\d+)', combined))
-    return (is_video_ext or has_video_attr or has_ep_pattern)
+    return (is_video_ext or is_multipart or has_video_attr or has_ep_pattern)
 
 async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
     topic_id_filter = c.get("topic_id")
@@ -469,8 +489,34 @@ async def sync_channel_series(cp, c, ent_bunker, ent_prod, new_msgs):
         if not p_tid:
             continue
 
-        msg_ids = [m.id for m in t_msgs if not m.action]
+        # BLINDAJE ANTI-DUPLICADOS EN SERIES: Si el tema ya existe en Producción, verificar qué archivos ya están
+        existing_topic_files = set()
+        if not is_new:
+            try:
+                await ensure_connected(cp, "Producción")
+                async for pm in cp.iter_messages(ent_prod, reply_to=p_tid, limit=300):
+                    if pm.file and hasattr(pm.file, 'name') and pm.file.name:
+                        existing_topic_files.add(pm.file.name.strip().lower())
+                    if pm.text:
+                        existing_topic_files.add(pm.text.strip().lower()[:60])
+            except Exception as e:
+                logger.warning(f"No se pudo consultar historial del tema {p_tid} en '{c['nombre']}': {e}")
+
+        msgs_to_send = []
+        for m in t_msgs:
+            if m.action:
+                continue
+            mfname = (m.file.name.strip().lower() if m.file and hasattr(m.file, 'name') and m.file.name else "")
+            mtext = (m.text.strip().lower()[:60] if m.text else "")
+            if (mfname and mfname in existing_topic_files) or (mtext and mtext in existing_topic_files):
+                logger.info(f"⏩ Omitiendo capítulo/archivo ya existente en tema '{topic_title}': {mfname or mtext[:30]}")
+                continue
+            msgs_to_send.append(m)
+
+        msg_ids = [m.id for m in msgs_to_send]
         if not msg_ids:
+            logger.info(f"☕ Todos los capítulos de '{topic_title}' ya se encuentran en Producción.")
+            max_synced_id = max(max_synced_id, max(m.id for m in t_msgs))
             continue
 
         series_ok = True
@@ -597,6 +643,13 @@ async def main():
     me_p = await cp.get_me()
     logger.info(f"Conectado como: {me_p.first_name} (ID: {me_p.id})")
     
+    # Precargar diálogos para resolver entidades en caché (evita 'Could not find the input entity for PeerChannel')
+    logger.info("Cargando diálogos para resolver entidades de canales...")
+    try:
+        await cp.get_dialogs(limit=200)
+    except Exception as de:
+        logger.warning(f"Aviso al precargar diálogos: {de}")
+    
     canales = load_json(MAP_FILE, default=[])
     if not canales:
         logger.error(f"❌ No se encontró o está vacío {MAP_FILE}.")
@@ -614,7 +667,11 @@ async def main():
         is_forum = c.get("is_forum", False)
         
         try:
-            ent_bunker = await cp.get_input_entity(b_id)
+            try:
+                ent_bunker = await cp.get_input_entity(b_id)
+            except Exception:
+                ent_bunker = await cp.get_entity(b_id)
+
             topic_id = c.get("topic_id")
             filtro_intel = c.get("filtro_inteligente")
 
@@ -645,7 +702,10 @@ async def main():
                 c["ultimo_id_sincronizado"] = current_top
                 continue
                 
-            ent_prod = await cp.get_input_entity(c["produccion_id"])
+            try:
+                ent_prod = await cp.get_input_entity(c["produccion_id"])
+            except Exception:
+                ent_prod = await cp.get_entity(c["produccion_id"])
             if not is_forum:
                 items, new_last_id = await sync_channel_peliculas(cp, c, ent_bunker, ent_prod, new_msgs)
             else:
