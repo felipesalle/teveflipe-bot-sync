@@ -646,7 +646,7 @@ async def main():
     # Precargar diálogos para resolver entidades en caché (evita 'Could not find the input entity for PeerChannel')
     logger.info("Cargando diálogos para resolver entidades de canales...")
     try:
-        await cp.get_dialogs(limit=200)
+        await cp.get_dialogs(limit=None)
     except Exception as de:
         logger.warning(f"Aviso al precargar diálogos: {de}")
     
@@ -677,7 +677,11 @@ async def main():
 
             # Si el canal lee de un topic específico, comprobar actividad SOLO en ese topic
             if topic_id:
-                latest = await cp.get_messages(ent_bunker, reply_to=topic_id, limit=1)
+                try:
+                    latest = await cp.get_messages(ent_bunker, reply_to=topic_id, limit=1)
+                except Exception as e_topic:
+                    logger.warning(f"Aviso consultando topic {topic_id} en '{c_nombre}': {e_topic}. Saltando canal.")
+                    continue
             else:
                 latest = await cp.get_messages(ent_bunker, limit=1)
 
