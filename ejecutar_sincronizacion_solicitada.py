@@ -253,7 +253,7 @@ async def sync_channel_universal(cb, cp, me_b, me_p, c):
         
         target_tid = None
         try:
-            topics_req = await cp(GetForumTopicsRequest(channel=ent_prod, offset_date=0, offset_id=0, offset_topic=0, limit=100))
+            topics_req = await cp(GetForumTopicsRequest(peer=ent_prod, offset_date=0, offset_id=0, offset_topic=0, limit=100))
             for t in topics_req.topics:
                 if series_topic_name.lower() in t.title.lower():
                     target_tid = t.id
@@ -265,17 +265,17 @@ async def sync_channel_universal(cb, cp, me_b, me_p, c):
         if not target_tid:
             logger.info(f"✨ Creando nuevo tema en Producción: '{series_topic_name}'...")
             try:
-                new_top = await cp(CreateForumTopicRequest(
-                    channel=ent_prod,
-                    title=series_topic_name,
-                    icon_color=0x6FB9F0
+                created = await cp(CreateForumTopicRequest(
+                    peer=ent_prod,
+                    title=series_topic_name[:120],
+                    random_id=random.randint(1, 2**63 - 1)
                 ))
-                for upd in getattr(new_top, 'updates', []):
-                    if hasattr(upd, 'message') and hasattr(upd.message, 'id'):
-                        target_tid = upd.message.id
+                for u in getattr(created, 'updates', []):
+                    if hasattr(u, 'id'):
+                        target_tid = u.id
                         break
-                    elif hasattr(upd, 'id'):
-                        target_tid = upd.id
+                    if hasattr(u, 'message') and hasattr(u.message, 'action') and hasattr(u.message.action, 'title'):
+                        target_tid = u.message.id
                         break
                 logger.info(f"✅ Tema creado con éxito: ID {target_tid}")
             except Exception as ce:
