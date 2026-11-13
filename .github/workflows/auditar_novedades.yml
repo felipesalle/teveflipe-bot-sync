@@ -1,4 +1,4 @@
-name: Auditoría de Novedades Búnker (Solo Lectura)
+name: Auditoría de Novedades Búnker (Anti-Falsos Positivos)
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ permissions:
 jobs:
   audit_novedades:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Descargar repositorio
@@ -28,14 +28,15 @@ jobs:
       - name: Instalar dependencias
         run: |
           pip install --upgrade pip
-          pip install --upgrade --no-cache-dir "telethon>=1.40.0"
+          pip install --upgrade --no-cache-dir "telethon>=1.40.0" requests
 
-      - name: Ejecutar Auditoría de Novedades
+      - name: Ejecutar Auditoría de Novedades con Verificación Cruzada
         env:
           PYTHONUNBUFFERED: "1"
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
-          python auditar_novedades_pendientes.py
+          python sync_maestro_universal.py --audit
