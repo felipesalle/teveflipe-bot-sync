@@ -28,8 +28,6 @@ TMDB_API_KEY = os.getenv("TMDB_API_KEY", "2b7cd7b237fe99884613b230a910a09c")
 MAP_FILE = "canales_map.json"
 CHUNK_SIZE = 5
 
-VIDEO_EXTS = ('.mp4', '.mkv', '.avi', '.mov', '.ts', '.m4v', '.wmv', '.flv', '.webm', '.rar', '.7z')
-
 def is_user_excluded(title: str, fname: str) -> bool:
     t = f"{title} {fname}".lower()
     if "isla de las tentaciones" in t or "tentaciones" in t:
@@ -42,10 +40,8 @@ def clean_title_for_search(text: str, filename: str) -> str:
     candidate = filename or text
     if not candidate:
         return ""
-    # Remover extensiones
     candidate = re.sub(r'\.(mkv|mp4|avi|rar|7z|\d{3})$', '', candidate, flags=re.IGNORECASE)
     candidate = re.sub(r'[\._\-]', ' ', candidate)
-    # Remover etiquetas comunes
     candidate = re.sub(r'(1080p|720p|4k|uhd|web-dl|webdl|bluray|bdrip|castellano|latino|spanish|x264|x265|hevc|h264|amzn|dsnp|mvplus|ac3|eac3|dts|by.*)', '', candidate, flags=re.IGNORECASE)
     return candidate.strip()
 
@@ -120,7 +116,41 @@ async def send_community_announcement(client, title: str, category: str, is_seri
     except Exception as e:
         logger.warning(f"No se pudo enviar anuncio a Comunidad para '{title}': {e}")
 
-async def sync_channel(client, c):
+async def relay_forward_chunk(cb, cp, me_b, me_p, ent_bunker, ent_prod, chunk, top_msg_id=None):
+    # Paso 1: CB reenvía a CP en privado
+    await cb(ForwardMessagesRequest(
+        from_peer=ent_bunker,
+        to_peer=await cb.get_input_entity(me_p.id),
+        id=chunk,
+        random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
+        drop_author=True
+    ))
+
+    await asyncio.sleep(1.0)
+    # Obtener los IDs recibidos en CP
+    received = [m.id async for m in cp.iter_messages(me_b.id, limit=len(chunk))]
+    received.reverse()
+
+    # Paso 2: CP reenvía a Producción
+    req_kwargs = {
+        "from_peer": await cp.get_input_entity(me_b.id),
+        "to_peer": ent_prod,
+        "id": received,
+        "random_id": [random.randint(1, 2**63 - 1) for _ in received],
+        "drop_author": True
+    }
+    if top_msg_id:
+        req_kwargs["top_msg_id"] = top_msg_id
+
+    await cp(ForwardMessagesRequest(**req_kwargs))
+
+    # Paso 3: Limpiar mensajes temporales en privado
+    try:
+        await cp.delete_messages(me_b.id, received)
+    except Exception:
+        pass
+
+async def sync_channel_universal(cb, cp, me_b, me_p, c):
     c_nombre = c["nombre"]
     b_id = c["bunker_id"]
     p_id = c["produccion_id"]
@@ -134,25 +164,25 @@ async def sync_channel(client, c):
     logger.info(f"   Puntero inicial: {last_id}")
     logger.info(f"==================================================")
 
-    ent_bunker = await client.get_input_entity(b_id)
-    ent_prod = await client.get_input_entity(p_id)
+    ent_bunker = await cb.get_input_entity(b_id)
+    ent_prod = await cp.get_input_entity(p_id)
 
-    # 1. Obtener mensajes existentes en Producción para no duplicar
+    # 1. Caché de archivos existentes en Producción
     existing_filenames = set()
     try:
         if not is_forum:
-            async for pm in client.iter_messages(ent_prod, limit=1000):
+            async for pm in cp.iter_messages(ent_prod, limit=1000):
                 if pm.file and hasattr(pm.file, 'name') and pm.file.name:
                     existing_filenames.add(pm.file.name.lower().strip())
     except Exception as e:
         logger.warning(f"Aviso leyendo historial de producción: {e}")
 
-    # 2. Leer mensajes nuevos del búnker
+    # 2. Leer mensajes nuevos del búnker usando CB
     iter_kwargs = {"min_id": last_id, "reverse": True}
     if topic_id:
         iter_kwargs["reply_to"] = topic_id
 
-    bunker_msgs = [m async for m in client.iter_messages(ent_bunker, **iter_kwargs)
+    bunker_msgs = [m async for m in cb.iter_messages(ent_bunker, **iter_kwargs)
                    if not m.action and (m.media or m.text)]
 
     if not bunker_msgs:
@@ -162,7 +192,6 @@ async def sync_channel(client, c):
     logger.info(f"📥 Encontrados {len(bunker_msgs)} mensajes en Búnker.")
 
     if not is_forum:
-        # Modo Canal Plano (Películas, Infantiles, Anime, Conciertos, Documentales)
         valid_chunks = []
         current_chunk = []
         titles_forwarded = []
@@ -175,7 +204,7 @@ async def sync_channel(client, c):
             
             # FILTRO EXCLUSIONES DE USUARIO
             if is_user_excluded(txt, fn):
-                logger.info(f"🚫 [Exclusión solicitada por usuario] Omitiendo: {fn or txt[:50]}")
+                logger.info(f"🚫 [Exclusión usuario] Omitiendo: {fn or txt[:50]}")
                 continue
 
             # FILTRO DUPLICADOS EN PRODUCCIÓN
@@ -195,18 +224,11 @@ async def sync_channel(client, c):
         if current_chunk:
             valid_chunks.append(current_chunk)
 
-        # Enviar chunks
         total_reenviados = 0
         for chunk in valid_chunks:
             for attempt in range(1, 4):
                 try:
-                    await client(ForwardMessagesRequest(
-                        from_peer=ent_bunker,
-                        to_peer=ent_prod,
-                        id=chunk,
-                        random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
-                        drop_author=True
-                    ))
+                    await relay_forward_chunk(cb, cp, me_b, me_p, ent_bunker, ent_prod, chunk)
                     total_reenviados += len(chunk)
                     logger.info(f"✅ Reenviado lote de {len(chunk)} mensajes en {c_nombre}.")
                     await asyncio.sleep(2.0)
@@ -218,23 +240,20 @@ async def sync_channel(client, c):
                     logger.error(f"Error reenviando lote ({attempt}/3): {e}")
                     await asyncio.sleep(3.0)
 
-        # Publicar anuncios en Comunidad
         for t in titles_forwarded[:4]:
-            await send_community_announcement(client, t, categoria, is_series=False)
+            await send_community_announcement(cp, t, categoria, is_series=False)
 
         c["ultimo_id_sincronizado"] = highest_id
-        logger.info(f"🏁 Finalizado {c_nombre}. Puntero actualizado a {highest_id}. Mensajes reenviados: {total_reenviados}")
+        logger.info(f"🏁 Finalizado {c_nombre}. Puntero: {highest_id}. Mensajes: {total_reenviados}")
 
     else:
         # Modo Foro (Series Turcas / Çalıkuşu)
         highest_id = last_id
-        # Agrupar mensajes en serie
         series_topic_name = "Çalıkuşu"
         
-        # 1. Buscar o crear tema en Producción
         target_tid = None
         try:
-            topics_req = await client(GetForumTopicsRequest(channel=ent_prod, offset_date=0, offset_id=0, offset_topic=0, limit=100))
+            topics_req = await cp(GetForumTopicsRequest(channel=ent_prod, offset_date=0, offset_id=0, offset_topic=0, limit=100))
             for t in topics_req.topics:
                 if series_topic_name.lower() in t.title.lower():
                     target_tid = t.id
@@ -246,7 +265,7 @@ async def sync_channel(client, c):
         if not target_tid:
             logger.info(f"✨ Creando nuevo tema en Producción: '{series_topic_name}'...")
             try:
-                new_top = await client(CreateForumTopicRequest(
+                new_top = await cp(CreateForumTopicRequest(
                     channel=ent_prod,
                     title=series_topic_name,
                     icon_color=0x6FB9F0
@@ -263,17 +282,16 @@ async def sync_channel(client, c):
                 logger.error(f"❌ Error creando tema: {ce}")
                 return
 
-        # 2. Consultar archivos ya existentes dentro del tema
+        # Anti-duplicados en el tema
         existing_in_topic = set()
         if target_tid:
             try:
-                async for tm in client.iter_messages(ent_prod, reply_to=target_tid, limit=200):
+                async for tm in cp.iter_messages(ent_prod, reply_to=target_tid, limit=200):
                     if tm.file and hasattr(tm.file, 'name') and tm.file.name:
                         existing_in_topic.add(tm.file.name.lower().strip())
             except Exception as e_top_scan:
                 logger.warning(f"Aviso escaneando tema: {e_top_scan}")
 
-        # 3. Filtrar episodios
         episodes_to_forward = []
         for m in bunker_msgs:
             highest_id = max(highest_id, m.id)
@@ -289,20 +307,12 @@ async def sync_channel(client, c):
 
             episodes_to_forward.append(m.id)
 
-        # 4. Reenviar en lotes con top_msg_id
         total_ep_reenviados = 0
         for i in range(0, len(episodes_to_forward), CHUNK_SIZE):
             chunk = episodes_to_forward[i:i + CHUNK_SIZE]
             for attempt in range(1, 4):
                 try:
-                    await client(ForwardMessagesRequest(
-                        from_peer=ent_bunker,
-                        to_peer=ent_prod,
-                        id=chunk,
-                        random_id=[random.randint(1, 2**63 - 1) for _ in chunk],
-                        drop_author=True,
-                        top_msg_id=target_tid
-                    ))
+                    await relay_forward_chunk(cb, cp, me_b, me_p, ent_bunker, ent_prod, chunk, top_msg_id=target_tid)
                     total_ep_reenviados += len(chunk)
                     logger.info(f"✅ Reenviados {len(chunk)} capítulos al tema '{series_topic_name}'.")
                     await asyncio.sleep(2.0)
@@ -314,45 +324,54 @@ async def sync_channel(client, c):
                     logger.error(f"Error reenviando episodios ({attempt}/3): {e}")
                     await asyncio.sleep(3.0)
 
-        # Anuncio en comunidad
-        await send_community_announcement(client, series_topic_name, categoria, is_series=True)
+        await send_community_announcement(cp, series_topic_name, categoria, is_series=True)
         c["ultimo_id_sincronizado"] = highest_id
-        logger.info(f"🏁 Finalizado {c_nombre}. Puntero actualizado a {highest_id}. Capítulos reenviados: {total_ep_reenviados}")
+        logger.info(f"🏁 Finalizado {c_nombre}. Puntero: {highest_id}. Capítulos reenviados: {total_ep_reenviados}")
 
 async def main():
     print("=" * 70)
-    print("🚀 EJECUTANDO SINCRONIZACIÓN SOLICITADA")
+    print("🚀 EJECUTANDO SINCRONIZACIÓN SOLICITADA (RELAY UNIVERSAL CB -> CP)")
     print("   (Exclusiones aplicadas: La Isla de las Tentaciones, La Voz)")
     print("=" * 70)
 
-    client = TelegramClient(StringSession(SESSION_BUNKER), API_ID, API_HASH)
-    await client.start()
-    me = await client.get_me()
-    logger.info(f"Conectado como: {me.first_name} ({me.id})")
+    cb = TelegramClient(StringSession(SESSION_BUNKER), API_ID, API_HASH)
+    cp = TelegramClient(StringSession(SESSION_PROD), API_ID, API_HASH)
+    await cb.start()
+    await cp.start()
+
+    me_b = await cb.get_me()
+    me_p = await cp.get_me()
+    logger.info(f"Bunker: {me_b.first_name} ({me_b.id}) | Prod: {me_p.first_name} ({me_p.id})")
     
-    await client.get_dialogs(limit=None)
+    await cb.get_dialogs(limit=None)
+    await cp.get_dialogs(limit=None)
 
     with open(MAP_FILE, "r", encoding="utf-8") as f:
         canales = json.load(f)
 
-    # Canales a sincronizar solicitados por el usuario
-    target_ids = ['peliculas_infantiles', 'peliculas_anime', 'conciertos', 'documentales', 'series_turcas']
+    # Canales solicitados por el usuario
+    # peliculas_infantiles (Policán) ya se reenvió directamente, nos aseguramos de que su puntero sea 525
+    c_inf = next((x for x in canales if x['id'] == 'peliculas_infantiles'), None)
+    if c_inf and c_inf.get('ultimo_id_sincronizado', 0) < 525:
+        c_inf['ultimo_id_sincronizado'] = 525
+
+    target_ids = ['peliculas_anime', 'conciertos', 'documentales', 'series_turcas']
 
     for cid in target_ids:
         c = next((x for x in canales if x['id'] == cid), None)
         if not c:
             continue
         try:
-            await sync_channel(client, c)
+            await sync_channel_universal(cb, cp, me_b, me_p, c)
         except Exception as e:
             logger.error(f"❌ Error en canal {cid}: {e}")
 
-    # Guardar estado actualizado
     with open(MAP_FILE, "w", encoding="utf-8") as f:
         json.dump(canales, f, indent=2, ensure_ascii=False)
-    logger.info("💾 Guardado canales_map.json con nuevos punteros.")
+    logger.info("💾 Guardado canales_map.json con nuevos punteros actualizados.")
 
-    await client.disconnect()
+    await cb.disconnect()
+    await cp.disconnect()
 
 if __name__ == '__main__':
     asyncio.run(main())
