@@ -539,6 +539,64 @@ async def sync_channel(cb, cp, me_b, me_p, c, inventario_canales):
     logger.info(f"✅ Sincronización en '{c_nombre}' completada. {synchronized_count} mensajes procesados. Nuevo puntero: {highest_id}")
     return synchronized_count
 
+def load_channels_merged() -> list:
+    canales = []
+    if os.path.exists(MAP_FILE):
+        try:
+            with open(MAP_FILE, "r", encoding="utf-8") as f:
+                canales = json.load(f)
+        except Exception as e:
+            logger.warning(f"Aviso leyendo {MAP_FILE}: {e}")
+
+    prod_map = {c.get("produccion_id"): c for c in canales if c.get("produccion_id")}
+
+    # Enriquecer dinámicamente con Firebase Realtime Database (channels.json)
+    try:
+        url = "https://teveflipe-default-rtdb.firebaseio.com/channels.json"
+        res = requests.get(url, timeout=5)
+        if res.status_code == 200:
+            rtdb_data = res.json() or {}
+            for k, val in rtdb_data.items():
+                if not isinstance(val, dict):
+                    continue
+                p_id = val.get("id") or int(k)
+                b_id = val.get("bunker_id")
+                is_active = val.get("active", True)
+                name = val.get("name")
+                invite = val.get("inviteLink", "")
+                cat = val.get("category", "general")
+                is_forum = bool(val.get("isForum", False))
+
+                if p_id in prod_map:
+                    # Respetar activación/pausa y nombre desde la landing page
+                    prod_map[p_id]["activo"] = is_active
+                    if name:
+                        prod_map[p_id]["nombre"] = name
+                    if invite:
+                        prod_map[p_id]["invite_link"] = invite
+                    if b_id:
+                        prod_map[p_id]["bunker_id"] = b_id
+                elif b_id:
+                    # Canal nuevo agregado desde la landing page con Búnker asignado
+                    nuevo = {
+                        "id": f"canal_{abs(p_id)}",
+                        "nombre": name or f"Canal {p_id}",
+                        "bunker_id": b_id,
+                        "produccion_id": p_id,
+                        "invite_link": invite,
+                        "categoria": cat,
+                        "is_forum": is_forum,
+                        "ultimo_id_sincronizado": 0,
+                        "activo": is_active
+                    }
+                    canales.append(nuevo)
+                    prod_map[p_id] = nuevo
+                    logger.info(f"🌐 Canal nuevo detectado desde Firebase Landing: '{name}' (Búnker: {b_id} ➔ Prod: {p_id})")
+    except Exception as fe:
+        logger.warning(f"Aviso sincronizando canales desde Firebase RTDB: {fe}")
+
+    return canales
+
 async def main():
     mode = "--sync" if "--sync" in sys.argv else "--audit"
     print("=" * 70)
@@ -565,10 +623,7 @@ async def main():
     await cb.get_dialogs(limit=None)
     await cp.get_dialogs(limit=None)
 
-    canales = []
-    if os.path.exists(MAP_FILE):
-        with open(MAP_FILE, "r", encoding="utf-8") as f:
-            canales = json.load(f)
+    canales = load_channels_merged()
 
     inventario = {}
     if os.path.exists(INVENTARIO_FILE):
