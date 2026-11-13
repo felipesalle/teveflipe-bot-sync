@@ -38,4 +38,4 @@ jobs:
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
         run: |
-          python test_dual_access.py
+          python test_invites_and_noforwards.py
