@@ -41,6 +41,9 @@ VIDEO_EXTENSIONS = ('.mkv', '.mp4', '.avi', '.ts', '.mov', '.m4v', '.webm', '.fl
 SERIES_EPISODE_REGEX = re.compile(
     r'(?i)(?:\b[sS](\d{1,2})[eE](\d{1,2})\b|\b(\d{1,2})x(\d{1,2})\b|\bcap[ií]tulo\s*(\d+)|\bepisodio\s*(\d+))'
 )
+SERIES_CLEAN_REGEX = re.compile(
+    r'(?i)[_\s\.\-]*(?:S\d+E\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Temporada\s*\d+|Season\s*\d+|Episodio\s*\d+|T\d+|S\d+|Cap\s*\d+).*$'
+)
 
 NON_DOC_KEYWORDS = [
     "cuarto milenio", "horizonte", "el hormiguero", "la resistencia", "la revuelta",
@@ -102,6 +105,20 @@ def clean_for_search(text: str, filename: str) -> tuple[str, str]:
     match_year = re.search(r"\b(19\d{2}|20\d{2})\b", raw)
     year = match_year.group(1) if match_year else ""
     return line, year
+
+def clean_series_title(text: str, filename: str) -> str:
+    raw = (text or "").strip()
+    if not raw and filename:
+        raw = os.path.splitext(filename)[0]
+    
+    line = raw.split("\n")[0].strip()
+    line = re.sub(r"^[🎬📺🎥🎞️👶💥🥢✨📼🌍🎸🪐\[\(#\s*]+", "", line)
+    line = re.sub(r"\[.*?\]|\(.*?\)", "", line)
+    line = SERIES_CLEAN_REGEX.sub("", line)
+    line = re.sub(r"(?i)\b(1080p|720p|4k|2160p|bluray|web-dl|webdl|webrip|hdrip|x264|x265|hevc|aac|dts|dual|latino|castellano|subtitulado|sub|completa).*$", "", line)
+    line = re.sub(r"[._\-–—]", " ", line)
+    line = re.sub(r"\s+", " ", line).strip()
+    return line
 
 def is_banned_file(fname: str) -> bool:
     fn = (fname or "").lower().strip()
@@ -331,9 +348,14 @@ async def audit_channel(cb, cp, c, inventario_canales):
                 })
             else:
                 # Supergrupos de series
+                if not is_video_or_multipart(fn, getattr(getattr(m, 'file', None), 'mime_type', '')):
+                    continue
+
                 ep_tag = extract_episode_tag(txt, fn)
-                series_name, _ = clean_for_search(txt, fn)
+                series_name = clean_series_title(txt, fn)
                 norm_series = normalize_text(series_name)
+                if not norm_series or norm_series in ("sticker", "video", "audio", "archivo", "varios"):
+                    continue
 
                 # Si el archivo exacto ya está en el inventario del foro
                 if fn_clean and fn_clean in prod_filenames:
@@ -490,11 +512,14 @@ async def sync_channel(cb, cp, me_b, me_p, c, inventario_canales):
                 continue
             if is_user_excluded(txt, fn):
                 continue
+            if not is_video_or_multipart(fn, getattr(getattr(m, 'file', None), 'mime_type', '')):
+                continue
 
-            series_name, _ = clean_for_search(txt, fn)
+            series_name = clean_series_title(txt, fn)
             norm_s = normalize_text(series_name)
-            if not norm_s:
-                norm_s = "varios"
+            if not norm_s or norm_s in ("sticker", "video", "audio", "archivo", "varios"):
+                logger.info(f"  ⏩ Omitiendo mensaje {m.id}: nombre de serie inválido ('{series_name}')")
+                continue
 
             if norm_s not in series_batches:
                 series_batches[norm_s] = {"display_name": series_name or norm_s, "messages": []}
@@ -504,8 +529,14 @@ async def sync_channel(cb, cp, me_b, me_p, c, inventario_canales):
             display_name = sdata["display_name"]
             msgs = sdata["messages"]
 
-            # Obtener o crear topic en Producción
+            # Obtener o crear topic en Producción con búsqueda tolerante
             topic_dest_id = live_topics.get(norm_s)
+            if not topic_dest_id:
+                for lt_name, lt_id in live_topics.items():
+                    if lt_name == norm_s or (len(norm_s) > 4 and norm_s in lt_name) or (len(lt_name) > 4 and lt_name in norm_s):
+                        topic_dest_id = lt_id
+                        break
+
             is_new_topic = False
             if not topic_dest_id:
                 try:
@@ -568,8 +599,11 @@ def load_channels_merged() -> list:
                 is_forum = bool(val.get("isForum", False))
 
                 if p_id in prod_map:
-                    # Respetar activación/pausa y nombre desde la landing page
-                    prod_map[p_id]["activo"] = is_active
+                    # Respetar activación/pausa y nombre desde la landing page, pero si está excluido localmente, mantenerlo desactivado
+                    if prod_map[p_id].get("activo") is False:
+                        pass
+                    else:
+                        prod_map[p_id]["activo"] = is_active
                     if name:
                         prod_map[p_id]["nombre"] = name
                     if invite:
