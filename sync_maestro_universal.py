@@ -122,7 +122,11 @@ def clean_series_title(text: str, filename: str) -> str:
 
 def is_banned_file(fname: str) -> bool:
     fn = (fname or "").lower().strip()
-    return any(fn.endswith(ext) for ext in BANNED_EXTENSIONS)
+    if any(fn.endswith(ext) for ext in BANNED_EXTENSIONS):
+        return True
+    if re.search(r'\.zip(?:\.\d+)?$', fn):
+        return True
+    return False
 
 def is_video_or_multipart(fname: str, mime_type: str = "") -> bool:
     fn = (fname or "").lower().strip()
