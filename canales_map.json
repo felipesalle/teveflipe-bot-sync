@@ -8,7 +8,7 @@
     "invite_link": "https://t.me/+VpmsvyK63OplZGIx",
     "categoria": "peliculas",
     "is_forum": false,
-    "ultimo_id_sincronizado": 2080,
+    "ultimo_id_sincronizado": 2082,
     "activo": true
   },
   {
@@ -30,7 +30,7 @@
     "bunker_nombre": "Series Españolas",
     "topic_id": 21,
     "produccion_id": -1004419790119,
-    "invite_link": "https://t.me/joinchat/69qsybL6zbplZDRj",
+    "invite_link": "https://t.me/+69qsybL6zbplZDRj",
     "categoria": "series",
     "is_forum": true,
     "ultimo_id_sincronizado": 118952,
@@ -78,7 +78,7 @@
     "bunker_id": -1004385066808,
     "bunker_nombre": "Series Infantiles",
     "produccion_id": -1004343712699,
-    "invite_link": "https://t.me/+J15eKBk0lHBhZmQx",
+    "invite_link": "https://t.me/+f9K5xlAz_UEzZjRh",
     "categoria": "kids",
     "is_forum": true,
     "ultimo_id_sincronizado": 31351,
@@ -155,7 +155,7 @@
     "invite_link": "https://t.me/+m55509Q2gDZkNjMx",
     "categoria": "documentales",
     "is_forum": false,
-    "ultimo_id_sincronizado": 1635866,
+    "ultimo_id_sincronizado": 1636116,
     "filtro_inteligente": "documentales",
     "activo": true
   },
