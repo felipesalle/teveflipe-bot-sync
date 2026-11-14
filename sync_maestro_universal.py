@@ -44,6 +44,10 @@ SERIES_EPISODE_REGEX = re.compile(
 SERIES_CLEAN_REGEX = re.compile(
     r'(?i)[_\s\.\-]*(?:S\d+E\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Temporada\s*\d+|Season\s*\d+|Episodio\s*\d+|T\d+|S\d+|Cap\s*\d+).*$'
 )
+SERIES_LEADING_EP_REGEX = re.compile(
+    r'^(?:S\d+E\d+|\d+x\d+|Cap[ií]tulo\s*\d+|Temporada\s*\d+|Season\s*\d+|Episodio\s*\d+|T\d+(?:\s*[-_]\s*\d+)?|S\d+|Cap\s*\d+|\d{1,3}\s*[-–—]\s*)[_\s\.\-]*',
+    re.IGNORECASE
+)
 
 NON_DOC_KEYWORDS = [
     "cuarto milenio", "horizonte", "el hormiguero", "la resistencia", "la revuelta",
@@ -114,11 +118,15 @@ def clean_series_title(text: str, filename: str) -> str:
     line = raw.split("\n")[0].strip()
     line = re.sub(r"^[🎬📺🎥🎞️👶💥🥢✨📼🌍🎸🪐\[\(#\s*]+", "", line)
     line = re.sub(r"\[.*?\]|\(.*?\)", "", line)
-    line = SERIES_CLEAN_REGEX.sub("", line)
+    
+    if SERIES_LEADING_EP_REGEX.match(line):
+        line = SERIES_LEADING_EP_REGEX.sub("", line)
+    else:
+        line = SERIES_CLEAN_REGEX.sub("", line)
+
     line = re.sub(r"(?i)\b(1080p|720p|4k|2160p|bluray|web-dl|webdl|webrip|hdrip|x264|x265|hevc|aac|dts|dual|latino|castellano|subtitulado|sub|completa).*$", "", line)
     line = re.sub(r"[._\-–—]", " ", line)
-    line = re.sub(r"\s+", " ", line).strip()
-    return line
+    return re.sub(r"\s+", " ", line).strip()
 
 def is_banned_file(fname: str) -> bool:
     fn = (fname or "").lower().strip()
@@ -358,7 +366,7 @@ async def audit_channel(cb, cp, c, inventario_canales):
                 ep_tag = extract_episode_tag(txt, fn)
                 series_name = clean_series_title(txt, fn)
                 norm_series = normalize_text(series_name)
-                if not norm_series or norm_series in ("sticker", "video", "audio", "archivo", "varios"):
+                if not norm_series or norm_series in ("sticker", "video", "audio", "archivo", "varios") or norm_series.isdigit():
                     continue
 
                 # Si el archivo exacto ya está en el inventario del foro
@@ -521,7 +529,7 @@ async def sync_channel(cb, cp, me_b, me_p, c, inventario_canales):
 
             series_name = clean_series_title(txt, fn)
             norm_s = normalize_text(series_name)
-            if not norm_s or norm_s in ("sticker", "video", "audio", "archivo", "varios"):
+            if not norm_s or norm_s in ("sticker", "video", "audio", "archivo", "varios") or norm_s.isdigit():
                 logger.info(f"  ⏩ Omitiendo mensaje {m.id}: nombre de serie inválido ('{series_name}')")
                 continue
 
