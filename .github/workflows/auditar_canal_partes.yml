@@ -1,15 +1,24 @@
-name: Auditoría Canal Partes
+name: Censo y Auditoría Canal Partes
 
 on:
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Acción a realizar'
+        required: true
+        default: 'censo_total'
+        type: choice
+        options:
+          - 'censo_total'
+          - 'auditoria_cabeceras'
 
 permissions:
   contents: write
 
 jobs:
-  audit_partes:
+  run_task:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Descargar repositorio
@@ -26,19 +35,26 @@ jobs:
           pip install --upgrade pip
           pip install --upgrade --no-cache-dir "telethon>=1.40.0" requests
 
-      - name: Ejecutar Auditoría Exhaustiva de Canal de Películas
+      - name: Ejecutar Tarea
         env:
           PYTHONUNBUFFERED: "1"
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
+          CHOSEN_ACTION: ${{ inputs.action }}
         run: |
-          python auditar_canal_partes.py
+          if [ "$CHOSEN_ACTION" = "censo_total" ] || [ -z "$CHOSEN_ACTION" ]; then
+            python calcular_censo_canal.py
+          else
+            python auditar_canal_partes.py
+          fi
 
-      - name: Subir artefacto de reporte
+      - name: Subir artefactos de resultados
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: reporte-auditoria-partes
-          path: reporte_auditoria_canal_partes.json
+          name: resultados-censo-auditoria
+          path: |
+            censo_total_canal.json
+            reporte_auditoria_canal_partes.json
