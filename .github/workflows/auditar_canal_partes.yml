@@ -6,13 +6,20 @@ on:
       action:
         description: 'Acción a realizar'
         required: true
-        default: 'censo_total'
+        default: 'auditar_multicanal'
         type: choice
         options:
+          - 'auditar_multicanal'
+          - 'borrar_multicanal'
           - 'censo_total'
           - 'auditoria_cabeceras'
           - 'borrar_incompatibles'
           - 'identificar_tres_canales'
+      target:
+        description: 'Canal objetivo (all, pelis_2000, pelis_clasicas, series)'
+        required: false
+        default: 'all'
+        type: string
 
 permissions:
   contents: write
@@ -45,8 +52,13 @@ jobs:
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
           CHOSEN_ACTION: ${{ inputs.action }}
+          CHOSEN_TARGET: ${{ inputs.target }}
         run: |
-          if [ "$CHOSEN_ACTION" = "identificar_tres_canales" ]; then
+          if [ "$CHOSEN_ACTION" = "auditar_multicanal" ]; then
+            python auditar_censo_multicanal.py
+          elif [ "$CHOSEN_ACTION" = "borrar_multicanal" ]; then
+            python borrar_incompatibles_multicanal.py
+          elif [ "$CHOSEN_ACTION" = "identificar_tres_canales" ]; then
             python identificar_tres_canales.py
           elif [ "$CHOSEN_ACTION" = "auditoria_cabeceras" ]; then
             python auditar_cabeceras_censo.py
@@ -65,3 +77,5 @@ jobs:
             censo_total_canal.json
             reporte_auditoria_canal_partes.json
             resultado_auditoria_cabeceras.json
+            reporte_auditoria_multicanal.json
+            ids_a_borrar_multicanal.json
