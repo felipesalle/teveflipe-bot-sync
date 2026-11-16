@@ -11,6 +11,7 @@ on:
         options:
           - 'censo_total'
           - 'auditoria_cabeceras'
+          - 'borrar_incompatibles'
 
 permissions:
   contents: write
@@ -46,6 +47,8 @@ jobs:
         run: |
           if [ "$CHOSEN_ACTION" = "auditoria_cabeceras" ]; then
             python auditar_cabeceras_censo.py
+          elif [ "$CHOSEN_ACTION" = "borrar_incompatibles" ]; then
+            python borrar_incompatibles_canal.py
           else
             python calcular_censo_canal.py
           fi
