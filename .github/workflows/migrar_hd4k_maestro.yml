@@ -17,7 +17,7 @@ on:
       max_works:
         description: 'Máximo número de obras por lote en esta ejecución'
         required: false
-        default: '15'
+        default: '30'
         type: string
 
 concurrency:
@@ -55,7 +55,8 @@ jobs:
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
           SESSION_PROD: ${{ secrets.SESSION_PROD }}
-          MAX_BATCH_WORKS: ${{ github.event.inputs.max_works || '15' }}
+          MAX_BATCH_WORKS: ${{ github.event.inputs.max_works || '30' }}
+          MAX_RUN_SECONDS: "2100"
         run: |
           python migrar_hd4k_maestro.py ${{ github.event.inputs.mode || '--migrate' }}
 
