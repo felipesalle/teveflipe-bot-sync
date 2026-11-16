@@ -227,11 +227,39 @@ async def run_audit():
     c_title = getattr(target_channel, 'title', str(target_channel.id))
     logger.info(f"Iniciando escaneo exhaustivo de: '{c_title}' (ID: {target_channel.id})")
 
-    # Leer todos los mensajes del canal
+    # 1. Búsqueda directa y detallada de 'Australia'
+    logger.info("🔍 Buscando específicamente 'Australia' en todo el historial del canal...")
+    aus_msgs = [m async for m in client.iter_messages(target_channel, search='Australia')]
+    logger.info(f"Mensajes encontrados con 'Australia': {len(aus_msgs)}")
+    for am in aus_msgs:
+        afn = getattr(getattr(am, 'file', None), 'name', '') or ""
+        atxt = (am.text or "").strip()
+        logger.info(f"  ↳ Msg {am.id}: File='{afn}' | Text='{atxt[:80]}'")
+        if afn and ("part1" in afn.lower() or ".001" in afn.lower() or not any(x in afn.lower() for x in ["part2", "part3", "part4"])):
+            logger.info(f"  🔬 Inspeccionando cabecera de '{afn}' (Msg {am.id})...")
+            ahead = await inspect_first_bytes(client, target_channel, am)
+            logger.info(f"     Hex inicial (32 bytes): {ahead[:32].hex()}")
+            if ahead.startswith(RAR4_SIG):
+                logger.warning(f"     ⚠️ DETECTADO RAR 4.x! Este formato no es compatible con TeVeFLIPE.")
+            elif ahead.startswith(RAR5_SIG):
+                comp_m, is_st, iname = inspect_rar5_header(ahead)
+                logger.info(f"     RAR 5.0 detectado. Compresión: {comp_m} | Es Store: {is_st} | Fichero: {iname}")
+            elif ahead.startswith(ZIP_SIG):
+                logger.warning(f"     ⚠️ DETECTADO ZIP! No reproducible.")
+            else:
+                logger.info(f"     Otro formato: {ahead[:8]}")
+
+    # 2. Leer mensajes para auditoría global
     all_messages = []
-    async for m in client.iter_messages(target_channel, limit=1000):
+    async for m in client.iter_messages(target_channel, limit=2500):
         if not m.action and (m.file or m.text):
             all_messages.append(m)
+
+    # Si Australia no estaba en los últimos 2500, agregarlo explícitamente
+    existing_ids = {m.id for m in all_messages}
+    for am in aus_msgs:
+        if am.id not in existing_ids:
+            all_messages.append(am)
 
     logger.info(f"Se recolectaron {len(all_messages)} mensajes con contenido.")
 
