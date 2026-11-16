@@ -1,0 +1,1124 @@
+{
+  "version": "1.0",
+  "updated_at": 1794869148.3529756,
+  "channels": {
+    "pelis_clasicas": {
+      "bunker_id": -1004450378925,
+      "bunker_name": "Películas Clásicas HD/4K Bunker",
+      "prod_id": -1004291273383,
+      "prod_title": "🎞️ Películas Clásicas HD/4K — TeVeFLIPE",
+      "target_type": "broadcast",
+      "last_synced_id": 216
+    },
+    "pelis_2000": {
+      "bunker_id": -1004420612937,
+      "bunker_name": "Películas 2000-2019 HD/4K Bunker",
+      "prod_id": -1004336513084,
+      "prod_title": "🎬 Películas 2000-2019 HD/4K — TeVeFLIPE",
+      "target_type": "broadcast",
+      "last_synced_id": 239
+    },
+    "pelis_estrenos": {
+      "bunker_id": -5498750167,
+      "bunker_name": "Películas Estrenos HD/4K Bunker",
+      "prod_id": -1004377860188,
+      "prod_title": "🏆 Películas Estrenos HD/4K — TeVeFLIPE",
+      "target_type": "broadcast",
+      "last_synced_id": 575197
+    },
+    "series": {
+      "bunker_id": -1004457839581,
+      "bunker_name": "Series HD/4K Bunker",
+      "prod_id": -1004312744356,
+      "prod_title": "📺 Series HD/4K — TeVeFLIPE",
+      "target_type": "forum",
+      "last_synced_id": 2000
+    }
+  },
+  "migrated_works": {
+    "pelis_clasicas::la bella y la bestia [3d]::1991": {
+      "titulo": "La bella y la bestia [3D] (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 2,
+      "part_msg_ids": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "total_parts": 17,
+      "status": "CONFIRMED_PILOT",
+      "verified_at": 1794868648.4267092
+    },
+    "pelis_clasicas::2001: odisea del espacio** (1968)": {
+      "titulo": "2001: odisea del espacio** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 20,
+      "part_msg_ids": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "total_parts": 19,
+      "total_bytes": 77434892549,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868689.28519
+    },
+    "pelis_clasicas::blade runner** (1982)": {
+      "titulo": "blade runner** (1982)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 40,
+      "part_msg_ids": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "total_parts": 5,
+      "total_bytes": 8525079480,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868696.868986
+    },
+    "pelis_clasicas::star wars: episodio v - el imperio contraataca** (1980)": {
+      "titulo": "star wars: episodio v - el imperio contraataca** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 46,
+      "part_msg_ids": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "total_parts": 13,
+      "total_bytes": 52685677247,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868714.8611677
+    },
+    "pelis_clasicas::matrix** (1999)": {
+      "titulo": "matrix** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 60,
+      "part_msg_ids": [
+        61,
+        62,
+        63
+      ],
+      "total_parts": 3,
+      "total_bytes": 10535245643,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868719.8490517
+    },
+    "pelis_clasicas::alien, el octavo pasajero** (1979)": {
+      "titulo": "alien, el octavo pasajero** (1979)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 64,
+      "part_msg_ids": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ],
+      "total_parts": 9,
+      "total_bytes": 33637240225,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868732.606495
+    },
+    "pelis_clasicas::metrópolis** (1927)": {
+      "titulo": "metrópolis** (1927)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 74,
+      "part_msg_ids": [
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "total_parts": 7,
+      "total_bytes": 28722791237,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868742.823976
+    },
+    "pelis_clasicas::the truman show** (1998)": {
+      "titulo": "the truman show** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 82,
+      "part_msg_ids": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90
+      ],
+      "total_parts": 8,
+      "total_bytes": 31613956062,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868754.297907
+    },
+    "pelis_clasicas::gattaca** (1997)": {
+      "titulo": "gattaca** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 91,
+      "part_msg_ids": [
+        92,
+        93,
+        94
+      ],
+      "total_parts": 3,
+      "total_bytes": 6369968005,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868759.2863812
+    },
+    "pelis_clasicas::depredador** (1987)": {
+      "titulo": "depredador** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 95,
+      "part_msg_ids": [
+        96,
+        97,
+        98
+      ],
+      "total_parts": 3,
+      "total_bytes": 4563427637,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868764.3016644
+    },
+    "pelis_clasicas::desafío total** (1990)": {
+      "titulo": "desafío total** (1990)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 99,
+      "part_msg_ids": [
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "total_parts": 12,
+      "total_bytes": 24267840328,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868780.9385056
+    },
+    "pelis_clasicas::robocop** (1987)": {
+      "titulo": "robocop** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 112,
+      "part_msg_ids": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ],
+      "total_parts": 18,
+      "total_bytes": 71678164384,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868805.526492
+    },
+    "pelis_clasicas::ghost in the shell** (1995)": {
+      "titulo": "ghost in the shell** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 131,
+      "part_msg_ids": [
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ],
+      "total_parts": 7,
+      "total_bytes": 6779069319,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868815.7118576
+    },
+    "pelis_clasicas::12 monos** (1995)": {
+      "titulo": "12 monos** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 139,
+      "part_msg_ids": [
+        140,
+        141,
+        142
+      ],
+      "total_parts": 3,
+      "total_bytes": 6128947467,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868820.6867075
+    },
+    "pelis_clasicas::la mosca** (1986)": {
+      "titulo": "la mosca** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 143,
+      "part_msg_ids": [
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150
+      ],
+      "total_parts": 7,
+      "total_bytes": 25996328477,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868830.8894525
+    },
+    "pelis_clasicas::dark city** (1998)": {
+      "titulo": "dark city** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "ficha_msg_id": 151,
+      "part_msg_ids": [
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "total_parts": 8,
+      "total_bytes": 30805164198,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868842.355309
+    },
+    "pelis_2000::la llegada** (2016)": {
+      "titulo": "la llegada** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 2,
+      "part_msg_ids": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "total_parts": 5,
+      "total_bytes": 16704651879,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868850.2344928
+    },
+    "pelis_2000::blade runner 2049** (2017)": {
+      "titulo": "blade runner 2049** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 8,
+      "part_msg_ids": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "total_parts": 18,
+      "total_bytes": 75429176257,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868874.654449
+    },
+    "pelis_2000::el origen** (2010)": {
+      "titulo": "el origen** (2010)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 27,
+      "part_msg_ids": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "total_parts": 8,
+      "total_bytes": 32249491728,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868886.1586676
+    },
+    "pelis_2000::ex machina** (2014)": {
+      "titulo": "ex machina** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 36,
+      "part_msg_ids": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "total_parts": 11,
+      "total_bytes": 45866711960,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868901.5681648
+    },
+    "pelis_2000::aniquilación** (2018)": {
+      "titulo": "aniquilación** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 48,
+      "part_msg_ids": [
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "total_parts": 14,
+      "total_bytes": 52795102526,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868920.8148806
+    },
+    "pelis_2000::moon** (2009)": {
+      "titulo": "moon** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 63,
+      "part_msg_ids": [
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74
+      ],
+      "total_parts": 11,
+      "total_bytes": 44361238433,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868936.1824563
+    },
+    "pelis_2000::primer** (2004)": {
+      "titulo": "primer** (2004)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 75,
+      "part_msg_ids": [
+        76,
+        77
+      ],
+      "total_parts": 2,
+      "total_bytes": 4150323370,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868939.8902566
+    },
+    "pelis_2000::donnie darko** (2001)": {
+      "titulo": "donnie darko** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 78,
+      "part_msg_ids": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86
+      ],
+      "total_parts": 8,
+      "total_bytes": 32948535354,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868951.4167705
+    },
+    "pelis_2000::elysium** (2013)": {
+      "titulo": "elysium** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 87,
+      "part_msg_ids": [
+        88,
+        89,
+        90,
+        91
+      ],
+      "total_parts": 4,
+      "total_bytes": 6757647650,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868957.6879196
+    },
+    "pelis_2000::mad max: furia en la carretera** (2015)": {
+      "titulo": "mad max: furia en la carretera** (2015)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 92,
+      "part_msg_ids": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ],
+      "total_parts": 7,
+      "total_bytes": 28085764982,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868967.8527873
+    },
+    "pelis_2000::mission: impossible - fallout** (2018)": {
+      "titulo": "mission: impossible - fallout** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 100,
+      "part_msg_ids": [
+        101,
+        102
+      ],
+      "total_parts": 2,
+      "total_bytes": 2206650615,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868971.5378518
+    },
+    "pelis_2000::john wick** (2014)": {
+      "titulo": "john wick** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 103,
+      "part_msg_ids": [
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "total_parts": 8,
+      "total_bytes": 29725381360,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868983.0163412
+    },
+    "pelis_2000::kingsman: servicio secreto** (2014)": {
+      "titulo": "kingsman: servicio secreto** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 112,
+      "part_msg_ids": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ],
+      "total_parts": 8,
+      "total_bytes": 30742121348,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794868994.4725637
+    },
+    "pelis_2000::kill bill: volumen 1** (2003)": {
+      "titulo": "kill bill: volumen 1** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 121,
+      "part_msg_ids": [
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "total_parts": 7,
+      "total_bytes": 27685511021,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869004.636316
+    },
+    "pelis_2000::piratas del caribe: la maldición del perla negra** (2003)": {
+      "titulo": "piratas del caribe: la maldición del perla negra** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "ficha_msg_id": 129,
+      "part_msg_ids": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143
+      ],
+      "total_parts": 14,
+      "total_bytes": 56073666129,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869023.9044616
+    },
+    "pelis_estrenos::duna: parte dos** (2024)": {
+      "titulo": "duna: parte dos** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 2,
+      "part_msg_ids": [
+        3,
+        4,
+        5
+      ],
+      "total_parts": 3,
+      "total_bytes": 8757496657,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869029.0851946
+    },
+    "pelis_estrenos::barbarian** (2022)": {
+      "titulo": "barbarian** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 6,
+      "part_msg_ids": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "total_parts": 7,
+      "total_bytes": 29313479767,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869039.232296
+    },
+    "pelis_estrenos::el padre** (2020)": {
+      "titulo": "el padre** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 14,
+      "part_msg_ids": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "total_parts": 6,
+      "total_bytes": 11517450973,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869048.1567943
+    },
+    "pelis_estrenos::spider-man: a través del spider-verso** (2023)": {
+      "titulo": "spider-man: a través del spider-verso** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 21,
+      "part_msg_ids": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "total_parts": 7,
+      "total_bytes": 26143000745,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869058.3123572
+    },
+    "pelis_estrenos::soul** (2020)": {
+      "titulo": "soul** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 29,
+      "part_msg_ids": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "total_parts": 6,
+      "total_bytes": 23474713980,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869067.197394
+    },
+    "pelis_estrenos::elvis** (2022)": {
+      "titulo": "elvis** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 36,
+      "part_msg_ids": [
+        37,
+        38,
+        39
+      ],
+      "total_parts": 3,
+      "total_bytes": 4459269652,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869072.1843793
+    },
+    "pelis_estrenos::wish: el poder de los deseos** (2023)": {
+      "titulo": "wish: el poder de los deseos** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 40,
+      "part_msg_ids": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "total_parts": 9,
+      "total_bytes": 17340474604,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869084.967404
+    },
+    "pelis_estrenos::el caballero verde** (2021)": {
+      "titulo": "el caballero verde** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 50,
+      "part_msg_ids": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ],
+      "total_parts": 7,
+      "total_bytes": 13942420994,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869095.1590405
+    },
+    "pelis_estrenos::dungeons & dragons: honor entre ladrones** (2023)": {
+      "titulo": "dungeons & dragons: honor entre ladrones** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 58,
+      "part_msg_ids": [
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "total_parts": 5,
+      "total_bytes": 9231048945,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869102.722268
+    },
+    "pelis_estrenos::vivo**** (2020)** (2020)": {
+      "titulo": "vivo**** (2020)** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 64,
+      "part_msg_ids": [
+        65,
+        66
+      ],
+      "total_parts": 2,
+      "total_bytes": 2116477763,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869106.4302547
+    },
+    "pelis_estrenos::black lotus) (2023)** (2023)": {
+      "titulo": "black lotus) (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 67,
+      "part_msg_ids": [
+        68,
+        69,
+        70
+      ],
+      "total_parts": 3,
+      "total_bytes": 4112065116,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869111.4043047
+    },
+    "pelis_estrenos::burial) (2024)** (2024)": {
+      "titulo": "burial) (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 71,
+      "part_msg_ids": [
+        72,
+        73,
+        74
+      ],
+      "total_parts": 3,
+      "total_bytes": 11181715404,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869116.3794138
+    },
+    "pelis_estrenos::+cuñados (2024)** (2024)": {
+      "titulo": "+cuñados (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 75,
+      "part_msg_ids": [
+        76,
+        77,
+        78
+      ],
+      "total_parts": 3,
+      "total_bytes": 5361434076,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869121.3609915
+    },
+    "pelis_estrenos::10 días de un buen hombre (2023)** (2023)": {
+      "titulo": "10 días de un buen hombre (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 79,
+      "part_msg_ids": [
+        80,
+        81
+      ],
+      "total_parts": 2,
+      "total_bytes": 2931651472,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869125.0355964
+    },
+    "pelis_estrenos::12 palabras (2022)** (2022)": {
+      "titulo": "12 palabras (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "ficha_msg_id": 82,
+      "part_msg_ids": [
+        83,
+        84
+      ],
+      "total_parts": 2,
+      "total_bytes": 3959412876,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869128.7121613
+    },
+    "series::1x01 - juego de tronos [4k]": {
+      "titulo": "1x01 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        2
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869130.2931535
+    },
+    "series::1x02 - juego de tronos [4k]": {
+      "titulo": "1x02 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        3
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869131.5768669
+    },
+    "series::1x03 - juego de tronos [4k]": {
+      "titulo": "1x03 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        4
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869132.8605092
+    },
+    "series::1x04 - juego de tronos [4k]": {
+      "titulo": "1x04 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        5
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869134.1520472
+    },
+    "series::1x05 - juego de tronos [4k]": {
+      "titulo": "1x05 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        6
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869135.4407911
+    },
+    "series::1x06 - juego de tronos [4k]": {
+      "titulo": "1x06 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        7
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869136.7328212
+    },
+    "series::1x07 - juego de tronos [4k]": {
+      "titulo": "1x07 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        8
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869138.0176196
+    },
+    "series::1x08 - juego de tronos [4k]": {
+      "titulo": "1x08 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        9
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869139.3297422
+    },
+    "series::1x09 - juego de tronos [4k]": {
+      "titulo": "1x09 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        10
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869140.6155324
+    },
+    "series::1x10 - juego de tronos [4k]": {
+      "titulo": "1x10 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        11
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869141.9034436
+    },
+    "series::2x01 - juego de tronos [4k]": {
+      "titulo": "2x01 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        12
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869143.1902988
+    },
+    "series::2x02 - juego de tronos [4k]": {
+      "titulo": "2x02 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        13
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869144.4795034
+    },
+    "series::2x03 - juego de tronos [4k]": {
+      "titulo": "2x03 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        14
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869145.7659507
+    },
+    "series::2x04 - juego de tronos [4k]": {
+      "titulo": "2x04 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        15
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869147.0527427
+    },
+    "series::2x05 - juego de tronos [4k]": {
+      "titulo": "2x05 - juego de tronos [4k]",
+      "bunker_id": -1004457839581,
+      "prod_id": -1004312744356,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        16
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794869148.3394642
+    }
+  },
+  "incidents_queue": []
+}
