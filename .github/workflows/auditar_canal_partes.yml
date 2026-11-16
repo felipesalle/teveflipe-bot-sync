@@ -1,0 +1,44 @@
+name: Auditoría Canal Partes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit_partes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          pip install --upgrade pip
+          pip install --upgrade --no-cache-dir "telethon>=1.40.0" requests
+
+      - name: Ejecutar Auditoría Exhaustiva de Canal de Películas
+        env:
+          PYTHONUNBUFFERED: "1"
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          SESSION_BUNKER: ${{ secrets.SESSION_BUNKER }}
+          SESSION_PROD: ${{ secrets.SESSION_PROD }}
+        run: |
+          python auditar_canal_partes.py
+
+      - name: Subir artefacto de reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-auditoria-partes
+          path: reporte_auditoria_canal_partes.json
