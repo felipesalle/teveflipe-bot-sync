@@ -2,8 +2,8 @@ name: Motor Maestro de Sincronización HD/4K (Migración e Incremental)
 
 on:
   schedule:
-    # Sincronización incremental periódica cada 6 horas
-    - cron: '0 */6 * * *'
+    # Sincronización continua acelerada cada 1 hora (34 min activos + 26 min descanso)
+    - cron: '0 * * * *'
   workflow_dispatch:
     inputs:
       mode:
