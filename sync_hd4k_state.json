@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updated_at": 1794946060.1352522,
+  "updated_at": 1794969363.3034954,
   "channels": {
     "pelis_clasicas": {
       "bunker_id": -1004450378925,
@@ -8,7 +8,7 @@
       "prod_id": -1004291273383,
       "prod_title": "🎞️ Películas Clásicas HD/4K — TeVeFLIPE",
       "target_type": "broadcast",
-      "last_synced_id": 3023,
+      "last_synced_id": 3699,
       "sync_phase": "BACKFILL",
       "paused_reason": null,
       "bunker_max_id": 25068
@@ -19,7 +19,7 @@
       "prod_id": -1004336513084,
       "prod_title": "🎬 Películas 2000-2019 HD/4K — TeVeFLIPE",
       "target_type": "broadcast",
-      "last_synced_id": 2995,
+      "last_synced_id": 3583,
       "sync_phase": "BACKFILL",
       "paused_reason": null,
       "bunker_max_id": 17921
@@ -30,7 +30,7 @@
       "prod_id": -1004377860188,
       "prod_title": "🏆 Películas Estrenos HD/4K — TeVeFLIPE",
       "target_type": "broadcast",
-      "last_synced_id": 583818,
+      "last_synced_id": 585708,
       "sync_phase": "BACKFILL",
       "paused_reason": null,
       "bunker_max_id": 670061
@@ -21378,6 +21378,5530 @@
       "total_bytes": 23391877954,
       "status": "CONFIRMED_SUCCESS",
       "verified_at": 1794946058.4906836
+    },
+    "pelis_clasicas::aladdin [3d]**": {
+      "titulo": "aladdin [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2398,
+      "part_msg_ids": [
+        2399,
+        2400,
+        2401,
+        2402,
+        2403,
+        2404,
+        2405,
+        2406,
+        2407,
+        2408,
+        2409,
+        2410,
+        2411,
+        2412,
+        2413,
+        2414
+      ],
+      "total_parts": 16,
+      "total_bytes": 15808909038,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967369.705541
+    },
+    "pelis_clasicas::alaska, tierra de oro (1960)** (1960)": {
+      "titulo": "alaska, tierra de oro (1960)** (1960)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2415,
+      "part_msg_ids": [
+        2416,
+        2417,
+        2418,
+        2419,
+        2420,
+        2421,
+        2422,
+        2423,
+        2424,
+        2425,
+        2426,
+        2427,
+        2428,
+        2429,
+        2430,
+        2431,
+        2432,
+        2433
+      ],
+      "total_parts": 18,
+      "total_bytes": 46395820345,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967389.8988929
+    },
+    "pelis_clasicas::alerta máxima (1992)** (1992)": {
+      "titulo": "alerta máxima (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2434,
+      "part_msg_ids": [
+        2435,
+        2436
+      ],
+      "total_parts": 2,
+      "total_bytes": 3924423171,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967394.3163538
+    },
+    "pelis_clasicas::alerta máxima 2 (1995)** (1995)": {
+      "titulo": "alerta máxima 2 (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2437,
+      "part_msg_ids": [
+        2438,
+        2439
+      ],
+      "total_parts": 2,
+      "total_bytes": 3840135962,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967398.7133558
+    },
+    "pelis_clasicas::algo pasa con mary (1998)** (1998)": {
+      "titulo": "algo pasa con mary (1998)** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2440,
+      "part_msg_ids": [
+        2441,
+        2442,
+        2443
+      ],
+      "total_parts": 3,
+      "total_bytes": 5643424340,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967404.094009
+    },
+    "pelis_clasicas::algo pasa con mary (v ext) (1998)** (1998)": {
+      "titulo": "algo pasa con mary (v ext) (1998)** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2444,
+      "part_msg_ids": [
+        2445,
+        2446,
+        2447,
+        2448
+      ],
+      "total_parts": 4,
+      "total_bytes": 14863667073,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967410.452479
+    },
+    "pelis_clasicas::algo que paso en ano nuevo**": {
+      "titulo": "algo que paso en ano nuevo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2449,
+      "part_msg_ids": [
+        2450,
+        2451
+      ],
+      "total_parts": 2,
+      "total_bytes": 4590344955,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967414.8605373
+    },
+    "pelis_clasicas::alguien mueve los hilos (1994)** (1994)": {
+      "titulo": "alguien mueve los hilos (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2452,
+      "part_msg_ids": [
+        2453,
+        2454,
+        2455,
+        2456,
+        2457
+      ],
+      "total_parts": 5,
+      "total_bytes": 7154006289,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967422.1884484
+    },
+    "pelis_clasicas::alguien voló sobre el nido del cuco 1975** (1975)": {
+      "titulo": "alguien voló sobre el nido del cuco 1975** (1975)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2458,
+      "part_msg_ids": [
+        2459,
+        2460,
+        2461,
+        2462,
+        2463
+      ],
+      "total_parts": 5,
+      "total_bytes": 8652594932,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967429.5157883
+    },
+    "pelis_clasicas::algunas veces ellos vuelven (1991)** (1991)": {
+      "titulo": "algunas veces ellos vuelven (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2464,
+      "part_msg_ids": [
+        2465,
+        2466
+      ],
+      "total_parts": 2,
+      "total_bytes": 3057224124,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967433.8992932
+    },
+    "pelis_clasicas::algunos hombres buenos (1992)** (1992)": {
+      "titulo": "algunos hombres buenos (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2467,
+      "part_msg_ids": [
+        2468,
+        2469
+      ],
+      "total_parts": 2,
+      "total_bytes": 2227829802,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967438.282725
+    },
+    "pelis_clasicas::alicia en las ciudades 1974** (1974)": {
+      "titulo": "alicia en las ciudades 1974** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2470,
+      "part_msg_ids": [
+        2471,
+        2472
+      ],
+      "total_parts": 2,
+      "total_bytes": 2457340180,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967442.6812565
+    },
+    "pelis_clasicas::alien (1979)** (1979)": {
+      "titulo": "alien (1979)** (1979)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2473,
+      "part_msg_ids": [
+        2474,
+        2475,
+        2476,
+        2477,
+        2478,
+        2479,
+        2480
+      ],
+      "total_parts": 7,
+      "total_bytes": 26728714204,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967451.9904547
+    },
+    "pelis_clasicas::alien - resurrección (1997)** (1997)": {
+      "titulo": "alien - resurrección (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2481,
+      "part_msg_ids": [
+        2482,
+        2483,
+        2484
+      ],
+      "total_parts": 3,
+      "total_bytes": 4449737694,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967457.357793
+    },
+    "pelis_clasicas::alien 3 (1992)** (1992)": {
+      "titulo": "alien 3 (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2485,
+      "part_msg_ids": [
+        2486,
+        2487,
+        2488
+      ],
+      "total_parts": 3,
+      "total_bytes": 5551712065,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967462.7287843
+    },
+    "pelis_clasicas::alien 3 (versión director) (1992)** (1992)": {
+      "titulo": "alien 3 (versión director) (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2489,
+      "part_msg_ids": [
+        2490,
+        2491,
+        2492,
+        2493
+      ],
+      "total_parts": 4,
+      "total_bytes": 14064242590,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967469.0978441
+    },
+    "pelis_clasicas::alien 40th anniversary shorts film**": {
+      "titulo": "alien 40th anniversary shorts film**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2494,
+      "part_msg_ids": [
+        2495,
+        2496,
+        2497
+      ],
+      "total_parts": 3,
+      "total_bytes": 7095939007,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967474.4570508
+    },
+    "pelis_clasicas::alien nación (1988)** (1988)": {
+      "titulo": "alien nación (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2498,
+      "part_msg_ids": [
+        2499,
+        2500
+      ],
+      "total_parts": 2,
+      "total_bytes": 2922157682,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967478.8448818
+    },
+    "pelis_clasicas::aliens (1986)** (1986)": {
+      "titulo": "aliens (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2501,
+      "part_msg_ids": [
+        2502,
+        2503,
+        2504,
+        2505,
+        2506,
+        2507,
+        2508,
+        2509,
+        2510
+      ],
+      "total_parts": 9,
+      "total_bytes": 17908136701,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967490.1521027
+    },
+    "pelis_clasicas::alita angel de combate (open matte)**": {
+      "titulo": "alita angel de combate (open matte)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2511,
+      "part_msg_ids": [
+        2512,
+        2513
+      ],
+      "total_parts": 2,
+      "total_bytes": 7634975996,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967494.5424893
+    },
+    "pelis_clasicas::allan quatermain y la ciudad perdida del oro (1986)** (1986)": {
+      "titulo": "allan quatermain y la ciudad perdida del oro (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2514,
+      "part_msg_ids": [
+        2515,
+        2516
+      ],
+      "total_parts": 2,
+      "total_bytes": 3604872656,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967498.9518566
+    },
+    "pelis_clasicas::almas de metal ****@cinepalomitas**": {
+      "titulo": "almas de metal ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2517,
+      "part_msg_ids": [
+        2518,
+        2519,
+        2520
+      ],
+      "total_parts": 3,
+      "total_bytes": 4050222524,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967504.3222823
+    },
+    "pelis_clasicas::almas desnudas (1949)** (1949)": {
+      "titulo": "almas desnudas (1949)** (1949)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2521,
+      "part_msg_ids": [
+        2522,
+        2523,
+        2524,
+        2525,
+        2526,
+        2527
+      ],
+      "total_parts": 6,
+      "total_bytes": 22863226415,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967512.6623485
+    },
+    "pelis_clasicas::alvin y las ardillas fiesta sobre ruedas**": {
+      "titulo": "alvin y las ardillas fiesta sobre ruedas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2528,
+      "part_msg_ids": [
+        2529,
+        2530
+      ],
+      "total_parts": 2,
+      "total_bytes": 2587065860,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967517.0427344
+    },
+    "pelis_clasicas::always (para siempre) (1989)** (1989)": {
+      "titulo": "always (para siempre) (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2531,
+      "part_msg_ids": [
+        2532,
+        2533
+      ],
+      "total_parts": 2,
+      "total_bytes": 2459814373,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967521.4251153
+    },
+    "pelis_clasicas::amadeus (1984)** (1984)": {
+      "titulo": "amadeus (1984)** (1984)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2534,
+      "part_msg_ids": [
+        2535,
+        2536
+      ],
+      "total_parts": 2,
+      "total_bytes": 3958179175,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967525.8719745
+    },
+    "pelis_2000::amanecer oscuro (2018) [bdremux1080]": {
+      "titulo": "amanecer oscuro (2018) [bdremux1080]",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        2331
+      ],
+      "total_parts": 1,
+      "total_bytes": 2044723200,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967528.9889405
+    },
+    "pelis_2000::amelie (2001)** (2001)": {
+      "titulo": "amelie (2001)** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2332,
+      "part_msg_ids": [
+        2333,
+        2334
+      ],
+      "total_parts": 2,
+      "total_bytes": 4802473066,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967533.4037786
+    },
+    "pelis_2000::amenazados en la red (2016)** (2016)": {
+      "titulo": "amenazados en la red (2016)** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2335,
+      "part_msg_ids": [
+        2336,
+        2337
+      ],
+      "total_parts": 2,
+      "total_bytes": 3896619694,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967537.7901149
+    },
+    "pelis_2000::american assassin [abrams** (2017)": {
+      "titulo": "american assassin [abrams** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2338,
+      "part_msg_ids": [
+        2339,
+        2340,
+        2341
+      ],
+      "total_parts": 3,
+      "total_bytes": 4624968193,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967543.1630335
+    },
+    "pelis_2000::american gangster (2007)** (2007)": {
+      "titulo": "american gangster (2007)** (2007)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2342,
+      "part_msg_ids": [
+        2343,
+        2344
+      ],
+      "total_parts": 2,
+      "total_bytes": 5296064692,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967547.5556874
+    },
+    "pelis_2000::american heist (2014)** (2014)": {
+      "titulo": "american heist (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2345,
+      "part_msg_ids": [
+        2346,
+        2347
+      ],
+      "total_parts": 2,
+      "total_bytes": 3026148015,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967551.955469
+    },
+    "pelis_2000::american playboy 2003** (2003)": {
+      "titulo": "american playboy 2003** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2348,
+      "part_msg_ids": [
+        2349,
+        2350
+      ],
+      "total_parts": 2,
+      "total_bytes": 2968835193,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967556.3424852
+    },
+    "pelis_2000::american psycho (2000)** (2000)": {
+      "titulo": "american psycho (2000)** (2000)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2351,
+      "part_msg_ids": [
+        2352,
+        2353
+      ],
+      "total_parts": 2,
+      "total_bytes": 4720740280,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967560.7397094
+    },
+    "pelis_2000::american ultra (2015)** (2015)": {
+      "titulo": "american ultra (2015)** (2015)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2354,
+      "part_msg_ids": [
+        2355,
+        2356
+      ],
+      "total_parts": 2,
+      "total_bytes": 5507734797,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967565.1298168
+    },
+    "pelis_2000::amigos con dinero (2006)** (2006)": {
+      "titulo": "amigos con dinero (2006)** (2006)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2357,
+      "part_msg_ids": [
+        2358,
+        2359
+      ],
+      "total_parts": 2,
+      "total_bytes": 2479481528,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967569.5194898
+    },
+    "pelis_2000::amigos de mas (2013)** (2013)": {
+      "titulo": "amigos de mas (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2360,
+      "part_msg_ids": [
+        2361,
+        2362,
+        2363,
+        2364,
+        2365
+      ],
+      "total_parts": 5,
+      "total_bytes": 8835363496,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967576.8565354
+    },
+    "pelis_2000::amityville el despertar (2017)** (2017)": {
+      "titulo": "amityville el despertar (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2366,
+      "part_msg_ids": [
+        2367,
+        2368
+      ],
+      "total_parts": 2,
+      "total_bytes": 3969193784,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967581.2570515
+    },
+    "pelis_2000::amityville el origen (2018)** (2018)": {
+      "titulo": "amityville el origen (2018)** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2369,
+      "part_msg_ids": [
+        2370,
+        2371,
+        2372,
+        2373,
+        2374,
+        2375
+      ],
+      "total_parts": 6,
+      "total_bytes": 11192340152,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967589.5787885
+    },
+    "pelis_2000::amor a segunda vista (2014)** (2014)": {
+      "titulo": "amor a segunda vista (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2376,
+      "part_msg_ids": [
+        2377,
+        2378
+      ],
+      "total_parts": 2,
+      "total_bytes": 2586221175,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967593.9822218
+    },
+    "pelis_2000::amor a segunda vista (2019)** (2019)": {
+      "titulo": "amor a segunda vista (2019)** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2379,
+      "part_msg_ids": [
+        2380,
+        2381,
+        2382,
+        2383,
+        2384
+      ],
+      "total_parts": 5,
+      "total_bytes": 10055401756,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967601.3222396
+    },
+    "pelis_2000::amor con preaviso 2002** (2002)": {
+      "titulo": "amor con preaviso 2002** (2002)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2385,
+      "part_msg_ids": [
+        2386,
+        2387
+      ],
+      "total_parts": 2,
+      "total_bytes": 2457490077,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967605.722523
+    },
+    "pelis_2000::amor de ida y vuelta (2018)** (2018)": {
+      "titulo": "amor de ida y vuelta (2018)** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2388,
+      "part_msg_ids": [
+        2389,
+        2390
+      ],
+      "total_parts": 2,
+      "total_bytes": 1782424191,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967610.1057775
+    },
+    "pelis_2000::amor en juego (2005)** (2005)": {
+      "titulo": "amor en juego (2005)** (2005)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2391,
+      "part_msg_ids": [
+        2392,
+        2393,
+        2394
+      ],
+      "total_parts": 3,
+      "total_bytes": 5620617527,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967615.4647582
+    },
+    "pelis_2000::amor es todo lo que necesitas 2012** (2012)": {
+      "titulo": "amor es todo lo que necesitas 2012** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2395,
+      "part_msg_ids": [
+        2396,
+        2397,
+        2398,
+        2399,
+        2400
+      ],
+      "total_parts": 5,
+      "total_bytes": 8178997941,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967622.8084693
+    },
+    "pelis_2000::amor y otras drogas (2010)** (2010)": {
+      "titulo": "amor y otras drogas (2010)** (2010)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2401,
+      "part_msg_ids": [
+        2402,
+        2403,
+        2404
+      ],
+      "total_parts": 3,
+      "total_bytes": 4943137272,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967628.177906
+    },
+    "pelis_2000::an education (2009)** (2009)": {
+      "titulo": "an education (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2405,
+      "part_msg_ids": [
+        2406,
+        2407
+      ],
+      "total_parts": 2,
+      "total_bytes": 3130291028,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967632.5575438
+    },
+    "pelis_2000::ana y el apocalipsis (2017)** (2017)": {
+      "titulo": "ana y el apocalipsis (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2408,
+      "part_msg_ids": [
+        2409,
+        2410,
+        2411,
+        2412
+      ],
+      "total_parts": 4,
+      "total_bytes": 8394865070,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967638.9604664
+    },
+    "pelis_2000::anamorph 2007** (2007)": {
+      "titulo": "anamorph 2007** (2007)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2413,
+      "part_msg_ids": [
+        2414,
+        2415,
+        2416
+      ],
+      "total_parts": 3,
+      "total_bytes": 4255772321,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967644.3433008
+    },
+    "pelis_2000::anarchy  la noche de (2014)** (2014)": {
+      "titulo": "anarchy  la noche de (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2417,
+      "part_msg_ids": [
+        2418,
+        2419,
+        2420
+      ],
+      "total_parts": 3,
+      "total_bytes": 4614249739,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967649.7116833
+    },
+    "pelis_2000::angeles y demonios v ext (2009)** (2009)": {
+      "titulo": "angeles y demonios v ext (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2421,
+      "part_msg_ids": [
+        2422,
+        2423,
+        2424,
+        2425
+      ],
+      "total_parts": 4,
+      "total_bytes": 6649866006,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967656.0682776
+    },
+    "pelis_2000::aniara (2018)** (2018)": {
+      "titulo": "aniara (2018)** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2426,
+      "part_msg_ids": [
+        2427,
+        2428
+      ],
+      "total_parts": 2,
+      "total_bytes": 5788812525,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967660.4540048
+    },
+    "pelis_2000::animal kingdom (2010)** (2010)": {
+      "titulo": "animal kingdom (2010)** (2010)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2429,
+      "part_msg_ids": [
+        2430,
+        2431,
+        2432,
+        2433,
+        2434,
+        2435
+      ],
+      "total_parts": 6,
+      "total_bytes": 22546319119,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967668.7992897
+    },
+    "pelis_2000::animales fantasticos1 [brabrams** (2018)": {
+      "titulo": "animales fantasticos1 [brabrams** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2436,
+      "part_msg_ids": [
+        2437,
+        2438
+      ],
+      "total_parts": 2,
+      "total_bytes": 5341952421,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967673.1999626
+    },
+    "pelis_2000::animatrix (2003)** (2003)": {
+      "titulo": "animatrix (2003)** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2439,
+      "part_msg_ids": [
+        2440,
+        2441,
+        2442
+      ],
+      "total_parts": 3,
+      "total_bytes": 3763129952,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967678.5661314
+    },
+    "pelis_2000::anna (2019)** (2019)": {
+      "titulo": "anna (2019)** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2443,
+      "part_msg_ids": [
+        2444,
+        2445
+      ],
+      "total_parts": 2,
+      "total_bytes": 5547111508,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967682.9756644
+    },
+    "pelis_estrenos::carga máxima (2023)** (2023)": {
+      "titulo": "carga máxima (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 1994,
+      "part_msg_ids": [
+        1995,
+        1996,
+        1997
+      ],
+      "total_parts": 3,
+      "total_bytes": 4657317442,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967688.877287
+    },
+    "pelis_estrenos::caribe, todo incluido 2020** (2020)": {
+      "titulo": "caribe, todo incluido 2020** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 1998,
+      "part_msg_ids": [
+        1999,
+        2000,
+        2001
+      ],
+      "total_parts": 3,
+      "total_bytes": 5543549489,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967694.2453501
+    },
+    "pelis_estrenos::cariño cuánto te odio 2021** (2021)": {
+      "titulo": "cariño cuánto te odio 2021** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2002,
+      "part_msg_ids": [
+        2003,
+        2004,
+        2005
+      ],
+      "total_parts": 3,
+      "total_bytes": 4834402779,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967699.610898
+    },
+    "pelis_estrenos::carmen trevilla 2023** (2023)": {
+      "titulo": "carmen trevilla 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2006,
+      "part_msg_ids": [
+        2007,
+        2008,
+        2009,
+        2010
+      ],
+      "total_parts": 4,
+      "total_bytes": 6731207600,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967705.9518435
+    },
+    "pelis_estrenos::carne roja (2023)** (2023)": {
+      "titulo": "carne roja (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2011,
+      "part_msg_ids": [
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "total_parts": 4,
+      "total_bytes": 3405930557,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967712.2906153
+    },
+    "pelis_estrenos::carrera (2026)** (2026)": {
+      "titulo": "carrera (2026)** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2016,
+      "part_msg_ids": [
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "total_parts": 4,
+      "total_bytes": 12631696745,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967718.621932
+    },
+    "pelis_estrenos::carrera de bestias** (2026)": {
+      "titulo": "carrera de bestias** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2021,
+      "part_msg_ids": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "total_parts": 5,
+      "total_bytes": 18572992606,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967725.9611268
+    },
+    "pelis_estrenos::carter (2022)** (2022)": {
+      "titulo": "carter (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2027,
+      "part_msg_ids": [
+        2028,
+        2029
+      ],
+      "total_parts": 2,
+      "total_bytes": 6788981796,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967730.3462064
+    },
+    "pelis_estrenos::casa grande (2026)** (2026)": {
+      "titulo": "casa grande (2026)** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2030,
+      "part_msg_ids": [
+        2031,
+        2032,
+        2033,
+        2034,
+        2035,
+        2036
+      ],
+      "total_parts": 6,
+      "total_bytes": 21638265654,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967738.6515818
+    },
+    "pelis_estrenos::cash (2023)** (2023)": {
+      "titulo": "cash (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2037,
+      "part_msg_ids": [
+        2038,
+        2039,
+        2040
+      ],
+      "total_parts": 3,
+      "total_bytes": 4840738387,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967744.0200076
+    },
+    "pelis_estrenos::casi familia webdl** (2025)": {
+      "titulo": "casi familia webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2041,
+      "part_msg_ids": [
+        2042,
+        2043
+      ],
+      "total_parts": 2,
+      "total_bytes": 8264012427,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967748.4009955
+    },
+    "pelis_estrenos::caso 137 [hd** (2025)": {
+      "titulo": "caso 137 [hd** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2044,
+      "part_msg_ids": [
+        2045,
+        2046
+      ],
+      "total_parts": 2,
+      "total_bytes": 3375874980,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967752.7749202
+    },
+    "pelis_estrenos::cat person (2023)** (2023)": {
+      "titulo": "cat person (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2047,
+      "part_msg_ids": [
+        2048,
+        2049
+      ],
+      "total_parts": 2,
+      "total_bytes": 5192287150,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967757.1553028
+    },
+    "pelis_estrenos::cata de vinos (la dégustation) (2022)** (2022)": {
+      "titulo": "cata de vinos (la dégustation) (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2050,
+      "part_msg_ids": [
+        2051,
+        2052,
+        2053
+      ],
+      "total_parts": 3,
+      "total_bytes": 4193925639,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967762.5098047
+    },
+    "pelis_estrenos::cato [** (2021)": {
+      "titulo": "cato [** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2054,
+      "part_msg_ids": [
+        2055,
+        2056
+      ],
+      "total_parts": 2,
+      "total_bytes": 2898251278,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967766.9000833
+    },
+    "pelis_estrenos::caza al estafador (2024)** (2024)": {
+      "titulo": "caza al estafador (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2057,
+      "part_msg_ids": [
+        2058,
+        2059
+      ],
+      "total_parts": 2,
+      "total_bytes": 4513468190,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967771.2808163
+    },
+    "pelis_estrenos::caza al mal (2024)** (2024)": {
+      "titulo": "caza al mal (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2060,
+      "part_msg_ids": [
+        2061,
+        2062
+      ],
+      "total_parts": 2,
+      "total_bytes": 6616850458,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967775.6605463
+    },
+    "pelis_estrenos::cazadora auschwitz 2022** (2022)": {
+      "titulo": "cazadora auschwitz 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2063,
+      "part_msg_ids": [
+        2064,
+        2065,
+        2066
+      ],
+      "total_parts": 3,
+      "total_bytes": 4445716816,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967781.0894728
+    },
+    "pelis_estrenos::cazadoras de aliens (2022)** (2022)": {
+      "titulo": "cazadoras de aliens (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2067,
+      "part_msg_ids": [
+        2068,
+        2069,
+        2070
+      ],
+      "total_parts": 3,
+      "total_bytes": 4861970458,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967786.4665394
+    },
+    "pelis_estrenos::cazadores en ierr inhóspita 2024** (2024)": {
+      "titulo": "cazadores en ierr inhóspita 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2071,
+      "part_msg_ids": [
+        2072,
+        2073
+      ],
+      "total_parts": 2,
+      "total_bytes": 2463947538,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967790.853
+    },
+    "pelis_estrenos::cazadores en tierra inhóspita 2024** (2024)": {
+      "titulo": "cazadores en tierra inhóspita 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2074,
+      "part_msg_ids": [
+        2075,
+        2076,
+        2077,
+        2078
+      ],
+      "total_parts": 4,
+      "total_bytes": 5957345654,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967797.208827
+    },
+    "pelis_estrenos::cazafantasmas 2024** (2024)": {
+      "titulo": "cazafantasmas 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2079,
+      "part_msg_ids": [
+        2080,
+        2081,
+        2082,
+        2083
+      ],
+      "total_parts": 4,
+      "total_bytes": 6803130996,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967803.547764
+    },
+    "pelis_estrenos::cazafantasmas imperio (2024)** (2024)": {
+      "titulo": "cazafantasmas imperio (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2084,
+      "part_msg_ids": [
+        2085,
+        2086,
+        2087,
+        2088,
+        2089,
+        2090
+      ],
+      "total_parts": 6,
+      "total_bytes": 21926639861,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967811.8756826
+    },
+    "pelis_estrenos::cazafantasmas imperio helado (2024)** (2024)": {
+      "titulo": "cazafantasmas imperio helado (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2091,
+      "part_msg_ids": [
+        2092,
+        2093,
+        2094,
+        2095,
+        2096
+      ],
+      "total_parts": 5,
+      "total_bytes": 8920256761,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967819.2060127
+    },
+    "pelis_estrenos::cazafantasmas mas alla [abrams** (2021)": {
+      "titulo": "cazafantasmas mas alla [abrams** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2097,
+      "part_msg_ids": [
+        2098,
+        2099
+      ],
+      "total_parts": 2,
+      "total_bytes": 5254622588,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967823.5808506
+    },
+    "pelis_estrenos::cazafantasmas, mas alla (2021)** (2021)": {
+      "titulo": "cazafantasmas, mas alla (2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2100,
+      "part_msg_ids": [
+        2101,
+        2102,
+        2103,
+        2104,
+        2105,
+        2106,
+        2107,
+        2108
+      ],
+      "total_parts": 8,
+      "total_bytes": 15004042614,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967833.8787968
+    },
+    "pelis_estrenos::caña al extraterrestre (2022)** (2022)": {
+      "titulo": "caña al extraterrestre (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2109,
+      "part_msg_ids": [
+        2110,
+        2111,
+        2112,
+        2113
+      ],
+      "total_parts": 4,
+      "total_bytes": 4041897988,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967840.230536
+    },
+    "pelis_estrenos::cells at work! (2024)** (2024)": {
+      "titulo": "cells at work! (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2114,
+      "part_msg_ids": [
+        2115,
+        2116
+      ],
+      "total_parts": 2,
+      "total_bytes": 4321318353,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967844.606596
+    },
+    "pelis_estrenos::cenicienta (2021)** (2021)": {
+      "titulo": "cenicienta (2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2117,
+      "part_msg_ids": [
+        2118,
+        2119,
+        2120,
+        2121,
+        2122,
+        2123,
+        2124
+      ],
+      "total_parts": 7,
+      "total_bytes": 14117284721,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967853.966882
+    },
+    "pelis_estrenos::ceniza (2023)** (2023)": {
+      "titulo": "ceniza (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2125,
+      "part_msg_ids": [
+        2126,
+        2127,
+        2128
+      ],
+      "total_parts": 3,
+      "total_bytes": 4735099747,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967859.337005
+    },
+    "pelis_clasicas::amanecer rojo(1984)** (1984)": {
+      "titulo": "amanecer rojo(1984)** (1984)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2537,
+      "part_msg_ids": [
+        2538,
+        2539,
+        2540
+      ],
+      "total_parts": 3,
+      "total_bytes": 5292463520,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967865.230572
+    },
+    "pelis_clasicas::amantes (1991)** (1991)": {
+      "titulo": "amantes (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2541,
+      "part_msg_ids": [
+        2542,
+        2543,
+        2544
+      ],
+      "total_parts": 3,
+      "total_bytes": 5181687596,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967870.6071687
+    },
+    "pelis_clasicas::amenaza en la red**": {
+      "titulo": "amenaza en la red**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2545,
+      "part_msg_ids": [
+        2546,
+        2547,
+        2548,
+        2549
+      ],
+      "total_parts": 4,
+      "total_bytes": 4731476127,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967876.977723
+    },
+    "pelis_clasicas::american beauty (1999)** (1999)": {
+      "titulo": "american beauty (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2550,
+      "part_msg_ids": [
+        2551,
+        2552,
+        2553
+      ],
+      "total_parts": 3,
+      "total_bytes": 3166558349,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967882.3379753
+    },
+    "pelis_clasicas::american history x (1998)** (1998)": {
+      "titulo": "american history x (1998)** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2554,
+      "part_msg_ids": [
+        2555,
+        2556
+      ],
+      "total_parts": 2,
+      "total_bytes": 5543549205,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967886.7356215
+    },
+    "pelis_clasicas::american psycho (1)**": {
+      "titulo": "american psycho (1)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2557,
+      "part_msg_ids": [
+        2558,
+        2559,
+        2560
+      ],
+      "total_parts": 3,
+      "total_bytes": 4211163470,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967892.104012
+    },
+    "pelis_clasicas::american psycho 1 ****@cinepalomita**": {
+      "titulo": "american psycho 1 ****@cinepalomita**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2561,
+      "part_msg_ids": [
+        2562,
+        2563,
+        2564,
+        2565
+      ],
+      "total_parts": 4,
+      "total_bytes": 5088251405,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967898.47069
+    },
+    "pelis_clasicas::amigas para siempre** (1995)": {
+      "titulo": "amigas para siempre** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2566,
+      "part_msg_ids": [
+        2567,
+        2568
+      ],
+      "total_parts": 2,
+      "total_bytes": 6138578578,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967902.8568082
+    },
+    "pelis_clasicas::amigos hasta la muerte (1973)** (1973)": {
+      "titulo": "amigos hasta la muerte (1973)** (1973)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2569,
+      "part_msg_ids": [
+        2570,
+        2571,
+        2572,
+        2573,
+        2574,
+        2575
+      ],
+      "total_parts": 6,
+      "total_bytes": 23738729240,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967911.1884897
+    },
+    "pelis_clasicas::amistad (1997)** (1997)": {
+      "titulo": "amistad (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2576,
+      "part_msg_ids": [
+        2577,
+        2578,
+        2579,
+        2580,
+        2581,
+        2582,
+        2583
+      ],
+      "total_parts": 7,
+      "total_bytes": 6727050751,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967920.5015836
+    },
+    "pelis_clasicas::amityville ii la posesión (1982)** (1982)": {
+      "titulo": "amityville ii la posesión (1982)** (1982)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2584,
+      "part_msg_ids": [
+        2585,
+        2586
+      ],
+      "total_parts": 2,
+      "total_bytes": 2851094883,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967924.8849456
+    },
+    "pelis_clasicas::amityville iii el pozo del infierno 1983** (1983)": {
+      "titulo": "amityville iii el pozo del infierno 1983** (1983)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2587,
+      "part_msg_ids": [
+        2588,
+        2589
+      ],
+      "total_parts": 2,
+      "total_bytes": 3526694876,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967929.273312
+    },
+    "pelis_clasicas::amityville iv la fuga del mal (1989)** (1989)": {
+      "titulo": "amityville iv la fuga del mal (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2590,
+      "part_msg_ids": [
+        2591,
+        2592
+      ],
+      "total_parts": 2,
+      "total_bytes": 3442219029,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967933.647615
+    },
+    "pelis_clasicas::amityville v (1990)** (1990)": {
+      "titulo": "amityville v (1990)** (1990)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2593,
+      "part_msg_ids": [
+        2594,
+        2595,
+        2596
+      ],
+      "total_parts": 3,
+      "total_bytes": 4279179041,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967939.0296884
+    },
+    "pelis_clasicas::amityville vi es cuestión de tiempo 1992** (1992)": {
+      "titulo": "amityville vi es cuestión de tiempo 1992** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2597,
+      "part_msg_ids": [
+        2598,
+        2599
+      ],
+      "total_parts": 2,
+      "total_bytes": 3594767948,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967943.4095285
+    },
+    "pelis_clasicas::amityville vii el rostro del diablo 1993** (1993)": {
+      "titulo": "amityville vii el rostro del diablo 1993** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2600,
+      "part_msg_ids": [
+        2601,
+        2602
+      ],
+      "total_parts": 2,
+      "total_bytes": 3020419094,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967947.820023
+    },
+    "pelis_clasicas::amityville viii la casa de las muñecas 1996** (1996)": {
+      "titulo": "amityville viii la casa de las muñecas 1996** (1996)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2603,
+      "part_msg_ids": [
+        2604,
+        2605
+      ],
+      "total_parts": 2,
+      "total_bytes": 3418214015,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967952.2148502
+    },
+    "pelis_clasicas::amor a quemarropa (1993)** (1993)": {
+      "titulo": "amor a quemarropa (1993)** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2606,
+      "part_msg_ids": [
+        2607,
+        2608
+      ],
+      "total_parts": 2,
+      "total_bytes": 2334701886,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967956.615783
+    },
+    "pelis_clasicas::amor que mata (1947)** (1947)": {
+      "titulo": "amor que mata (1947)** (1947)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2609,
+      "part_msg_ids": [
+        2610,
+        2611
+      ],
+      "total_parts": 2,
+      "total_bytes": 4807816771,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967961.004984
+    },
+    "pelis_clasicas::amor y honor**": {
+      "titulo": "amor y honor**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2612,
+      "part_msg_ids": [
+        2613,
+        2614
+      ],
+      "total_parts": 2,
+      "total_bytes": 4648767111,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967965.3960829
+    },
+    "pelis_clasicas::anaconda**": {
+      "titulo": "anaconda**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2615,
+      "part_msg_ids": [
+        2616,
+        2617,
+        2618
+      ],
+      "total_parts": 3,
+      "total_bytes": 3442278867,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967970.7664723
+    },
+    "pelis_clasicas::anaconda (1997)** (1997)": {
+      "titulo": "anaconda (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2619,
+      "part_msg_ids": [
+        2620,
+        2621
+      ],
+      "total_parts": 2,
+      "total_bytes": 3442279128,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967975.155634
+    },
+    "pelis_clasicas::analisis final (1992)** (1992)": {
+      "titulo": "analisis final (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2622,
+      "part_msg_ids": [
+        2623,
+        2624,
+        2625
+      ],
+      "total_parts": 3,
+      "total_bytes": 4970598808,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967980.5321267
+    },
+    "pelis_clasicas::anarchy la noche de las bestias**": {
+      "titulo": "anarchy la noche de las bestias**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2626,
+      "part_msg_ids": [
+        2627,
+        2628,
+        2629
+      ],
+      "total_parts": 3,
+      "total_bytes": 4014789612,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967985.9527102
+    },
+    "pelis_clasicas::anchorman i - la leyenda de ron burgundy**": {
+      "titulo": "anchorman i - la leyenda de ron burgundy**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2630,
+      "part_msg_ids": [
+        2631,
+        2632
+      ],
+      "total_parts": 2,
+      "total_bytes": 2651955480,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967990.350621
+    },
+    "pelis_clasicas::anchorman ii - la leyenda continúa**": {
+      "titulo": "anchorman ii - la leyenda continúa**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2633,
+      "part_msg_ids": [
+        2634,
+        2635
+      ],
+      "total_parts": 2,
+      "total_bytes": 2663350218,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794967994.7409256
+    },
+    "pelis_clasicas::angeles sin paraiso (1963)** (1963)": {
+      "titulo": "angeles sin paraiso (1963)** (1963)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2636,
+      "part_msg_ids": [
+        2637,
+        2638,
+        2639,
+        2640,
+        2641
+      ],
+      "total_parts": 5,
+      "total_bytes": 20188155650,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968002.0850403
+    },
+    "pelis_clasicas::angeles y demonios 2 ****@cinepalomitas**": {
+      "titulo": "angeles y demonios 2 ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2642,
+      "part_msg_ids": [
+        2643,
+        2644,
+        2645,
+        2646,
+        2647
+      ],
+      "total_parts": 5,
+      "total_bytes": 6721019887,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968009.4307642
+    },
+    "pelis_clasicas::anomalous**": {
+      "titulo": "anomalous**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2648,
+      "part_msg_ids": [
+        2649,
+        2650
+      ],
+      "total_parts": 2,
+      "total_bytes": 3555649614,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968013.8352802
+    },
+    "pelis_clasicas::ant man**": {
+      "titulo": "ant man**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2651,
+      "part_msg_ids": [
+        2652,
+        2653,
+        2654,
+        2655
+      ],
+      "total_parts": 4,
+      "total_bytes": 4516042841,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968020.199605
+    },
+    "pelis_2000::annabelle (2014)** (2014)": {
+      "titulo": "annabelle (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2446,
+      "part_msg_ids": [
+        2447,
+        2448,
+        2449,
+        2450,
+        2451,
+        2452,
+        2453
+      ],
+      "total_parts": 7,
+      "total_bytes": 24958483162,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968030.1748035
+    },
+    "pelis_2000::annabelle 2 creación (2017)** (2017)": {
+      "titulo": "annabelle 2 creación (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2454,
+      "part_msg_ids": [
+        2455,
+        2456,
+        2457,
+        2458,
+        2459,
+        2460,
+        2461,
+        2462,
+        2463,
+        2464,
+        2465,
+        2466,
+        2467
+      ],
+      "total_parts": 13,
+      "total_bytes": 26158184335,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968045.514285
+    },
+    "pelis_2000::annabelle 3  vuelve a casa (2019)** (2019)": {
+      "titulo": "annabelle 3  vuelve a casa (2019)** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2468,
+      "part_msg_ids": [
+        2469,
+        2470,
+        2471,
+        2472,
+        2473
+      ],
+      "total_parts": 5,
+      "total_bytes": 20345115329,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968052.8741305
+    },
+    "pelis_2000::annabelle 3 (2019)** (2019)": {
+      "titulo": "annabelle 3 (2019)** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2474,
+      "part_msg_ids": [
+        2475,
+        2476,
+        2477,
+        2478,
+        2479,
+        2480,
+        2481,
+        2482,
+        2483
+      ],
+      "total_parts": 9,
+      "total_bytes": 20659880884,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968064.1838293
+    },
+    "pelis_2000::antboy (2013)** (2013)": {
+      "titulo": "antboy (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2484,
+      "part_msg_ids": [
+        2485,
+        2486
+      ],
+      "total_parts": 2,
+      "total_bytes": 3984135491,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968068.571762
+    },
+    "pelis_2000::antboy 2 (2014)** (2014)": {
+      "titulo": "antboy 2 (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2487,
+      "part_msg_ids": [
+        2488,
+        2489
+      ],
+      "total_parts": 2,
+      "total_bytes": 3776915682,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968072.987272
+    },
+    "pelis_2000::antboy 3 (2016)** (2016)": {
+      "titulo": "antboy 3 (2016)** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2490,
+      "part_msg_ids": [
+        2491,
+        2492
+      ],
+      "total_parts": 2,
+      "total_bytes": 3842868826,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968077.3761492
+    },
+    "pelis_2000::antes de la quema 2019** (2019)": {
+      "titulo": "antes de la quema 2019** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2493,
+      "part_msg_ids": [
+        2494,
+        2495,
+        2496,
+        2497
+      ],
+      "total_parts": 4,
+      "total_bytes": 6428786854,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968083.7425098
+    },
+    "pelis_2000::antes del anochecer (2013)** (2013)": {
+      "titulo": "antes del anochecer (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2498,
+      "part_msg_ids": [
+        2499,
+        2500
+      ],
+      "total_parts": 2,
+      "total_bytes": 2338447942,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968088.1318996
+    },
+    "pelis_2000::antes del atardecer (2004)** (2004)": {
+      "titulo": "antes del atardecer (2004)** (2004)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2501,
+      "part_msg_ids": [
+        2502,
+        2503
+      ],
+      "total_parts": 2,
+      "total_bytes": 3506805620,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968092.5164435
+    },
+    "pelis_2000::anticristo (2009)** (2009)": {
+      "titulo": "anticristo (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2504,
+      "part_msg_ids": [
+        2505,
+        2506,
+        2507,
+        2508,
+        2509,
+        2510
+      ],
+      "total_parts": 6,
+      "total_bytes": 23063791712,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968100.8587968
+    },
+    "pelis_2000::antisocial (2013)** (2013)": {
+      "titulo": "antisocial (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2511,
+      "part_msg_ids": [
+        2512,
+        2513
+      ],
+      "total_parts": 2,
+      "total_bytes": 2756025521,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968105.248966
+    },
+    "pelis_2000::antisocial 2 (2015)** (2015)": {
+      "titulo": "antisocial 2 (2015)** (2015)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2514,
+      "part_msg_ids": [
+        2515,
+        2516
+      ],
+      "total_parts": 2,
+      "total_bytes": 3068141352,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968109.6423178
+    },
+    "pelis_2000::apartamento 1303 (2012)** (2012)": {
+      "titulo": "apartamento 1303 (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2517,
+      "part_msg_ids": [
+        2518,
+        2519,
+        2520,
+        2521,
+        2522
+      ],
+      "total_parts": 5,
+      "total_bytes": 15201594719,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968116.9980614
+    },
+    "pelis_2000::apocalypse now redux (2001)** (2001)": {
+      "titulo": "apocalypse now redux (2001)** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2523,
+      "part_msg_ids": [
+        2524,
+        2525,
+        2526
+      ],
+      "total_parts": 3,
+      "total_bytes": 4860800113,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968122.384253
+    },
+    "pelis_2000::apocalypto (2006)** (2006)": {
+      "titulo": "apocalypto (2006)** (2006)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2527,
+      "part_msg_ids": [
+        2528,
+        2529,
+        2530
+      ],
+      "total_parts": 3,
+      "total_bytes": 9089483792,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968127.7522695
+    },
+    "pelis_2000::apostando al limite (2005)** (2005)": {
+      "titulo": "apostando al limite (2005)** (2005)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2531,
+      "part_msg_ids": [
+        2532,
+        2533,
+        2534
+      ],
+      "total_parts": 3,
+      "total_bytes": 4510420169,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968133.1178539
+    },
+    "pelis_2000::appaloosa (2008)** (2008)": {
+      "titulo": "appaloosa (2008)** (2008)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2535,
+      "part_msg_ids": [
+        2536,
+        2537,
+        2538,
+        2539,
+        2540
+      ],
+      "total_parts": 5,
+      "total_bytes": 18889975256,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968140.5487876
+    },
+    "pelis_2000::aprendiz de gigoló (2013)** (2013)": {
+      "titulo": "aprendiz de gigoló (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2541,
+      "part_msg_ids": [
+        2542,
+        2543
+      ],
+      "total_parts": 2,
+      "total_bytes": 3125516495,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968144.9484577
+    },
+    "pelis_2000::april apocalypse (2013)** (2013)": {
+      "titulo": "april apocalypse (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2544,
+      "part_msg_ids": [
+        2545,
+        2546,
+        2547,
+        2548,
+        2549
+      ],
+      "total_parts": 5,
+      "total_bytes": 6429143316,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968152.305303
+    },
+    "pelis_2000::aquaman (2018)** (2018)": {
+      "titulo": "aquaman (2018)** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2550,
+      "part_msg_ids": [
+        2551,
+        2552,
+        2553
+      ],
+      "total_parts": 3,
+      "total_bytes": 8670192043,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968157.6664102
+    },
+    "pelis_2000::aquellas juergas universitarias (2003)** (2003)": {
+      "titulo": "aquellas juergas universitarias (2003)** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2554,
+      "part_msg_ids": [
+        2555,
+        2556,
+        2557,
+        2558
+      ],
+      "total_parts": 4,
+      "total_bytes": 4004677364,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968164.0256228
+    },
+    "pelis_2000::aquellos dias felices 2006** (2006)": {
+      "titulo": "aquellos dias felices 2006** (2006)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2559,
+      "part_msg_ids": [
+        2560,
+        2561
+      ],
+      "total_parts": 2,
+      "total_bytes": 3741780416,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968168.4118578
+    },
+    "pelis_2000::arac attack (2002)** (2002)": {
+      "titulo": "arac attack (2002)** (2002)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2562,
+      "part_msg_ids": [
+        2563,
+        2564
+      ],
+      "total_parts": 2,
+      "total_bytes": 3314589686,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968172.7943163
+    },
+    "pelis_2000::arrastrame al  nfierno (2009)** (2009)": {
+      "titulo": "arrastrame al  nfierno (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2565,
+      "part_msg_ids": [
+        2566,
+        2567,
+        2568,
+        2569,
+        2570,
+        2571
+      ],
+      "total_parts": 6,
+      "total_bytes": 22075587584,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968181.1454515
+    },
+    "pelis_2000::arrastrame al infierno (2009)** (2009)": {
+      "titulo": "arrastrame al infierno (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2572,
+      "part_msg_ids": [
+        2573,
+        2574
+      ],
+      "total_parts": 2,
+      "total_bytes": 2303773866,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968185.5393643
+    },
+    "pelis_2000::arresto domiciliario (2008)** (2008)": {
+      "titulo": "arresto domiciliario (2008)** (2008)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2575,
+      "part_msg_ids": [
+        2576,
+        2577,
+        2578,
+        2579
+      ],
+      "total_parts": 4,
+      "total_bytes": 7639222083,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968192.004866
+    },
+    "pelis_2000::arrival (2016)** (2016)": {
+      "titulo": "arrival (2016)** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2580,
+      "part_msg_ids": [
+        2581,
+        2582,
+        2583,
+        2584,
+        2585
+      ],
+      "total_parts": 5,
+      "total_bytes": 18068454204,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968199.3624737
+    },
+    "pelis_2000::arsene lupin (2004)** (2004)": {
+      "titulo": "arsene lupin (2004)** (2004)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2586,
+      "part_msg_ids": [
+        2587,
+        2588,
+        2589
+      ],
+      "total_parts": 3,
+      "total_bytes": 4804811206,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968204.7391284
+    },
+    "pelis_2000::artico [** (2018)": {
+      "titulo": "artico [** (2018)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2590,
+      "part_msg_ids": [
+        2591,
+        2592
+      ],
+      "total_parts": 2,
+      "total_bytes": 3819866171,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968209.1317754
+    },
+    "pelis_estrenos::cenizas en el cielo (2023)** (2023)": {
+      "titulo": "cenizas en el cielo (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2129,
+      "part_msg_ids": [
+        2130,
+        2131,
+        2132
+      ],
+      "total_parts": 3,
+      "total_bytes": 5674369136,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968215.0261621
+    },
+    "pelis_estrenos::cerca de ti 2020** (2020)": {
+      "titulo": "cerca de ti 2020** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2133,
+      "part_msg_ids": [
+        2134,
+        2135
+      ],
+      "total_parts": 2,
+      "total_bytes": 5079498462,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968219.4121854
+    },
+    "pelis_estrenos::cerrar los ojos (2023)** (2023)": {
+      "titulo": "cerrar los ojos (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2136,
+      "part_msg_ids": [
+        2137,
+        2138,
+        2139,
+        2140,
+        2141
+      ],
+      "total_parts": 5,
+      "total_bytes": 10639325909,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968226.7707677
+    },
+    "pelis_estrenos::chabuca 2024** (2024)": {
+      "titulo": "chabuca 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2142,
+      "part_msg_ids": [
+        2143,
+        2144,
+        2145
+      ],
+      "total_parts": 3,
+      "total_bytes": 5305655655,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968232.1577237
+    },
+    "pelis_estrenos::champagne! (2022)** (2022)": {
+      "titulo": "champagne! (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2146,
+      "part_msg_ids": [
+        2147,
+        2148,
+        2149
+      ],
+      "total_parts": 3,
+      "total_bytes": 7727471579,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968237.5251632
+    },
+    "pelis_estrenos::champions (2023)** (2023)": {
+      "titulo": "champions (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2150,
+      "part_msg_ids": [
+        2151,
+        2152,
+        2153,
+        2154,
+        2155
+      ],
+      "total_parts": 5,
+      "total_bytes": 10627406569,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968244.900964
+    },
+    "pelis_estrenos::champions [web** (2023)": {
+      "titulo": "champions [web** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2156,
+      "part_msg_ids": [
+        2157,
+        2158,
+        2159,
+        2160,
+        2161,
+        2162,
+        2163,
+        2164,
+        2165,
+        2166,
+        2167,
+        2168
+      ],
+      "total_parts": 12,
+      "total_bytes": 23833806833,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968259.1491773
+    },
+    "pelis_estrenos::chaos walking (2021)** (2021)": {
+      "titulo": "chaos walking (2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2169,
+      "part_msg_ids": [
+        2170,
+        2171,
+        2172
+      ],
+      "total_parts": 3,
+      "total_bytes": 4495439186,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968264.5370924
+    },
+    "pelis_estrenos::chernobil la pelicula vose wdl** (2021)": {
+      "titulo": "chernobil la pelicula vose wdl** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2173,
+      "part_msg_ids": [
+        2174,
+        2175
+      ],
+      "total_parts": 2,
+      "total_bytes": 5841824552,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968268.9222333
+    },
+    "pelis_estrenos::cherry (2021)** (2021)": {
+      "titulo": "cherry (2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2176,
+      "part_msg_ids": [
+        2177,
+        2178,
+        2179,
+        2180,
+        2181,
+        2182,
+        2183
+      ],
+      "total_parts": 7,
+      "total_bytes": 26736712084,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968278.2285442
+    },
+    "pelis_estrenos::chevalier** (2023)": {
+      "titulo": "chevalier** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2184,
+      "part_msg_ids": [
+        2185,
+        2186,
+        2187,
+        2188
+      ],
+      "total_parts": 4,
+      "total_bytes": 12522435639,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968284.5748773
+    },
+    "pelis_estrenos::chicas malas (2024)** (2024)": {
+      "titulo": "chicas malas (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2189,
+      "part_msg_ids": [
+        2190,
+        2191,
+        2192,
+        2193
+      ],
+      "total_parts": 4,
+      "total_bytes": 9227398416,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968290.971476
+    },
+    "pelis_estrenos::chicas malas la nueva película 2024** (2024)": {
+      "titulo": "chicas malas la nueva película 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2194,
+      "part_msg_ids": [
+        2195,
+        2196
+      ],
+      "total_parts": 2,
+      "total_bytes": 4224598919,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968295.3568103
+    },
+    "pelis_estrenos::chicas malas mean girls** (2024)": {
+      "titulo": "chicas malas mean girls** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2197,
+      "part_msg_ids": [
+        2198,
+        2199,
+        2200,
+        2201,
+        2202,
+        2203
+      ],
+      "total_parts": 6,
+      "total_bytes": 22425444412,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968303.700327
+    },
+    "pelis_estrenos::chicos de hielo en el trópico (2025)** (2025)": {
+      "titulo": "chicos de hielo en el trópico (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2204,
+      "part_msg_ids": [
+        2205,
+        2206,
+        2207
+      ],
+      "total_parts": 3,
+      "total_bytes": 5943616131,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968309.0772877
+    },
+    "pelis_estrenos::chinas (2023)** (2023)": {
+      "titulo": "chinas (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2208,
+      "part_msg_ids": [
+        2209,
+        2210,
+        2211
+      ],
+      "total_parts": 3,
+      "total_bytes": 6914827379,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968314.45108
+    },
+    "pelis_estrenos::choose love (2023)** (2023)": {
+      "titulo": "choose love (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2212,
+      "part_msg_ids": [
+        2213,
+        2214,
+        2215
+      ],
+      "total_parts": 3,
+      "total_bytes": 5740689544,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968319.823523
+    },
+    "pelis_estrenos::christmas bloody christmas (2024)** (2024)": {
+      "titulo": "christmas bloody christmas (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2216,
+      "part_msg_ids": [
+        2217,
+        2218,
+        2219
+      ],
+      "total_parts": 3,
+      "total_bytes": 11960693763,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968325.1979618
+    },
+    "pelis_estrenos::christy webdl** (2025)": {
+      "titulo": "christy webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2220,
+      "part_msg_ids": [
+        2221,
+        2222,
+        2223,
+        2224,
+        2225,
+        2226
+      ],
+      "total_parts": 6,
+      "total_bytes": 24804650658,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968333.5437162
+    },
+    "pelis_estrenos::cielo de medianoche (2020)** (2020)": {
+      "titulo": "cielo de medianoche (2020)** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2227,
+      "part_msg_ids": [
+        2228,
+        2229,
+        2230,
+        2231
+      ],
+      "total_parts": 4,
+      "total_bytes": 15053968719,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968339.9403253
+    },
+    "pelis_estrenos::cinco citas a ciegas (2024)** (2024)": {
+      "titulo": "cinco citas a ciegas (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2232,
+      "part_msg_ids": [
+        2233,
+        2234,
+        2235
+      ],
+      "total_parts": 3,
+      "total_bytes": 6432245043,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968345.3062096
+    },
+    "pelis_estrenos::cinco lobitos 2022** (2022)": {
+      "titulo": "cinco lobitos 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2236,
+      "part_msg_ids": [
+        2237,
+        2238,
+        2239
+      ],
+      "total_parts": 3,
+      "total_bytes": 4445339980,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968350.6727939
+    },
+    "pelis_estrenos::ciudad de asfalto (2023)** (2023)": {
+      "titulo": "ciudad de asfalto (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2240,
+      "part_msg_ids": [
+        2241,
+        2242,
+        2243,
+        2244
+      ],
+      "total_parts": 4,
+      "total_bytes": 15834340585,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968357.0270662
+    },
+    "pelis_estrenos::ciudad paraíso (paradise city) (2022)** (2022)": {
+      "titulo": "ciudad paraíso (paradise city) (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2245,
+      "part_msg_ids": [
+        2246,
+        2247,
+        2248
+      ],
+      "total_parts": 3,
+      "total_bytes": 4676895290,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968362.3943286
+    },
+    "pelis_estrenos::ciudad sin sueño (2025)** (2025)": {
+      "titulo": "ciudad sin sueño (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2249,
+      "part_msg_ids": [
+        2250,
+        2251
+      ],
+      "total_parts": 2,
+      "total_bytes": 4682890942,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968366.7684832
+    },
+    "pelis_estrenos::ciudadanos soberanos webdl** (2025)": {
+      "titulo": "ciudadanos soberanos webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2252,
+      "part_msg_ids": [
+        2253,
+        2254,
+        2255,
+        2256,
+        2257
+      ],
+      "total_parts": 5,
+      "total_bytes": 19647025946,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968374.107165
+    },
+    "pelis_estrenos::civil war [br** (2024)": {
+      "titulo": "civil war [br** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2258,
+      "part_msg_ids": [
+        2259,
+        2260,
+        2261
+      ],
+      "total_parts": 3,
+      "total_bytes": 9730933906,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968379.4591973
+    },
+    "pelis_estrenos::civil war [brip** (2024)": {
+      "titulo": "civil war [brip** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2262,
+      "part_msg_ids": [
+        2263,
+        2264
+      ],
+      "total_parts": 2,
+      "total_bytes": 7731771392,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968383.8352218
+    },
+    "pelis_estrenos::civil war [webdl** (2024)": {
+      "titulo": "civil war [webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2265,
+      "part_msg_ids": [
+        2266,
+        2267,
+        2268,
+        2269,
+        2270
+      ],
+      "total_parts": 5,
+      "total_bytes": 20663939008,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968391.188254
+    },
+    "pelis_estrenos::claret (2020)** (2020)": {
+      "titulo": "claret (2020)** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2271,
+      "part_msg_ids": [
+        2272,
+        2273,
+        2274
+      ],
+      "total_parts": 3,
+      "total_bytes": 5210462325,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968396.5432136
+    },
+    "pelis_clasicas::ant man [3d]**": {
+      "titulo": "ant man [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2656,
+      "part_msg_ids": [
+        2657,
+        2658,
+        2659,
+        2660,
+        2661,
+        2662,
+        2663,
+        2664,
+        2665,
+        2666,
+        2667,
+        2668,
+        2669,
+        2670,
+        2671
+      ],
+      "total_parts": 15,
+      "total_bytes": 15715981124,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968414.2115436
+    },
+    "pelis_clasicas::ant man y la avispa [3d]**": {
+      "titulo": "ant man y la avispa [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2672,
+      "part_msg_ids": [
+        2673,
+        2674,
+        2675,
+        2676,
+        2677,
+        2678,
+        2679,
+        2680,
+        2681,
+        2682,
+        2683,
+        2684,
+        2685,
+        2686
+      ],
+      "total_parts": 14,
+      "total_bytes": 14051308599,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968430.4361262
+    },
+    "pelis_clasicas::antes del  amanecer (1995)** (1995)": {
+      "titulo": "antes del  amanecer (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2687,
+      "part_msg_ids": [
+        2688,
+        2689
+      ],
+      "total_parts": 2,
+      "total_bytes": 2325386741,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968434.8324645
+    },
+    "pelis_clasicas::antes que el diablo sepa que has muerto**": {
+      "titulo": "antes que el diablo sepa que has muerto**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2690,
+      "part_msg_ids": [
+        2691,
+        2692,
+        2693,
+        2694,
+        2695
+      ],
+      "total_parts": 5,
+      "total_bytes": 20414403746,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968442.1674552
+    },
+    "pelis_clasicas::antman y la avispa**": {
+      "titulo": "antman y la avispa**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2696,
+      "part_msg_ids": [
+        2697,
+        2698,
+        2699,
+        2700,
+        2701,
+        2702,
+        2703,
+        2704,
+        2705,
+        2706,
+        2707,
+        2708,
+        2709,
+        2710
+      ],
+      "total_parts": 14,
+      "total_bytes": 21285585988,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968458.4238725
+    },
+    "pelis_clasicas::antman y la avispa  quantumania [3d]**": {
+      "titulo": "antman y la avispa  quantumania [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2711,
+      "part_msg_ids": [
+        2712,
+        2713,
+        2714,
+        2715,
+        2716,
+        2717,
+        2718,
+        2719,
+        2720,
+        2721,
+        2722,
+        2723,
+        2724,
+        2725,
+        2726,
+        2727,
+        2728,
+        2729,
+        2730
+      ],
+      "total_parts": 19,
+      "total_bytes": 19532035936,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968479.576413
+    },
+    "pelis_clasicas::apache ****@cinepalomitas**": {
+      "titulo": "apache ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2731,
+      "part_msg_ids": [
+        2732,
+        2733,
+        2734
+      ],
+      "total_parts": 3,
+      "total_bytes": 3406609425,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968484.9814053
+    },
+    "pelis_clasicas::apocalypse now redux**": {
+      "titulo": "apocalypse now redux**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2735,
+      "part_msg_ids": [
+        2736,
+        2737,
+        2738,
+        2739,
+        2740,
+        2741
+      ],
+      "total_parts": 6,
+      "total_bytes": 8239618970,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968493.306317
+    },
+    "pelis_clasicas::apocalypto**": {
+      "titulo": "apocalypto**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2742,
+      "part_msg_ids": [
+        2743,
+        2744
+      ],
+      "total_parts": 2,
+      "total_bytes": 3514014951,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968497.6967015
+    },
+    "pelis_clasicas::apolo 13**": {
+      "titulo": "apolo 13**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2745,
+      "part_msg_ids": [
+        2746,
+        2747,
+        2748,
+        2749
+      ],
+      "total_parts": 4,
+      "total_bytes": 5391322419,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968504.0673645
+    },
+    "pelis_clasicas::apolo 13 (1995)** (1995)": {
+      "titulo": "apolo 13 (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2750,
+      "part_msg_ids": [
+        2751,
+        2752,
+        2753,
+        2754
+      ],
+      "total_parts": 4,
+      "total_bytes": 15463602972,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968510.4300182
+    },
+    "pelis_clasicas::aprende como puedas (1996)** (1996)": {
+      "titulo": "aprende como puedas (1996)** (1996)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2755,
+      "part_msg_ids": [
+        2756,
+        2757
+      ],
+      "total_parts": 2,
+      "total_bytes": 1868451270,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968514.8547456
+    },
+    "pelis_clasicas::aprendiendo a vivir webdl** (1999)": {
+      "titulo": "aprendiendo a vivir webdl** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2758,
+      "part_msg_ids": [
+        2759,
+        2760,
+        2761
+      ],
+      "total_parts": 3,
+      "total_bytes": 10608184070,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968520.2213676
+    },
+    "pelis_clasicas::aquarius (deliria) (1987)** (1987)": {
+      "titulo": "aquarius (deliria) (1987)** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2762,
+      "part_msg_ids": [
+        2763,
+        2764
+      ],
+      "total_parts": 2,
+      "total_bytes": 3667884253,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968524.6227806
+    },
+    "pelis_clasicas::aqui huele a muerto 1989** (1989)": {
+      "titulo": "aqui huele a muerto 1989** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2765,
+      "part_msg_ids": [
+        2766,
+        2767
+      ],
+      "total_parts": 2,
+      "total_bytes": 2451339928,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968529.0277064
+    },
+    "pelis_clasicas::aqui vienen los monsters 1995** (1995)": {
+      "titulo": "aqui vienen los monsters 1995** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2768,
+      "part_msg_ids": [
+        2769,
+        2770
+      ],
+      "total_parts": 2,
+      "total_bytes": 2657243616,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968533.4228058
+    },
+    "pelis_clasicas::arachnid**": {
+      "titulo": "arachnid**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2771,
+      "part_msg_ids": [
+        2772,
+        2773
+      ],
+      "total_parts": 2,
+      "total_bytes": 3871654189,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968537.822319
+    },
+    "pelis_clasicas::aracnofobia (1990)** (1990)": {
+      "titulo": "aracnofobia (1990)** (1990)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2774,
+      "part_msg_ids": [
+        2775,
+        2776,
+        2777
+      ],
+      "total_parts": 3,
+      "total_bytes": 5020568022,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968543.2018745
+    },
+    "pelis_clasicas::arde mississippi (1988)** (1988)": {
+      "titulo": "arde mississippi (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2778,
+      "part_msg_ids": [
+        2779,
+        2780
+      ],
+      "total_parts": 2,
+      "total_bytes": 6318909975,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968547.5908985
+    },
+    "pelis_clasicas::arena  ring de las galaxias (1989)** (1989)": {
+      "titulo": "arena  ring de las galaxias (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2781,
+      "part_msg_ids": [
+        2782,
+        2783
+      ],
+      "total_parts": 2,
+      "total_bytes": 2023292262,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968551.9737992
+    },
+    "pelis_clasicas::arenas sangrientas (1949)** (1949)": {
+      "titulo": "arenas sangrientas (1949)** (1949)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2784,
+      "part_msg_ids": [
+        2785,
+        2786
+      ],
+      "total_parts": 2,
+      "total_bytes": 6608098290,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968556.3728986
+    },
+    "pelis_clasicas::argylat by favio**": {
+      "titulo": "argylat by favio**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2787,
+      "part_msg_ids": [
+        2788,
+        2789,
+        2790,
+        2791,
+        2792
+      ],
+      "total_parts": 5,
+      "total_bytes": 4792428711,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968563.718453
+    },
+    "pelis_clasicas::arizona baby (1987)** (1987)": {
+      "titulo": "arizona baby (1987)** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2793,
+      "part_msg_ids": [
+        2794,
+        2795,
+        2796
+      ],
+      "total_parts": 3,
+      "total_bytes": 4357377677,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968569.1280904
+    },
+    "pelis_clasicas::arlington road (1999)** (1999)": {
+      "titulo": "arlington road (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2797,
+      "part_msg_ids": [
+        2798,
+        2799
+      ],
+      "total_parts": 2,
+      "total_bytes": 4965559692,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968573.5091264
+    },
+    "pelis_2000::asalto al tren pelham 123 (2009)** (2009)": {
+      "titulo": "asalto al tren pelham 123 (2009)** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2593,
+      "part_msg_ids": [
+        2594,
+        2595,
+        2596,
+        2597,
+        2598,
+        2599,
+        2600
+      ],
+      "total_parts": 7,
+      "total_bytes": 26739943341,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968583.3913536
+    },
+    "pelis_2000::asalto en wall street (2013)** (2013)": {
+      "titulo": "asalto en wall street (2013)** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2601,
+      "part_msg_ids": [
+        2602,
+        2603
+      ],
+      "total_parts": 2,
+      "total_bytes": 4391547757,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968587.7817707
+    },
+    "pelis_2000::asesinato (2017)** (2017)": {
+      "titulo": "asesinato (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2604,
+      "part_msg_ids": [
+        2605,
+        2606,
+        2607,
+        2608
+      ],
+      "total_parts": 4,
+      "total_bytes": 13577181914,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968594.1565723
+    },
+    "pelis_2000::asesinato en el orient express (2017)** (2017)": {
+      "titulo": "asesinato en el orient express (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2609,
+      "part_msg_ids": [
+        2610,
+        2611,
+        2612,
+        2613,
+        2614,
+        2615,
+        2616,
+        2617,
+        2618,
+        2619,
+        2620,
+        2621,
+        2622
+      ],
+      "total_parts": 13,
+      "total_bytes": 24779903386,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968609.4245954
+    },
+    "pelis_2000::asesinato en el orient express [abrams** (2017)": {
+      "titulo": "asesinato en el orient express [abrams** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2623,
+      "part_msg_ids": [
+        2624,
+        2625,
+        2626
+      ],
+      "total_parts": 3,
+      "total_bytes": 4806421108,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968614.8086386
+    },
+    "pelis_2000::asesinatos en limehouse 2016** (2016)": {
+      "titulo": "asesinatos en limehouse 2016** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2627,
+      "part_msg_ids": [
+        2628,
+        2629,
+        2630
+      ],
+      "total_parts": 3,
+      "total_bytes": 5322995757,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968620.192777
+    },
+    "pelis_2000::asesino (2004)** (2004)": {
+      "titulo": "asesino (2004)** (2004)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2631,
+      "part_msg_ids": [
+        2632,
+        2633,
+        2634,
+        2635,
+        2636,
+        2637
+      ],
+      "total_parts": 6,
+      "total_bytes": 11433163367,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968628.5497742
+    },
+    "pelis_2000::asesino a sueldo (2012)** (2012)": {
+      "titulo": "asesino a sueldo (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2638,
+      "part_msg_ids": [
+        2639,
+        2640
+      ],
+      "total_parts": 2,
+      "total_bytes": 3013555810,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968632.9539616
+    },
+    "pelis_2000::asesinos de elite [abrams** (2011)": {
+      "titulo": "asesinos de elite [abrams** (2011)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2641,
+      "part_msg_ids": [
+        2642,
+        2643
+      ],
+      "total_parts": 2,
+      "total_bytes": 3942104337,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968637.3525348
+    },
+    "pelis_2000::asesinos internacionales [abrams** (2017)": {
+      "titulo": "asesinos internacionales [abrams** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2644,
+      "part_msg_ids": [
+        2645,
+        2646,
+        2647
+      ],
+      "total_parts": 3,
+      "total_bytes": 4500608882,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968642.7239635
+    },
+    "pelis_2000::asi en la tierra como en (2014)** (2014)": {
+      "titulo": "asi en la tierra como en (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2648,
+      "part_msg_ids": [
+        2649,
+        2650,
+        2651,
+        2652,
+        2653,
+        2654,
+        2655
+      ],
+      "total_parts": 7,
+      "total_bytes": 26815621462,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968652.0987148
+    },
+    "pelis_2000::assassin's creed (2016)** (2016)": {
+      "titulo": "assassin's creed (2016)** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2656,
+      "part_msg_ids": [
+        2657,
+        2658,
+        2659,
+        2660
+      ],
+      "total_parts": 4,
+      "total_bytes": 15559455579,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968658.4623997
+    },
+    "pelis_2000::assassination classroom 2015** (2015)": {
+      "titulo": "assassination classroom 2015** (2015)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2661,
+      "part_msg_ids": [
+        2662,
+        2663,
+        2664
+      ],
+      "total_parts": 3,
+      "total_bytes": 5234914255,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968663.861377
+    },
+    "pelis_2000::assassins creed brip** (2016)": {
+      "titulo": "assassins creed brip** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2665,
+      "part_msg_ids": [
+        2666,
+        2667,
+        2668
+      ],
+      "total_parts": 3,
+      "total_bytes": 9370239989,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968669.2558146
+    },
+    "pelis_2000::asuntos pendientes (2004)** (2004)": {
+      "titulo": "asuntos pendientes (2004)** (2004)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2669,
+      "part_msg_ids": [
+        2670,
+        2671,
+        2672,
+        2673
+      ],
+      "total_parts": 4,
+      "total_bytes": 7897029009,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968675.6194458
+    },
+    "pelis_2000::así en la tierra como en el infierno (2014)** (2014)": {
+      "titulo": "así en la tierra como en el infierno (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2674,
+      "part_msg_ids": [
+        2675,
+        2676
+      ],
+      "total_parts": 2,
+      "total_bytes": 4547358830,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968680.0038264
+    },
+    "pelis_2000::atando cabos (2001)** (2001)": {
+      "titulo": "atando cabos (2001)** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2677,
+      "part_msg_ids": [
+        2678,
+        2679
+      ],
+      "total_parts": 2,
+      "total_bytes": 4486663597,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968684.39584
+    },
+    "pelis_2000::aterrados (2017)** (2017)": {
+      "titulo": "aterrados (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2680,
+      "part_msg_ids": [
+        2681,
+        2682,
+        2683
+      ],
+      "total_parts": 3,
+      "total_bytes": 2874825112,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968689.764124
+    },
+    "pelis_2000::aterrizaje forzoso 2005** (2005)": {
+      "titulo": "aterrizaje forzoso 2005** (2005)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2684,
+      "part_msg_ids": [
+        2685,
+        2686
+      ],
+      "total_parts": 2,
+      "total_bytes": 2549134042,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968694.1551192
+    },
+    "pelis_2000::atraco en familia (2017)** (2017)": {
+      "titulo": "atraco en familia (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2687,
+      "part_msg_ids": [
+        2688,
+        2689
+      ],
+      "total_parts": 2,
+      "total_bytes": 4859184839,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968698.5561504
+    },
+    "pelis_2000::atrapada en el infierno (2012)** (2012)": {
+      "titulo": "atrapada en el infierno (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2690,
+      "part_msg_ids": [
+        2691,
+        2692
+      ],
+      "total_parts": 2,
+      "total_bytes": 2170456965,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968702.9525545
+    },
+    "pelis_2000::atrapada en la oscuridad 2013** (2013)": {
+      "titulo": "atrapada en la oscuridad 2013** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2693,
+      "part_msg_ids": [
+        2694,
+        2695
+      ],
+      "total_parts": 2,
+      "total_bytes": 3459327488,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968707.3570213
+    },
+    "pelis_2000::atrapado en grand isle [abrams** (2019)": {
+      "titulo": "atrapado en grand isle [abrams** (2019)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2696,
+      "part_msg_ids": [
+        2697,
+        2698
+      ],
+      "total_parts": 2,
+      "total_bytes": 4156258391,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968711.7411394
+    },
+    "pelis_2000::atrapado en un pirado (2008)** (2008)": {
+      "titulo": "atrapado en un pirado (2008)** (2008)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2699,
+      "part_msg_ids": [
+        2700,
+        2701
+      ],
+      "total_parts": 2,
+      "total_bytes": 7736349274,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968716.1288016
+    },
+    "pelis_2000::atrápame si puedes (2002)** (2002)": {
+      "titulo": "atrápame si puedes (2002)** (2002)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2702,
+      "part_msg_ids": [
+        2703,
+        2704,
+        2705,
+        2706
+      ],
+      "total_parts": 4,
+      "total_bytes": 6628869818,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968722.5006225
+    },
+    "pelis_2000::attack the block (2011)** (2011)": {
+      "titulo": "attack the block (2011)** (2011)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2707,
+      "part_msg_ids": [
+        2708,
+        2709,
+        2710
+      ],
+      "total_parts": 3,
+      "total_bytes": 10487996617,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968727.883451
+    },
+    "pelis_2000::attraction 2017** (2017)": {
+      "titulo": "attraction 2017** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2711,
+      "part_msg_ids": [
+        2712,
+        2713,
+        2714,
+        2715
+      ],
+      "total_parts": 4,
+      "total_bytes": 6428629349,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968734.2738245
+    },
+    "pelis_2000::atómica (2017)** (2017)": {
+      "titulo": "atómica (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2716,
+      "part_msg_ids": [
+        2717,
+        2718
+      ],
+      "total_parts": 2,
+      "total_bytes": 4216992620,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968738.6704164
+    },
+    "pelis_2000::austin powers  miembro (2002)** (2002)": {
+      "titulo": "austin powers  miembro (2002)** (2002)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2719,
+      "part_msg_ids": [
+        2720,
+        2721
+      ],
+      "total_parts": 2,
+      "total_bytes": 2221623585,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968743.0616243
+    },
+    "pelis_2000::autómata (2014)** (2014)": {
+      "titulo": "autómata (2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2722,
+      "part_msg_ids": [
+        2723,
+        2724
+      ],
+      "total_parts": 2,
+      "total_bytes": 4544530584,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968747.4540963
+    },
+    "pelis_estrenos::clases particulares (2022)** (2022)": {
+      "titulo": "clases particulares (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2275,
+      "part_msg_ids": [
+        2276,
+        2277,
+        2278
+      ],
+      "total_parts": 3,
+      "total_bytes": 5024366818,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968753.3629444
+    },
+    "pelis_estrenos::cleaner (2025)** (2025)": {
+      "titulo": "cleaner (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2279,
+      "part_msg_ids": [
+        2280,
+        2281
+      ],
+      "total_parts": 2,
+      "total_bytes": 6287363694,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968757.7504
+    },
+    "pelis_estrenos::cleaner rescate vertical** (2025)": {
+      "titulo": "cleaner rescate vertical** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2282,
+      "part_msg_ids": [
+        2283,
+        2284,
+        2285
+      ],
+      "total_parts": 3,
+      "total_bytes": 9382509396,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968763.125173
+    },
+    "pelis_estrenos::clerks iii (2022)** (2022)": {
+      "titulo": "clerks iii (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2286,
+      "part_msg_ids": [
+        2287,
+        2288,
+        2289,
+        2290,
+        2291,
+        2292,
+        2293,
+        2294,
+        2295,
+        2296
+      ],
+      "total_parts": 10,
+      "total_bytes": 19064649905,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968775.4126167
+    },
+    "pelis_estrenos::cliff walkers (2021** (2021)": {
+      "titulo": "cliff walkers (2021** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2297,
+      "part_msg_ids": [
+        2298,
+        2299,
+        2300,
+        2301
+      ],
+      "total_parts": 4,
+      "total_bytes": 6585006836,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968781.7903945
+    },
+    "pelis_estrenos::clika webdl** (2026)": {
+      "titulo": "clika webdl** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2302,
+      "part_msg_ids": [
+        2303,
+        2304,
+        2305,
+        2306
+      ],
+      "total_parts": 4,
+      "total_bytes": 15649592657,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968788.1609025
+    },
+    "pelis_estrenos::clock 2023** (2023)": {
+      "titulo": "clock 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2307,
+      "part_msg_ids": [
+        2308,
+        2309,
+        2310
+      ],
+      "total_parts": 3,
+      "total_bytes": 2179030143,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968793.533104
+    },
+    "pelis_estrenos::close (2022)** (2022)": {
+      "titulo": "close (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2311,
+      "part_msg_ids": [
+        2312,
+        2313,
+        2314,
+        2315,
+        2316,
+        2317
+      ],
+      "total_parts": 6,
+      "total_bytes": 21036028825,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968801.8958292
+    },
+    "pelis_estrenos::cloud (2024)** (2024)": {
+      "titulo": "cloud (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2318,
+      "part_msg_ids": [
+        2319,
+        2320,
+        2321
+      ],
+      "total_parts": 3,
+      "total_bytes": 6226713727,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968807.2638218
+    },
+    "pelis_estrenos::clown in a cornfield 2025** (2025)": {
+      "titulo": "clown in a cornfield 2025** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2322,
+      "part_msg_ids": [
+        2323,
+        2324,
+        2325,
+        2326,
+        2327
+      ],
+      "total_parts": 5,
+      "total_bytes": 18586263820,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968814.6039352
+    },
+    "pelis_estrenos::club zero (2023)** (2023)": {
+      "titulo": "club zero (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2328,
+      "part_msg_ids": [
+        2329,
+        2330,
+        2331
+      ],
+      "total_parts": 3,
+      "total_bytes": 11297965180,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968819.9745972
+    },
+    "pelis_estrenos::codon es un maquina 2023** (2023)": {
+      "titulo": "codon es un maquina 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2332,
+      "part_msg_ids": [
+        2333,
+        2334
+      ],
+      "total_parts": 2,
+      "total_bytes": 2539715402,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968824.3579283
+    },
+    "pelis_estrenos::colmillos del bayou 2025** (2025)": {
+      "titulo": "colmillos del bayou 2025** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2335,
+      "part_msg_ids": [
+        2336,
+        2337
+      ],
+      "total_parts": 2,
+      "total_bytes": 4384894652,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968828.7444937
+    },
+    "pelis_estrenos::colorea mi mundo con amor (2022)** (2022)": {
+      "titulo": "colorea mi mundo con amor (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2338,
+      "part_msg_ids": [
+        2339,
+        2340,
+        2341
+      ],
+      "total_parts": 3,
+      "total_bytes": 3990732047,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968834.1296768
+    },
+    "pelis_estrenos::combustión instantánea (2022)** (2022)": {
+      "titulo": "combustión instantánea (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2342,
+      "part_msg_ids": [
+        2343,
+        2344
+      ],
+      "total_parts": 2,
+      "total_bytes": 4774192262,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968838.523108
+    },
+    "pelis_estrenos::come true (2020)** (2020)": {
+      "titulo": "come true (2020)** (2020)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2345,
+      "part_msg_ids": [
+        2346,
+        2347
+      ],
+      "total_parts": 2,
+      "total_bytes": 5052815583,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968842.909841
+    },
+    "pelis_estrenos::como cabras** (2026)": {
+      "titulo": "como cabras** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2348,
+      "part_msg_ids": [
+        2349,
+        2350,
+        2351,
+        2352,
+        2353
+      ],
+      "total_parts": 5,
+      "total_bytes": 19086135639,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968850.2528865
+    },
+    "pelis_estrenos::como sobrevivir al instituto (2022)** (2022)": {
+      "titulo": "como sobrevivir al instituto (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2354,
+      "part_msg_ids": [
+        2355,
+        2356,
+        2357
+      ],
+      "total_parts": 3,
+      "total_bytes": 5448839870,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968855.6140623
+    },
+    "pelis_estrenos::compasion diablo 2023** (2023)": {
+      "titulo": "compasion diablo 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2358,
+      "part_msg_ids": [
+        2359,
+        2360,
+        2361
+      ],
+      "total_parts": 3,
+      "total_bytes": 5146178928,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968860.9837892
+    },
+    "pelis_estrenos::compasion por el diablo [** (2023)": {
+      "titulo": "compasion por el diablo [** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2362,
+      "part_msg_ids": [
+        2363,
+        2364,
+        2365,
+        2366,
+        2367
+      ],
+      "total_parts": 5,
+      "total_bytes": 8836090181,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968868.322641
+    },
+    "pelis_estrenos::compasion por el diablo[abrams** (2023)": {
+      "titulo": "compasion por el diablo[abrams** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2368,
+      "part_msg_ids": [
+        2369,
+        2370,
+        2371
+      ],
+      "total_parts": 3,
+      "total_bytes": 5388283666,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968873.6824508
+    },
+    "pelis_estrenos::con canas y a lo loco (2022)** (2022)": {
+      "titulo": "con canas y a lo loco (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2372,
+      "part_msg_ids": [
+        2373,
+        2374
+      ],
+      "total_parts": 2,
+      "total_bytes": 4534883322,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968878.062905
+    },
+    "pelis_estrenos::con el agua al cuello (2024)** (2024)": {
+      "titulo": "con el agua al cuello (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2375,
+      "part_msg_ids": [
+        2376,
+        2377,
+        2378,
+        2379,
+        2380
+      ],
+      "total_parts": 5,
+      "total_bytes": 17226513646,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968885.3953953
+    },
+    "pelis_estrenos::con el agua al cuello (goodrich) (2024)** (2024)": {
+      "titulo": "con el agua al cuello (goodrich) (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2381,
+      "part_msg_ids": [
+        2382,
+        2383
+      ],
+      "total_parts": 2,
+      "total_bytes": 7470487883,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968889.773108
+    },
+    "pelis_estrenos::con la marea (2023)** (2023)": {
+      "titulo": "con la marea (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2384,
+      "part_msg_ids": [
+        2385,
+        2386,
+        2387
+      ],
+      "total_parts": 3,
+      "total_bytes": 12063393199,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968895.1378036
+    },
+    "pelis_estrenos::con los pies en la tierra (2023)** (2023)": {
+      "titulo": "con los pies en la tierra (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2388,
+      "part_msg_ids": [
+        2389,
+        2390,
+        2391
+      ],
+      "total_parts": 3,
+      "total_bytes": 6133804033,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968900.5076723
+    },
+    "pelis_estrenos::con su propia justicia 2021** (2021)": {
+      "titulo": "con su propia justicia 2021** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2392,
+      "part_msg_ids": [
+        2393,
+        2394,
+        2395
+      ],
+      "total_parts": 3,
+      "total_bytes": 4693299798,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968905.8787994
+    },
+    "pelis_estrenos::conclave** (2024)": {
+      "titulo": "conclave** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2396,
+      "part_msg_ids": [
+        2397,
+        2398,
+        2399,
+        2400
+      ],
+      "total_parts": 4,
+      "total_bytes": 13712773607,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968912.2350569
+    },
+    "pelis_estrenos::conclave webdl** (2024)": {
+      "titulo": "conclave webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2401,
+      "part_msg_ids": [
+        2402,
+        2403,
+        2404,
+        2405,
+        2406,
+        2407,
+        2408
+      ],
+      "total_parts": 7,
+      "total_bytes": 25712422970,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968921.5495305
+    },
+    "pelis_estrenos::condenados - vogter (2024)** (2024)": {
+      "titulo": "condenados - vogter (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2409,
+      "part_msg_ids": [
+        2410,
+        2411
+      ],
+      "total_parts": 2,
+      "total_bytes": 4982737683,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968925.9532866
+    },
+    "pelis_clasicas::arma joven (1988)** (1988)": {
+      "titulo": "arma joven (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2800,
+      "part_msg_ids": [
+        2801,
+        2802,
+        2803
+      ],
+      "total_parts": 3,
+      "total_bytes": 4891736264,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968931.8468173
+    },
+    "pelis_clasicas::arma letal 2 (1989)** (1989)": {
+      "titulo": "arma letal 2 (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2804,
+      "part_msg_ids": [
+        2805,
+        2806
+      ],
+      "total_parts": 2,
+      "total_bytes": 4056140397,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968936.2427776
+    },
+    "pelis_clasicas::arma letal 3 (1992)** (1992)": {
+      "titulo": "arma letal 3 (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2807,
+      "part_msg_ids": [
+        2808,
+        2809,
+        2810
+      ],
+      "total_parts": 3,
+      "total_bytes": 4177790879,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968941.6153762
+    },
+    "pelis_clasicas::arma letal 4 (1998)** (1998)": {
+      "titulo": "arma letal 4 (1998)** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2811,
+      "part_msg_ids": [
+        2812,
+        2813,
+        2814,
+        2815,
+        2816,
+        2817,
+        2818
+      ],
+      "total_parts": 7,
+      "total_bytes": 12040325785,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968950.979171
+    },
+    "pelis_clasicas::armas de mujer (1988)** (1988)": {
+      "titulo": "armas de mujer (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2819,
+      "part_msg_ids": [
+        2820,
+        2821,
+        2822
+      ],
+      "total_parts": 3,
+      "total_bytes": 4942233364,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968956.3563855
+    },
+    "pelis_clasicas::arthur 1981** (1981)": {
+      "titulo": "arthur 1981** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2823,
+      "part_msg_ids": [
+        2824,
+        2825,
+        2826
+      ],
+      "total_parts": 3,
+      "total_bytes": 5142167520,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968961.7343984
+    },
+    "pelis_clasicas::arthur el soltero de oro (1981)** (1981)": {
+      "titulo": "arthur el soltero de oro (1981)** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2827,
+      "part_msg_ids": [
+        2828,
+        2829,
+        2830,
+        2831
+      ],
+      "total_parts": 4,
+      "total_bytes": 14531615015,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968968.1917632
+    },
+    "pelis_clasicas::asalto al distrito 13**": {
+      "titulo": "asalto al distrito 13**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2832,
+      "part_msg_ids": [
+        2833,
+        2834,
+        2835
+      ],
+      "total_parts": 3,
+      "total_bytes": 4301414268,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968973.566339
+    },
+    "pelis_clasicas::asalto al fuerte clark (1953)** (1953)": {
+      "titulo": "asalto al fuerte clark (1953)** (1953)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2836,
+      "part_msg_ids": [
+        2837,
+        2838
+      ],
+      "total_parts": 2,
+      "total_bytes": 5203215178,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968977.9604688
+    },
+    "pelis_clasicas::asalto al poder**": {
+      "titulo": "asalto al poder**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2839,
+      "part_msg_ids": [
+        2840,
+        2841,
+        2842,
+        2843,
+        2844,
+        2845
+      ],
+      "total_parts": 6,
+      "total_bytes": 7692726552,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968986.2771487
+    },
+    "pelis_clasicas::ascensor para el cadalso(1958)** (1958)": {
+      "titulo": "ascensor para el cadalso(1958)** (1958)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2846,
+      "part_msg_ids": [
+        2847,
+        2848,
+        2849,
+        2850,
+        2851,
+        2852
+      ],
+      "total_parts": 6,
+      "total_bytes": 23727153591,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794968994.6023824
+    },
+    "pelis_clasicas::asesinato en 8 mm(1999)** (1999)": {
+      "titulo": "asesinato en 8 mm(1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2853,
+      "part_msg_ids": [
+        2854,
+        2855,
+        2856,
+        2857,
+        2858,
+        2859,
+        2860,
+        2861,
+        2862,
+        2863,
+        2864
+      ],
+      "total_parts": 11,
+      "total_bytes": 22244790687,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969007.953949
+    },
+    "pelis_clasicas::asesinato en el orient express (1974)** (1974)": {
+      "titulo": "asesinato en el orient express (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2865,
+      "part_msg_ids": [
+        2866,
+        2867
+      ],
+      "total_parts": 2,
+      "total_bytes": 6080693481,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969012.3374364
+    },
+    "pelis_clasicas::asesino del mas alla (1995)** (1995)": {
+      "titulo": "asesino del mas alla (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2868,
+      "part_msg_ids": [
+        2869,
+        2870
+      ],
+      "total_parts": 2,
+      "total_bytes": 8166682354,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969016.7176325
+    },
+    "pelis_clasicas::asesino implacable (1971)** (1971)": {
+      "titulo": "asesino implacable (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2871,
+      "part_msg_ids": [
+        2872,
+        2873,
+        2874,
+        2875,
+        2876
+      ],
+      "total_parts": 5,
+      "total_bytes": 18565611184,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969024.0497823
+    },
+    "pelis_clasicas::asesinos (1995)** (1995)": {
+      "titulo": "asesinos (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2877,
+      "part_msg_ids": [
+        2878,
+        2879,
+        2880
+      ],
+      "total_parts": 3,
+      "total_bytes": 4908582866,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969029.4250767
+    },
+    "pelis_clasicas::asesinos cibernéticos (1995)** (1995)": {
+      "titulo": "asesinos cibernéticos (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2881,
+      "part_msg_ids": [
+        2882,
+        2883
+      ],
+      "total_parts": 2,
+      "total_bytes": 4018662756,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969033.8202474
+    },
+    "pelis_clasicas::asesinos cibernéticos (screamers)**": {
+      "titulo": "asesinos cibernéticos (screamers)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2884,
+      "part_msg_ids": [
+        2885,
+        2886
+      ],
+      "total_parts": 2,
+      "total_bytes": 4061677213,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969038.2058046
+    },
+    "pelis_clasicas::asesinos natos (1994)** (1994)": {
+      "titulo": "asesinos natos (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2887,
+      "part_msg_ids": [
+        2888,
+        2889,
+        2890
+      ],
+      "total_parts": 3,
+      "total_bytes": 3556031562,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969043.578515
+    },
+    "pelis_clasicas::asfixia (1972)** (1972)": {
+      "titulo": "asfixia (1972)** (1972)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2891,
+      "part_msg_ids": [
+        2892,
+        2893
+      ],
+      "total_parts": 2,
+      "total_bytes": 2520845951,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969047.9687912
+    },
+    "pelis_clasicas::assassination** (1987)": {
+      "titulo": "assassination** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2894,
+      "part_msg_ids": [
+        2895,
+        2896,
+        2897,
+        2898,
+        2899,
+        2900
+      ],
+      "total_parts": 6,
+      "total_bytes": 21476875381,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969056.296241
+    },
+    "pelis_clasicas::astrid et raphaëlle et alexandra ehle oeil pour oeil**": {
+      "titulo": "astrid et raphaëlle et alexandra ehle oeil pour oeil**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2901,
+      "part_msg_ids": [
+        2902,
+        2903
+      ],
+      "total_parts": 2,
+      "total_bytes": 4156773857,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969060.6810188
+    },
+    "pelis_clasicas::astérix y obélix contra césar (1999)** (1999)": {
+      "titulo": "astérix y obélix contra césar (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2904,
+      "part_msg_ids": [
+        2905,
+        2906,
+        2907
+      ],
+      "total_parts": 3,
+      "total_bytes": 5167471800,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969066.0550132
+    },
+    "pelis_clasicas::así en el cielo como en la tierra 1995** (1995)": {
+      "titulo": "así en el cielo como en la tierra 1995** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2908,
+      "part_msg_ids": [
+        2909,
+        2910
+      ],
+      "total_parts": 2,
+      "total_bytes": 4418216842,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969070.4390388
+    },
+    "pelis_clasicas::ataque al carro blindado (1967)** (1967)": {
+      "titulo": "ataque al carro blindado (1967)** (1967)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2911,
+      "part_msg_ids": [
+        2912,
+        2913,
+        2914,
+        2915,
+        2916,
+        2917,
+        2918
+      ],
+      "total_parts": 7,
+      "total_bytes": 26690510880,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969079.7654054
+    },
+    "pelis_clasicas::ataque fuerza z 1982** (1982)": {
+      "titulo": "ataque fuerza z 1982** (1982)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2919,
+      "part_msg_ids": [
+        2920,
+        2921
+      ],
+      "total_parts": 2,
+      "total_bytes": 3812276112,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969084.1509578
+    },
+    "pelis_clasicas::aterriza como puedas [1980]** (1980)": {
+      "titulo": "aterriza como puedas [1980]** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2922,
+      "part_msg_ids": [
+        2923,
+        2924
+      ],
+      "total_parts": 2,
+      "total_bytes": 2810031424,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969088.536775
+    },
+    "pelis_clasicas::atmósfera cero**": {
+      "titulo": "atmósfera cero**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2925,
+      "part_msg_ids": [
+        2926,
+        2927
+      ],
+      "total_parts": 2,
+      "total_bytes": 3809799617,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969092.9255893
+    },
+    "pelis_clasicas::atmósfera cero (1981)** (1981)": {
+      "titulo": "atmósfera cero (1981)** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2928,
+      "part_msg_ids": [
+        2929,
+        2930,
+        2931,
+        2932,
+        2933,
+        2934
+      ],
+      "total_parts": 6,
+      "total_bytes": 9318515396,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969101.2465835
+    },
+    "pelis_clasicas::atraco perfecto (1956)** (1956)": {
+      "titulo": "atraco perfecto (1956)** (1956)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 2935,
+      "part_msg_ids": [
+        2936,
+        2937,
+        2938,
+        2939,
+        2940,
+        2941
+      ],
+      "total_parts": 6,
+      "total_bytes": 21024604342,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969109.5674646
+    },
+    "pelis_2000::avatar 2009** (2009)": {
+      "titulo": "avatar 2009** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2725,
+      "part_msg_ids": [
+        2726,
+        2727,
+        2728,
+        2729,
+        2730
+      ],
+      "total_parts": 5,
+      "total_bytes": 9770108839,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969117.4524603
+    },
+    "pelis_2000::avatar [extendida] [2160p] [dts 768k +s f] [2009]** (2009)": {
+      "titulo": "avatar [extendida] [2160p] [dts 768k +s f] [2009]** (2009)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2731,
+      "part_msg_ids": [
+        2732,
+        2733,
+        2734,
+        2735,
+        2736,
+        2737,
+        2738,
+        2739
+      ],
+      "total_parts": 8,
+      "total_bytes": 15142455800,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969127.757479
+    },
+    "pelis_2000::azul y no tan rosa (2012)** (2012)": {
+      "titulo": "azul y no tan rosa (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2740,
+      "part_msg_ids": [
+        2741,
+        2742,
+        2743,
+        2744,
+        2745
+      ],
+      "total_parts": 5,
+      "total_bytes": 4259545844,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969135.11008
+    },
+    "pelis_2000::azuloscurocasinegro (2006)** (2006)": {
+      "titulo": "azuloscurocasinegro (2006)** (2006)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2746,
+      "part_msg_ids": [
+        2747,
+        2748,
+        2749
+      ],
+      "total_parts": 3,
+      "total_bytes": 5739258580,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969140.4791517
+    },
+    "pelis_2000::azumi (2003)** (2003)": {
+      "titulo": "azumi (2003)** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2750,
+      "part_msg_ids": [
+        2751,
+        2752
+      ],
+      "total_parts": 2,
+      "total_bytes": 2879543989,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969144.8587785
+    },
+    "pelis_2000::azumi 2 (2005)** (2005)": {
+      "titulo": "azumi 2 (2005)** (2005)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2753,
+      "part_msg_ids": [
+        2754,
+        2755
+      ],
+      "total_parts": 2,
+      "total_bytes": 2634175310,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969149.2461402
+    },
+    "pelis_2000::bad santa 2 2016** (2016)": {
+      "titulo": "bad santa 2 2016** (2016)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2756,
+      "part_msg_ids": [
+        2757,
+        2758,
+        2759,
+        2760
+      ],
+      "total_parts": 4,
+      "total_bytes": 6438865503,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969155.6014824
+    },
+    "pelis_2000::bad words juegos de palabras 2013** (2013)": {
+      "titulo": "bad words juegos de palabras 2013** (2013)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2761,
+      "part_msg_ids": [
+        2762,
+        2763,
+        2764,
+        2765
+      ],
+      "total_parts": 4,
+      "total_bytes": 8081600929,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969161.9831004
+    },
+    "pelis_2000::bait (2012)** (2012)": {
+      "titulo": "bait (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2766,
+      "part_msg_ids": [
+        2767,
+        2768,
+        2769
+      ],
+      "total_parts": 3,
+      "total_bytes": 3126225553,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969167.3583624
+    },
+    "pelis_2000::balada triste de trompeta (2010)** (2010)": {
+      "titulo": "balada triste de trompeta (2010)** (2010)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2770,
+      "part_msg_ids": [
+        2771,
+        2772,
+        2773,
+        2774,
+        2775,
+        2776
+      ],
+      "total_parts": 6,
+      "total_bytes": 23761358454,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969175.6818752
+    },
+    "pelis_2000::banderas de nuestros padres (2006)** (2006)": {
+      "titulo": "banderas de nuestros padres (2006)** (2006)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2777,
+      "part_msg_ids": [
+        2778,
+        2779,
+        2780,
+        2781
+      ],
+      "total_parts": 4,
+      "total_bytes": 8144304283,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969182.0534713
+    },
+    "pelis_2000::bandidos (2001)** (2001)": {
+      "titulo": "bandidos (2001)** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2782,
+      "part_msg_ids": [
+        2783,
+        2784,
+        2785,
+        2786,
+        2787,
+        2788
+      ],
+      "total_parts": 6,
+      "total_bytes": 24776504036,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969190.389201
+    },
+    "pelis_2000::bang bang operación koh i noor 2014** (2014)": {
+      "titulo": "bang bang operación koh i noor 2014** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2789,
+      "part_msg_ids": [
+        2790,
+        2791
+      ],
+      "total_parts": 2,
+      "total_bytes": 3311219980,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969194.7895246
+    },
+    "pelis_2000::barbacoa de amigos 2014** (2014)": {
+      "titulo": "barbacoa de amigos 2014** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2792,
+      "part_msg_ids": [
+        2793,
+        2794,
+        2795,
+        2796
+      ],
+      "total_parts": 4,
+      "total_bytes": 6545719192,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969201.1574988
+    },
+    "pelis_2000::barridos por la marea rip** (2002)": {
+      "titulo": "barridos por la marea rip** (2002)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2797,
+      "part_msg_ids": [
+        2798,
+        2799,
+        2800
+      ],
+      "total_parts": 3,
+      "total_bytes": 10176208574,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969206.5319686
+    },
+    "pelis_2000::barry seal el traficante [abrams** (2017)": {
+      "titulo": "barry seal el traficante [abrams** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2801,
+      "part_msg_ids": [
+        2802,
+        2803,
+        2804
+      ],
+      "total_parts": 3,
+      "total_bytes": 5024579130,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969211.9306898
+    },
+    "pelis_2000::barry seal el traficante brip** (2017)": {
+      "titulo": "barry seal el traficante brip** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2805,
+      "part_msg_ids": [
+        2806,
+        2807,
+        2808,
+        2809
+      ],
+      "total_parts": 4,
+      "total_bytes": 14065077174,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969218.2995396
+    },
+    "pelis_2000::basic (2003)** (2003)": {
+      "titulo": "basic (2003)** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2810,
+      "part_msg_ids": [
+        2811,
+        2812
+      ],
+      "total_parts": 2,
+      "total_bytes": 5463057389,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969222.6864843
+    },
+    "pelis_2000::basic (basico y letal)[abrams** (2003)": {
+      "titulo": "basic (basico y letal)[abrams** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2813,
+      "part_msg_ids": [
+        2814,
+        2815
+      ],
+      "total_parts": 2,
+      "total_bytes": 4064509194,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969227.0689404
+    },
+    "pelis_2000::bathory condesa de sangre (2008)** (2008)": {
+      "titulo": "bathory condesa de sangre (2008)** (2008)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2816,
+      "part_msg_ids": [
+        2817,
+        2818,
+        2819,
+        2820
+      ],
+      "total_parts": 4,
+      "total_bytes": 6468856140,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969233.439205
+    },
+    "pelis_2000::batman begins (2005)** (2005)": {
+      "titulo": "batman begins (2005)** (2005)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2821,
+      "part_msg_ids": [
+        2822,
+        2823
+      ],
+      "total_parts": 2,
+      "total_bytes": 6423025220,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969237.8435295
+    },
+    "pelis_2000::battleship (2012)** (2012)": {
+      "titulo": "battleship (2012)** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2824,
+      "part_msg_ids": [
+        2825,
+        2826,
+        2827,
+        2828,
+        2829,
+        2830,
+        2831
+      ],
+      "total_parts": 7,
+      "total_bytes": 25934026764,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969247.1552527
+    },
+    "pelis_2000::battleship brabrams** (2012)": {
+      "titulo": "battleship brabrams** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2832,
+      "part_msg_ids": [
+        2833,
+        2834
+      ],
+      "total_parts": 2,
+      "total_bytes": 6013554211,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969251.5382736
+    },
+    "pelis_2000::battleship brip** (2012)": {
+      "titulo": "battleship brip** (2012)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2835,
+      "part_msg_ids": [
+        2836,
+        2837,
+        2838,
+        2839
+      ],
+      "total_parts": 4,
+      "total_bytes": 13842209862,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969257.925603
+    },
+    "pelis_2000::baywatch (vers exten) (2017)** (2017)": {
+      "titulo": "baywatch (vers exten) (2017)** (2017)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2840,
+      "part_msg_ids": [
+        2841,
+        2842,
+        2843,
+        2844
+      ],
+      "total_parts": 4,
+      "total_bytes": 15872827559,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969264.2818084
+    },
+    "pelis_2000::beethoven 3 (2000)** (2000)": {
+      "titulo": "beethoven 3 (2000)** (2000)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2845,
+      "part_msg_ids": [
+        2846,
+        2847
+      ],
+      "total_parts": 2,
+      "total_bytes": 2670307755,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969268.6728282
+    },
+    "pelis_2000::beethoven 4 (2001)** (2001)": {
+      "titulo": "beethoven 4 (2001)** (2001)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2848,
+      "part_msg_ids": [
+        2849,
+        2850
+      ],
+      "total_parts": 2,
+      "total_bytes": 2534033408,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969273.0712953
+    },
+    "pelis_2000::beethoven 5  (2003)** (2003)": {
+      "titulo": "beethoven 5  (2003)** (2003)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2851,
+      "part_msg_ids": [
+        2852,
+        2853,
+        2854
+      ],
+      "total_parts": 3,
+      "total_bytes": 2162095150,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969278.4417171
+    },
+    "pelis_2000::beethoven 6 (2008)** (2008)": {
+      "titulo": "beethoven 6 (2008)** (2008)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2855,
+      "part_msg_ids": [
+        2856,
+        2857,
+        2858,
+        2859
+      ],
+      "total_parts": 4,
+      "total_bytes": 3677410020,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969284.8394876
+    },
+    "pelis_2000::beethoven 7 ((2014)** (2014)": {
+      "titulo": "beethoven 7 ((2014)** (2014)",
+      "bunker_id": -1004420612937,
+      "prod_id": -1004336513084,
+      "topic_id": null,
+      "ficha_msg_id": 2860,
+      "part_msg_ids": [
+        2861,
+        2862,
+        2863,
+        2864
+      ],
+      "total_parts": 4,
+      "total_bytes": 3941302227,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969291.2291026
+    },
+    "pelis_estrenos::confesion final [** (2022)": {
+      "titulo": "confesion final [** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2412,
+      "part_msg_ids": [
+        2413,
+        2414,
+        2415
+      ],
+      "total_parts": 3,
+      "total_bytes": 4684692863,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969297.1143599
+    },
+    "pelis_estrenos::confesiones (2023** (2023)": {
+      "titulo": "confesiones (2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2416,
+      "part_msg_ids": [
+        2417,
+        2418,
+        2419
+      ],
+      "total_parts": 3,
+      "total_bytes": 5791637788,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969302.519609
+    },
+    "pelis_estrenos::confession 2022** (2022)": {
+      "titulo": "confession 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2420,
+      "part_msg_ids": [
+        2421,
+        2422,
+        2423
+      ],
+      "total_parts": 3,
+      "total_bytes": 4426617631,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969307.9128523
+    },
+    "pelis_estrenos::confidencial (black bag) (2025)** (2025)": {
+      "titulo": "confidencial (black bag) (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2424,
+      "part_msg_ids": [
+        2425,
+        2426,
+        2427,
+        2428,
+        2429
+      ],
+      "total_parts": 5,
+      "total_bytes": 16612548249,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969315.2606792
+    },
+    "pelis_estrenos::conspiración en hollywood (2022)** (2022)": {
+      "titulo": "conspiración en hollywood (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2430,
+      "part_msg_ids": [
+        2431,
+        2432
+      ],
+      "total_parts": 2,
+      "total_bytes": 4947567125,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969319.683156
+    },
+    "pelis_estrenos::constantine la casa de los secretos 2022** (2022)": {
+      "titulo": "constantine la casa de los secretos 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2433,
+      "part_msg_ids": [
+        2434,
+        2435
+      ],
+      "total_parts": 2,
+      "total_bytes": 7070221804,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969324.0782208
+    },
+    "pelis_estrenos::contadora peliculas 2023** (2023)": {
+      "titulo": "contadora peliculas 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2436,
+      "part_msg_ids": [
+        2437,
+        2438
+      ],
+      "total_parts": 2,
+      "total_bytes": 2715671690,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969328.4632938
+    },
+    "pelis_estrenos::contagion of fear [webdl** (2024)": {
+      "titulo": "contagion of fear [webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2439,
+      "part_msg_ids": [
+        2440,
+        2441,
+        2442
+      ],
+      "total_parts": 3,
+      "total_bytes": 6183284434,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969333.8362455
+    },
+    "pelis_estrenos::contigo todo webdl** (2024)": {
+      "titulo": "contigo todo webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2443,
+      "part_msg_ids": [
+        2444,
+        2445,
+        2446,
+        2447,
+        2448
+      ],
+      "total_parts": 5,
+      "total_bytes": 18589819639,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969341.1803772
+    },
+    "pelis_estrenos::contra las cuerdas** (2025)": {
+      "titulo": "contra las cuerdas** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2449,
+      "part_msg_ids": [
+        2450,
+        2451,
+        2452,
+        2453,
+        2454
+      ],
+      "total_parts": 5,
+      "total_bytes": 18529751755,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969348.5197883
+    },
+    "pelis_estrenos::contrarreloj (2023)** (2023)": {
+      "titulo": "contrarreloj (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 2455,
+      "part_msg_ids": [
+        2456,
+        2457,
+        2458,
+        2459,
+        2460,
+        2461,
+        2462,
+        2463,
+        2464,
+        2465,
+        2466
+      ],
+      "total_parts": 11,
+      "total_bytes": 22031946987,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1794969361.772842
     }
   },
   "incidents_queue": []
