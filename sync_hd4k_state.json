@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updated_at": 1795116154.0237877,
+  "updated_at": 1795137901.067332,
   "channels": {
     "pelis_clasicas": {
       "bunker_id": -1004450378925,
@@ -8,7 +8,7 @@
       "prod_id": -1004291273383,
       "prod_title": "🎞️ Películas Clásicas HD/4K — TeVeFLIPE",
       "target_type": "broadcast",
-      "last_synced_id": 7256,
+      "last_synced_id": 8636,
       "sync_phase": "BACKFILL",
       "paused_reason": null,
       "bunker_max_id": 25068
@@ -30,7 +30,7 @@
       "prod_id": -1004377860188,
       "prod_title": "🏆 Películas Estrenos HD/4K — TeVeFLIPE",
       "target_type": "broadcast",
-      "last_synced_id": 594791,
+      "last_synced_id": 595470,
       "sync_phase": "BACKFILL",
       "paused_reason": null,
       "bunker_max_id": 670061
@@ -54634,6 +54634,4179 @@
       "total_bytes": 4356014360,
       "status": "CONFIRMED_SUCCESS",
       "verified_at": 1795116152.4766917
+    },
+    "pelis_clasicas::el gran diluvio**": {
+      "titulo": "el gran diluvio**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5591,
+      "part_msg_ids": [
+        5592,
+        5593
+      ],
+      "total_parts": 2,
+      "total_bytes": 6866924359,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136413.2381005
+    },
+    "pelis_clasicas::el gran halcon (1991)** (1991)": {
+      "titulo": "el gran halcon (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5594,
+      "part_msg_ids": [
+        5595,
+        5596,
+        5597,
+        5598,
+        5599
+      ],
+      "total_parts": 5,
+      "total_bytes": 19125193199,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136420.508242
+    },
+    "pelis_clasicas::el gran restaurante ****@cinepalomitas**": {
+      "titulo": "el gran restaurante ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5600,
+      "part_msg_ids": [
+        5601,
+        5602
+      ],
+      "total_parts": 2,
+      "total_bytes": 2032237011,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136424.8655286
+    },
+    "pelis_clasicas::el gran salto (1994)** (1994)": {
+      "titulo": "el gran salto (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5603,
+      "part_msg_ids": [
+        5604,
+        5605
+      ],
+      "total_parts": 2,
+      "total_bytes": 4116633774,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136429.22389
+    },
+    "pelis_clasicas::el gran silencio (1968)** (1968)": {
+      "titulo": "el gran silencio (1968)** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5606,
+      "part_msg_ids": [
+        5607,
+        5608
+      ],
+      "total_parts": 2,
+      "total_bytes": 4224594389,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136433.5801165
+    },
+    "pelis_clasicas::el grinch**": {
+      "titulo": "el grinch**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5609,
+      "part_msg_ids": [
+        5610,
+        5611
+      ],
+      "total_parts": 2,
+      "total_bytes": 3764278469,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136437.958304
+    },
+    "pelis_clasicas::el guateque (1968)** (1968)": {
+      "titulo": "el guateque (1968)** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5612,
+      "part_msg_ids": [
+        5613,
+        5614,
+        5615,
+        5616,
+        5617,
+        5618
+      ],
+      "total_parts": 6,
+      "total_bytes": 24573918285,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136446.2098265
+    },
+    "pelis_clasicas::el guerrero n13 (1999)** (1999)": {
+      "titulo": "el guerrero n13 (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5619,
+      "part_msg_ids": [
+        5620,
+        5621,
+        5622,
+        5623,
+        5624,
+        5625
+      ],
+      "total_parts": 6,
+      "total_bytes": 21479497690,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136454.4403183
+    },
+    "pelis_clasicas::el guerrero nº 13 (1999)** (1999)": {
+      "titulo": "el guerrero nº 13 (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5626,
+      "part_msg_ids": [
+        5627,
+        5628,
+        5629
+      ],
+      "total_parts": 3,
+      "total_bytes": 5256311205,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136459.7704735
+    },
+    "pelis_clasicas::el guerrero rojo (1985)** (1985)": {
+      "titulo": "el guerrero rojo (1985)** (1985)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5630,
+      "part_msg_ids": [
+        5631,
+        5632,
+        5633,
+        5634
+      ],
+      "total_parts": 4,
+      "total_bytes": 15761818666,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136466.0597935
+    },
+    "pelis_clasicas::el hada novata (1997)** (1997)": {
+      "titulo": "el hada novata (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5635,
+      "part_msg_ids": [
+        5636,
+        5637,
+        5638
+      ],
+      "total_parts": 3,
+      "total_bytes": 8764556842,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136471.390221
+    },
+    "pelis_clasicas::el halcon y la presa 1966** (1966)": {
+      "titulo": "el halcon y la presa 1966** (1966)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5639,
+      "part_msg_ids": [
+        5640,
+        5641
+      ],
+      "total_parts": 2,
+      "total_bytes": 4988017683,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136475.7636075
+    },
+    "pelis_clasicas::el halcón y la flecha (1950)** (1950)": {
+      "titulo": "el halcón y la flecha (1950)** (1950)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5642,
+      "part_msg_ids": [
+        5643,
+        5644,
+        5645,
+        5646,
+        5647
+      ],
+      "total_parts": 5,
+      "total_bytes": 17058991731,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136483.0422866
+    },
+    "pelis_clasicas::el hijo de godzilla (1967)** (1967)": {
+      "titulo": "el hijo de godzilla (1967)** (1967)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5648,
+      "part_msg_ids": [
+        5649,
+        5650
+      ],
+      "total_parts": 2,
+      "total_bytes": 2050248701,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136487.3973997
+    },
+    "pelis_clasicas::el hijo de la pantera rosa (1993)** (1993)": {
+      "titulo": "el hijo de la pantera rosa (1993)** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5651,
+      "part_msg_ids": [
+        5652,
+        5653,
+        5654
+      ],
+      "total_parts": 3,
+      "total_bytes": 4127038698,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136492.738986
+    },
+    "pelis_clasicas::el hobbit 1 [3d]**": {
+      "titulo": "el hobbit 1 [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5655,
+      "part_msg_ids": [
+        5656,
+        5657,
+        5658,
+        5659,
+        5660,
+        5661,
+        5662,
+        5663,
+        5664,
+        5665,
+        5666,
+        5667,
+        5668,
+        5669,
+        5670,
+        5671,
+        5672,
+        5673
+      ],
+      "total_parts": 18,
+      "total_bytes": 17937355180,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136512.6921365
+    },
+    "pelis_clasicas::el hobbit 2  la desolacion de smaug [3d]**": {
+      "titulo": "el hobbit 2  la desolacion de smaug [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5674,
+      "part_msg_ids": [
+        5675,
+        5676,
+        5677,
+        5678,
+        5679,
+        5680,
+        5681,
+        5682,
+        5683,
+        5684,
+        5685,
+        5686,
+        5687,
+        5688,
+        5689,
+        5690
+      ],
+      "total_parts": 16,
+      "total_bytes": 16338642554,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136530.689653
+    },
+    "pelis_clasicas::el hobbit 3  la batalla de los 5 ejercitos [3d]**": {
+      "titulo": "el hobbit 3  la batalla de los 5 ejercitos [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5691,
+      "part_msg_ids": [
+        5692,
+        5693,
+        5694,
+        5695,
+        5696,
+        5697,
+        5698,
+        5699,
+        5700,
+        5701,
+        5702,
+        5703,
+        5704,
+        5705
+      ],
+      "total_parts": 14,
+      "total_bytes": 14633450249,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136546.7271242
+    },
+    "pelis_clasicas::el hogar de miss peregrine [3d]**": {
+      "titulo": "el hogar de miss peregrine [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5706,
+      "part_msg_ids": [
+        5707,
+        5708,
+        5709,
+        5710,
+        5711,
+        5712,
+        5713,
+        5714,
+        5715,
+        5716,
+        5717,
+        5718,
+        5719,
+        5720,
+        5721
+      ],
+      "total_parts": 15,
+      "total_bytes": 15470827880,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136563.7200918
+    },
+    "pelis_clasicas::el hombre de hielo (1984)** (1984)": {
+      "titulo": "el hombre de hielo (1984)** (1984)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5722,
+      "part_msg_ids": [
+        5723,
+        5724
+      ],
+      "total_parts": 2,
+      "total_bytes": 2034108940,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136568.0726607
+    },
+    "pelis_clasicas::el hombre de la mascara de hierro mkv**": {
+      "titulo": "el hombre de la mascara de hierro mkv**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5725,
+      "part_msg_ids": [
+        5726,
+        5727,
+        5728,
+        5729
+      ],
+      "total_parts": 4,
+      "total_bytes": 4110050745,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136574.3596041
+    },
+    "pelis_clasicas::el hombre de la máscara de hierro@cinepalomitas**": {
+      "titulo": "el hombre de la máscara de hierro@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5730,
+      "part_msg_ids": [
+        5731,
+        5732
+      ],
+      "total_parts": 2,
+      "total_bytes": 2145032786,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136578.7165892
+    },
+    "pelis_estrenos::el ultimo encargo webdl** (2025)": {
+      "titulo": "el ultimo encargo webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4816,
+      "part_msg_ids": [
+        4817,
+        4818,
+        4819,
+        4820
+      ],
+      "total_parts": 4,
+      "total_bytes": 14932103795,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136585.9683163
+    },
+    "pelis_estrenos::el ultimo frente** (2024)": {
+      "titulo": "el ultimo frente** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4821,
+      "part_msg_ids": [
+        4822,
+        4823,
+        4824,
+        4825
+      ],
+      "total_parts": 4,
+      "total_bytes": 15579891443,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136592.2975717
+    },
+    "pelis_estrenos::el ultimo gigante (2026)** (2026)": {
+      "titulo": "el ultimo gigante (2026)** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4826,
+      "part_msg_ids": [
+        4827,
+        4828
+      ],
+      "total_parts": 2,
+      "total_bytes": 4241371481,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136596.6562977
+    },
+    "pelis_estrenos::el ultimo hijo(2021)** (2021)": {
+      "titulo": "el ultimo hijo(2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4829,
+      "part_msg_ids": [
+        4830,
+        4831,
+        4832
+      ],
+      "total_parts": 3,
+      "total_bytes": 9564296855,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136601.9885592
+    },
+    "pelis_estrenos::el ultimo late night (2023)** (2023)": {
+      "titulo": "el ultimo late night (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4833,
+      "part_msg_ids": [
+        4834,
+        4835,
+        4836
+      ],
+      "total_parts": 3,
+      "total_bytes": 10974881253,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136607.317036
+    },
+    "pelis_estrenos::el ultimo padrino 2024** (2024)": {
+      "titulo": "el ultimo padrino 2024** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4837,
+      "part_msg_ids": [
+        4838,
+        4839,
+        4840
+      ],
+      "total_parts": 3,
+      "total_bytes": 4387940130,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136612.638977
+    },
+    "pelis_estrenos::el ultimo padrino webdl** (2024)": {
+      "titulo": "el ultimo padrino webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4841,
+      "part_msg_ids": [
+        4842,
+        4843,
+        4844,
+        4845,
+        4846
+      ],
+      "total_parts": 5,
+      "total_bytes": 20322571014,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136619.9171085
+    },
+    "pelis_estrenos::el ultimo soldado (2023)** (2023)": {
+      "titulo": "el ultimo soldado (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4847,
+      "part_msg_ids": [
+        4848,
+        4849,
+        4850,
+        4851,
+        4852,
+        4853,
+        4854
+      ],
+      "total_parts": 7,
+      "total_bytes": 13476796749,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136629.1176512
+    },
+    "pelis_estrenos::el ultimo verano (2023)** (2023)": {
+      "titulo": "el ultimo verano (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4855,
+      "part_msg_ids": [
+        4856,
+        4857,
+        4858,
+        4859
+      ],
+      "total_parts": 4,
+      "total_bytes": 12992983764,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136635.3930058
+    },
+    "pelis_estrenos::el ultimo viaje del demeter (2023)** (2023)": {
+      "titulo": "el ultimo viaje del demeter (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4860,
+      "part_msg_ids": [
+        4861,
+        4862,
+        4863
+      ],
+      "total_parts": 3,
+      "total_bytes": 11283073974,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136640.7106097
+    },
+    "pelis_estrenos::el ultimo viaje demeter [w** (2023)": {
+      "titulo": "el ultimo viaje demeter [w** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4864,
+      "part_msg_ids": [
+        4865,
+        4866,
+        4867
+      ],
+      "total_parts": 3,
+      "total_bytes": 11073627533,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136646.0500576
+    },
+    "pelis_estrenos::el vengador toxico webdl** (2023)": {
+      "titulo": "el vengador toxico webdl** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4868,
+      "part_msg_ids": [
+        4869,
+        4870,
+        4871,
+        4872,
+        4873
+      ],
+      "total_parts": 5,
+      "total_bytes": 19584784321,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136653.322637
+    },
+    "pelis_estrenos::el vestido de oskar (2022)** (2022)": {
+      "titulo": "el vestido de oskar (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4874,
+      "part_msg_ids": [
+        4875,
+        4876,
+        4877
+      ],
+      "total_parts": 3,
+      "total_bytes": 4944757778,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136658.6510003
+    },
+    "pelis_estrenos::el viaje a paris de la señora harris 2022** (2022)": {
+      "titulo": "el viaje a paris de la señora harris 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4878,
+      "part_msg_ids": [
+        4879,
+        4880
+      ],
+      "total_parts": 2,
+      "total_bytes": 2228477034,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136662.9959433
+    },
+    "pelis_estrenos::el viaje de ernest y celestine 2022** (2022)": {
+      "titulo": "el viaje de ernest y celestine 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4881,
+      "part_msg_ids": [
+        4882,
+        4883,
+        4884,
+        4885,
+        4886
+      ],
+      "total_parts": 5,
+      "total_bytes": 7466950146,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136670.259315
+    },
+    "pelis_estrenos::el viaje de rickey hill 2023** (2023)": {
+      "titulo": "el viaje de rickey hill 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4887,
+      "part_msg_ids": [
+        4888,
+        4889
+      ],
+      "total_parts": 2,
+      "total_bytes": 2726960994,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136674.6138315
+    },
+    "pelis_estrenos::el viaje de rickey hill [wdl** (2023)": {
+      "titulo": "el viaje de rickey hill [wdl** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4890,
+      "part_msg_ids": [
+        4891,
+        4892,
+        4893,
+        4894,
+        4895
+      ],
+      "total_parts": 5,
+      "total_bytes": 9979781188,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136681.8979378
+    },
+    "pelis_estrenos::el vigilante nocturno demonios heredados 2023** (2023)": {
+      "titulo": "el vigilante nocturno demonios heredados 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4896,
+      "part_msg_ids": [
+        4897,
+        4898,
+        4899,
+        4900
+      ],
+      "total_parts": 4,
+      "total_bytes": 13632573567,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136688.1826859
+    },
+    "pelis_estrenos::el virtuoso (2021)** (2021)": {
+      "titulo": "el virtuoso (2021)** (2021)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4901,
+      "part_msg_ids": [
+        4902,
+        4903,
+        4904,
+        4905
+      ],
+      "total_parts": 4,
+      "total_bytes": 12957936138,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136694.47908
+    },
+    "pelis_estrenos::el visitante del futuro (2022)** (2022)": {
+      "titulo": "el visitante del futuro (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4906,
+      "part_msg_ids": [
+        4907,
+        4908,
+        4909,
+        4910,
+        4911,
+        4912,
+        4913
+      ],
+      "total_parts": 7,
+      "total_bytes": 13754678022,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136703.68063
+    },
+    "pelis_estrenos::el zorro (der fuchs) (2022)** (2022)": {
+      "titulo": "el zorro (der fuchs) (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4914,
+      "part_msg_ids": [
+        4915,
+        4916,
+        4917
+      ],
+      "total_parts": 3,
+      "total_bytes": 5308938321,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136708.9958694
+    },
+    "pelis_estrenos::el zorro 2022** (2022)": {
+      "titulo": "el zorro 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4918,
+      "part_msg_ids": [
+        4919,
+        4920
+      ],
+      "total_parts": 2,
+      "total_bytes": 2651910114,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136713.3590047
+    },
+    "pelis_estrenos::el ángel de los pobres (2023)** (2023)": {
+      "titulo": "el ángel de los pobres (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4921,
+      "part_msg_ids": [
+        4922,
+        4923,
+        4924
+      ],
+      "total_parts": 3,
+      "total_bytes": 5888304759,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136718.6793065
+    },
+    "pelis_estrenos::el último aliento (2024)** (2024)": {
+      "titulo": "el último aliento (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4925,
+      "part_msg_ids": [
+        4926,
+        4927
+      ],
+      "total_parts": 2,
+      "total_bytes": 2615499503,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136723.0333798
+    },
+    "pelis_estrenos::el último baile de magic mike (2023)** (2023)": {
+      "titulo": "el último baile de magic mike (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4928,
+      "part_msg_ids": [
+        4929,
+        4930,
+        4931,
+        4932
+      ],
+      "total_parts": 4,
+      "total_bytes": 5884040154,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136729.3194923
+    },
+    "pelis_estrenos::el último disparo 2023** (2023)": {
+      "titulo": "el último disparo 2023** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4933,
+      "part_msg_ids": [
+        4934,
+        4935
+      ],
+      "total_parts": 2,
+      "total_bytes": 4877486408,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136733.6853025
+    },
+    "pelis_estrenos::el último objetivo (2023)** (2023)": {
+      "titulo": "el último objetivo (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4936,
+      "part_msg_ids": [
+        4937,
+        4938,
+        4939,
+        4940,
+        4941
+      ],
+      "total_parts": 5,
+      "total_bytes": 9924861027,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136740.9655523
+    },
+    "pelis_estrenos::el último paciente (2022)** (2022)": {
+      "titulo": "el último paciente (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4942,
+      "part_msg_ids": [
+        4943,
+        4944,
+        4945
+      ],
+      "total_parts": 3,
+      "total_bytes": 5088690655,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136746.2871995
+    },
+    "pelis_estrenos::el último videoclub (2023)** (2023)": {
+      "titulo": "el último videoclub (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4946,
+      "part_msg_ids": [
+        4947,
+        4948
+      ],
+      "total_parts": 2,
+      "total_bytes": 3636401597,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136750.6560009
+    },
+    "pelis_estrenos::eleanor the great wdl** (2025)": {
+      "titulo": "eleanor the great wdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4949,
+      "part_msg_ids": [
+        4950,
+        4951,
+        4952,
+        4953,
+        4954
+      ],
+      "total_parts": 5,
+      "total_bytes": 19074375544,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136757.9174168
+    },
+    "pelis_clasicas::el hombre de mackintosh (1973)** (1973)": {
+      "titulo": "el hombre de mackintosh (1973)** (1973)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5733,
+      "part_msg_ids": [
+        5734,
+        5735,
+        5736,
+        5737,
+        5738,
+        5739
+      ],
+      "total_parts": 6,
+      "total_bytes": 21435627461,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136766.6002524
+    },
+    "pelis_clasicas::el hombre de mimbre (1973)** (1973)": {
+      "titulo": "el hombre de mimbre (1973)** (1973)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5740,
+      "part_msg_ids": [
+        5741,
+        5742,
+        5743,
+        5744,
+        5745
+      ],
+      "total_parts": 5,
+      "total_bytes": 18326502052,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136773.892561
+    },
+    "pelis_clasicas::el hombre del carrito (1958)** (1958)": {
+      "titulo": "el hombre del carrito (1958)** (1958)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5746,
+      "part_msg_ids": [
+        5747,
+        5748,
+        5749,
+        5750,
+        5751,
+        5752
+      ],
+      "total_parts": 6,
+      "total_bytes": 24837670658,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136782.1402328
+    },
+    "pelis_clasicas::el hombre del saco ****@compartir**": {
+      "titulo": "el hombre del saco ****@compartir**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5753,
+      "part_msg_ids": [
+        5754,
+        5755,
+        5756
+      ],
+      "total_parts": 3,
+      "total_bytes": 4748926813,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136787.4589024
+    },
+    "pelis_clasicas::el hombre invisible (1933)** (1933)": {
+      "titulo": "el hombre invisible (1933)** (1933)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5757,
+      "part_msg_ids": [
+        5758,
+        5759,
+        5760,
+        5761,
+        5762
+      ],
+      "total_parts": 5,
+      "total_bytes": 18535238134,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136794.7132921
+    },
+    "pelis_clasicas::el hombre que pudo reinar (1975)** (1975)": {
+      "titulo": "el hombre que pudo reinar (1975)** (1975)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5763,
+      "part_msg_ids": [
+        5764,
+        5765,
+        5766,
+        5767,
+        5768
+      ],
+      "total_parts": 5,
+      "total_bytes": 20679585345,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136801.9704437
+    },
+    "pelis_clasicas::el hombre y el monstruo (1931)** (1931)": {
+      "titulo": "el hombre y el monstruo (1931)** (1931)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5769,
+      "part_msg_ids": [
+        5770,
+        5771
+      ],
+      "total_parts": 2,
+      "total_bytes": 5672921371,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136806.3634176
+    },
+    "pelis_clasicas::el honbre tranquilo (1952)** (1952)": {
+      "titulo": "el honbre tranquilo (1952)** (1952)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5772,
+      "part_msg_ids": [
+        5773,
+        5774,
+        5775,
+        5776,
+        5777,
+        5778
+      ],
+      "total_parts": 6,
+      "total_bytes": 23384607501,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136814.5916867
+    },
+    "pelis_clasicas::el hotel de los lios (1938)** (1938)": {
+      "titulo": "el hotel de los lios (1938)** (1938)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5779,
+      "part_msg_ids": [
+        5780,
+        5781
+      ],
+      "total_parts": 2,
+      "total_bytes": 5125523835,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136818.945329
+    },
+    "pelis_clasicas::el héroe solitario the spirit of st louis es en it fr demulti subs**": {
+      "titulo": "el héroe solitario the spirit of st louis es en it fr demulti subs**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5782,
+      "part_msg_ids": [
+        5783,
+        5784
+      ],
+      "total_parts": 2,
+      "total_bytes": 3198745510,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136823.2934318
+    },
+    "pelis_clasicas::el imperio de las hormigas (1977)** (1977)": {
+      "titulo": "el imperio de las hormigas (1977)** (1977)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5785,
+      "part_msg_ids": [
+        5786,
+        5787
+      ],
+      "total_parts": 2,
+      "total_bytes": 2808810881,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136827.6403117
+    },
+    "pelis_clasicas::el imperio del sol webdl** (1987)": {
+      "titulo": "el imperio del sol webdl** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5788,
+      "part_msg_ids": [
+        5789,
+        5790,
+        5791
+      ],
+      "total_parts": 3,
+      "total_bytes": 11752026492,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136832.9754624
+    },
+    "pelis_clasicas::el imperio perdido (1984)** (1984)": {
+      "titulo": "el imperio perdido (1984)** (1984)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5792,
+      "part_msg_ids": [
+        5793,
+        5794
+      ],
+      "total_parts": 2,
+      "total_bytes": 2606148196,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136837.3389134
+    },
+    "pelis_clasicas::el impostor (1997)** (1997)": {
+      "titulo": "el impostor (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5795,
+      "part_msg_ids": [
+        5796,
+        5797
+      ],
+      "total_parts": 2,
+      "total_bytes": 2688878596,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136841.684884
+    },
+    "pelis_clasicas::el increíble hombre menguante (1957)** (1957)": {
+      "titulo": "el increíble hombre menguante (1957)** (1957)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5798,
+      "part_msg_ids": [
+        5799,
+        5800,
+        5801,
+        5802,
+        5803,
+        5804
+      ],
+      "total_parts": 6,
+      "total_bytes": 22460397658,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136849.9143052
+    },
+    "pelis_clasicas::el informe pelicano (1993)** (1993)": {
+      "titulo": "el informe pelicano (1993)** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5805,
+      "part_msg_ids": [
+        5806,
+        5807,
+        5808,
+        5809,
+        5810
+      ],
+      "total_parts": 5,
+      "total_bytes": 20965339558,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136857.1926744
+    },
+    "pelis_clasicas::el informe pelicano [**": {
+      "titulo": "el informe pelicano [**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5811,
+      "part_msg_ids": [
+        5812,
+        5813,
+        5814,
+        5815,
+        5816,
+        5817
+      ],
+      "total_parts": 6,
+      "total_bytes": 12278898399,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136865.438312
+    },
+    "pelis_clasicas::el informe pelicano [hd**": {
+      "titulo": "el informe pelicano [hd**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5818,
+      "part_msg_ids": [
+        5819,
+        5820,
+        5821,
+        5822
+      ],
+      "total_parts": 4,
+      "total_bytes": 6923688333,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136871.742501
+    },
+    "pelis_clasicas::el inglés que subió una colina (1995)** (1995)": {
+      "titulo": "el inglés que subió una colina (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5823,
+      "part_msg_ids": [
+        5824,
+        5825,
+        5826,
+        5827,
+        5828
+      ],
+      "total_parts": 5,
+      "total_bytes": 20183562733,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136879.0487955
+    },
+    "pelis_clasicas::el insoportable peso de un talento descomunal ****@cinepalomitas**": {
+      "titulo": "el insoportable peso de un talento descomunal ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5829,
+      "part_msg_ids": [
+        5830,
+        5831,
+        5832
+      ],
+      "total_parts": 3,
+      "total_bytes": 3129405811,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136884.3845046
+    },
+    "pelis_clasicas::el invierno de las anjanas - pedro telechea (1999)** (1999)": {
+      "titulo": "el invierno de las anjanas - pedro telechea (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5833,
+      "part_msg_ids": [
+        5834,
+        5835
+      ],
+      "total_parts": 2,
+      "total_bytes": 3343509345,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136888.744799
+    },
+    "pelis_clasicas::el invisible harvey (1950)** (1950)": {
+      "titulo": "el invisible harvey (1950)** (1950)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5836,
+      "part_msg_ids": [
+        5837,
+        5838,
+        5839,
+        5840,
+        5841
+      ],
+      "total_parts": 5,
+      "total_bytes": 8616959271,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136896.009349
+    },
+    "pelis_clasicas::el jovencito frankenstein (1974)** (1974)": {
+      "titulo": "el jovencito frankenstein (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5842,
+      "part_msg_ids": [
+        5843,
+        5844
+      ],
+      "total_parts": 2,
+      "total_bytes": 5094462509,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136900.359369
+    },
+    "pelis_clasicas::el jovencito frankenstein bd**": {
+      "titulo": "el jovencito frankenstein bd**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5845,
+      "part_msg_ids": [
+        5846,
+        5847,
+        5848,
+        5849,
+        5850,
+        5851
+      ],
+      "total_parts": 6,
+      "total_bytes": 23782280736,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136908.5717785
+    },
+    "pelis_clasicas::el jovencito frankestein (1974)** (1974)": {
+      "titulo": "el jovencito frankestein (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5852,
+      "part_msg_ids": [
+        5853,
+        5854,
+        5855,
+        5856,
+        5857,
+        5858,
+        5859,
+        5860,
+        5861,
+        5862
+      ],
+      "total_parts": 10,
+      "total_bytes": 9487198918,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136920.737417
+    },
+    "pelis_clasicas::el juego de la sospecha (cluedo) (1985)** (1985)": {
+      "titulo": "el juego de la sospecha (cluedo) (1985)** (1985)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5863,
+      "part_msg_ids": [
+        5864,
+        5865
+      ],
+      "total_parts": 2,
+      "total_bytes": 2765429543,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136925.1865997
+    },
+    "pelis_estrenos::elefante blanco (2022)** (2022)": {
+      "titulo": "elefante blanco (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4955,
+      "part_msg_ids": [
+        4956,
+        4957,
+        4958
+      ],
+      "total_parts": 3,
+      "total_bytes": 4931168826,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136931.3287065
+    },
+    "pelis_estrenos::elio webdl** (2025)": {
+      "titulo": "elio webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4959,
+      "part_msg_ids": [
+        4960,
+        4961,
+        4962,
+        4963,
+        4964
+      ],
+      "total_parts": 5,
+      "total_bytes": 18972108271,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136938.5708413
+    },
+    "pelis_estrenos::elize sombras de una mujer wdl** (2026)": {
+      "titulo": "elize sombras de una mujer wdl** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4965,
+      "part_msg_ids": [
+        4966,
+        4967,
+        4968,
+        4969
+      ],
+      "total_parts": 4,
+      "total_bytes": 14485709158,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136944.8766801
+    },
+    "pelis_estrenos::ella mccay webdl** (2025)": {
+      "titulo": "ella mccay webdl** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4970,
+      "part_msg_ids": [
+        4971,
+        4972,
+        4973,
+        4974,
+        4975,
+        4976
+      ],
+      "total_parts": 6,
+      "total_bytes": 21925318737,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136953.0992982
+    },
+    "pelis_estrenos::ellas hablan (2022)** (2022)": {
+      "titulo": "ellas hablan (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4977,
+      "part_msg_ids": [
+        4978,
+        4979,
+        4980,
+        4981
+      ],
+      "total_parts": 4,
+      "total_bytes": 5468629414,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136959.387962
+    },
+    "pelis_estrenos::elpartidodelsiglo(2022)** (2022)": {
+      "titulo": "elpartidodelsiglo(2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4982,
+      "part_msg_ids": [
+        4983,
+        4984,
+        4985
+      ],
+      "total_parts": 3,
+      "total_bytes": 6697194045,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136964.7315178
+    },
+    "pelis_estrenos::els encantats (los encantados) (2023)** (2023)": {
+      "titulo": "els encantats (los encantados) (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4986,
+      "part_msg_ids": [
+        4987,
+        4988,
+        4989,
+        4990
+      ],
+      "total_parts": 4,
+      "total_bytes": 8267680161,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136971.0245893
+    },
+    "pelis_estrenos::elvis el cerdo 2022** (2022)": {
+      "titulo": "elvis el cerdo 2022** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4991,
+      "part_msg_ids": [
+        4992,
+        4993,
+        4994
+      ],
+      "total_parts": 3,
+      "total_bytes": 4459269652,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136976.336399
+    },
+    "pelis_estrenos::elyas el protector webdl** (2024)": {
+      "titulo": "elyas el protector webdl** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4995,
+      "part_msg_ids": [
+        4996,
+        4997,
+        4998
+      ],
+      "total_parts": 3,
+      "total_bytes": 10917331837,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136981.6633542
+    },
+    "pelis_estrenos::elyas, el protector (2024)** (2024)": {
+      "titulo": "elyas, el protector (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 4999,
+      "part_msg_ids": [
+        5000,
+        5001
+      ],
+      "total_parts": 2,
+      "total_bytes": 4793624854,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136986.0077631
+    },
+    "pelis_estrenos::embajada (2025)** (2025)": {
+      "titulo": "embajada (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5002,
+      "part_msg_ids": [
+        5003,
+        5004
+      ],
+      "total_parts": 2,
+      "total_bytes": 6678959792,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136990.3559074
+    },
+    "pelis_estrenos::embaucadores (2023)** (2023)": {
+      "titulo": "embaucadores (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5005,
+      "part_msg_ids": [
+        5006,
+        5007,
+        5008,
+        5009,
+        5010,
+        5011
+      ],
+      "total_parts": 6,
+      "total_bytes": 22204214803,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795136998.5795221
+    },
+    "pelis_estrenos::embaucadores (sharper) (2023)** (2023)": {
+      "titulo": "embaucadores (sharper) (2023)** (2023)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5012,
+      "part_msg_ids": [
+        5013,
+        5014
+      ],
+      "total_parts": 2,
+      "total_bytes": 2734671764,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137002.9442954
+    },
+    "pelis_estrenos::embestida webdl** (2026)": {
+      "titulo": "embestida webdl** (2026)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5015,
+      "part_msg_ids": [
+        5016,
+        5017,
+        5018,
+        5019
+      ],
+      "total_parts": 4,
+      "total_bytes": 13736928907,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137009.2271333
+    },
+    "pelis_estrenos::emergencia (2022)** (2022)": {
+      "titulo": "emergencia (2022)** (2022)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5020,
+      "part_msg_ids": [
+        5021,
+        5022,
+        5023
+      ],
+      "total_parts": 3,
+      "total_bytes": 5015667265,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137014.5499687
+    },
+    "pelis_estrenos::emergency exit (2025)** (2025)": {
+      "titulo": "emergency exit (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5024,
+      "part_msg_ids": [
+        5025,
+        5026
+      ],
+      "total_parts": 2,
+      "total_bytes": 4482638866,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137018.9454134
+    },
+    "pelis_estrenos::emilia (2024)** (2024)": {
+      "titulo": "emilia (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5027,
+      "part_msg_ids": [
+        5028,
+        5029,
+        5030
+      ],
+      "total_parts": 3,
+      "total_bytes": 8369175630,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137024.2656403
+    },
+    "pelis_estrenos::emma y el jaguar [brabrams** (2024)": {
+      "titulo": "emma y el jaguar [brabrams** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5031,
+      "part_msg_ids": [
+        5032,
+        5033
+      ],
+      "total_parts": 2,
+      "total_bytes": 6667340395,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137028.6156178
+    },
+    "pelis_estrenos::emma y el jaguar negro (2024)** (2024)": {
+      "titulo": "emma y el jaguar negro (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5034,
+      "part_msg_ids": [
+        5035,
+        5036,
+        5037,
+        5038
+      ],
+      "total_parts": 4,
+      "total_bytes": 12564671884,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137034.9516268
+    },
+    "pelis_estrenos::emmanuelle (2024)** (2024)": {
+      "titulo": "emmanuelle (2024)** (2024)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5039,
+      "part_msg_ids": [
+        5040,
+        5041,
+        5042
+      ],
+      "total_parts": 3,
+      "total_bytes": 10187047729,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137040.2619736
+    },
+    "pelis_estrenos::empezar de nuevo (2025)** (2025)": {
+      "titulo": "empezar de nuevo (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5043,
+      "part_msg_ids": [
+        5044,
+        5045,
+        5046,
+        5047
+      ],
+      "total_parts": 4,
+      "total_bytes": 8156155982,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137046.5503814
+    },
+    "pelis_estrenos::empezar de nuevo (broke) (2025)** (2025)": {
+      "titulo": "empezar de nuevo (broke) (2025)** (2025)",
+      "bunker_id": -5498750167,
+      "prod_id": -1004377860188,
+      "topic_id": null,
+      "ficha_msg_id": 5048,
+      "part_msg_ids": [
+        5049,
+        5050
+      ],
+      "total_parts": 2,
+      "total_bytes": 8156155560,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137050.9175875
+    },
+    "pelis_clasicas::el lagarto negro 1968** (1968)": {
+      "titulo": "el lagarto negro 1968** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5866,
+      "part_msg_ids": [
+        5867,
+        5868
+      ],
+      "total_parts": 2,
+      "total_bytes": 2154268594,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137055.7005582
+    },
+    "pelis_clasicas::el lago azul (1980)** (1980)": {
+      "titulo": "el lago azul (1980)** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5869,
+      "part_msg_ids": [
+        5870,
+        5871
+      ],
+      "total_parts": 2,
+      "total_bytes": 4773977859,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137060.074186
+    },
+    "pelis_clasicas::el lago de los muertos vivivientes (1981)** (1981)": {
+      "titulo": "el lago de los muertos vivivientes (1981)** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5872,
+      "part_msg_ids": [
+        5873,
+        5874
+      ],
+      "total_parts": 2,
+      "total_bytes": 3162536415,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137064.4334354
+    },
+    "pelis_clasicas::el largo y calido verano (1958)** (1958)": {
+      "titulo": "el largo y calido verano (1958)** (1958)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5875,
+      "part_msg_ids": [
+        5876,
+        5877,
+        5878
+      ],
+      "total_parts": 3,
+      "total_bytes": 12094607388,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137069.7705147
+    },
+    "pelis_clasicas::el largo y cálido verano (1985)** (1985)": {
+      "titulo": "el largo y cálido verano (1985)** (1985)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5879,
+      "part_msg_ids": [
+        5880,
+        5881
+      ],
+      "total_parts": 2,
+      "total_bytes": 4977237227,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137074.125239
+    },
+    "pelis_clasicas::el legado (1978)** (1978)": {
+      "titulo": "el legado (1978)** (1978)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5882,
+      "part_msg_ids": [
+        5883,
+        5884
+      ],
+      "total_parts": 2,
+      "total_bytes": 3875772274,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137078.4899318
+    },
+    "pelis_clasicas::el mariachi (1992)** (1992)": {
+      "titulo": "el mariachi (1992)** (1992)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5885,
+      "part_msg_ids": [
+        5886,
+        5887
+      ],
+      "total_parts": 2,
+      "total_bytes": 2989733453,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137082.837382
+    },
+    "pelis_clasicas::el mañana nunca muere (1997)** (1997)": {
+      "titulo": "el mañana nunca muere (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5888,
+      "part_msg_ids": [
+        5889,
+        5890
+      ],
+      "total_parts": 2,
+      "total_bytes": 5704026870,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137087.2002785
+    },
+    "pelis_clasicas::el misterio de la dama blanca 1988** (1988)": {
+      "titulo": "el misterio de la dama blanca 1988** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5891,
+      "part_msg_ids": [
+        5892,
+        5893
+      ],
+      "total_parts": 2,
+      "total_bytes": 2217579150,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137091.5487692
+    },
+    "pelis_clasicas::el misterio de salems lot mkv**": {
+      "titulo": "el misterio de salems lot mkv**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5894,
+      "part_msg_ids": [
+        5895
+      ],
+      "total_parts": 1,
+      "total_bytes": 1570661990,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137094.9265924
+    },
+    "pelis_clasicas::el misterio del dragon ****@cinepalomitas**": {
+      "titulo": "el misterio del dragon ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5896,
+      "part_msg_ids": [
+        5897,
+        5898
+      ],
+      "total_parts": 2,
+      "total_bytes": 2142759391,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137099.2823257
+    },
+    "pelis_clasicas::el molino negro (1974)** (1974)": {
+      "titulo": "el molino negro (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5899,
+      "part_msg_ids": [
+        5900,
+        5901,
+        5902,
+        5903,
+        5904
+      ],
+      "total_parts": 5,
+      "total_bytes": 19984834375,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137106.5333061
+    },
+    "pelis_clasicas::el mono borracho en el ojo del tigre (1978)** (1978)": {
+      "titulo": "el mono borracho en el ojo del tigre (1978)** (1978)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5905,
+      "part_msg_ids": [
+        5906,
+        5907
+      ],
+      "total_parts": 2,
+      "total_bytes": 4854054138,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137110.8758416
+    },
+    "pelis_clasicas::el morador de las tinieblas**": {
+      "titulo": "el morador de las tinieblas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5908,
+      "part_msg_ids": [
+        5909,
+        5910
+      ],
+      "total_parts": 2,
+      "total_bytes": 3150797421,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137115.2405283
+    },
+    "pelis_clasicas::el mundo nunca es suficiente (1999)** (1999)": {
+      "titulo": "el mundo nunca es suficiente (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5911,
+      "part_msg_ids": [
+        5912,
+        5913
+      ],
+      "total_parts": 2,
+      "total_bytes": 6019190449,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137119.6049917
+    },
+    "pelis_clasicas::el mundo perdido (1960)** (1960)": {
+      "titulo": "el mundo perdido (1960)** (1960)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5914,
+      "part_msg_ids": [
+        5915,
+        5916,
+        5917,
+        5918,
+        5919
+      ],
+      "total_parts": 5,
+      "total_bytes": 20010855994,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137126.9469934
+    },
+    "pelis_clasicas::el más allá (1981)** (1981)": {
+      "titulo": "el más allá (1981)** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5920,
+      "part_msg_ids": [
+        5921,
+        5922,
+        5923,
+        5924,
+        5925
+      ],
+      "total_parts": 5,
+      "total_bytes": 18034122961,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137134.203896
+    },
+    "pelis_clasicas::el más allá (here after)**": {
+      "titulo": "el más allá (here after)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5926,
+      "part_msg_ids": [
+        5927,
+        5928,
+        5929
+      ],
+      "total_parts": 3,
+      "total_bytes": 11009075536,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137139.5400653
+    },
+    "pelis_clasicas::el negociador (1998)** (1998)": {
+      "titulo": "el negociador (1998)** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5930,
+      "part_msg_ids": [
+        5931,
+        5932
+      ],
+      "total_parts": 2,
+      "total_bytes": 5867885282,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137143.9045236
+    },
+    "pelis_clasicas::el niño 44**": {
+      "titulo": "el niño 44**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5933,
+      "part_msg_ids": [
+        5934,
+        5935,
+        5936,
+        5937
+      ],
+      "total_parts": 4,
+      "total_bytes": 6942504342,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137150.2052512
+    },
+    "pelis_clasicas::el niño con el pijama de rayas**": {
+      "titulo": "el niño con el pijama de rayas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5938,
+      "part_msg_ids": [
+        5939,
+        5940,
+        5941
+      ],
+      "total_parts": 3,
+      "total_bytes": 3301078938,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137155.5468307
+    },
+    "pelis_clasicas::el nombre de la rosa**": {
+      "titulo": "el nombre de la rosa**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5942,
+      "part_msg_ids": [
+        5943,
+        5944,
+        5945,
+        5946
+      ],
+      "total_parts": 4,
+      "total_bytes": 7041530118,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137161.8433018
+    },
+    "pelis_clasicas::el nombre de la rosa (1986)** (1986)": {
+      "titulo": "el nombre de la rosa (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5947,
+      "part_msg_ids": [
+        5948,
+        5949,
+        5950,
+        5951,
+        5952,
+        5953
+      ],
+      "total_parts": 6,
+      "total_bytes": 22613623374,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137170.0968568
+    },
+    "pelis_clasicas::el nuevo caso del inspector clouseau 1964** (1964)": {
+      "titulo": "el nuevo caso del inspector clouseau 1964** (1964)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5954,
+      "part_msg_ids": [
+        5955,
+        5956,
+        5957
+      ],
+      "total_parts": 3,
+      "total_bytes": 4441256474,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137175.4175372
+    },
+    "pelis_clasicas::el nuevo karate kid (1994)** (1994)": {
+      "titulo": "el nuevo karate kid (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5958,
+      "part_msg_ids": [
+        5959,
+        5960,
+        5961
+      ],
+      "total_parts": 3,
+      "total_bytes": 4191741394,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137180.739599
+    },
+    "pelis_clasicas::el ojo de la aguja (1981)** (1981)": {
+      "titulo": "el ojo de la aguja (1981)** (1981)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5962,
+      "part_msg_ids": [
+        5963,
+        5964
+      ],
+      "total_parts": 2,
+      "total_bytes": 4855949546,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137185.0845652
+    },
+    "pelis_clasicas::el orgullo de los yanquis (sam wood,1942)**": {
+      "titulo": "el orgullo de los yanquis (sam wood,1942)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5965,
+      "part_msg_ids": [
+        5966,
+        5967,
+        5968,
+        5969
+      ],
+      "total_parts": 4,
+      "total_bytes": 6171936874,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137191.3674912
+    },
+    "pelis_clasicas::el oro de mackenna j lee thompson,1969 spanish english subs**": {
+      "titulo": "el oro de mackenna j lee thompson,1969 spanish english subs**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5970,
+      "part_msg_ids": [
+        5971,
+        5972
+      ],
+      "total_parts": 2,
+      "total_bytes": 4700692822,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137195.7249093
+    },
+    "pelis_clasicas::el oso (1988)** (1988)": {
+      "titulo": "el oso (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5973,
+      "part_msg_ids": [
+        5974,
+        5975
+      ],
+      "total_parts": 2,
+      "total_bytes": 4471950197,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137200.079728
+    },
+    "pelis_clasicas::el oso yogui [3d]**": {
+      "titulo": "el oso yogui [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5976,
+      "part_msg_ids": [
+        5977,
+        5978,
+        5979,
+        5980,
+        5981,
+        5982,
+        5983,
+        5984,
+        5985,
+        5986,
+        5987,
+        5988,
+        5989
+      ],
+      "total_parts": 13,
+      "total_bytes": 13424675813,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137215.1003585
+    },
+    "pelis_clasicas::el paciente inglés (1996)** (1996)": {
+      "titulo": "el paciente inglés (1996)** (1996)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5990,
+      "part_msg_ids": [
+        5991,
+        5992,
+        5993,
+        5994
+      ],
+      "total_parts": 4,
+      "total_bytes": 7130717003,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137222.5653129
+    },
+    "pelis_clasicas::el pacificador (1997)** (1997)": {
+      "titulo": "el pacificador (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 5995,
+      "part_msg_ids": [
+        5996,
+        5997,
+        5998,
+        5999
+      ],
+      "total_parts": 4,
+      "total_bytes": 15391081186,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137228.8671124
+    },
+    "pelis_clasicas::el padrastro 2 (1989)** (1989)": {
+      "titulo": "el padrastro 2 (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6000,
+      "part_msg_ids": [
+        6001,
+        6002
+      ],
+      "total_parts": 2,
+      "total_bytes": 2879599718,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137233.2204037
+    },
+    "pelis_clasicas::el padre de la novia (1991)** (1991)": {
+      "titulo": "el padre de la novia (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6003,
+      "part_msg_ids": [
+        6004,
+        6005
+      ],
+      "total_parts": 2,
+      "total_bytes": 3023177480,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137237.5750005
+    },
+    "pelis_clasicas::el paso del diablo**": {
+      "titulo": "el paso del diablo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6006,
+      "part_msg_ids": [
+        6007,
+        6008
+      ],
+      "total_parts": 2,
+      "total_bytes": 3776897167,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137241.9428473
+    },
+    "pelis_clasicas::el patrullero 777 [** (1978)": {
+      "titulo": "el patrullero 777 [** (1978)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6009,
+      "part_msg_ids": [
+        6010,
+        6011
+      ],
+      "total_parts": 2,
+      "total_bytes": 2364216237,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137246.2911117
+    },
+    "pelis_clasicas::el pequeño panda christopher cain 1995** (1995)": {
+      "titulo": "el pequeño panda christopher cain 1995** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6012,
+      "part_msg_ids": [
+        6013,
+        6014
+      ],
+      "total_parts": 2,
+      "total_bytes": 2526471594,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137250.6659875
+    },
+    "pelis_clasicas::el piano (1993)** (1993)": {
+      "titulo": "el piano (1993)** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6015,
+      "part_msg_ids": [
+        6016,
+        6017,
+        6018,
+        6019
+      ],
+      "total_parts": 4,
+      "total_bytes": 12632490766,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137256.9609005
+    },
+    "pelis_clasicas::el poder del perro@cinepalomitas**": {
+      "titulo": "el poder del perro@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6020,
+      "part_msg_ids": [
+        6021,
+        6022,
+        6023
+      ],
+      "total_parts": 3,
+      "total_bytes": 3839153147,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137262.2751825
+    },
+    "pelis_clasicas::el portero de noche (1974)** (1974)": {
+      "titulo": "el portero de noche (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6024,
+      "part_msg_ids": [
+        6025,
+        6026
+      ],
+      "total_parts": 2,
+      "total_bytes": 5173865503,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137266.6182766
+    },
+    "pelis_clasicas::el primer caballero (1995)** (1995)": {
+      "titulo": "el primer caballero (1995)** (1995)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6027,
+      "part_msg_ids": [
+        6028,
+        6029,
+        6030
+      ],
+      "total_parts": 3,
+      "total_bytes": 5313001874,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137271.9449263
+    },
+    "pelis_clasicas::el primer gran asalto al tren (1978)** (1978)": {
+      "titulo": "el primer gran asalto al tren (1978)** (1978)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6031,
+      "part_msg_ids": [
+        6032,
+        6033,
+        6034,
+        6035,
+        6036,
+        6037
+      ],
+      "total_parts": 6,
+      "total_bytes": 20709775312,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137280.174034
+    },
+    "pelis_clasicas::el principe de egipto 1998** (1998)": {
+      "titulo": "el principe de egipto 1998** (1998)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6038,
+      "part_msg_ids": [
+        6039,
+        6040
+      ],
+      "total_parts": 2,
+      "total_bytes": 3884953399,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137284.5306442
+    },
+    "pelis_clasicas::el principe de zamunda ****@cinepalomitas**": {
+      "titulo": "el principe de zamunda ****@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6041,
+      "part_msg_ids": [
+        6042,
+        6043,
+        6044
+      ],
+      "total_parts": 3,
+      "total_bytes": 4470831667,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137289.9818213
+    },
+    "pelis_clasicas::el principe valiente 1997** (1997)": {
+      "titulo": "el principe valiente 1997** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6045,
+      "part_msg_ids": [
+        6046,
+        6047,
+        6048,
+        6049
+      ],
+      "total_parts": 4,
+      "total_bytes": 14185995271,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137296.2813728
+    },
+    "pelis_clasicas::el prisionero de zenda (1952)** (1952)": {
+      "titulo": "el prisionero de zenda (1952)** (1952)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6050,
+      "part_msg_ids": [
+        6051,
+        6052,
+        6053,
+        6054,
+        6055,
+        6056
+      ],
+      "total_parts": 6,
+      "total_bytes": 23353958255,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137304.5076966
+    },
+    "pelis_clasicas::el proceso paradine (1947)** (1947)": {
+      "titulo": "el proceso paradine (1947)** (1947)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6057,
+      "part_msg_ids": [
+        6058,
+        6059,
+        6060,
+        6061,
+        6062,
+        6063
+      ],
+      "total_parts": 6,
+      "total_bytes": 22253477349,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137312.7737849
+    },
+    "pelis_clasicas::el profe (1971)** (1971)": {
+      "titulo": "el profe (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6064,
+      "part_msg_ids": [
+        6065,
+        6066,
+        6067,
+        6068,
+        6069
+      ],
+      "total_parts": 5,
+      "total_bytes": 12283865208,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137320.0476797
+    },
+    "pelis_clasicas::el profesional (1994)** (1994)": {
+      "titulo": "el profesional (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6070,
+      "part_msg_ids": [
+        6071,
+        6072
+      ],
+      "total_parts": 2,
+      "total_bytes": 5587071307,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137324.399547
+    },
+    "pelis_clasicas::el profesor chiflado (1996)** (1996)": {
+      "titulo": "el profesor chiflado (1996)** (1996)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6073,
+      "part_msg_ids": [
+        6074,
+        6075,
+        6076,
+        6077,
+        6078,
+        6079,
+        6080
+      ],
+      "total_parts": 7,
+      "total_bytes": 25487361753,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137333.6484697
+    },
+    "pelis_clasicas::el príncipe de zamunda [1] (1988)** (1988)": {
+      "titulo": "el príncipe de zamunda [1] (1988)** (1988)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6081,
+      "part_msg_ids": [
+        6082,
+        6083,
+        6084
+      ],
+      "total_parts": 3,
+      "total_bytes": 4414685038,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137338.9639342
+    },
+    "pelis_clasicas::el príncipe y la corista (1957)** (1957)": {
+      "titulo": "el príncipe y la corista (1957)** (1957)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6085,
+      "part_msg_ids": [
+        6086,
+        6087,
+        6088,
+        6089,
+        6090
+      ],
+      "total_parts": 5,
+      "total_bytes": 18174606301,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137346.2399244
+    },
+    "pelis_clasicas::el pueblo de los malditos (1960)** (1960)": {
+      "titulo": "el pueblo de los malditos (1960)** (1960)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6091,
+      "part_msg_ids": [
+        6092,
+        6093,
+        6094,
+        6095,
+        6096,
+        6097
+      ],
+      "total_parts": 6,
+      "total_bytes": 22675768116,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137354.4523811
+    },
+    "pelis_clasicas::el quinto elemento [3d]**": {
+      "titulo": "el quinto elemento [3d]**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6098,
+      "part_msg_ids": [
+        6099,
+        6100,
+        6101,
+        6102,
+        6103
+      ],
+      "total_parts": 5,
+      "total_bytes": 4203332760,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137361.7089226
+    },
+    "pelis_clasicas::el regreso de la pantera rosa (1975)** (1975)": {
+      "titulo": "el regreso de la pantera rosa (1975)** (1975)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6104,
+      "part_msg_ids": [
+        6105,
+        6106,
+        6107
+      ],
+      "total_parts": 3,
+      "total_bytes": 5044808486,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137367.038779
+    },
+    "pelis_clasicas::el regreso de los extraterrestres (1980)** (1980)": {
+      "titulo": "el regreso de los extraterrestres (1980)** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6108,
+      "part_msg_ids": [
+        6109,
+        6110
+      ],
+      "total_parts": 2,
+      "total_bytes": 2892453847,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137371.3983076
+    },
+    "pelis_clasicas::el regreso de los supercamorristas 1985** (1985)": {
+      "titulo": "el regreso de los supercamorristas 1985** (1985)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6111,
+      "part_msg_ids": [
+        6112,
+        6113
+      ],
+      "total_parts": 2,
+      "total_bytes": 2588172266,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137375.7437482
+    },
+    "pelis_clasicas::el reino animal@comunidadcastellana**": {
+      "titulo": "el reino animal@comunidadcastellana**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6114,
+      "part_msg_ids": [
+        6115,
+        6116,
+        6117
+      ],
+      "total_parts": 3,
+      "total_bytes": 3447674096,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137381.090498
+    },
+    "pelis_clasicas::el reloj asesino (1948)** (1948)": {
+      "titulo": "el reloj asesino (1948)** (1948)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6118,
+      "part_msg_ids": [
+        6119,
+        6120
+      ],
+      "total_parts": 2,
+      "total_bytes": 8388608000,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137385.4510145
+    },
+    "pelis_clasicas::el reloj asesino (1948)": {
+      "titulo": "el reloj asesino (1948)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": null,
+      "part_msg_ids": [
+        6121
+      ],
+      "total_parts": 1,
+      "total_bytes": 4194304000,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137389.3104985
+    },
+    "pelis_clasicas::el reportero de la calle 42 (1987)** (1987)": {
+      "titulo": "el reportero de la calle 42 (1987)** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6122,
+      "part_msg_ids": [
+        6123,
+        6124,
+        6125
+      ],
+      "total_parts": 3,
+      "total_bytes": 2588439898,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137394.6241894
+    },
+    "pelis_clasicas::el retorno de godzilla (1984)** (1984)": {
+      "titulo": "el retorno de godzilla (1984)** (1984)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6126,
+      "part_msg_ids": [
+        6127,
+        6128
+      ],
+      "total_parts": 2,
+      "total_bytes": 2202879155,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137398.9883256
+    },
+    "pelis_clasicas::el retorno de sabata (1971)** (1971)": {
+      "titulo": "el retorno de sabata (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6129,
+      "part_msg_ids": [
+        6130,
+        6131,
+        6132,
+        6133,
+        6134
+      ],
+      "total_parts": 5,
+      "total_bytes": 17583228399,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137406.3906274
+    },
+    "pelis_clasicas::el rey de nueva york (1990)** (1990)": {
+      "titulo": "el rey de nueva york (1990)** (1990)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6135,
+      "part_msg_ids": [
+        6136,
+        6137,
+        6138
+      ],
+      "total_parts": 3,
+      "total_bytes": 3189762556,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137411.754269
+    },
+    "pelis_clasicas::el rey del juego (1965)** (1965)": {
+      "titulo": "el rey del juego (1965)** (1965)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6139,
+      "part_msg_ids": [
+        6140,
+        6141,
+        6142,
+        6143
+      ],
+      "total_parts": 4,
+      "total_bytes": 16378271583,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137418.053354
+    },
+    "pelis_clasicas::el rey del peligro (1968)** (1968)": {
+      "titulo": "el rey del peligro (1968)** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6144,
+      "part_msg_ids": [
+        6145,
+        6146,
+        6147
+      ],
+      "total_parts": 3,
+      "total_bytes": 4180582233,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137423.371134
+    },
+    "pelis_clasicas::el rey pasmado**": {
+      "titulo": "el rey pasmado**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6148,
+      "part_msg_ids": [
+        6149,
+        6150
+      ],
+      "total_parts": 2,
+      "total_bytes": 2968757178,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137427.7289422
+    },
+    "pelis_clasicas::el rey pescador (1991)** (1991)": {
+      "titulo": "el rey pescador (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6151,
+      "part_msg_ids": [
+        6152,
+        6153,
+        6154
+      ],
+      "total_parts": 3,
+      "total_bytes": 3146231524,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137433.0776255
+    },
+    "pelis_clasicas::el rey tuerto**": {
+      "titulo": "el rey tuerto**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6155,
+      "part_msg_ids": [
+        6156,
+        6157
+      ],
+      "total_parts": 2,
+      "total_bytes": 2741260713,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137437.4343364
+    },
+    "pelis_clasicas::el rio 1951** (1951)": {
+      "titulo": "el rio 1951** (1951)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6158,
+      "part_msg_ids": [
+        6159,
+        6160
+      ],
+      "total_parts": 2,
+      "total_bytes": 5900174984,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137441.7995515
+    },
+    "pelis_clasicas::el ritual**": {
+      "titulo": "el ritual**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6161,
+      "part_msg_ids": [
+        6162,
+        6163
+      ],
+      "total_parts": 2,
+      "total_bytes": 3505323166,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137446.16632
+    },
+    "pelis_clasicas::el robo mas grande jamas contado [**": {
+      "titulo": "el robo mas grande jamas contado [**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6164,
+      "part_msg_ids": [
+        6165,
+        6166
+      ],
+      "total_parts": 2,
+      "total_bytes": 4106796349,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137450.522584
+    },
+    "pelis_clasicas::el robobo de la jojoya - martes y trece**": {
+      "titulo": "el robobo de la jojoya - martes y trece**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6167,
+      "part_msg_ids": [
+        6168,
+        6169,
+        6170,
+        6171
+      ],
+      "total_parts": 4,
+      "total_bytes": 16566071033,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137456.8197095
+    },
+    "pelis_clasicas::el rompehuesos (1974)** (1974)": {
+      "titulo": "el rompehuesos (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6172,
+      "part_msg_ids": [
+        6173,
+        6174
+      ],
+      "total_parts": 2,
+      "total_bytes": 3170358505,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137461.1760836
+    },
+    "pelis_clasicas::el salario del miedo**": {
+      "titulo": "el salario del miedo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6175,
+      "part_msg_ids": [
+        6176,
+        6177
+      ],
+      "total_parts": 2,
+      "total_bytes": 3280795762,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137465.5196688
+    },
+    "pelis_clasicas::el salario del miedo (1953)** (1953)": {
+      "titulo": "el salario del miedo (1953)** (1953)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6178,
+      "part_msg_ids": [
+        6179,
+        6180,
+        6181,
+        6182
+      ],
+      "total_parts": 4,
+      "total_bytes": 5001270101,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137471.8207319
+    },
+    "pelis_clasicas::el santo (1997)** (1997)": {
+      "titulo": "el santo (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6183,
+      "part_msg_ids": [
+        6184,
+        6185
+      ],
+      "total_parts": 2,
+      "total_bytes": 3720479980,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137476.1875155
+    },
+    "pelis_clasicas::el sargento de hierro (1986)** (1986)": {
+      "titulo": "el sargento de hierro (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6186,
+      "part_msg_ids": [
+        6187,
+        6188,
+        6189
+      ],
+      "total_parts": 3,
+      "total_bytes": 8425689721,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137481.5044992
+    },
+    "pelis_clasicas::el secreto de adeline dual**": {
+      "titulo": "el secreto de adeline dual**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6190,
+      "part_msg_ids": [
+        6191,
+        6192
+      ],
+      "total_parts": 2,
+      "total_bytes": 2766903497,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137485.8610156
+    },
+    "pelis_clasicas::el secreto de joey**": {
+      "titulo": "el secreto de joey**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6193,
+      "part_msg_ids": [
+        6194,
+        6195,
+        6196
+      ],
+      "total_parts": 3,
+      "total_bytes": 4274993569,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137491.218099
+    },
+    "pelis_clasicas::el secreto de los fantasmas 1987** (1987)": {
+      "titulo": "el secreto de los fantasmas 1987** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6197,
+      "part_msg_ids": [
+        6198,
+        6199
+      ],
+      "total_parts": 2,
+      "total_bytes": 4652890438,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137495.5777493
+    },
+    "pelis_clasicas::el secreto de mi éxito (1987)** (1987)": {
+      "titulo": "el secreto de mi éxito (1987)** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6200,
+      "part_msg_ids": [
+        6201,
+        6202
+      ],
+      "total_parts": 2,
+      "total_bytes": 2983217145,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137499.9456272
+    },
+    "pelis_clasicas::el secreto de thomas crown**": {
+      "titulo": "el secreto de thomas crown**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6203,
+      "part_msg_ids": [
+        6204,
+        6205,
+        6206
+      ],
+      "total_parts": 3,
+      "total_bytes": 4366660335,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137505.2832406
+    },
+    "pelis_clasicas::el seductor (1971)** (1971)": {
+      "titulo": "el seductor (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6207,
+      "part_msg_ids": [
+        6208,
+        6209
+      ],
+      "total_parts": 2,
+      "total_bytes": 4964704675,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137509.6227434
+    },
+    "pelis_clasicas::el semental italiano 1970** (1970)": {
+      "titulo": "el semental italiano 1970** (1970)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6210,
+      "part_msg_ids": [
+        6211,
+        6212
+      ],
+      "total_parts": 2,
+      "total_bytes": 2229149596,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137513.978843
+    },
+    "pelis_clasicas::el sentido de la vida (1983)** (1983)": {
+      "titulo": "el sentido de la vida (1983)** (1983)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6213,
+      "part_msg_ids": [
+        6214,
+        6215
+      ],
+      "total_parts": 2,
+      "total_bytes": 3568551933,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137518.335667
+    },
+    "pelis_clasicas::el señor de la guerra 1080 by runneo**": {
+      "titulo": "el señor de la guerra 1080 by runneo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6216,
+      "part_msg_ids": [
+        6217,
+        6218,
+        6219,
+        6220,
+        6221,
+        6222,
+        6223
+      ],
+      "total_parts": 7,
+      "total_bytes": 10073751237,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137527.5365927
+    },
+    "pelis_clasicas::el señor de la guerra [1920** (1920)": {
+      "titulo": "el señor de la guerra [1920** (1920)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6224,
+      "part_msg_ids": [
+        6225,
+        6226,
+        6227,
+        6228
+      ],
+      "total_parts": 4,
+      "total_bytes": 6370782901,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137533.8405795
+    },
+    "pelis_clasicas::el señor de las ilusiones**": {
+      "titulo": "el señor de las ilusiones**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6229,
+      "part_msg_ids": [
+        6230,
+        6231
+      ],
+      "total_parts": 2,
+      "total_bytes": 2894208201,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137538.2040088
+    },
+    "pelis_clasicas::el señor de las moscas (1963)** (1963)": {
+      "titulo": "el señor de las moscas (1963)** (1963)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6232,
+      "part_msg_ids": [
+        6233,
+        6234
+      ],
+      "total_parts": 2,
+      "total_bytes": 4344150444,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137543.6868334
+    },
+    "pelis_clasicas::el señor de las moscas (1990)** (1990)": {
+      "titulo": "el señor de las moscas (1990)** (1990)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6235,
+      "part_msg_ids": [
+        6236,
+        6237
+      ],
+      "total_parts": 2,
+      "total_bytes": 3507472102,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137548.0356877
+    },
+    "pelis_clasicas::el señor doctor [1965]** (1965)": {
+      "titulo": "el señor doctor [1965]** (1965)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6238,
+      "part_msg_ids": [
+        6239,
+        6240
+      ],
+      "total_parts": 2,
+      "total_bytes": 3547626756,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137552.3798175
+    },
+    "pelis_clasicas::el sicario**": {
+      "titulo": "el sicario**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6241,
+      "part_msg_ids": [
+        6242,
+        6243
+      ],
+      "total_parts": 2,
+      "total_bytes": 3786015643,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137556.7263575
+    },
+    "pelis_clasicas::el sicario de dios**": {
+      "titulo": "el sicario de dios**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6244,
+      "part_msg_ids": [
+        6245,
+        6246
+      ],
+      "total_parts": 2,
+      "total_bytes": 7972674132,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137561.0762918
+    },
+    "pelis_clasicas::el silencio de un hombre - jean-pierre melville (1967)** (1967)": {
+      "titulo": "el silencio de un hombre - jean-pierre melville (1967)** (1967)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6247,
+      "part_msg_ids": [
+        6248,
+        6249
+      ],
+      "total_parts": 2,
+      "total_bytes": 4844809356,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137565.440502
+    },
+    "pelis_clasicas::el sindicato**": {
+      "titulo": "el sindicato**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6250,
+      "part_msg_ids": [
+        6251,
+        6252,
+        6253
+      ],
+      "total_parts": 3,
+      "total_bytes": 5362468898,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137570.7823403
+    },
+    "pelis_clasicas::el soldado de dios**": {
+      "titulo": "el soldado de dios**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6254,
+      "part_msg_ids": [
+        6255,
+        6256,
+        6257
+      ],
+      "total_parts": 3,
+      "total_bytes": 4750269236,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137576.1088998
+    },
+    "pelis_clasicas::el sonido del trueno**": {
+      "titulo": "el sonido del trueno**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6258,
+      "part_msg_ids": [
+        6259,
+        6260
+      ],
+      "total_parts": 2,
+      "total_bytes": 3364392485,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137580.4577835
+    },
+    "pelis_clasicas::el sucesor**": {
+      "titulo": "el sucesor**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6261,
+      "part_msg_ids": [
+        6262,
+        6263,
+        6264
+      ],
+      "total_parts": 3,
+      "total_bytes": 5482236684,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137585.7906442
+    },
+    "pelis_clasicas::el super chef (1997)** (1997)": {
+      "titulo": "el super chef (1997)** (1997)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6265,
+      "part_msg_ids": [
+        6266,
+        6267
+      ],
+      "total_parts": 2,
+      "total_bytes": 4322388326,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137590.158651
+    },
+    "pelis_clasicas::el superpoderoso (1980)** (1980)": {
+      "titulo": "el superpoderoso (1980)** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6268,
+      "part_msg_ids": [
+        6269,
+        6270
+      ],
+      "total_parts": 2,
+      "total_bytes": 5843799182,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137594.538317
+    },
+    "pelis_clasicas::el superviviente@cinepalomitas**": {
+      "titulo": "el superviviente@cinepalomitas**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6271,
+      "part_msg_ids": [
+        6272,
+        6273,
+        6274,
+        6275
+      ],
+      "total_parts": 4,
+      "total_bytes": 5281539356,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137600.826784
+    },
+    "pelis_clasicas::el sótano de ma**": {
+      "titulo": "el sótano de ma**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6276,
+      "part_msg_ids": [
+        6277,
+        6278,
+        6279
+      ],
+      "total_parts": 3,
+      "total_bytes": 5212382570,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137606.1419783
+    },
+    "pelis_clasicas::el sótano prohibido (1989)** (1989)": {
+      "titulo": "el sótano prohibido (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6280,
+      "part_msg_ids": [
+        6281,
+        6282
+      ],
+      "total_parts": 2,
+      "total_bytes": 2245613485,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137610.500618
+    },
+    "pelis_clasicas::el televisor (1974)** (1974)": {
+      "titulo": "el televisor (1974)** (1974)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6283,
+      "part_msg_ids": [
+        6284,
+        6285,
+        6286,
+        6287,
+        6288
+      ],
+      "total_parts": 5,
+      "total_bytes": 18133870630,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137617.777734
+    },
+    "pelis_clasicas::el teléfono**": {
+      "titulo": "el teléfono**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6289,
+      "part_msg_ids": [
+        6290,
+        6291
+      ],
+      "total_parts": 2,
+      "total_bytes": 2644441201,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137622.1373022
+    },
+    "pelis_clasicas::el templo de oro (1986)** (1986)": {
+      "titulo": "el templo de oro (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6292,
+      "part_msg_ids": [
+        6293,
+        6294,
+        6295,
+        6296,
+        6297
+      ],
+      "total_parts": 5,
+      "total_bytes": 19774511077,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137629.437803
+    },
+    "pelis_clasicas::el terrible burlón (1952)** (1952)": {
+      "titulo": "el terrible burlón (1952)** (1952)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6298,
+      "part_msg_ids": [
+        6299,
+        6300,
+        6301,
+        6302,
+        6303
+      ],
+      "total_parts": 5,
+      "total_bytes": 19317881261,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137636.707333
+    },
+    "pelis_clasicas::el terror llama a su puerta**": {
+      "titulo": "el terror llama a su puerta**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6304,
+      "part_msg_ids": [
+        6305,
+        6306
+      ],
+      "total_parts": 2,
+      "total_bytes": 3648431507,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137641.0634868
+    },
+    "pelis_clasicas::el terror llama a su puerta 1986** (1986)": {
+      "titulo": "el terror llama a su puerta 1986** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6307,
+      "part_msg_ids": [
+        6308,
+        6309
+      ],
+      "total_parts": 2,
+      "total_bytes": 4160292525,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137645.415038
+    },
+    "pelis_clasicas::el tesoro de sierra madre (1948)** (1948)": {
+      "titulo": "el tesoro de sierra madre (1948)** (1948)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6310,
+      "part_msg_ids": [
+        6311,
+        6312,
+        6313,
+        6314,
+        6315
+      ],
+      "total_parts": 5,
+      "total_bytes": 19331225070,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137652.6960783
+    },
+    "pelis_clasicas::el tiempo en sus manos**": {
+      "titulo": "el tiempo en sus manos**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6316,
+      "part_msg_ids": [
+        6317,
+        6318,
+        6319
+      ],
+      "total_parts": 3,
+      "total_bytes": 4220035037,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137658.1500418
+    },
+    "pelis_clasicas::el tiempo en sus manos (1960)** (1960)": {
+      "titulo": "el tiempo en sus manos (1960)** (1960)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6320,
+      "part_msg_ids": [
+        6321,
+        6322,
+        6323,
+        6324,
+        6325
+      ],
+      "total_parts": 5,
+      "total_bytes": 18129978009,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137665.4003248
+    },
+    "pelis_clasicas::el topo [rip 574p][es+subs ita][1970]** (1970)": {
+      "titulo": "el topo [rip 574p][es+subs ita][1970]** (1970)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6326,
+      "part_msg_ids": [
+        6327,
+        6328
+      ],
+      "total_parts": 2,
+      "total_bytes": 2349507861,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137669.7562327
+    },
+    "pelis_clasicas::el tren**": {
+      "titulo": "el tren**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6329,
+      "part_msg_ids": [
+        6330,
+        6331
+      ],
+      "total_parts": 2,
+      "total_bytes": 3581221475,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137674.1078084
+    },
+    "pelis_clasicas::el tren de las 3 y 10**": {
+      "titulo": "el tren de las 3 y 10**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6332,
+      "part_msg_ids": [
+        6333,
+        6334,
+        6335
+      ],
+      "total_parts": 3,
+      "total_bytes": 2617972482,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137679.4549723
+    },
+    "pelis_clasicas::el tren del terror (expreso sangriento) 1980** (1980)": {
+      "titulo": "el tren del terror (expreso sangriento) 1980** (1980)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6336,
+      "part_msg_ids": [
+        6337,
+        6338
+      ],
+      "total_parts": 2,
+      "total_bytes": 2764648558,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137683.8153586
+    },
+    "pelis_clasicas::el triunfo ****@almazero**": {
+      "titulo": "el triunfo ****@almazero**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6339,
+      "part_msg_ids": [
+        6340,
+        6341
+      ],
+      "total_parts": 2,
+      "total_bytes": 5316775426,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137688.1848848
+    },
+    "pelis_clasicas::el tulipán negro (1964)** (1964)": {
+      "titulo": "el tulipán negro (1964)** (1964)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6342,
+      "part_msg_ids": [
+        6343,
+        6344
+      ],
+      "total_parts": 2,
+      "total_bytes": 5010664678,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137692.5554042
+    },
+    "pelis_clasicas::el turismo es un gran invento (1968)** (1968)": {
+      "titulo": "el turismo es un gran invento (1968)** (1968)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6345,
+      "part_msg_ids": [
+        6346,
+        6347,
+        6348,
+        6349
+      ],
+      "total_parts": 4,
+      "total_bytes": 6187335277,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137700.331059
+    },
+    "pelis_clasicas::el ultimo cazador de brujas (microhd)**": {
+      "titulo": "el ultimo cazador de brujas (microhd)**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6350,
+      "part_msg_ids": [
+        6351,
+        6352,
+        6353
+      ],
+      "total_parts": 3,
+      "total_bytes": 3227344634,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137705.6560009
+    },
+    "pelis_clasicas::el ultimo dragon 1985** (1985)": {
+      "titulo": "el ultimo dragon 1985** (1985)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6354,
+      "part_msg_ids": [
+        6355,
+        6356,
+        6357
+      ],
+      "total_parts": 3,
+      "total_bytes": 5197697701,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137710.9829767
+    },
+    "pelis_clasicas::el ultimo emperador (1987)** (1987)": {
+      "titulo": "el ultimo emperador (1987)** (1987)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6358,
+      "part_msg_ids": [
+        6359,
+        6360,
+        6361,
+        6362,
+        6363,
+        6364,
+        6365
+      ],
+      "total_parts": 7,
+      "total_bytes": 26396751853,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137720.195249
+    },
+    "pelis_clasicas::el ultimo gran heroe (1993)** (1993)": {
+      "titulo": "el ultimo gran heroe (1993)** (1993)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6366,
+      "part_msg_ids": [
+        6367,
+        6368
+      ],
+      "total_parts": 2,
+      "total_bytes": 3205456959,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137724.56301
+    },
+    "pelis_clasicas::el vagón de la muerte**": {
+      "titulo": "el vagón de la muerte**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6369,
+      "part_msg_ids": [
+        6370,
+        6371
+      ],
+      "total_parts": 2,
+      "total_bytes": 2927593049,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137728.927228
+    },
+    "pelis_clasicas::el vasco 1080**": {
+      "titulo": "el vasco 1080**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6372,
+      "part_msg_ids": [
+        6373,
+        6374
+      ],
+      "total_parts": 2,
+      "total_bytes": 3858592902,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137733.281822
+    },
+    "pelis_clasicas::el vengador tóxico [3] (1989)** (1989)": {
+      "titulo": "el vengador tóxico [3] (1989)** (1989)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6375,
+      "part_msg_ids": [
+        6376,
+        6377
+      ],
+      "total_parts": 2,
+      "total_bytes": 2700912425,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137737.6413028
+    },
+    "pelis_clasicas::el verano de kikujiro (1999** (1999)": {
+      "titulo": "el verano de kikujiro (1999** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6378,
+      "part_msg_ids": [
+        6379,
+        6380
+      ],
+      "total_parts": 2,
+      "total_bytes": 3336372513,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137741.9937735
+    },
+    "pelis_clasicas::el verdugo**": {
+      "titulo": "el verdugo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6381,
+      "part_msg_ids": [
+        6382,
+        6383,
+        6384
+      ],
+      "total_parts": 3,
+      "total_bytes": 4028140842,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137747.3234494
+    },
+    "pelis_clasicas::el viaje fantástico de simbad**": {
+      "titulo": "el viaje fantástico de simbad**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6385,
+      "part_msg_ids": [
+        6386,
+        6387
+      ],
+      "total_parts": 2,
+      "total_bytes": 3179269215,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137751.6800869
+    },
+    "pelis_clasicas::el vigilante nocturno (1994)** (1994)": {
+      "titulo": "el vigilante nocturno (1994)** (1994)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6388,
+      "part_msg_ids": [
+        6389,
+        6390
+      ],
+      "total_parts": 2,
+      "total_bytes": 5056286036,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137756.032811
+    },
+    "pelis_clasicas::el visitante nocturno (1971)** (1971)": {
+      "titulo": "el visitante nocturno (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6391,
+      "part_msg_ids": [
+        6392,
+        6393
+      ],
+      "total_parts": 2,
+      "total_bytes": 3587792762,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137760.396097
+    },
+    "pelis_clasicas::el vuelo**": {
+      "titulo": "el vuelo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6394,
+      "part_msg_ids": [
+        6395,
+        6396,
+        6397,
+        6398,
+        6399
+      ],
+      "total_parts": 5,
+      "total_bytes": 6215334936,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137767.6560926
+    },
+    "pelis_clasicas::el vuelo del fenix**": {
+      "titulo": "el vuelo del fenix**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6400,
+      "part_msg_ids": [
+        6401,
+        6402,
+        6403
+      ],
+      "total_parts": 3,
+      "total_bytes": 5008361107,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137772.9858825
+    },
+    "pelis_clasicas::el vuelo del navegante (1986)** (1986)": {
+      "titulo": "el vuelo del navegante (1986)** (1986)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6404,
+      "part_msg_ids": [
+        6405,
+        6406,
+        6407,
+        6408,
+        6409,
+        6410,
+        6411
+      ],
+      "total_parts": 7,
+      "total_bytes": 26042107343,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137782.1832185
+    },
+    "pelis_clasicas::el vuelo del navegante ok**": {
+      "titulo": "el vuelo del navegante ok**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6412,
+      "part_msg_ids": [
+        6413,
+        6414,
+        6415
+      ],
+      "total_parts": 3,
+      "total_bytes": 4319129346,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137787.504511
+    },
+    "pelis_clasicas::el último atardecer (1961)** (1961)": {
+      "titulo": "el último atardecer (1961)** (1961)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6416,
+      "part_msg_ids": [
+        6417,
+        6418,
+        6419,
+        6420
+      ],
+      "total_parts": 4,
+      "total_bytes": 14336493018,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137793.7925065
+    },
+    "pelis_clasicas::el último boy scout (1991)** (1991)": {
+      "titulo": "el último boy scout (1991)** (1991)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6421,
+      "part_msg_ids": [
+        6422,
+        6423,
+        6424,
+        6425,
+        6426,
+        6427,
+        6428,
+        6429,
+        6430,
+        6431
+      ],
+      "total_parts": 10,
+      "total_bytes": 18985021109,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137805.9751108
+    },
+    "pelis_clasicas::el último hombre    vivo (1971)** (1971)": {
+      "titulo": "el último hombre    vivo (1971)** (1971)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6432,
+      "part_msg_ids": [
+        6433,
+        6434
+      ],
+      "total_parts": 2,
+      "total_bytes": 3820380412,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137810.3383129
+    },
+    "pelis_clasicas::el último paciente**": {
+      "titulo": "el último paciente**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6435,
+      "part_msg_ids": [
+        6436,
+        6437,
+        6438
+      ],
+      "total_parts": 3,
+      "total_bytes": 4344176119,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137815.6519313
+    },
+    "pelis_clasicas::el último pistolero (1976)** (1976)": {
+      "titulo": "el último pistolero (1976)** (1976)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6439,
+      "part_msg_ids": [
+        6440,
+        6441,
+        6442,
+        6443
+      ],
+      "total_parts": 4,
+      "total_bytes": 16518940796,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137822.1148467
+    },
+    "pelis_clasicas::el último torpedo (1958)** (1958)": {
+      "titulo": "el último torpedo (1958)** (1958)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6444,
+      "part_msg_ids": [
+        6445,
+        6446,
+        6447
+      ],
+      "total_parts": 3,
+      "total_bytes": 9071274667,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137827.435778
+    },
+    "pelis_clasicas::el último tren de gun hill (1959)** (1959)": {
+      "titulo": "el último tren de gun hill (1959)** (1959)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6448,
+      "part_msg_ids": [
+        6449,
+        6450,
+        6451,
+        6452,
+        6453,
+        6454,
+        6455
+      ],
+      "total_parts": 7,
+      "total_bytes": 26403070353,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137836.6818945
+    },
+    "pelis_clasicas::election (1999)** (1999)": {
+      "titulo": "election (1999)** (1999)",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6456,
+      "part_msg_ids": [
+        6457,
+        6458,
+        6459
+      ],
+      "total_parts": 3,
+      "total_bytes": 4702551536,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137841.9950292
+    },
+    "pelis_clasicas::elektra [**": {
+      "titulo": "elektra [**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6460,
+      "part_msg_ids": [
+        6461,
+        6462,
+        6463
+      ],
+      "total_parts": 3,
+      "total_bytes": 5545614126,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137847.3268738
+    },
+    "pelis_clasicas::elgolpe 1080**": {
+      "titulo": "elgolpe 1080**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6464,
+      "part_msg_ids": [
+        6465,
+        6466,
+        6467,
+        6468
+      ],
+      "total_parts": 4,
+      "total_bytes": 6198459389,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137853.6157863
+    },
+    "pelis_clasicas::eljueg0delabrujahd**": {
+      "titulo": "eljueg0delabrujahd**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6469,
+      "part_msg_ids": [
+        6470,
+        6471
+      ],
+      "total_parts": 2,
+      "total_bytes": 3741453480,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137857.975065
+    },
+    "pelis_clasicas::elniñoyla garza@desencuentrodigital**": {
+      "titulo": "elniñoyla garza@desencuentrodigital**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6472,
+      "part_msg_ids": [
+        6473,
+        6474,
+        6475
+      ],
+      "total_parts": 3,
+      "total_bytes": 5348143725,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137863.2958765
+    },
+    "pelis_clasicas::elpanda4 by favio**": {
+      "titulo": "elpanda4 by favio**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6476,
+      "part_msg_ids": [
+        6477,
+        6478,
+        6479
+      ],
+      "total_parts": 3,
+      "total_bytes": 2913865467,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137868.6193173
+    },
+    "pelis_clasicas::elresplandorrunneo**": {
+      "titulo": "elresplandorrunneo**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6480,
+      "part_msg_ids": [
+        6481,
+        6482,
+        6483,
+        6484,
+        6485,
+        6486,
+        6487
+      ],
+      "total_parts": 7,
+      "total_bytes": 13628843527,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137879.1200612
+    },
+    "pelis_clasicas::elultimomohicanobdr1080 www newpct1 com**": {
+      "titulo": "elultimomohicanobdr1080 www newpct1 com**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6488,
+      "part_msg_ids": [
+        6489,
+        6490,
+        6491,
+        6492,
+        6493,
+        6494,
+        6495,
+        6496,
+        6497,
+        6498
+      ],
+      "total_parts": 10,
+      "total_bytes": 18643857250,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137891.3097646
+    },
+    "pelis_clasicas::ava**": {
+      "titulo": "ava**",
+      "bunker_id": -1004450378925,
+      "prod_id": -1004291273383,
+      "topic_id": null,
+      "ficha_msg_id": 6499,
+      "part_msg_ids": [
+        6500,
+        6501,
+        6502,
+        6503
+      ],
+      "total_parts": 4,
+      "total_bytes": 6573620739,
+      "status": "CONFIRMED_SUCCESS",
+      "verified_at": 1795137897.610001
     }
   },
   "incidents_queue": []
